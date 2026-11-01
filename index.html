@@ -29,6 +29,7 @@
     .metric-title{color:var(--sub);font-size:12px;font-weight:650}.metric-primary{font-size:clamp(30px,4vw,40px);letter-spacing:-1.6px;line-height:1.3;font-weight:800;color:#142c43;overflow-wrap:anywhere}.metric-primary small{font-size:15px;color:#6e7c8e;font-weight:630;letter-spacing:0}.metric-sub{font-size:12px;color:var(--sub);margin-top:5px}
     .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:17px 0}.mini{padding:14px;background:#f5f8fa;border:1px solid #edf1f5;border-radius:13px;min-width:0}.mini .k{color:#69798b;font-size:11px;line-height:1.4}.mini strong{display:block;font-size:18px;color:#1e3045;letter-spacing:-.4px;line-height:1.5;overflow-wrap:anywhere;margin-top:5px}.mini .micro{font-size:10px;color:#708094;line-height:1.4}
     .chart-title{display:flex;align-items:center;justify-content:space-between;gap:6px;font-weight:710;font-size:13px;margin:18px 0 3px}.legend{display:flex;gap:13px;flex-wrap:wrap;color:#79869a;font-size:10px}.legend b{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:baseline}.svgchart{display:block;width:100%;height:auto;overflow:visible}.chartwrap{margin:7px 0 4px;padding:5px 0 0}.stack{display:flex;height:10px;background:#e7edf1;border-radius:30px;overflow:hidden;margin:9px 0}.stack>div{min-width:0}
+    .retirement-forecast{margin:16px 0 20px;padding:14px 16px;border-radius:14px;border:1px solid #d9eee5;background:#f1faf6}.retirement-years{font-size:clamp(23px,3.5vw,30px);font-weight:800;line-height:1.4;color:#087664;margin-top:3px}.tradeoff-points{padding-left:19px;margin:14px 0 0;color:var(--sub);font-size:12px;line-height:1.65}.tradeoff-points li{margin:5px 0}
     .alert{padding:12px 13px;border:1px solid #dae9e7;border-left:3px solid #56aa99;background:#f2faf8;border-radius:10px;color:#41655f;font-size:11.5px;line-height:1.6;margin-top:17px}.alert.warm{background:#fff9ee;border-color:#f3e7d1;border-left-color:var(--amber);color:#735e3c}
     .purchasing-power-note{margin-top:16px;padding:17px 20px}.purchasing-power-note h3{font-size:14px;margin:0 0 6px}.purchasing-power-note p{font-size:13px;line-height:1.75;color:var(--sub);margin:0}
     details{border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:12px;color:#64758b}summary{font-weight:720;color:#52657a;cursor:pointer;list-style:revert}details p{margin:8px 0 0}details ul{margin:8px 0;padding-left:18px}details li{margin:4px 0}
@@ -64,18 +65,25 @@
               <div class="field" data-field="invMonthly"><div class="field-line"><label for="invMonthly-num">ลงทุนต่อเดือน</label><div class="field-input"><input id="invMonthly-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="12000"><span>บาท</span></div></div><input aria-label="ลงทุนต่อเดือน ปรับแถบ" type="range" min="0" max="100000" step="1000" value="12000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
               <div class="field" data-field="invYears"><div class="field-line"><label for="invYears-num">ระยะเวลาลงทุน</label><div class="field-input"><input id="invYears-num" type="number" min="1" max="60" step="1" value="20"><span>ปี</span></div></div><input aria-label="ระยะเวลาลงทุน ปรับแถบ" type="range" min="1" max="45" step="1" value="20"><div class="range-ends"><span>1 ปี</span><span>45 ปี</span></div></div>
               <div class="field" data-field="invRate"><div class="field-line"><label for="invRate-num">ผลตอบแทนสมมติต่อปี</label><div class="field-input"><input id="invRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input aria-label="ผลตอบแทนสมมติต่อปี ปรับแถบ" type="range" min="0" max="15" step="0.5" value="6"><div class="range-ends"><span>0%</span><span>15%</span></div></div>
-              <div class="input-grid"><div class="field" data-field="invInitial"><div class="field-line"><label for="invInitial-num">เงินลงทุนตั้งต้น</label><div class="field-input"><input id="invInitial-num" type="number" min="0" max="1000000000" step="10000" value="0"><span>บาท</span></div></div></div><div class="field" data-field="invInflation"><div class="field-line"><label for="invInflation-num">เงินเฟ้อต่อปี</label><div class="field-input"><input id="invInflation-num" type="number" min="0" max="15" step="0.5" value="2"><span>%</span></div></div></div><div class="field" data-field="invWithdrawal"><div class="field-line"><label for="invWithdrawal-num">สมมติถอนใช้ต่อปี</label><div class="field-input"><input id="invWithdrawal-num" type="number" min="0" max="12" step="0.5" value="4"><span>%</span></div></div></div></div>
+              <div class="input-grid"><div class="field" data-field="invInitial"><div class="field-line"><label for="invInitial-num">เงินลงทุนตั้งต้น</label><div class="field-input"><input id="invInitial-num" type="number" min="0" max="1000000000" step="10000" value="0"><span>บาท</span></div></div></div><div class="field" data-field="invInflation"><div class="field-line"><label for="invInflation-num">เงินเฟ้อต่อปี</label><div class="field-input"><input id="invInflation-num" type="number" min="0" max="15" step="0.5" value="2"><span>%</span></div></div></div></div>
+              <div class="field" data-field="invWithdrawal"><div class="field-line"><label for="invWithdrawal-num">ถอนใช้ต่อเดือนหลังหยุดเติมเงิน</label><div class="field-input"><input id="invWithdrawal-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="ถอนใช้ต่อเดือน ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
             </div>
             <div class="button-row"><button class="btn" type="button" data-reset="investment">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">มูลค่าพอร์ตปลายงวด (สมมติ)</div><div class="metric-primary" id="invTotal" aria-live="polite">—</div><div class="metric-sub" id="invSummary">—</div>
-            <div class="mini-grid"><div class="mini"><div class="k">เงินต้นสะสม</div><strong id="invPrincipal">—</strong></div><div class="mini"><div class="k">ผลตอบแทนสะสม</div><strong id="invGrowth">—</strong></div><div class="mini"><div class="k">มูลค่าเทียบกำลังซื้อวันนี้</div><strong id="invReal">—</strong></div><div class="mini"><div class="k">สมมติถอนใช้เฉลี่ย/เดือน</div><strong id="invWithdraw">—</strong><div class="micro" id="invWithdrawReal">—</div></div></div>
+            <div class="mini-grid"><div class="mini"><div class="k">เงินต้นสะสม</div><strong id="invPrincipal">—</strong></div><div class="mini"><div class="k">ผลตอบแทนสะสม</div><strong id="invGrowth">—</strong></div><div class="mini"><div class="k">มูลค่าเทียบกำลังซื้อวันนี้</div><strong id="invReal">—</strong></div><div class="mini"><div class="k">ถอนใช้ต่อเดือนหลังหยุดเติมเงิน</div><strong id="invWithdraw">—</strong><div class="micro" id="invWithdrawReal">—</div></div></div>
+            <div class="retirement-forecast"><div class="metric-title">หลังหยุดเติมเงิน พอร์ตอยู่ได้นานเท่าไร?</div><div class="retirement-years" id="invRunway" aria-live="polite">—</div><div class="metric-sub" id="invRunwaySummary">—</div></div>
             <div class="chart-title"><span>การเติบโตของพอร์ต</span><div class="legend"><span><b style="background:#0e9985"></b>พอร์ต</span><span><b style="background:#b1c1cc"></b>เงินต้น</span></div></div>
             <div class="chartwrap"><svg id="invChart" class="svgchart" viewBox="0 0 570 218" role="img" aria-label="กราฟมูลค่าพอร์ตตามระยะเวลาลงทุน"></svg></div>
             <div class="chart-title"><span>ถ้าผลตอบแทนสูงขึ้นอีก 2 จุดเปอร์เซ็นต์</span><span id="invAltRate" style="font-size:11px;color:#62748a">—</span></div>
             <div class="mini-grid" style="margin-top:8px"><div class="mini"><div class="k">พอร์ตในสมมติฐานใหม่</div><strong id="invAltTotal">—</strong></div><div class="mini"><div class="k">ส่วนต่างจากสมมติฐานเดิม</div><strong id="invDiff">—</strong></div></div>
-            <div class="alert warm">ผลตอบแทนไม่รับประกัน และอัตราถอนใช้ไม่ได้หมายความว่าเงินจะไม่มีวันหมด</div>
-            <details><summary>สูตรและสมมติฐาน</summary><p>เงินเริ่มต้นทบต้นรายเดือน บวกเงินลงทุนใหม่ทุกสิ้นเดือน โดยใช้อัตรารายเดือน = ผลตอบแทนต่อปี ÷ 12 ผลตอบแทนจริงอาจผันผวน เงินเฟ้อใช้แปลงกำลังซื้อกลับเป็นมูลค่าวันนี้ ไม่หักภาษีและค่าธรรมเนียม การถอนใช้รายเดือนเป็นเพียงอัตรารายปีคูณมูลค่าพอร์ต ÷ 12 ไม่มีการจำลองความเสี่ยงลำดับผลตอบแทนหรืออายุการใช้เงิน</p></details>
+            <div class="alert warm">อายุพอร์ตเป็นเพียงแบบจำลองจากผลตอบแทนคงที่ ไม่ใช่การรับประกันว่าเงินจะอยู่ได้นานเท่านี้</div>
+            <details><summary>สูตรและสมมติฐาน</summary><ul>
+              <li><strong>ช่วงสะสมเงิน:</strong> เงินลงทุนเริ่มต้นทบต้นรายเดือน และเติมเงินทุกสิ้นเดือนจนครบระยะเวลาที่ตั้งไว้</li>
+              <li><strong>ช่วงถอนใช้:</strong> หลังจากนั้นหยุดเติมเงิน และถอนจำนวนบาทคงที่ทุกสิ้นเดือน โดยใช้ผลตอบแทนต่อปีที่กำหนดไว้เท่าเดิม จำลองได้สูงสุด 100 ปี</li>
+              <li><strong>เงินเฟ้อ:</strong> ใช้เทียบกำลังซื้อกลับเป็นมูลค่าวันนี้ ไม่ได้เพิ่มจำนวนเงินที่ถอนในแต่ละปี</li>
+              <li><strong>ข้อจำกัด:</strong> สมมติผลตอบแทนคงที่ ไม่รวมภาษี ค่าธรรมเนียม และความผันผวนของตลาด จึงไม่ใช่การคาดการณ์อายุพอร์ตจริง</li>
+            </ul></details>
           </div>
         </div>
         <aside class="card purchasing-power-note" aria-label="คำอธิบายกำลังซื้อวันนี้">
@@ -108,7 +116,13 @@
             <div class="bar-row"><span>ค่าใช้รถสุทธิ</span><div class="bar-bg"><div id="carBarRunning" class="bar-fill"></div></div><strong id="carBarRunningText">—</strong></div>
             <div class="bar-row"><span>มูลค่ารถลดลง</span><div class="bar-bg"><div id="carBarDep" class="bar-fill" style="background:#7893bb"></div></div><strong id="carBarDepText">—</strong></div>
             <div class="alert warm">ราคารถเป็นเงินที่จ่ายเร็วขึ้น ไม่ใช่ต้นทุนเพิ่มทั้งหมด ยังไม่รวมดอกเบี้ย ค่าซ่อมใหญ่ และต้นทุนเสียโอกาส</div>
-            <details><summary>วิธีเปรียบเทียบให้ไม่บวกราคารถซ้ำ</summary><p>ค่าใช้รถสุทธิต่อเดือน = น้ำมัน + ที่จอด + (ประกัน + บำรุงรักษา + ภาษี/พ.ร.บ.) ÷ 12 − ค่าเดินทางเดิมที่ประหยัดได้ แล้วคูณจำนวนเดือนที่ซื้อก่อน มูลค่ารถลดลง = ราคารถ × [1 − (1 − อัตราลดลงต่อปี)^(เดือน/12)] ต้นทุนทางเศรษฐกิจตัวอย่าง = ค่าใช้รถสุทธิรวม + มูลค่ารถลดลง (อาจติดลบได้หากประหยัดค่าเดินทางมาก) ไม่ได้จำลองราคารถสองคันต่างรุ่นกัน สินเชื่อ ราคาขายต่อจริง หรือค่าเงินตามเวลา</p></details>
+            <details><summary>วิธีคำนวณต้นทุนซื้อรถก่อนแผน</summary><ul>
+              <li><strong>ค่าใช้รถสุทธิ/เดือน:</strong> น้ำมัน + ที่จอด + ค่าใช้จ่ายรายปีเฉลี่ยต่อเดือน − ค่าเดินทางเดิมที่ประหยัดได้</li>
+              <li><strong>ค่าใช้จ่ายช่วงซื้อก่อน:</strong> ค่าใช้รถสุทธิคูณจำนวนเดือนที่ซื้อก่อนแผน</li>
+              <li><strong>มูลค่ารถลดลง:</strong> ประมาณจากราคารถและอัตราลดลงต่อปีแบบทบต้น</li>
+              <li><strong>ต้นทุนเพิ่ม:</strong> ค่าใช้รถสุทธิรวม + มูลค่ารถลดลง โดยไม่บวกราคารถทั้งคันซ้ำ</li>
+              <li><strong>ข้อจำกัด:</strong> ไม่รวมดอกเบี้ยสินเชื่อ ราคาขายต่อจริง หรือมูลค่าเงินตามเวลา</li>
+            </ul></details>
           </div>
         </div>
       </section>
@@ -131,7 +145,12 @@
             <div class="bar-row"><span>อีก 6 เดือน</span><div class="bar-bg"><div id="savBar6" class="bar-fill"></div></div><strong id="savBar6Text">—</strong></div>
             <div class="bar-row"><span>อีก 12 เดือน</span><div class="bar-bg"><div id="savBar12" class="bar-fill"></div></div><strong id="savBar12Text">—</strong></div>
             <div class="bar-row"><span>อีก 24 เดือน</span><div class="bar-bg"><div id="savBar24" class="bar-fill"></div></div><strong id="savBar24Text">—</strong></div>
-            <details><summary>สูตรและขอบเขต</summary><p>เดือนที่ต้องใช้ = จำนวนเดือนพักช่วงแรก + ปัดขึ้น[(ยอดเป้าหมาย − เงินที่มี) ÷ เงินเติมต่อเดือน] หากเงินที่มีถึงเป้าแล้ว = 0 เดือน หากเงินเติมเป็น 0 และยังไม่ถึงเป้า จะแสดงว่าไปไม่ถึงภายใต้สมมติฐานนี้ สูตรถือว่าออมปลายเดือน เป้าหมายคงที่ ไม่มีผลตอบแทนหรือเงินเฟ้อ และไม่ใช่ตัวแทนของภาระที่ต้องจ่ายตามวันครบกำหนดจริง</p></details>
+            <details><summary>สูตรและขอบเขต</summary><ul>
+              <li><strong>ระยะเวลาถึงเป้า:</strong> เดือนที่พักออม + ปัดขึ้น(เงินที่ยังขาด ÷ เงินออมต่อเดือน)</li>
+              <li><strong>ถึงเป้าแล้ว:</strong> แสดง 0 เดือน หากยังไม่ถึงเป้าและไม่เติมเงิน จะแสดงว่าไปไม่ถึง</li>
+              <li><strong>สมมติฐาน:</strong> เติมเงินปลายเดือน เป้าหมายคงที่ ไม่รวมผลตอบแทนหรือเงินเฟ้อ</li>
+              <li><strong>ข้อจำกัด:</strong> ไม่ใช่การคาดการณ์ภาระที่ต้องจ่ายตามวันครบกำหนดจริง</li>
+            </ul></details>
           </div>
         </div>
         <details class="card addon" id="carInvestAddon"><summary>🚗 Car Fund vs Investing</summary>
@@ -148,7 +167,10 @@
               <div class="metric-title">ผลต่างพอร์ตลงทุน B เทียบ A ณ เดือนเดียวกัน</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><p class="addon-note" id="tradeDetail">—</p>
             </div>
             <div class="button-row"><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
-            <div class="alert warm">เทียบพอร์ต ณ เดือนเดียวกัน โดยนำเงินที่เหลือหลังซื้อรถไปลงทุนต่อ ไม่รวมค่าใช้รถและค่าเสื่อม ผลตอบแทนไม่รับประกัน</div>
+            <ul class="tradeoff-points">
+              <li>เทียบยอดพอร์ต ณ เดือนเดียวกัน และนำเงินที่เหลือหลังซื้อรถไปลงทุนต่อ</li>
+              <li>ยังไม่รวมค่าใช้รถ ค่าเสื่อม และความผันผวนของผลตอบแทน</li>
+            </ul>
           </div>
         </details>
       </section>
@@ -170,7 +192,12 @@
             <div class="bar-row"><span>เป้าของตัวเอง</span><div class="bar-bg"><div id="bmBarTarget" class="bar-fill" style="background:#7893bb"></div></div><strong id="bmBarTargetText">—</strong></div>
             <div class="market"><h4>สถิติครัวเรือนไทย · ปี 2568</h4><p>NSO · ข้อมูลปี 2568 · ตรวจสอบล่าสุด 1 พ.ย. 2569</p><div class="market-row"><div class="market-stat"><span>รายได้เฉลี่ย/เดือน/ครัวเรือน</span><b>28,308 ฿</b></div><div class="market-stat"><span>ค่าใช้จ่ายเฉลี่ย/เดือน/ครัวเรือน</span><b>22,420 ฿</b></div></div><p class="source">แหล่งข้อมูล: <a href="https://www.nso.go.th/nsoweb/index" target="_blank" rel="noopener noreferrer">NSO — ข้อมูลครัวเรือน</a> · <a href="https://www.nso.go.th/public/e-book/Statistical-Yearbook/SYB-2026_webPage/Page_SYB_TH.html" target="_blank" rel="noopener noreferrer">NSO — สถิติลูกจ้างตามช่วงค่าจ้าง</a></p><div class="source-update"><button id="copyBenchmarkUpdate" class="btn btn-secondary" type="button">📋 คัดลอกคำขออัปเดตข้อมูล</button><span class="note-tiny" id="copyBenchmarkStatus" role="status"></span></div></div>
             <div class="alert warm">ข้อมูลครัวเรือนไม่ใช่สถิติเงินออมของพนักงานเงินเดือน จึงใช้จัดอันดับ Top % ไม่ได้</div>
-            <details><summary>วิธีอ่าน Benchmark</summary><p>อัตราออมส่วนตัว = เงินออมสุทธิเฉลี่ยต่อเดือน ÷ รายรับสุทธิเฉลี่ยต่อเดือน × 100 ถ้ารายรับเป็นศูนย์ จะแสดงว่าไม่สามารถคำนวณได้ เปรียบเทียบกับเป้าของตัวเองเป็นจุดเปอร์เซ็นต์ ไม่ใช่อันดับเมื่อเทียบกับคนไทย เงินออมรายเดือนควรรวมยอดเงินสดออมและเงินลงทุนสุทธิที่เพิ่มขึ้นจากรายรับ โดยไม่รวมกำไร/ขาดทุนจากราคาสินทรัพย์หรือการโยกเงินไปมาระหว่างบัญชี</p></details>
+            <details><summary>วิธีอ่าน Benchmark</summary><ul>
+              <li><strong>อัตราออม:</strong> เงินออมสุทธิเฉลี่ยต่อเดือน ÷ รายรับสุทธิเฉลี่ยต่อเดือน × 100 (รายรับเป็นศูนย์จะคำนวณไม่ได้)</li>
+              <li><strong>เปรียบเทียบ:</strong> วัดส่วนต่างจากเป้าออมของตัวเองเป็นจุดเปอร์เซ็นต์ ไม่ใช่อันดับของคนไทย</li>
+              <li><strong>การนับเงินออม:</strong> รวมเงินสดออมและเงินลงทุนสุทธิจากรายรับ ไม่บวกเงินโอนระหว่างบัญชีหรือกำไรจากราคาสินทรัพย์ซ้ำ</li>
+              <li><strong>ข้อมูลตลาด:</strong> สถิติครัวเรือนใช้เป็นบริบทเท่านั้น ไม่สามารถจัดอันดับพนักงานรายบุคคลได้</li>
+            </ul></details>
           </div>
         </div>
       </section>
@@ -188,13 +215,13 @@
 (() => {
   'use strict';
   const DEFAULT = Object.freeze({
-    invMonthly:12000,invYears:20,invRate:6,invInitial:0,invInflation:2,invWithdrawal:4,
+    invMonthly:12000,invYears:20,invRate:6,invInitial:0,invInflation:2,invWithdrawal:30000,
     carEarlier:18,carPrice:550000,carFuel:2500,carParking:500,carInsurance:13000,carService:8000,carTax:2200,carTransport:2000,carDep:12,
     savGoal:300000,savNow:25000,savMonthly:12000,savPause:2,
     tradeCarPrice:500000,tradeCarNow:0,tradeMonthly:20000,tradeInvest:3000,tradeRate:6,
     bmIncome:60000,bmSaving:12000,bmMonths:6,bmTarget:25
   });
-  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invWithdrawal:[0,12],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,5e5],carService:[0,3e5],carTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],savPause:[0,120],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],bmIncome:[0,1e7],bmSaving:[-1e7,1e7],bmMonths:[1,120],bmTarget:[0,100]};
+  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,5e5],carService:[0,3e5],carTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],savPause:[0,120],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],bmIncome:[0,1e7],bmSaving:[-1e7,1e7],bmMonths:[1,120],bmTarget:[0,100]};
   const state={...DEFAULT};
   const fmt=new Intl.NumberFormat('th-TH',{maximumFractionDigits:0});
   const num=(value)=>Number.isFinite(value)?fmt.format(Math.round(value)):'—';
@@ -215,13 +242,35 @@
     const compounded=Math.pow(1+r,n);
     return principal*compounded+(Math.abs(r)<1e-12?monthly*n:monthly*(compounded-1)/r);
   }
+  // Fixed nominal monthly withdrawals at month-end, after growth; no new contributions.
+  // A 100-year cap avoids presenting a deterministic projection as a lifetime guarantee.
+  function withdrawalRunway(portfolio,withdrawal,annualPercent){
+    if(withdrawal<=0)return {months:null,exhausted:false};
+    let balance=Math.max(0,portfolio);
+    const monthlyRate=annualPercent/1200;
+    for(let month=1;month<=1200;month++){
+      const available=balance*(1+monthlyRate);
+      if(available+1e-7<withdrawal)return {months:month-1,exhausted:true};
+      balance=Math.max(0,available-withdrawal);
+      if(balance===0)return {months:month,exhausted:true};
+    }
+    return {months:1200,exhausted:false};
+  }
   function investment(){
     const {invMonthly:m,invYears:y,invRate:r,invInitial:p,invInflation:infl,invWithdrawal:w}=state;
     const total=futureValue(p,m,r,y),principal=p+m*y*12,growth=total-principal;
-    const real=total/Math.pow(1+infl/100,y),withdraw=total*w/1200,withdrawReal=withdraw/Math.pow(1+infl/100,y);
+    const real=total/Math.pow(1+infl/100,y),withdrawReal=w/Math.pow(1+infl/100,y);
     const altRate=Math.min(20,r+2),alt=futureValue(p,m,altRate,y);
+    const runway=withdrawalRunway(total,w,r);
     set('invTotal',short(total));set('invSummary',`ลงทุน ${baht(m)}/เดือน นาน ${y} ปี ที่ผลตอบแทนสมมติ ${percent(r)}/ปี`);
-    set('invPrincipal',short(principal));set('invGrowth',short(growth));set('invReal',short(real));set('invWithdraw',baht(withdraw));set('invWithdrawReal',`คิดเป็นกำลังซื้อวันนี้ประมาณ ${baht(withdrawReal)}/เดือน`);
+    set('invPrincipal',short(principal));set('invGrowth',short(growth));set('invReal',short(real));set('invWithdraw',baht(w));set('invWithdrawReal',`คิดเป็นกำลังซื้อวันนี้ประมาณ ${baht(withdrawReal)}/เดือน`);
+    if(w===0){
+      set('invRunway','ยังไม่ถอนเงิน');
+      set('invRunwaySummary','ระบุเงินถอนใช้ต่อเดือนเพื่อคำนวณอายุพอร์ต');
+    }else{
+      set('invRunway',runway.exhausted?(runway.months===0?'ไม่ถึง 1 เดือน':visibleMonths(runway.months)):'มากกว่า 100 ปี');
+      set('invRunwaySummary',`หลังหยุดเติมเงิน ถอน ${baht(w)}/เดือน · ผลตอบแทนสมมติ ${percent(r)}/ปี · ไม่เพิ่มเงินถอนตามเงินเฟ้อ`);
+    }
     set('invAltRate',`${percent(r)} → ${percent(altRate)}`);set('invAltTotal',short(alt));set('invDiff',`+${short(Math.max(0,alt-total))}`);
     const data=[],base=[];for(let t=0;t<=y;t++){data.push(Math.max(0,futureValue(p,m,r,t)));base.push(p+m*t*12)};
     drawLineChart($('invChart'),data,base,y);
