@@ -172,11 +172,6 @@
             </div><div class="button-row"><button class="btn" type="button" data-reset="savings">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div><div class="metric-sub" id="savSummary">—</div>
-            <div class="chart-title"><span>ภาพรวมเงินสะสมตามแผน</span><span class="note-tiny">ก่อนรวมผลตอบแทน</span></div>
-            <div class="bar-row"><span>วันนี้</span><div class="bar-bg"><div id="savBar0" class="bar-fill"></div></div><strong id="savBar0Text">—</strong></div>
-            <div class="bar-row"><span>อีก 6 เดือน</span><div class="bar-bg"><div id="savBar6" class="bar-fill"></div></div><strong id="savBar6Text">—</strong></div>
-            <div class="bar-row"><span>อีก 12 เดือน</span><div class="bar-bg"><div id="savBar12" class="bar-fill"></div></div><strong id="savBar12Text">—</strong></div>
-            <div class="bar-row"><span>อีก 24 เดือน</span><div class="bar-bg"><div id="savBar24" class="bar-fill"></div></div><strong id="savBar24Text">—</strong></div>
             <details><summary>สูตรและขอบเขต</summary><ul>
               <li><strong>ระยะเวลาถึงเป้า:</strong> ปัดขึ้น(เงินที่ยังขาด ÷ เงินออมต่อเดือน) โดยเริ่มออมตั้งแต่เดือนแรก</li>
               <li><strong>ถึงเป้าแล้ว:</strong> แสดง 0 เดือน หากยังไม่ถึงเป้าและไม่เติมเงิน จะแสดงว่าไปไม่ถึง</li>
@@ -190,8 +185,8 @@
             <div class="addon-grid">
               <div class="field" data-field="tradeCarPrice"><div class="field-line"><label for="tradeCarPrice-num">งบซื้อรถ</label><div class="field-input"><input id="tradeCarPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input type="range" aria-label="งบซื้อรถ" min="100000" max="1000000" step="10000" value="400000"></div>
               <div class="field" data-field="tradeCarNow"><div class="field-line"><label for="tradeCarNow-num">เงิน Car Fund ตอนนี้</label><div class="field-input"><input id="tradeCarNow-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input type="range" aria-label="เงิน Car Fund ตอนนี้" min="0" max="500000" step="10000" value="0"></div>
-              <div class="field" data-field="tradeMonthly"><div class="field-line"><label for="tradeMonthly-num">งบรวมออมซื้อรถและลงทุน / เดือน (ทั้งสองแผน)</label><div class="field-input"><input id="tradeMonthly-num" type="number" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input type="range" aria-label="งบรวมออมซื้อรถและลงทุนต่อเดือน" min="0" max="100000" step="1000" value="30000"></div>
-              <div class="field" data-field="tradeInvest"><div class="field-line"><label for="tradeInvest-num">แผน B · แบ่งไปลงทุน / เดือน</label><div class="field-input"><input id="tradeInvest-num" type="number" min="0" max="1000000" step="1000" value="5000"><span>บาท</span></div></div><input type="range" aria-label="แผน B แบ่งไปลงทุนต่อเดือน" min="0" max="50000" step="1000" value="5000"></div>
+              <div class="field" data-field="tradeMonthly"><div class="field-line"><label for="tradeMonthly-num">งบรวมออมซื้อรถและลงทุน / เดือน</label><div class="field-input"><input id="tradeMonthly-num" type="number" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input type="range" aria-label="งบรวมออมซื้อรถและลงทุนต่อเดือน" min="0" max="100000" step="1000" value="30000"></div>
+              <div class="field" data-field="tradeInvest"><div class="field-line"><label for="tradeInvest-num">แบ่งไปลงทุน / เดือน</label><div class="field-input"><input id="tradeInvest-num" type="number" min="0" max="1000000" step="1000" value="5000"><span>บาท</span></div></div><input type="range" aria-label="แบ่งไปลงทุนต่อเดือน" min="0" max="50000" step="1000" value="5000"></div>
               <div class="field" data-field="tradeRate"><div class="field-line"><label for="tradeRate-num">ผลตอบแทนสมมติต่อปี</label><div class="field-input"><input id="tradeRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input type="range" aria-label="ผลตอบแทนสมมติต่อปี" min="-10" max="20" step="0.5" value="6"></div>
             </div>
             <div class="trade-plan-split" aria-live="polite">
@@ -365,10 +360,8 @@
     const {savGoal:goal,savNow:now,savMonthly:monthly}=state;
     const gap=Math.max(0,goal-now);
     const months=gap===0?0:monthly===0?Infinity:Math.ceil(gap/monthly);
-    const at=(t)=>now+monthly*t;
     set('savTime',visibleMonths(months));
     set('savSummary',gap===0?'ถึงเป้าหมายที่ระบุแล้ว':monthly===0?`ยังขาด ${baht(gap)} · ระบุเงินออมต่อเดือนเพื่อคำนวณ`:`ยังขาด ${baht(gap)} · ออม ${baht(monthly)}/เดือน`);
-    [0,6,12,24].forEach(t=>{const a=at(t);$('savBar'+t).style.width=`${goal===0?100:Math.min(100,100*a/goal)}%`;set('savBar'+t+'Text',short(a))});
   }
   // Compare both plans at the same calendar month (when the slower plan can buy the car).
   // Redirect all remaining monthly allocation to investments once the car goal is filled.
