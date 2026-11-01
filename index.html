@@ -24,6 +24,7 @@
     .hint{font-size:12px;color:var(--sub);margin:3px 0 16px}.fields{display:grid;gap:16px;margin-top:19px}.field{display:grid;gap:5px}.field-line{display:flex;justify-content:space-between;align-items:center;gap:8px}.field label{font-size:12.5px;color:#364963;font-weight:610}.field-input{display:flex;align-items:center;gap:6px;justify-content:flex-end;min-width:118px}.field-input input{width:105px;max-width:34vw;text-align:right;border:1px solid #dce6ed;border-radius:9px;padding:6px 7px;color:var(--ink);background:#fbfdff;outline:none;font-size:14px;font-weight:710}.field-input input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #0e998521}.field-input span{color:#718196;font-size:12px;min-width:20px}
     input[type=number]{appearance:textfield;-moz-appearance:textfield}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
     input[type=range]{appearance:none;-webkit-appearance:none;background:#e3edf0;height:6px;border-radius:100px;width:100%;margin:9px 0 4px;accent-color:var(--teal)}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border:4px solid var(--teal);background:white;border-radius:50%;box-shadow:0 2px 5px #0002}input[type=range]::-moz-range-thumb{width:11px;height:11px;border:4px solid var(--teal);background:white;border-radius:50%}.range-ends{display:flex;justify-content:space-between;color:#a1adba;font-size:10px;margin-top:-4px}
+    .fixed-car-cost{background:#f5f8fa;border-radius:10px;padding:10px 11px;min-height:66px}.fixed-car-cost .fixed-label{font-size:11.5px;color:#52647a}.fixed-car-cost strong{display:block;margin-top:4px;color:#1e3045;font-size:15px}.fixed-car-cost .micro{font-size:10px;color:var(--sub)}
     .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.input-grid .field-line{align-items:start;flex-direction:column}.input-grid .field-input{min-width:0;justify-content:start}.input-grid .field-input input{width:100px}
     .divider{height:1px;background:var(--line);margin:18px 0}.button-row{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:20px}.btn{border:1px solid #d8e1e9;border-radius:11px;background:#fff;color:#40536d;padding:10px 12px;font-weight:700;font-size:12px}.btn:hover{border-color:#7ab9ae;color:var(--teal-dark)}.btn-secondary{background:#ecf8f4;color:#087b6c;border-color:#d5eee6}.note-tiny{color:var(--sub);font-size:11px}
     .metric-title{color:var(--sub);font-size:12px;font-weight:650}.metric-primary{font-size:clamp(30px,4vw,40px);letter-spacing:-1.6px;line-height:1.3;font-weight:800;color:#142c43;overflow-wrap:anywhere}.metric-primary small{font-size:15px;color:#6e7c8e;font-weight:630;letter-spacing:0}.metric-sub{font-size:12px;color:var(--sub);margin-top:5px}
@@ -98,17 +99,17 @@
       <section id="car" class="panel" aria-labelledby="car-title" hidden>
         <div class="section-head"><div><h2 id="car-title">Car Purchase Timing</h2><p>ซื้อรถก่อนแผน ต้องจ่ายเพิ่มเท่าไร?</p></div></div>
         <div class="layout">
-          <div class="card inputs-card"><div class="card-label"><h3>เปรียบเทียบเวลาซื้อรถ</h3></div><p class="hint">นับเฉพาะช่วงที่ซื้อก่อนแผนเดิม</p>
+          <div class="card inputs-card"><div class="card-label"><h3>เปรียบเทียบเวลาซื้อรถ</h3></div><p class="hint">สมมติ Toyota Yaris ATIV 1.2 เบนซิน มือสอง · นับเฉพาะช่วงซื้อก่อนแผนเดิม</p>
             <div class="fields">
               <div class="field" data-field="carEarlier"><div class="field-line"><label for="carEarlier-num">ซื้อเร็วกว่ากำหนด</label><div class="field-input"><input id="carEarlier-num" type="number" min="0" max="120" step="1" value="18"><span>เดือน</span></div></div><input aria-label="ซื้อเร็วกว่ากำหนด ปรับแถบ" type="range" min="0" max="60" step="1" value="18"><div class="range-ends"><span>ตามแผน</span><span>60 เดือน</span></div></div>
-              <div class="field" data-field="carPrice"><div class="field-line"><label for="carPrice-num">ราคารถที่ซื้อก่อน</label><div class="field-input"><input id="carPrice-num" type="number" min="0" max="10000000" step="10000" value="550000"><span>บาท</span></div></div><input aria-label="ราคารถ ปรับแถบ" type="range" min="50000" max="1000000" step="10000" value="550000"><div class="range-ends"><span>50,000</span><span>1,000,000</span></div></div>
+              <div class="field" data-field="carPrice"><div class="field-line"><label for="carPrice-num">ราคารถที่ซื้อก่อน</label><div class="field-input"><input id="carPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input aria-label="ราคารถ ปรับแถบ" type="range" min="50000" max="1000000" step="10000" value="400000"><div class="range-ends"><span>50,000</span><span>1,000,000</span></div></div>
               <div class="input-grid">
                 <div class="field" data-field="carFuel"><div class="field-line"><label for="carFuel-num">น้ำมัน / เดือน</label><div class="field-input"><input id="carFuel-num" type="number" min="0" max="100000" step="100" value="2500"><span>฿</span></div></div></div>
-                <div class="field" data-field="carParking"><div class="field-line"><label for="carParking-num">ที่จอด / เดือน</label><div class="field-input"><input id="carParking-num" type="number" min="0" max="100000" step="100" value="500"><span>฿</span></div></div></div>
-                <div class="field" data-field="carInsurance"><div class="field-line"><label for="carInsurance-num">ประกัน / ปี</label><div class="field-input"><input id="carInsurance-num" type="number" min="0" max="500000" step="1000" value="13000"><span>฿</span></div></div></div>
+                <div class="field" data-field="carParking"><div class="field-line"><label for="carParking-num">ที่จอดรถ / เดือน (ถ้ามี)</label><div class="field-input"><input id="carParking-num" type="number" min="0" max="100000" step="100" value="0"><span>฿</span></div></div></div>
+                <div class="fixed-car-cost"><div class="fixed-label">ประกันสมัครใจ (ชั้น 2+)</div><strong>7,000 บาท/ปี</strong><div class="micro">สมมติฐานราคา ไม่ใช่ใบเสนอราคา</div></div>
                 <div class="field" data-field="carService"><div class="field-line"><label for="carService-num">บำรุงรักษา / ปี</label><div class="field-input"><input id="carService-num" type="number" min="0" max="300000" step="1000" value="8000"><span>฿</span></div></div></div>
-                <div class="field" data-field="carTax"><div class="field-line"><label for="carTax-num">ภาษี/พ.ร.บ. / ปี</label><div class="field-input"><input id="carTax-num" type="number" min="0" max="100000" step="100" value="2200"><span>฿</span></div></div></div>
-                <div class="field" data-field="carTransport"><div class="field-line"><label for="carTransport-num">ค่าเดินทางเดิมที่ลดได้ / เดือน</label><div class="field-input"><input id="carTransport-num" type="number" min="0" max="100000" step="100" value="2000"><span>฿</span></div></div></div>
+                <div class="fixed-car-cost"><div class="fixed-label">ภาษีรถ + พ.ร.บ. (1,197 ซีซี)</div><strong>ประมาณ 1,841 บาท/ปี</strong><div class="micro">ก่อนส่วนลดภาษีตามอายุรถ</div></div>
+                <div class="field" data-field="carTransport"><div class="field-line"><label for="carTransport-num">ค่าเดินทางเดิมที่ประหยัดได้ / เดือน</label><div class="field-input"><input id="carTransport-num" type="number" min="0" max="100000" step="100" value="0"><span>฿</span></div></div></div>
                 <div class="field" data-field="carDep"><div class="field-line"><label for="carDep-num">มูลค่ารถลด / ปี (สมมติ)</label><div class="field-input"><input id="carDep-num" type="number" min="0" max="50" step="1" value="12"><span>%</span></div></div></div>
               </div>
             </div><div class="button-row"><button class="btn" type="button" data-reset="car">↺ คืนค่าตัวอย่าง</button></div>
@@ -120,11 +121,12 @@
             <div class="bar-row"><span>มูลค่ารถลดลง</span><div class="bar-bg"><div id="carBarDep" class="bar-fill" style="background:#7893bb"></div></div><strong id="carBarDepText">—</strong></div>
             <div class="alert warm">ราคารถเป็นเงินที่จ่ายเร็วขึ้น ไม่ใช่ต้นทุนเพิ่มทั้งหมด ยังไม่รวมดอกเบี้ย ค่าซ่อมใหญ่ และต้นทุนเสียโอกาส</div>
             <details><summary>วิธีคำนวณต้นทุนซื้อรถก่อนแผน</summary><ul>
-              <li><strong>ค่าใช้รถสุทธิ/เดือน:</strong> น้ำมัน + ที่จอด + ค่าใช้จ่ายรายปีเฉลี่ยต่อเดือน − ค่าเดินทางเดิมที่ประหยัดได้</li>
+              <li><strong>ค่าใช้รถสุทธิ/เดือน:</strong> น้ำมัน + ที่จอด + (ประกันชั้น 2+ 7,000 + บำรุงรักษา + ภาษี/พ.ร.บ. ประมาณ 1,841)/12 − ค่าเดินทางเดิมที่ประหยัดได้</li>
               <li><strong>ค่าใช้จ่ายช่วงซื้อก่อน:</strong> ค่าใช้รถสุทธิคูณจำนวนเดือนที่ซื้อก่อนแผน</li>
               <li><strong>มูลค่ารถลดลง:</strong> ประมาณจากราคารถและอัตราลดลงต่อปีแบบทบต้น</li>
               <li><strong>ต้นทุนเพิ่ม:</strong> ค่าใช้รถสุทธิรวม + มูลค่ารถลดลง โดยไม่บวกราคารถทั้งคันซ้ำ</li>
-              <li><strong>ข้อจำกัด:</strong> ไม่รวมดอกเบี้ยสินเชื่อ ราคาขายต่อจริง หรือมูลค่าเงินตามเวลา</li>
+              <li><strong>สมมติฐาน Yaris ATIV 1.2 เบนซิน:</strong> ภาษีก่อนส่วนลดตามอายุรถ 1,195.50 บาท/ปี (เครื่อง 1,197 ซีซี) และ พ.ร.บ. 645.21 บาท/ปี ประกันชั้น 2+ ประมาณ 7,000 บาท/ปี ไม่ใช่ราคาเบี้ยที่รับประกัน</li>
+              <li><strong>ข้อจำกัด:</strong> ค่าจอดขึ้นกับสิทธิที่จอดรถของที่ทำงาน/จุดหมาย ไม่รวมสินเชื่อ ค่าซ่อมใหญ่ และมูลค่าเงินตามเวลา ราคาขายต่อเป็นเพียงสมมติฐาน</li>
             </ul></details>
           </div>
         </div>
@@ -219,12 +221,12 @@
   'use strict';
   const DEFAULT = Object.freeze({
     invMonthly:12000,invYears:20,invRate:6,invInitial:0,invInflation:2,invRetRate:3,invWithdrawal:30000,
-    carEarlier:18,carPrice:550000,carFuel:2500,carParking:500,carInsurance:13000,carService:8000,carTax:2200,carTransport:2000,carDep:12,
+    carEarlier:18,carPrice:400000,carFuel:2500,carParking:0,carService:8000,carTransport:0,carDep:12,
     savGoal:300000,savNow:25000,savMonthly:12000,savPause:2,
     tradeCarPrice:500000,tradeCarNow:0,tradeMonthly:20000,tradeInvest:3000,tradeRate:6,
     bmIncome:60000,bmSaving:12000,bmMonths:6,bmTarget:25
   });
-  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[-10,20],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,5e5],carService:[0,3e5],carTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],savPause:[0,120],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],bmIncome:[0,1e7],bmSaving:[-1e7,1e7],bmMonths:[1,120],bmTarget:[0,100]};
+  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[-10,20],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carService:[0,3e5],carTransport:[0,1e5],carDep:[0,50],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],savPause:[0,120],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],bmIncome:[0,1e7],bmSaving:[-1e7,1e7],bmMonths:[1,120],bmTarget:[0,100]};
   const state={...DEFAULT};
   const fmt=new Intl.NumberFormat('th-TH',{maximumFractionDigits:0});
   const num=(value)=>Number.isFinite(value)?fmt.format(Math.round(value)):'—';
@@ -292,8 +294,10 @@
     const labels=`<text x="${left}" y="${H-7}" fill="#8b98a5" font-size="11">วันนี้</text><text x="${W-right}" text-anchor="end" y="${H-7}" fill="#8b98a5" font-size="11">ปีที่ ${years}</text>`;
     svg.innerHTML=`<defs><linearGradient id="investmentFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e9985" stop-opacity=".24"/><stop offset="1" stop-color="#0e9985" stop-opacity="0"/></linearGradient></defs>${grids}<polygon points="${area(data)}" fill="url(#investmentFill)"/><polyline points="${pts(base)}" fill="none" stroke="#b1c1cc" stroke-width="2.5" stroke-linecap="round"/><polyline points="${pts(data)}" fill="none" stroke="#0e9985" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${x(data.length-1)}" cy="${yp(data.at(-1))}" r="4.5" fill="#0e9985" stroke="#fff" stroke-width="2"/>${labels}`;
   }
+  const YARIS_ATIV_ANNUAL=Object.freeze({insurance:7000,roadTax:1195.5,compulsory:645.21});
   function car(){
-    const {carEarlier:months,carPrice:price,carFuel:fuel,carParking:parking,carInsurance:ins,carService:maint,carTax:tax,carTransport:old,carDep:d}=state;
+    const {carEarlier:months,carPrice:price,carFuel:fuel,carParking:parking,carService:maint,carTransport:old,carDep:d}=state;
+    const ins=YARIS_ATIV_ANNUAL.insurance,tax=YARIS_ATIV_ANNUAL.roadTax+YARIS_ATIV_ANNUAL.compulsory;
     const netMonth=fuel+parking+(ins+maint+tax)/12-old;
     const running=netMonth*months;
     const depreciation=price*(1-Math.pow(1-d/100,months/12));
@@ -363,7 +367,7 @@
     set('bmBarActualText',short(savings));set('bmBarTargetText',short(targetMoney));
   }
   const render={investment,car,savings,benchmark,tradeoff};
-  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carTax','carTransport','carDep'],savings:['savGoal','savNow','savMonthly','savPause'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],benchmark:['bmIncome','bmSaving','bmMonths','bmTarget']};
+  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carService','carTransport','carDep'],savings:['savGoal','savNow','savMonthly','savPause'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],benchmark:['bmIncome','bmSaving','bmMonths','bmTarget']};
   const groupFor=k=>Object.keys(groups).find(g=>groups[g].includes(k));
   function syncField(key,origin){
     const field=document.querySelector(`[data-field="${key}"]`);if(!field)return;
