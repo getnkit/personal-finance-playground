@@ -8,7 +8,8 @@ Mobile-first, free, standalone financial *what-if* simulator. Built with a singl
 
 - **Investment & Retirement:** monthly contributions, compound growth, and illustrative withdrawals
 - **Car Timing:** costs of buying a car earlier than planned
-- **Savings & Goals:** savings targets, pauses, and **Car Fund vs Investing** comparison
+- **Savings & Goals:** savings targets, pauses, and **Car Fund First vs Car Fund + Investing** comparison
+- **Tax Playground (Thai tax year 2569):** illustrative salary/bonus income tax, progressive brackets, and what-if deductions. This is not a tax filing calculator; verify eligibility and actual taxes with iTAX and the Thai Revenue Department.
 - **Financial Benchmark:** personal savings metrics and a clearly dated Thai statistics snapshot
 
 ## Hosting and updates
