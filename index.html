@@ -122,7 +122,7 @@
             </div><div class="button-row"><button class="btn" type="button" data-reset="car">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">ต้นทุนเพิ่มจากการซื้อรถก่อนแผน</div><div class="metric-primary" id="carEconomic">—</div><div class="metric-sub" id="carSummary">—</div>
-            <div class="mini-grid"><div class="mini"><div class="k">ค่าใช้รถสุทธิ / เดือน</div><strong id="carNetMonth">—</strong><div class="micro">หลังหักค่าเดินทางเดิมที่ประหยัดได้</div></div><div class="mini"><div class="k">ค่าใช้รถสุทธิตลอดช่วงซื้อก่อน</div><strong id="carRunning">—</strong></div><div class="mini"><div class="k">มูลค่ารถที่อาจลดลง</div><strong id="carDepLoss">—</strong><div class="micro">สมมติอัตราลดลงคงที่</div></div></div>
+            <div class="mini-grid"><div class="mini"><div class="k">ค่าใช้รถสุทธิตลอดช่วงซื้อก่อน</div><strong id="carRunning">—</strong></div><div class="mini"><div class="k">มูลค่ารถที่อาจลดลง</div><strong id="carDepLoss">—</strong><div class="micro">สมมติอัตราลดลงคงที่</div></div></div>
             <div class="finance-results" id="carFinanceResults" hidden>
               <div class="mini-grid"><div class="mini"><div class="k">ค่างวดไฟแนนซ์ / เดือน</div><strong id="carLoanPayment">—</strong><div class="micro" id="carLoanDown">—</div></div><div class="mini"><div class="k">ดอกเบี้ยรวมตลอดสัญญา</div><strong id="carLoanTotalInterest">—</strong><div class="micro">เงินต้นที่ผ่อนไม่บวกซ้ำเป็นต้นทุนเพิ่ม เพราะนับค่าเสื่อมรถแล้ว</div></div></div>
               <div class="source">ดอกเบี้ยที่นับรวมใน “ต้นทุนเพิ่มจากการซื้อรถก่อนแผน” ด้านบน: <strong id="carEarlyInterest">—</strong> (เฉพาะช่วงซื้อก่อนแผน ไม่ใช่ดอกเบี้ยทั้งสัญญาเสมอไป)</div>
@@ -309,7 +309,7 @@
     const earlyInterest=financed?totalInterest*Math.min(months,loanMonths)/loanMonths:0;
     const economic=running+depreciation+earlyInterest;
     set('carEconomic',short(economic));set('carSummary',months===0?'ซื้อในเดือนเดียวกับแผนเดิม จึงไม่มีช่วงค่าใช้จ่ายที่เกิดก่อน':`หากซื้อก่อน ${visibleMonths(months)} เมื่อเทียบกับวันซื้อในแผนเดิม`);
-    set('carNetMonth',baht(netMonth));set('carRunning',short(running));set('carDepLoss',short(depreciation));
+    set('carRunning',short(running));set('carDepLoss',short(depreciation));
     if(financed){
       set('carLoanPayment',baht(monthlyPayment));
       set('carLoanDown',`เงินดาวน์ ${baht(price-loan)} · ยอดกู้ ${baht(loan)}`);
