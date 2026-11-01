@@ -326,12 +326,22 @@
   document.querySelectorAll('[data-reset]').forEach(button=>button.addEventListener('click',()=>{
     const group=button.dataset.reset;groups[group].forEach(key=>{state[key]=DEFAULT[key];syncField(key)});render[group]();
   }));
-  const updatePrompt=`โปรดอัปเดต Financial Benchmark ในไฟล์ Personal Finance Playground (index.html) ที่ฉันแนบมา หากยังไม่มีไฟล์แนบ ขอให้ฉันอัปโหลดก่อน โดย:
-1. ตรวจสอบว่ามีข้อมูลสถิติ NSO ปีล่าสุดหรือยัง (อย่าสมมติว่าปีปัจจุบันเป็นปีข้อมูลล่าสุด) ระบุปีเก็บข้อมูล ปีเผยแพร่ แหล่ง URL ต้นทาง และวันที่ตรวจสอบ
-2. หากพบข้อมูลกลุ่มลูกจ้างแยกตามรายได้ ให้แสดงตัวเลือกที่มีแหล่งอ้างอิง โดยไม่กำหนดช่วงเงินเดือนของเจ้าของเว็บไซต์ และไม่อนุมานข้อมูลส่วนบุคคลจากค่าเริ่มต้น ห้ามนำข้อมูลครัวเรือนไปจัดอันดับบุคคล หรือแต่งเปอร์เซ็นไทล์/อัตราออม
-3. หากไม่มีชุดข้อมูลใหม่ที่ตรวจสอบได้ ให้คงตัวเลขเดิม และอธิบายข้อจำกัด
-4. แก้ข้อมูลและแหล่งอ้างอิงใน HTML เท่านั้น รักษาเครื่องคำนวณทั้งสี่โหมด สูตร UI Mobile-first และข้อจำกัดความเป็นส่วนตัวเดิม ทดสอบก่อนส่ง index.html ใหม่เพื่อ Deploy บน GitHub Pages
-เว็บไซต์ NSO: https://www.nso.go.th/nsoweb/index`;
+  const updatePrompt=`โปรดตรวจสอบและอัปเดต Financial Benchmark ของเว็บไซต์นี้ โดยใช้ข้อมูลและไฟล์ปัจจุบันจาก GitHub โดยตรง ไม่ต้องอาศัยบริบทแชตเก่า
+
+Repository: https://github.com/getnkit/personal-finance-playground
+Branch: main
+File: index.html
+เว็บไซต์: https://getnkit.github.io/personal-finance-playground/
+
+ขั้นตอน:
+1. อ่าน index.html ล่าสุดจาก Repository ก่อนทุกครั้ง อย่าใช้ไฟล์หรือค่า Benchmark ที่จำได้จากแชตเก่า
+2. ค้นข้อมูลสถิติล่าสุดจากแหล่งทางการที่ตรวจสอบได้ (เริ่มจากสำนักงานสถิติแห่งชาติ https://www.nso.go.th/) ระบุปีข้อมูล ปีเผยแพร่ URL อ้างอิง และวันที่ตรวจสอบจริง อย่าสมมติว่าปีปัจจุบันคือปีข้อมูลล่าสุด
+3. เปรียบเทียบเฉพาะสถิติที่มีนิยามและประชากรเป้าหมายถูกต้อง ระบุความต่างระหว่างครัวเรือนกับลูกจ้าง/บุคคล หากมีข้อมูลแยกกลุ่มรายได้ที่เชื่อถือได้ จึงค่อยเสนอให้ใช้ โดยไม่ระบุหรืออนุมานรายได้เจ้าของ Repository และไม่สร้างอันดับเปอร์เซ็นไทล์หรืออัตราออมที่ไม่มีหลักฐาน
+4. ถ้ามีข้อมูลใหม่ที่เหมาะสม ให้แก้เฉพาะเนื้อหา ตัวเลข ปีข้อมูล และแหล่งอ้างอิงในส่วน Benchmark ของ index.html รักษาสูตร เครื่องคำนวณทั้ง 4 โหมด UI Mobile-first และค่าตัวอย่างทั่วไปไว้ ตรวจสอบความถูกต้องก่อน Commit
+5. หาก GitHub Connector ยังมีสิทธิ์เขียน ให้ Commit ไปยัง Repository นี้และตรวจผล GitHub Pages Deployment; หากไม่มีสิทธิ์ ให้แจ้งอย่างตรงไปตรงมาและส่งไฟล์หรือ Patch ที่พร้อมนำขึ้น GitHub โดยไม่อ้างว่า Deploy แล้ว
+6. ถ้าข้อมูลเดิมยังเป็นข้อมูลล่าสุดที่เหมาะสม ให้รายงานผลการตรวจสอบ ไม่จำเป็นต้องแก้ไฟล์หรือสร้าง Commit
+
+โปรดไม่เพิ่มข้อมูลการเงินจริงหรือข้อมูลส่วนบุคคลของเจ้าของ Repository ลงในเว็บไซต์สาธารณะ`;
   $('copyBenchmarkUpdate').addEventListener('click',async()=>{
     let copied=false;
     try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(updatePrompt);copied=true;}}catch(e){}
