@@ -4,7 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101e36">
-  <meta name="description" content="Personal Finance Playground — ทดลองแผนการเงินและเปรียบเทียบผลลัพธ์">
+  <meta name="description" content="ทดลองวางแผนลงทุน ซื้อรถ และเงินออม ปรับตัวเลขเพื่อเปรียบเทียบทางเลือกก่อนตัดสินใจ">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Personal Finance Playground">
+  <meta property="og:description" content="ลองปรับตัวเลข แล้วเห็นภาพแผนลงทุน ซื้อรถ และเงินออมในหน้าเดียว">
+  <meta property="og:url" content="https://getnkit.github.io/personal-finance-playground/">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101e36'/%3E%3Cpath d='M14 43 27 30 36 36 51 17M40 17h11v11' fill='none' stroke='%2359d4bf' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <title>Personal Finance Playground</title>
   <style>
     :root{color-scheme:light;--navy:#101e36;--ink:#17263b;--sub:#617087;--teal:#0e9985;--teal-dark:#087664;--line:#e3eaf0;--wash:#f5f8fa;--white:#fff;--amber:#efb34f;--blue:#7893bb;--shadow:0 12px 44px rgba(23,39,60,.055)}
@@ -43,18 +49,114 @@
     @media(max-width:760px){.sitebar{padding:16px 18px}.top-pill{display:none}.shell{padding:21px 14px 90px}.intro{align-items:start}.intro h1{font-size:25px}.privacy-pill{display:none}.tabs{display:none}.layout{grid-template-columns:1fr;gap:12px}.section-head{margin-bottom:13px}.section-head h2{font-size:21px}.section-head p{font-size:12px}.inputs-card,.results-card{padding:17px}.fields{gap:15px}.bottom-tabs{position:fixed;bottom:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-top:1px solid #e4ebef;box-shadow:0 -5px 25px #18324813;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}.bottom-tabs .tab{padding:4px 0 3px;border-radius:9px;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-weight:680}.bottom-tabs .tab .emoji{font-size:19px}.bottom-tabs .tab[aria-selected="true"]{box-shadow:none;background:#e9f6f1;color:#006c5d}.input-grid{gap:10px}.metric-primary{font-size:34px}.footer{margin:18px 0 0}}
     @media(min-width:761px) and (max-width:960px){.layout{grid-template-columns:minmax(290px,360px) 1fr}.inputs-card,.results-card{padding:17px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+    /* Visual polish — deliberately presentation-only; all calculations remain unchanged. */
+    body{background:radial-gradient(ellipse 700px 360px at 92% 0%,#e8f5f1 0%,transparent 80%),#f5f8fa}
+    .sitebar{padding-top:16px;padding-bottom:16px;background:#10243a;border-bottom:1px solid #243c50}
+    .brandmark{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#d2fff0,#7cddc9);box-shadow:inset 0 1px 2px #ffffff88,0 5px 15px #0000001c;color:#115a50}
+    .brandmark svg{width:25px;height:25px}
+    .brand-title{font-size:15px;font-weight:810;letter-spacing:0}
+    .brand-sub{font-size:10px;letter-spacing:.16em;opacity:.66}
+    .shell{padding-top:24px}
+    .intro{position:relative;isolation:isolate;overflow:hidden;align-items:center;min-height:166px;margin-bottom:19px;padding:26px 29px;border:1px solid #dcece5;border-radius:23px;background:linear-gradient(108deg,#fff 0%,#f7fcf9 57%,#e8f7f0 100%);box-shadow:0 9px 28px #1f4a3e0b}
+    .intro::before{content:"";position:absolute;z-index:-1;width:280px;height:280px;border-radius:50%;right:-104px;top:-130px;background:#bcf0dd60}
+    .intro-copy{max-width:680px}
+    .eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:10px;letter-spacing:.17em;color:#237968;font-weight:800}
+    .eyebrow-dot{display:inline-block;width:7px;height:7px;background:#1ca58b;border-radius:50%;box-shadow:0 0 0 4px #daf5eb}
+    .intro h1{font-size:clamp(25px,3vw,35px);line-height:1.33;letter-spacing:-.75px;color:#173b40;margin:0 0 8px;font-weight:820}
+    .intro p{font-size:13.5px;line-height:1.8;color:#61797c;max-width:590px}
+    .hero-art{flex:0 0 225px;margin-right:6px;align-self:center}
+    .hero-art svg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 14px #29594c13)}
+    .tabs{gap:7px;padding:6px;margin-bottom:22px;border:1px solid #e0eae6;border-radius:17px;background:#fff;box-shadow:0 5px 18px #1d3a5009}
+    .tab{display:flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:10px 13px;color:#53687b;border:1px solid transparent;border-radius:12px;transition:background .16s ease,border-color .16s ease,color .16s ease}
+    .tab[aria-selected="true"]{background:#eaf7f1;border-color:#d1eadf;color:#087968;box-shadow:0 2px 8px #147d6f10}
+    .tab:hover{color:#087968;background:#f0f8f5}
+    .tab:focus-visible,.btn:focus-visible,.addon summary:focus-visible{outline:3px solid #83cbbb;outline-offset:2px}
+    .tab-icon{display:inline-grid;place-items:center;flex:0 0 auto;width:22px;height:22px}
+    .tab-icon svg{display:block;width:20px;height:20px}
+    .section-head{padding:0 2px;margin-bottom:16px}
+    .section-head h2{font-size:21px;font-weight:800;letter-spacing:-.4px;color:#213c4a}
+    .section-head p{font-size:12.5px;line-height:1.65}
+    .card{border-color:#e0e9e9;box-shadow:0 7px 28px #1d3b4b09}
+    .inputs-card{padding:23px}
+    .results-card{padding:24px;border-top:3px solid #86cfb9}
+    .card-label h3{color:#203b48;font-weight:790}
+    .field-input input{min-height:38px;background:#fff;border-color:#d6e3e5;transition:border-color .15s ease,box-shadow .15s ease}
+    .field-input input:hover,.car-finance-mode select:hover{border-color:#a8c6c4}
+    .field-input input:focus{border-color:#24a48c;box-shadow:0 0 0 3px #30ad971a}
+    .btn{padding:10px 14px;border-color:#dae6e4;color:#3b6664;background:#fbfefd;border-radius:10px}
+    .btn:hover{background:#eaf8f3;border-color:#9dd7c6}
+    .metric-primary{color:#145951}
+    .mini{background:#f5f9f8;border-color:#e4eeec}
+    .mini strong{color:#244751}
+    .retirement-forecast{background:#f0faf6;border-color:#d5ece3}
+    .addon{border-color:#dbeae4}
+    .addon summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;padding:17px 20px;color:#244951}
+    .addon summary::-webkit-details-marker{display:none}
+    .addon summary::after{content:"+";display:grid;place-items:center;flex:0 0 auto;width:26px;height:26px;border-radius:8px;background:#e6f5ef;color:#137766;font-size:20px;font-weight:450;line-height:1}
+    .addon[open] summary::after{content:"−"}
+    .addon-heading{display:flex;align-items:center;gap:10px}
+    .addon-heading .tab-icon{color:#178a77}
+    .bottom-tabs .tab .tab-icon{display:inline-grid}
+    @media(max-width:960px){
+      .hero-art{flex-basis:175px;margin-right:-4px}
+      .intro-copy{max-width:610px}
+    }
+    @media(max-width:760px){
+      .sitebar{padding:13px 17px}
+      .brandmark{width:38px;height:38px;border-radius:12px}
+      .brandmark svg{width:23px;height:23px}
+      .brand-title{font-size:13.5px}
+      .brand-sub{font-size:9px}
+      .shell{padding-top:17px}
+      .intro{min-height:0;margin-bottom:15px;padding:21px 19px;border-radius:19px}
+      .intro h1{font-size:clamp(22px,5.8vw,27px);line-height:1.37}
+      .intro p{font-size:12.5px;line-height:1.7}
+      .hero-art{display:none}
+      .section-head h2{font-size:20px}
+      .inputs-card,.results-card{padding:19px}
+      .bottom-tabs{padding:7px 9px calc(7px + env(safe-area-inset-bottom));border-top:1px solid #dbe9e5;background:#ffffffed;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+      .bottom-tabs .tab{gap:3px;min-height:51px;padding:5px 2px 4px;border-radius:10px;font-size:10px}
+      .bottom-tabs .tab .tab-icon{height:22px;width:24px}
+      .bottom-tabs .tab .tab-icon svg{width:21px;height:21px}
+      .bottom-tabs .tab[aria-selected="true"]{background:#e7f7f0;border-color:transparent;color:#087968}
+      .addon summary{padding:16px}
+    }
+    @media(max-width:360px){
+      .brand-title{font-size:12.5px}
+      .intro h1{font-size:21px}
+      .addon summary{font-size:12.5px}
+    }
   </style>
 </head>
 <body>
   <header class="sitebar">
-    <div class="brand"><div class="brandmark" aria-hidden="true">↗</div><div><div class="brand-title">Personal Finance Playground</div><div class="brand-sub">THINK · SIMULATE · DECIDE</div></div></div>
+    <div class="brand"><div class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></div><div><div class="brand-title">Personal Finance Playground</div><div class="brand-sub">PLAN · EXPLORE · DECIDE</div></div></div>
   </header>
   <div class="shell">
-    <div class="intro"><div><h1>ถ้าลองเปลี่ยนแผน จะเกิดอะไรขึ้น?</h1><p>ปรับตัวเลขแล้วเปรียบเทียบผลลัพธ์ได้ทันที</p></div></div>
+    <div class="intro">
+      <div class="intro-copy">
+        <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> PLAN WITH CLARITY</div>
+        <h1>วางแผนเงิน ให้เห็นภาพก่อนตัดสินใจ</h1>
+        <p>ทดลองปรับตัวเลข แล้วเปรียบเทียบแผนลงทุน ซื้อรถ และเงินออมได้ในหน้าเดียว</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 240 148" fill="none">
+          <rect x="37" y="31" width="168" height="101" rx="20" fill="white" stroke="#c8e6da" stroke-width="1.5"/>
+          <path d="M61 106 91 83 117 93 150 60 177 73" stroke="#168c78" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="m168 65 9 8-12 3" stroke="#168c78" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M61 119h116" stroke="#e0eee9" stroke-width="2" stroke-linecap="round"/>
+          <rect x="12" y="13" width="69" height="31" rx="15.5" fill="#d6f4e8"/>
+          <path d="M31 29h30" stroke="#74b9a5" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="200" cy="34" r="16" fill="#bbe8da"/>
+          <path d="m195 34 4 4 7-8" stroke="#167966" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
     <nav class="tabs" aria-label="โหมดจำลอง">
-      <button class="tab" data-tab="investment" aria-selected="true">📈 Investment & Retirement</button>
-      <button class="tab" data-tab="car" aria-selected="false">🚗 Car Timing</button>
-      <button class="tab" data-tab="savings" aria-selected="false">🎯 Savings & Goals</button>
+      <button class="tab" data-tab="investment" aria-selected="true"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></span><span class="tab-text">Investment & Retirement</span></button>
+      <button class="tab" data-tab="car" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span><span class="tab-text">Car Timing</span></button>
+      <button class="tab" data-tab="savings" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="tab-text">Savings & Goals</span></button>
     </nav>
 
     <main>
@@ -177,7 +279,7 @@
             </ul></details>
           </div>
         </div>
-        <details class="card addon" id="carInvestAddon"><summary>🚗 Car Fund vs Investing</summary>
+        <details class="card addon" id="carInvestAddon"><summary><span class="addon-heading"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span> Car Fund vs Investing</span></summary>
           <div class="addon-body"><p class="hint">สมมติซื้อรถด้วยเงินสดทั้งคัน: แผน A เก็บเงินซื้อรถก่อนแล้วค่อยลงทุน ส่วนแผน B ทยอยลงทุนไปพร้อมกับเก็บเงินซื้อรถ</p>
             <div class="addon-grid">
               <div class="field" data-field="tradeCarPrice"><div class="field-line"><label for="tradeCarPrice-num">งบซื้อรถ</label><div class="field-input"><input id="tradeCarPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input type="range" aria-label="งบซื้อรถ" min="100000" max="1000000" step="10000" value="400000"></div>
@@ -203,9 +305,9 @@
     <div class="footer"><span>Personal Finance Playground</span><span>ตัวเลขเป็นการจำลอง ไม่ใช่ผลตอบแทนที่รับประกัน</span></div>
   </div>
   <nav class="bottom-tabs" aria-label="เลือกโหมด (มือถือ)">
-    <button class="tab" data-tab="investment" aria-selected="true"><span class="emoji">📈</span>Investment</button>
-    <button class="tab" data-tab="car" aria-selected="false"><span class="emoji">🚗</span>Car Timing</button>
-    <button class="tab" data-tab="savings" aria-selected="false"><span class="emoji">🎯</span>Savings</button>
+    <button class="tab" data-tab="investment" aria-selected="true"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></span><span class="tab-text">Investment</span></button>
+    <button class="tab" data-tab="car" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span><span class="tab-text">Car Timing</span></button>
+    <button class="tab" data-tab="savings" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="tab-text">Savings</span></button>
   </nav>
   <noscript><div style="max-width:600px;margin:20px auto;background:#fff3d9;padding:14px;border-radius:12px">โปรดเปิด JavaScript เพื่อใช้เครื่องคำนวณ</div></noscript>
 <script>
