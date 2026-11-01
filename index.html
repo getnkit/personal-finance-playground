@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101e36">
-  <meta name="description" content="Personal Finance Playground — ทดลองแผนการเงินด้วย 4 เครื่องคำนวณ โดยไม่เชื่อมข้อมูลเงินจริง">
+  <meta name="description" content="Personal Finance Playground — ทดลองแผนการเงินและเปรียบเทียบผลลัพธ์">
   <title>Personal Finance Playground</title>
   <style>
     :root{color-scheme:light;--navy:#101e36;--ink:#17263b;--sub:#617087;--teal:#0e9985;--teal-dark:#087664;--line:#e3eaf0;--wash:#f5f8fa;--white:#fff;--amber:#efb34f;--blue:#7893bb;--shadow:0 12px 44px rgba(23,39,60,.055)}
@@ -44,10 +44,9 @@
 <body>
   <header class="sitebar">
     <div class="brand"><div class="brandmark" aria-hidden="true">↗</div><div><div class="brand-title">Personal Finance Playground</div><div class="brand-sub">THINK · SIMULATE · DECIDE</div></div></div>
-    <div class="top-pill">100% Local Calculation · No account required</div>
   </header>
   <div class="shell">
-    <div class="intro"><div><div class="eyebrow">YOUR WHAT-IF LAB</div><h1>ถ้าลองเปลี่ยนแผน จะเกิดอะไรขึ้น?</h1><p>ปรับสมมติฐานแล้วดูผลทันที — ทุกโหมดมีตัวเลขตัวอย่าง ไม่เชื่อมบัญชีธนาคารหรือ Google Sheets จริง</p></div><div class="privacy-pill">◈ ไม่บันทึกข้อมูลส่วนตัว</div></div>
+    <div class="intro"><div><h1>ถ้าลองเปลี่ยนแผน จะเกิดอะไรขึ้น?</h1><p>ปรับตัวเลขแล้วเปรียบเทียบผลลัพธ์ได้ทันที</p></div></div>
     <nav class="tabs" aria-label="โหมดจำลอง">
       <button class="tab" data-tab="investment" aria-selected="true">📈 Investment & Retirement</button>
       <button class="tab" data-tab="car" aria-selected="false">🚗 Car Timing</button>
@@ -57,16 +56,16 @@
 
     <main>
       <section id="investment" class="panel" aria-labelledby="investment-title">
-        <div class="section-head"><div><h2 id="investment-title">Investment & Retirement</h2><p>ลงทุนต่อเนื่อง ผลตอบแทนต่างกัน 2% ส่งผลต่อเงินอนาคตแค่ไหน?</p></div><span class="chip">01 / 04</span></div>
+        <div class="section-head"><div><h2 id="investment-title">Investment & Retirement</h2><p>ทดลองเงินออม ผลตอบแทน และแผนเกษียณ</p></div><span class="chip">01 / 04</span></div>
         <div class="layout">
-          <div class="card inputs-card"><div class="card-label"><h3>กำหนดสมมติฐาน</h3><small>ปรับได้ทุกช่อง</small></div><p class="hint">ค่าเริ่มต้นเป็นตัวอย่างสมมติ ไม่ใช่ข้อมูลเงินจริง</p>
+          <div class="card inputs-card"><div class="card-label"><h3>กำหนดสมมติฐาน</h3></div>
             <div class="fields">
               <div class="field" data-field="invMonthly"><div class="field-line"><label for="invMonthly-num">ลงทุนต่อเดือน</label><div class="field-input"><input id="invMonthly-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="ลงทุนต่อเดือน ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
               <div class="field" data-field="invYears"><div class="field-line"><label for="invYears-num">ระยะเวลาลงทุน</label><div class="field-input"><input id="invYears-num" type="number" min="1" max="60" step="1" value="20"><span>ปี</span></div></div><input aria-label="ระยะเวลาลงทุน ปรับแถบ" type="range" min="1" max="45" step="1" value="20"><div class="range-ends"><span>1 ปี</span><span>45 ปี</span></div></div>
               <div class="field" data-field="invRate"><div class="field-line"><label for="invRate-num">ผลตอบแทนสมมติต่อปี</label><div class="field-input"><input id="invRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input aria-label="ผลตอบแทนสมมติต่อปี ปรับแถบ" type="range" min="0" max="15" step="0.5" value="6"><div class="range-ends"><span>0%</span><span>15%</span></div></div>
               <div class="input-grid"><div class="field" data-field="invInitial"><div class="field-line"><label for="invInitial-num">เงินลงทุนตั้งต้น</label><div class="field-input"><input id="invInitial-num" type="number" min="0" max="1000000000" step="10000" value="0"><span>บาท</span></div></div></div><div class="field" data-field="invInflation"><div class="field-line"><label for="invInflation-num">เงินเฟ้อต่อปี</label><div class="field-input"><input id="invInflation-num" type="number" min="0" max="15" step="0.5" value="2"><span>%</span></div></div></div><div class="field" data-field="invWithdrawal"><div class="field-line"><label for="invWithdrawal-num">สมมติถอนใช้ต่อปี</label><div class="field-input"><input id="invWithdrawal-num" type="number" min="0" max="12" step="0.5" value="4"><span>%</span></div></div></div></div>
             </div>
-            <div class="button-row"><span class="note-tiny">ปรับตัวเลขแล้วคำนวณใหม่ทันที</span><button class="btn" type="button" data-reset="investment">↺ คืนค่าตัวอย่าง</button></div>
+            <div class="button-row"><button class="btn" type="button" data-reset="investment">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">มูลค่าพอร์ตปลายงวด (สมมติ)</div><div class="metric-primary" id="invTotal" aria-live="polite">—</div><div class="metric-sub" id="invSummary">—</div>
             <div class="mini-grid"><div class="mini"><div class="k">เงินต้นสะสม</div><strong id="invPrincipal">—</strong></div><div class="mini"><div class="k">ผลตอบแทนสะสม</div><strong id="invGrowth">—</strong></div><div class="mini"><div class="k">มูลค่าเทียบกำลังซื้อวันนี้</div><strong id="invReal">—</strong></div><div class="mini"><div class="k">สมมติถอนใช้เฉลี่ย/เดือน</div><strong id="invWithdraw">—</strong><div class="micro" id="invWithdrawReal">—</div></div></div>
@@ -74,16 +73,16 @@
             <div class="chartwrap"><svg id="invChart" class="svgchart" viewBox="0 0 570 218" role="img" aria-label="กราฟมูลค่าพอร์ตตามระยะเวลาลงทุน"></svg></div>
             <div class="chart-title"><span>ถ้าผลตอบแทนสูงขึ้นอีก 2 จุดเปอร์เซ็นต์</span><span id="invAltRate" style="font-size:11px;color:#62748a">—</span></div>
             <div class="mini-grid" style="margin-top:8px"><div class="mini"><div class="k">พอร์ตในสมมติฐานใหม่</div><strong id="invAltTotal">—</strong></div><div class="mini"><div class="k">ส่วนต่างจากสมมติฐานเดิม</div><strong id="invDiff">—</strong></div></div>
-            <div class="alert warm">นี่คือการจำลองผลตอบแทนคงที่ ไม่ใช่คำรับประกันผลลงทุนจริง อัตราถอนใช้ไม่ได้แปลว่าเป็นรายได้ฟรีหรือถอนแล้วเงินจะไม่มีวันหมด</div>
+            <div class="alert warm">ผลตอบแทนไม่รับประกัน และอัตราถอนใช้ไม่ได้หมายความว่าเงินจะไม่มีวันหมด</div>
             <details><summary>สูตรและสมมติฐาน</summary><p>เงินเริ่มต้นทบต้นรายเดือน บวกเงินลงทุนใหม่ทุกสิ้นเดือน โดยใช้อัตรารายเดือน = ผลตอบแทนต่อปี ÷ 12 ผลตอบแทนจริงอาจผันผวน เงินเฟ้อใช้แปลงกำลังซื้อกลับเป็นมูลค่าวันนี้ ไม่หักภาษีและค่าธรรมเนียม การถอนใช้รายเดือนเป็นเพียงอัตรารายปีคูณมูลค่าพอร์ต ÷ 12 ไม่มีการจำลองความเสี่ยงลำดับผลตอบแทนหรืออายุการใช้เงิน</p></details>
           </div>
         </div>
       </section>
 
       <section id="car" class="panel" aria-labelledby="car-title" hidden>
-        <div class="section-head"><div><h2 id="car-title">Car Purchase Timing</h2><p>ซื้อรถเร็วขึ้นต้องรับต้นทุนก่อนแผนเดิมเท่าไร?</p></div><span class="chip">02 / 04</span></div>
+        <div class="section-head"><div><h2 id="car-title">Car Purchase Timing</h2><p>ซื้อรถก่อนแผน ต้องจ่ายเพิ่มเท่าไร?</p></div><span class="chip">02 / 04</span></div>
         <div class="layout">
-          <div class="card inputs-card"><div class="card-label"><h3>เปรียบเทียบเวลาซื้อรถ</h3><small>ซื้อก่อน vs ตามแผน</small></div><p class="hint">เปรียบเทียบเฉพาะช่วงตั้งแต่ซื้อก่อน จนถึงวันซื้อที่วางแผนไว้</p>
+          <div class="card inputs-card"><div class="card-label"><h3>เปรียบเทียบเวลาซื้อรถ</h3></div><p class="hint">นับเฉพาะช่วงที่ซื้อก่อนแผนเดิม</p>
             <div class="fields">
               <div class="field" data-field="carEarlier"><div class="field-line"><label for="carEarlier-num">ซื้อเร็วกว่ากำหนด</label><div class="field-input"><input id="carEarlier-num" type="number" min="0" max="120" step="1" value="18"><span>เดือน</span></div></div><input aria-label="ซื้อเร็วกว่ากำหนด ปรับแถบ" type="range" min="0" max="60" step="1" value="18"><div class="range-ends"><span>ตามแผน</span><span>60 เดือน</span></div></div>
               <div class="field" data-field="carPrice"><div class="field-line"><label for="carPrice-num">ราคารถที่ซื้อก่อน</label><div class="field-input"><input id="carPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input aria-label="ราคารถ ปรับแถบ" type="range" min="50000" max="1000000" step="10000" value="400000"><div class="range-ends"><span>50,000</span><span>1,000,000</span></div></div>
@@ -96,29 +95,29 @@
                 <div class="field" data-field="carTransport"><div class="field-line"><label for="carTransport-num">ค่าเดินทางเดิมที่ลดได้ / เดือน</label><div class="field-input"><input id="carTransport-num" type="number" min="0" max="100000" step="100" value="2000"><span>฿</span></div></div></div>
                 <div class="field" data-field="carDep"><div class="field-line"><label for="carDep-num">มูลค่ารถลด / ปี (สมมติ)</label><div class="field-input"><input id="carDep-num" type="number" min="0" max="50" step="1" value="12"><span>%</span></div></div></div>
               </div>
-            </div><div class="button-row"><span class="note-tiny">ค่าใช้จ่ายต่อปีคิดเฉลี่ยเป็นรายเดือน</span><button class="btn" type="button" data-reset="car">↺ คืนค่าตัวอย่าง</button></div>
+            </div><div class="button-row"><button class="btn" type="button" data-reset="car">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">ต้นทุนทางเศรษฐกิจเพิ่มเติมจากการซื้อเร็ว</div><div class="metric-primary" id="carEconomic">—</div><div class="metric-sub" id="carSummary">—</div>
             <div class="mini-grid"><div class="mini"><div class="k">ค่าใช้รถสุทธิ / เดือน</div><strong id="carNetMonth">—</strong><div class="micro">หลังหักค่าเดินทางเดิมที่ประหยัดได้</div></div><div class="mini"><div class="k">ค่าใช้รถสุทธิตลอดช่วงซื้อก่อน</div><strong id="carRunning">—</strong></div><div class="mini"><div class="k">มูลค่ารถที่อาจลดลง</div><strong id="carDepLoss">—</strong><div class="micro">สมมติอัตราลดลงคงที่</div></div><div class="mini"><div class="k">เงินสดสำหรับซื้อรถที่ต้องจ่ายเร็วขึ้น</div><strong id="carUpfront">—</strong><div class="micro">ไม่บวกซ้ำในต้นทุนทางเศรษฐกิจ</div></div></div>
             <div class="chart-title"><span>องค์ประกอบต้นทุนเพิ่มก่อนถึงวันซื้อเดิม</span></div>
             <div class="bar-row"><span>ค่าใช้รถสุทธิ</span><div class="bar-bg"><div id="carBarRunning" class="bar-fill"></div></div><strong id="carBarRunningText">—</strong></div>
             <div class="bar-row"><span>มูลค่ารถลดลง</span><div class="bar-bg"><div id="carBarDep" class="bar-fill" style="background:#7893bb"></div></div><strong id="carBarDepText">—</strong></div>
-            <div class="alert warm">ราคารถคือเงินสดที่ต้องจ่ายเร็วขึ้น ไม่ใช่ต้นทุนเพิ่มทั้งหมด เพราะตามแผนเดิมก็ต้องซื้อรถอยู่แล้ว ตัวเลขนี้ยังไม่รวมดอกเบี้ยสินเชื่อ ค่าซ่อมใหญ่ ราคาซื้อในอนาคต และต้นทุนเสียโอกาสของเงินสด</div>
+            <div class="alert warm">ราคารถเป็นเงินที่จ่ายเร็วขึ้น ไม่ใช่ต้นทุนเพิ่มทั้งหมด ยังไม่รวมดอกเบี้ย ค่าซ่อมใหญ่ และต้นทุนเสียโอกาส</div>
             <details><summary>วิธีเปรียบเทียบให้ไม่บวกราคารถซ้ำ</summary><p>ค่าใช้รถสุทธิต่อเดือน = น้ำมัน + ที่จอด + (ประกัน + บำรุงรักษา + ภาษี/พ.ร.บ.) ÷ 12 − ค่าเดินทางเดิมที่ประหยัดได้ แล้วคูณจำนวนเดือนที่ซื้อก่อน มูลค่ารถลดลง = ราคารถ × [1 − (1 − อัตราลดลงต่อปี)^(เดือน/12)] ต้นทุนทางเศรษฐกิจตัวอย่าง = ค่าใช้รถสุทธิรวม + มูลค่ารถลดลง (อาจติดลบได้หากประหยัดค่าเดินทางมาก) ไม่ได้จำลองราคารถสองคันต่างรุ่นกัน สินเชื่อ ราคาขายต่อจริง หรือค่าเงินตามเวลา</p></details>
           </div>
         </div>
       </section>
 
       <section id="savings" class="panel" aria-labelledby="savings-title" hidden>
-        <div class="section-head"><div><h2 id="savings-title">Savings & Goals</h2><p>ออมเดือนละเท่าไร เป้าหมายถึงเมื่อไร และถ้าพักออมจะช้าลงแค่ไหน?</p></div><span class="chip">03 / 04</span></div>
+        <div class="section-head"><div><h2 id="savings-title">Savings & Goals</h2><p>ออมเท่าไร และใช้เวลากี่เดือนถึงเป้าหมาย?</p></div><span class="chip">03 / 04</span></div>
         <div class="layout">
-          <div class="card inputs-card"><div class="card-label"><h3>ทดลองแผนสะสมเงิน</h3><small>เป้าหมายแบบไม่มีผลตอบแทน</small></div><p class="hint">ใช้สำหรับ Goal เงินสด เช่น Car Fund ไม่ซ้ำกับเครื่องคำนวณลงทุน</p>
+          <div class="card inputs-card"><div class="card-label"><h3>ทดลองแผนสะสมเงิน</h3><small>เป้าหมายเงินสด ไม่รวมผลตอบแทน</small></div>
             <div class="fields">
               <div class="field" data-field="savGoal"><div class="field-line"><label for="savGoal-num">ยอดเงินเป้าหมาย</label><div class="field-input"><input id="savGoal-num" type="number" min="0" max="1000000000" step="10000" value="400000"><span>บาท</span></div></div><input aria-label="เป้าหมาย ปรับแถบ" type="range" min="50000" max="2000000" step="10000" value="400000"><div class="range-ends"><span>50,000</span><span>2,000,000</span></div></div>
               <div class="field" data-field="savNow"><div class="field-line"><label for="savNow-num">เงินสะสมที่มีแล้ว</label><div class="field-input"><input id="savNow-num" type="number" min="0" max="1000000000" step="10000" value="80000"><span>บาท</span></div></div><input aria-label="เงินสะสมที่มีแล้ว ปรับแถบ" type="range" min="0" max="1000000" step="10000" value="80000"><div class="range-ends"><span>0</span><span>1,000,000</span></div></div>
               <div class="field" data-field="savMonthly"><div class="field-line"><label for="savMonthly-num">ออมเข้าเป้าหมายต่อเดือน</label><div class="field-input"><input id="savMonthly-num" type="number" min="0" max="1000000" step="1000" value="20000"><span>บาท</span></div></div><input aria-label="ออมเข้าเป้าหมาย ปรับแถบ" type="range" min="0" max="100000" step="1000" value="20000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
               <div class="field" data-field="savPause"><div class="field-line"><label for="savPause-num">พักเติมเงินช่วงแรก</label><div class="field-input"><input id="savPause-num" type="number" min="0" max="120" step="1" value="2"><span>เดือน</span></div></div><input aria-label="พักเติมเงิน ปรับแถบ" type="range" min="0" max="24" step="1" value="2"><div class="range-ends"><span>ไม่พัก</span><span>24 เดือน</span></div></div>
-            </div><div class="button-row"><span class="note-tiny">ตัวเลขเปลี่ยนได้ ไม่บันทึกลง Goals จริง</span><button class="btn" type="button" data-reset="savings">↺ คืนค่าตัวอย่าง</button></div>
+            </div><div class="button-row"><button class="btn" type="button" data-reset="savings">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div><div class="metric-sub" id="savSummary">—</div>
             <div class="mini-grid"><div class="mini"><div class="k">ถ้าไม่พักออม</div><strong id="savNoPause">—</strong></div><div class="mini"><div class="k">เวลาที่เพิ่มจากการพัก</div><strong id="savDelay">—</strong></div><div class="mini"><div class="k">เงินสะสมอีก 12 เดือน</div><strong id="savOneYear">—</strong></div><div class="mini"><div class="k">ส่วนที่ยังขาดวันนี้</div><strong id="savGap">—</strong></div></div>
@@ -127,12 +126,11 @@
             <div class="bar-row"><span>อีก 6 เดือน</span><div class="bar-bg"><div id="savBar6" class="bar-fill"></div></div><strong id="savBar6Text">—</strong></div>
             <div class="bar-row"><span>อีก 12 เดือน</span><div class="bar-bg"><div id="savBar12" class="bar-fill"></div></div><strong id="savBar12Text">—</strong></div>
             <div class="bar-row"><span>อีก 24 เดือน</span><div class="bar-bg"><div id="savBar24" class="bar-fill"></div></div><strong id="savBar24Text">—</strong></div>
-            <div class="alert">การพักออมเพื่อรับมือรายจ่ายจำเป็นในบางเดือน เป็นการปรับแผน ไม่จำเป็นต้องถอน Emergency Fund เพื่อรักษายอดเติม Goal ให้คงเดิม</div>
             <details><summary>สูตรและขอบเขต</summary><p>เดือนที่ต้องใช้ = จำนวนเดือนพักช่วงแรก + ปัดขึ้น[(ยอดเป้าหมาย − เงินที่มี) ÷ เงินเติมต่อเดือน] หากเงินที่มีถึงเป้าแล้ว = 0 เดือน หากเงินเติมเป็น 0 และยังไม่ถึงเป้า จะแสดงว่าไปไม่ถึงภายใต้สมมติฐานนี้ สูตรถือว่าออมปลายเดือน เป้าหมายคงที่ ไม่มีผลตอบแทนหรือเงินเฟ้อ และไม่ใช่ตัวแทนของภาระที่ต้องจ่ายตามวันครบกำหนดจริง</p></details>
           </div>
         </div>
-        <details class="card addon" id="carInvestAddon"><summary>🚗 เปรียบเทียบ Car Fund vs Investing <span class="note-tiny">· ทดลองเพิ่ม</span></summary>
-          <div class="addon-body"><p class="hint">สมมติมีเงินแบ่งได้ก้อนเดียวต่อเดือน จะรีบเก็บซื้อรถก่อน หรือกันส่วนหนึ่งไปลงทุนจนซื้อรถช้าลง? ทั้งสองแผนใช้เงินต่อเดือนเท่ากัน</p>
+        <details class="card addon" id="carInvestAddon"><summary>🚗 Car Fund vs Investing</summary>
+          <div class="addon-body"><p class="hint">แบ่งเงินไปลงทุนแล้วจะซื้อรถช้าลงเท่าไร?</p>
             <div class="addon-grid">
               <div class="field" data-field="tradeCarPrice"><div class="field-line"><label for="tradeCarPrice-num">งบซื้อรถ</label><div class="field-input"><input id="tradeCarPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input type="range" aria-label="งบซื้อรถ" min="100000" max="1000000" step="10000" value="400000"></div>
               <div class="field" data-field="tradeCarNow"><div class="field-line"><label for="tradeCarNow-num">เงิน Car Fund ตอนนี้</label><div class="field-input"><input id="tradeCarNow-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input type="range" aria-label="เงิน Car Fund ตอนนี้" min="0" max="500000" step="10000" value="0"></div>
@@ -144,35 +142,35 @@
               <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">พอร์ตลงทุน A ณ เดือนที่ B ซื้อรถ</div><strong id="tradePortA">—</strong></div><div class="mini"><div class="k">พอร์ตลงทุน B ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong></div></div>
               <div class="metric-title">ผลต่างพอร์ตลงทุน B เทียบ A ณ เดือนเดียวกัน</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><p class="addon-note" id="tradeDetail">—</p>
             </div>
-            <div class="button-row"><span class="note-tiny">ตัวเลขเป็นตัวอย่างสมมติ</span><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
-            <div class="alert warm">เทียบพอร์ต ณ เดือนเดียวกัน และสมมติว่าหลังซื้อรถแล้วนำเงินงบเดิมไปลงทุนทันที จึงไม่เอาเงินลงทุนทั้งก้อนมาเรียกว่า “กำไร” ผลตอบแทน 6% เป็นเพียงสมมติฐาน ไม่เหมาะใช้รับประกันผลระยะสั้น และการเทียบนี้ยังไม่รวมค่าใช้รถ/ค่าเสื่อมจากการซื้อก่อน (ทดลองใน Car Timing เพิ่มได้)</div>
+            <div class="button-row"><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
+            <div class="alert warm">เทียบพอร์ต ณ เดือนเดียวกัน โดยนำเงินที่เหลือหลังซื้อรถไปลงทุนต่อ ไม่รวมค่าใช้รถและค่าเสื่อม ผลตอบแทนไม่รับประกัน</div>
           </div>
         </details>
       </section>
 
       <section id="benchmark" class="panel" aria-labelledby="benchmark-title" hidden>
-        <div class="section-head"><div><h2 id="benchmark-title">Financial Benchmark</h2><p>เห็นวินัยและความก้าวหน้าของตัวเอง พร้อมข้อมูลสถิติไทยที่ตรวจสอบได้</p></div><span class="chip">04 / 04</span></div>
+        <div class="section-head"><div><h2 id="benchmark-title">Financial Benchmark</h2><p>วัดวินัยการออมและดูข้อมูลอ้างอิงไทย</p></div><span class="chip">04 / 04</span></div>
         <div class="layout">
-          <div class="card inputs-card"><div class="card-label"><h3>ประเมินผลงานของตัวเอง</h3><small>ค่าเริ่มต้นสมมติ</small></div><p class="hint">ใช้ยอดออมจริงเฉลี่ยต่อเดือน อย่านับเงินโอนระหว่าง Pocket หรือซื้อสินทรัพย์ซ้ำสองครั้ง</p>
+          <div class="card inputs-card"><div class="card-label"><h3>ประเมินการออม</h3></div><p class="hint">ใช้เงินออมจริงเฉลี่ยต่อเดือน โดยไม่นับเงินโอนระหว่างบัญชีซ้ำ</p>
             <div class="fields">
               <div class="field" data-field="bmIncome"><div class="field-line"><label for="bmIncome-num">รายรับสุทธิเฉลี่ยต่อเดือน</label><div class="field-input"><input id="bmIncome-num" type="number" min="0" max="10000000" step="1000" value="40000"><span>บาท</span></div></div><input aria-label="รายรับเฉลี่ย ปรับแถบ" type="range" min="10000" max="150000" step="1000" value="40000"><div class="range-ends"><span>10,000</span><span>150,000</span></div></div>
               <div class="field" data-field="bmSaving"><div class="field-line"><label for="bmSaving-num">เงินออมจริงเฉลี่ยต่อเดือน</label><div class="field-input"><input id="bmSaving-num" type="number" min="-10000000" max="10000000" step="1000" value="20000"><span>บาท</span></div></div><input aria-label="ออมจริงเฉลี่ย ปรับแถบ" type="range" min="0" max="120000" step="1000" value="20000"><div class="range-ends"><span>0</span><span>120,000</span></div></div>
               <div class="input-grid"><div class="field" data-field="bmMonths"><div class="field-line"><label for="bmMonths-num">จำนวนเดือนที่ใช้เฉลี่ย</label><div class="field-input"><input id="bmMonths-num" type="number" min="1" max="120" step="1" value="6"><span>เดือน</span></div></div></div><div class="field" data-field="bmTarget"><div class="field-line"><label for="bmTarget-num">เป้าอัตราออมส่วนตัว</label><div class="field-input"><input id="bmTarget-num" type="number" min="0" max="100" step="1" value="25"><span>%</span></div></div></div></div>
-            </div><div class="button-row"><span class="note-tiny">ตัวเลขอยู่เฉพาะหน้าเว็บนี้</span><button class="btn" type="button" data-reset="benchmark">↺ คืนค่าตัวอย่าง</button></div>
+            </div><div class="button-row"><button class="btn" type="button" data-reset="benchmark">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">อัตราออมจริงจากข้อมูลที่กรอก</div><div class="metric-primary" id="bmRate">—</div><div class="metric-sub" id="bmSummary">—</div>
             <div class="mini-grid"><div class="mini"><div class="k">เงินสะสมจริงในช่วงที่นำมาเฉลี่ย</div><strong id="bmActual">—</strong></div><div class="mini"><div class="k">หากรักษาอัตราเฉลี่ยได้ 12 เดือน</div><strong id="bmAnnual">—</strong><div class="micro">ประมาณการ ไม่ใช่ผลจริงของปี</div></div><div class="mini"><div class="k">ส่วนต่างจากเป้าออมของตัวเอง</div><strong id="bmDiff">—</strong></div><div class="mini"><div class="k">เป้าออมต่อเดือนที่กำหนดเอง</div><strong id="bmTargetMoney">—</strong></div></div>
             <div class="chart-title"><span>เทียบกับเป้าออมที่ตั้งเอง</span></div>
             <div class="bar-row"><span>ออมจริง</span><div class="bar-bg"><div id="bmBarActual" class="bar-fill"></div></div><strong id="bmBarActualText">—</strong></div>
             <div class="bar-row"><span>เป้าของตัวเอง</span><div class="bar-bg"><div id="bmBarTarget" class="bar-fill" style="background:#7893bb"></div></div><strong id="bmBarTargetText">—</strong></div>
-            <div class="market"><h4>ข้อมูลตลาดไทย — Snapshot ปี 2568</h4><p>NSO: การสำรวจภาวะเศรษฐกิจและสังคมของครัวเรือนปี 2568 (2025) · ตรวจสอบแหล่งข้อมูลล่าสุด 1 พ.ย. 2569 · ตัวเลขนี้ไม่รีเฟรชอัตโนมัติ</p><div class="market-row"><div class="market-stat"><span>รายได้เฉลี่ย/เดือน/ครัวเรือน</span><b>28,308 ฿</b></div><div class="market-stat"><span>ค่าใช้จ่ายเฉลี่ย/เดือน/ครัวเรือน</span><b>22,420 ฿</b></div></div><p class="source">แหล่งข้อมูล: <a href="https://www.nso.go.th/nsoweb/index" target="_blank" rel="noopener noreferrer">NSO — ข้อมูลครัวเรือน</a> · <a href="https://www.nso.go.th/public/e-book/Statistical-Yearbook/SYB-2026_webPage/Page_SYB_TH.html" target="_blank" rel="noopener noreferrer">NSO — สถิติลูกจ้างตามช่วงค่าจ้าง</a></p><p>ถ้าต้องการเทียบกับพนักงานเงินเดือน 30,000–50,000 บาท ควรใช้สถิติลูกจ้างกลุ่มรายได้เดียวกัน แต่ยังไม่มีตัวเลขอัตราออมของกลุ่มนั้นที่ยืนยันจากแหล่งข้อมูลชุดนี้ จึงไม่จัดอันดับวินัยการออมแบบ Top %</p><div class="source-update"><button id="copyBenchmarkUpdate" class="btn btn-secondary" type="button">📋 คัดลอกคำขออัปเดตข้อมูล</button><span class="note-tiny" id="copyBenchmarkStatus" role="status">แนบไฟล์ index.html ปัจจุบันพร้อมข้อความที่คัดลอกใน ChatGPT เพื่ออัปเดตและเผยแพร่ใหม่</span></div></div>
-            <div class="alert warm">สำคัญ: ตัวเลข NSO เป็นค่าเฉลี่ยระดับครัวเรือนของทั้งประเทศ ไม่ใช่รายรับสุทธิหรือเงินออมของคนอายุใกล้เคียงกัน จึงใช้จัดอันดับว่าเราอยู่ Top 10% หรือคำนวณ Savings Rate ของตลาดจากรายได้ลบรายจ่ายไม่ได้</div>
+            <div class="market"><h4>สถิติครัวเรือนไทย · ปี 2568</h4><p>NSO · ข้อมูลปี 2568 · ตรวจสอบล่าสุด 1 พ.ย. 2569</p><div class="market-row"><div class="market-stat"><span>รายได้เฉลี่ย/เดือน/ครัวเรือน</span><b>28,308 ฿</b></div><div class="market-stat"><span>ค่าใช้จ่ายเฉลี่ย/เดือน/ครัวเรือน</span><b>22,420 ฿</b></div></div><p class="source">แหล่งข้อมูล: <a href="https://www.nso.go.th/nsoweb/index" target="_blank" rel="noopener noreferrer">NSO — ข้อมูลครัวเรือน</a> · <a href="https://www.nso.go.th/public/e-book/Statistical-Yearbook/SYB-2026_webPage/Page_SYB_TH.html" target="_blank" rel="noopener noreferrer">NSO — สถิติลูกจ้างตามช่วงค่าจ้าง</a></p><div class="source-update"><button id="copyBenchmarkUpdate" class="btn btn-secondary" type="button">📋 คัดลอกคำขออัปเดตข้อมูล</button><span class="note-tiny" id="copyBenchmarkStatus" role="status"></span></div></div>
+            <div class="alert warm">ข้อมูลครัวเรือนไม่ใช่สถิติเงินออมของพนักงานเงินเดือน จึงใช้จัดอันดับ Top % ไม่ได้</div>
             <details><summary>วิธีอ่าน Benchmark</summary><p>อัตราออมส่วนตัว = เงินออมสุทธิเฉลี่ยต่อเดือน ÷ รายรับสุทธิเฉลี่ยต่อเดือน × 100 ถ้ารายรับเป็นศูนย์ จะแสดงว่าไม่สามารถคำนวณได้ เปรียบเทียบกับเป้าของตัวเองเป็นจุดเปอร์เซ็นต์ ไม่ใช่อันดับเมื่อเทียบกับคนไทย เงินออมรายเดือนควรรวมยอดเงินสดออมและเงินลงทุนสุทธิที่เพิ่มขึ้นจากรายรับ โดยไม่รวมกำไร/ขาดทุนจากราคาสินทรัพย์หรือการโยกเงินไปมาระหว่างบัญชี</p></details>
           </div>
         </div>
       </section>
     </main>
-    <div class="footer"><span>Personal Finance Playground · ฉบับปรับปรุง (4 โหมด + เปรียบเทียบ Car Fund/Investing) · ไม่มี Login, Analytics, Cookies, Backend หรือการบันทึกข้อมูลที่กรอก · ปิดหน้าแล้วค่าที่กรอกจะไม่ถูกเก็บไว้</span><span>Not financial advice · Simulations only</span></div>
+    <div class="footer"><span>Personal Finance Playground</span><span>ตัวเลขเป็นการจำลอง ไม่ใช่ผลตอบแทนที่รับประกัน</span></div>
   </div>
   <nav class="bottom-tabs" aria-label="เลือกโหมด (มือถือ)">
     <button class="tab" data-tab="investment" aria-selected="true"><span class="emoji">📈</span>Investment</button>
@@ -296,7 +294,7 @@
   function benchmark(){
     const {bmIncome:income,bmSaving:savings,bmMonths:months,bmTarget:goal}=state;
     const rate=income>0?savings/income*100:NaN,annual=savings*12,actual=savings*months,targetMoney=income*goal/100,delta=rate-goal;
-    set('bmRate',percent(rate));set('bmSummary',income===0?'รายรับเป็นศูนย์ จึงคำนวณ Savings Rate ไม่ได้':`อัตราออมจากค่าเฉลี่ยที่กรอก จำนวน ${months} เดือน (ตัวเลขสมมติเริ่มต้น)`);
+    set('bmRate',percent(rate));set('bmSummary',income===0?'รายรับเป็นศูนย์ จึงคำนวณ Savings Rate ไม่ได้':`อัตราออมเฉลี่ยจากข้อมูล ${months} เดือน`);
     set('bmActual',short(actual));set('bmAnnual',short(annual));set('bmDiff',Number.isFinite(delta)?`${delta>0?'+':''}${delta.toLocaleString('th-TH',{maximumFractionDigits:1})} จุดเปอร์เซ็นต์`:'—');set('bmTargetMoney',short(targetMoney));
     const max=Math.max(1,Math.abs(savings),Math.abs(targetMoney));
     $('bmBarActual').style.width=`${100*Math.abs(savings)/max}%`;$('bmBarActual').style.background=savings<0?'#e0a64d':'#0e9985';
