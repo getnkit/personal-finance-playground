@@ -37,8 +37,9 @@
     details{border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:12px;color:#64758b}summary{font-weight:720;color:#52657a;cursor:pointer;list-style:revert}details p{margin:8px 0 0}details ul{margin:8px 0;padding-left:18px}details li{margin:4px 0}details .detail-sublist{margin:5px 0 8px;padding-left:17px}details .detail-sublist li{margin:3px 0;line-height:1.55}
     .bar-row{display:grid;grid-template-columns:102px 1fr 92px;align-items:center;gap:9px;font-size:11px;color:#69788b;margin:12px 0}.bar-bg{height:12px;background:#e9eef2;border-radius:10px;overflow:hidden}.bar-fill{height:100%;border-radius:10px;background:var(--teal)}.bar-row strong{text-align:right;color:#3b5063;font-weight:700}
     .market{margin-top:18px;border:1px solid #e4eaef;background:#fbfcfd;padding:15px;border-radius:14px}.market h4{margin:0;font-size:13px}.market p{font-size:11px;color:#697b8e;margin:6px 0 0}.market-row{display:flex;gap:10px;margin-top:12px}.market-stat{flex:1;border:1px solid #e4eaef;background:#fff;padding:11px;border-radius:11px}.market-stat b{font-size:16px;display:block;color:#1f3951}.market-stat span{font-size:11px;color:var(--sub)}
+    .trade-plan-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.trade-plan-split>div{background:#f5f8fa;border:1px solid #edf1f5;border-radius:11px;padding:10px 12px;min-width:0}.trade-plan-split strong{display:block;font-size:11px;color:#244959}.trade-plan-split span{display:block;font-size:12px;color:var(--sub);line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
     .addon{padding-top:0;margin-top:18px;border-radius:18px;overflow:hidden}.addon summary{list-style:revert;cursor:pointer;padding:16px 18px;color:#1a354c;font-size:14px;font-weight:750}.addon[open] summary{border-bottom:1px solid var(--line)}.addon-body{padding:16px 18px}.addon-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.addon-grid .field{min-width:0}.addon-grid .field-input{min-width:0}.addon-grid .field-input input{max-width:130px}.addon-output{border:1px solid #d7ebe5;background:#f2faf7;border-radius:14px;padding:14px;margin-top:16px}.addon-output .metric-primary{font-size:28px}.addon-note{font-size:11px;color:var(--sub);margin:10px 0 0}.source-update{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}.source-update .btn{font-size:11px;padding:8px 10px}
-    @media(max-width:520px){.addon-grid{grid-template-columns:1fr}.addon-body{padding:15px}.addon summary{padding:14px}.source-update{align-items:stretch}.source-update .btn{flex:1}}
+    @media(max-width:520px){.trade-plan-split{grid-template-columns:1fr}.addon-grid{grid-template-columns:1fr}.addon-body{padding:15px}.addon summary{padding:14px}.source-update{align-items:stretch}.source-update .btn{flex:1}}
     .source{font-size:11px;color:#7a8899;margin-top:10px}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8e9aac;font-size:11px;margin-top:28px;padding:12px 4px}.footer span{max-width:800px}.bottom-tabs{display:none}
     @media(max-width:760px){.sitebar{padding:16px 18px}.top-pill{display:none}.shell{padding:21px 14px 90px}.intro{align-items:start}.intro h1{font-size:25px}.privacy-pill{display:none}.tabs{display:none}.layout{grid-template-columns:1fr;gap:12px}.section-head{margin-bottom:13px}.section-head h2{font-size:21px}.section-head p{font-size:12px}.inputs-card,.results-card{padding:17px}.fields{gap:15px}.bottom-tabs{position:fixed;bottom:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid #e4ebef;box-shadow:0 -5px 25px #18324813;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}.bottom-tabs .tab{padding:4px 0 3px;border-radius:9px;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-weight:680}.bottom-tabs .tab .emoji{font-size:19px}.bottom-tabs .tab[aria-selected="true"]{box-shadow:none;background:#e9f6f1;color:#006c5d}.input-grid{gap:10px}.metric-primary{font-size:34px}.footer{margin:18px 0 0}}
     @media(min-width:761px) and (max-width:960px){.layout{grid-template-columns:minmax(290px,360px) 1fr}.inputs-card,.results-card{padding:17px}}
@@ -113,7 +114,7 @@
                 <div class="field" data-field="carTransport"><div class="field-line"><label for="carTransport-num">ค่าเดินทางเดิมที่ประหยัดได้ / เดือน</label><div class="field-input"><input id="carTransport-num" type="number" min="0" max="100000" step="100" value="0"><span>฿</span></div></div></div>
                 <div class="field" data-field="carDep"><div class="field-line"><label for="carDep-num">มูลค่ารถลด / ปี (สมมติ)</label><div class="field-input"><input id="carDep-num" type="number" min="0" max="50" step="1" value="10"><span>%</span></div></div></div>
               </div>
-              <div class="car-finance-mode"><label for="carFinanceMode">วิธีซื้อรถ</label><select id="carFinanceMode"><option value="cash">ซื้อเงินสด</option><option value="loan">ใช้ไฟแนนซ์รถมือสอง</option></select></div>
+              <div class="car-finance-mode"><label for="carFinanceMode">วิธีซื้อรถ</label><select id="carFinanceMode"><option value="cash">ซื้อเงินสด</option><option value="loan" selected>ใช้ไฟแนนซ์รถมือสอง</option></select></div>
               <div class="finance-fields" id="carFinanceFields" hidden>
                 <div class="field" data-field="carLoan"><div class="field-line"><label for="carLoan-num">ยอดกู้ไฟแนนซ์</label><div class="field-input"><input id="carLoan-num" type="number" inputmode="numeric" min="0" max="10000000" step="10000" value="250000"><span>บาท</span></div></div></div>
                 <div class="field" data-field="carFlatRate"><div class="field-line"><label for="carFlatRate-num">ดอกเบี้ยคงที่ / ปี (Flat)</label><div class="field-input"><input id="carFlatRate-num" type="number" min="0" max="20" step="0.25" value="5"><span>%</span></div></div></div>
@@ -122,11 +123,11 @@
               </div>
             </div><div class="button-row"><button class="btn" type="button" data-reset="car">↺ คืนค่าตัวอย่าง</button></div>
           </div>
-          <div class="card results-card"><div class="metric-title">ต้นทุนทางเศรษฐกิจเพิ่มเติมจากการซื้อเร็ว</div><div class="metric-primary" id="carEconomic">—</div><div class="metric-sub" id="carSummary">—</div>
+          <div class="card results-card"><div class="metric-title">ต้นทุนเพิ่มจากการซื้อรถก่อนแผน</div><div class="metric-primary" id="carEconomic">—</div><div class="metric-sub" id="carSummary">—</div>
             <div class="mini-grid"><div class="mini"><div class="k">ค่าใช้รถสุทธิ / เดือน</div><strong id="carNetMonth">—</strong><div class="micro">หลังหักค่าเดินทางเดิมที่ประหยัดได้</div></div><div class="mini"><div class="k">ค่าใช้รถสุทธิตลอดช่วงซื้อก่อน</div><strong id="carRunning">—</strong></div><div class="mini"><div class="k">มูลค่ารถที่อาจลดลง</div><strong id="carDepLoss">—</strong><div class="micro">สมมติอัตราลดลงคงที่</div></div></div>
             <div class="finance-results" id="carFinanceResults" hidden>
-              <div class="mini-grid"><div class="mini"><div class="k">ค่างวดไฟแนนซ์ / เดือน</div><strong id="carLoanPayment">—</strong><div class="micro" id="carLoanDown">—</div></div><div class="mini"><div class="k">ดอกเบี้ยรวมตลอดสัญญา</div><strong id="carLoanTotalInterest">—</strong><div class="micro">เงินต้นไม่รวมเป็นต้นทุนสูญเสียซ้ำ</div></div></div>
-              <div class="source">ดอกเบี้ยเฉพาะช่วงซื้อก่อนแผน <strong id="carEarlyInterest">—</strong> รวมในต้นทุนด้านบนแล้ว</div>
+              <div class="mini-grid"><div class="mini"><div class="k">ค่างวดไฟแนนซ์ / เดือน</div><strong id="carLoanPayment">—</strong><div class="micro" id="carLoanDown">—</div></div><div class="mini"><div class="k">ดอกเบี้ยรวมตลอดสัญญา</div><strong id="carLoanTotalInterest">—</strong><div class="micro">เงินต้นที่ผ่อนไม่บวกซ้ำเป็นต้นทุนเพิ่ม เพราะนับค่าเสื่อมรถแล้ว</div></div></div>
+              <div class="source">ดอกเบี้ยที่นับรวมใน “ต้นทุนเพิ่มจากการซื้อรถก่อนแผน” ด้านบน: <strong id="carEarlyInterest">—</strong> (เฉพาะช่วงซื้อก่อนแผน ไม่ใช่ดอกเบี้ยทั้งสัญญาเสมอไป)</div>
             </div>
             <div class="chart-title"><span>องค์ประกอบต้นทุนเพิ่มก่อนถึงวันซื้อเดิม</span></div>
             <div class="bar-row"><span>ค่าใช้รถสุทธิ</span><div class="bar-bg"><div id="carBarRunning" class="bar-fill"></div></div><strong id="carBarRunningText">—</strong></div>
@@ -165,21 +166,19 @@
         <div class="layout">
           <div class="card inputs-card"><div class="card-label"><h3>ทดลองแผนสะสมเงิน</h3><small>เป้าหมายเงินสด ไม่รวมผลตอบแทน</small></div>
             <div class="fields">
-              <div class="field" data-field="savGoal"><div class="field-line"><label for="savGoal-num">ยอดเงินเป้าหมาย</label><div class="field-input"><input id="savGoal-num" type="number" min="0" max="1000000000" step="10000" value="300000"><span>บาท</span></div></div><input aria-label="เป้าหมาย ปรับแถบ" type="range" min="50000" max="2000000" step="10000" value="300000"><div class="range-ends"><span>50,000</span><span>2,000,000</span></div></div>
-              <div class="field" data-field="savNow"><div class="field-line"><label for="savNow-num">เงินสะสมที่มีแล้ว</label><div class="field-input"><input id="savNow-num" type="number" min="0" max="1000000000" step="10000" value="25000"><span>บาท</span></div></div><input aria-label="เงินสะสมที่มีแล้ว ปรับแถบ" type="range" min="0" max="1000000" step="10000" value="25000"><div class="range-ends"><span>0</span><span>1,000,000</span></div></div>
-              <div class="field" data-field="savMonthly"><div class="field-line"><label for="savMonthly-num">ออมเข้าเป้าหมายต่อเดือน</label><div class="field-input"><input id="savMonthly-num" type="number" min="0" max="1000000" step="1000" value="12000"><span>บาท</span></div></div><input aria-label="ออมเข้าเป้าหมาย ปรับแถบ" type="range" min="0" max="100000" step="1000" value="12000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
-              <div class="field" data-field="savPause"><div class="field-line"><label for="savPause-num">พักเติมเงินช่วงแรก</label><div class="field-input"><input id="savPause-num" type="number" min="0" max="120" step="1" value="2"><span>เดือน</span></div></div><input aria-label="พักเติมเงิน ปรับแถบ" type="range" min="0" max="24" step="1" value="2"><div class="range-ends"><span>ไม่พัก</span><span>24 เดือน</span></div></div>
+              <div class="field" data-field="savGoal"><div class="field-line"><label for="savGoal-num">ยอดเงินเป้าหมาย</label><div class="field-input"><input id="savGoal-num" type="number" min="0" max="1000000000" step="10000" value="400000"><span>บาท</span></div></div><input aria-label="เป้าหมาย ปรับแถบ" type="range" min="50000" max="2000000" step="10000" value="400000"><div class="range-ends"><span>50,000</span><span>2,000,000</span></div></div>
+              <div class="field" data-field="savNow"><div class="field-line"><label for="savNow-num">เงินสะสมที่มีแล้ว</label><div class="field-input"><input id="savNow-num" type="number" min="0" max="1000000000" step="10000" value="0"><span>บาท</span></div></div><input aria-label="เงินสะสมที่มีแล้ว ปรับแถบ" type="range" min="0" max="1000000" step="10000" value="0"><div class="range-ends"><span>0</span><span>1,000,000</span></div></div>
+              <div class="field" data-field="savMonthly"><div class="field-line"><label for="savMonthly-num">ออมเข้าเป้าหมายต่อเดือน</label><div class="field-input"><input id="savMonthly-num" type="number" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="ออมเข้าเป้าหมาย ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
             </div><div class="button-row"><button class="btn" type="button" data-reset="savings">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div><div class="metric-sub" id="savSummary">—</div>
-            <div class="mini-grid"><div class="mini"><div class="k">ถ้าไม่พักออม</div><strong id="savNoPause">—</strong></div><div class="mini"><div class="k">เวลาที่เพิ่มจากการพัก</div><strong id="savDelay">—</strong></div><div class="mini"><div class="k">เงินสะสมอีก 12 เดือน</div><strong id="savOneYear">—</strong></div><div class="mini"><div class="k">ส่วนที่ยังขาดวันนี้</div><strong id="savGap">—</strong></div></div>
             <div class="chart-title"><span>ภาพรวมเงินสะสมตามแผน</span><span class="note-tiny">ก่อนรวมผลตอบแทน</span></div>
             <div class="bar-row"><span>วันนี้</span><div class="bar-bg"><div id="savBar0" class="bar-fill"></div></div><strong id="savBar0Text">—</strong></div>
             <div class="bar-row"><span>อีก 6 เดือน</span><div class="bar-bg"><div id="savBar6" class="bar-fill"></div></div><strong id="savBar6Text">—</strong></div>
             <div class="bar-row"><span>อีก 12 เดือน</span><div class="bar-bg"><div id="savBar12" class="bar-fill"></div></div><strong id="savBar12Text">—</strong></div>
             <div class="bar-row"><span>อีก 24 เดือน</span><div class="bar-bg"><div id="savBar24" class="bar-fill"></div></div><strong id="savBar24Text">—</strong></div>
             <details><summary>สูตรและขอบเขต</summary><ul>
-              <li><strong>ระยะเวลาถึงเป้า:</strong> เดือนที่พักออม + ปัดขึ้น(เงินที่ยังขาด ÷ เงินออมต่อเดือน)</li>
+              <li><strong>ระยะเวลาถึงเป้า:</strong> ปัดขึ้น(เงินที่ยังขาด ÷ เงินออมต่อเดือน) โดยเริ่มออมตั้งแต่เดือนแรก</li>
               <li><strong>ถึงเป้าแล้ว:</strong> แสดง 0 เดือน หากยังไม่ถึงเป้าและไม่เติมเงิน จะแสดงว่าไปไม่ถึง</li>
               <li><strong>สมมติฐาน:</strong> เติมเงินปลายเดือน เป้าหมายคงที่ ไม่รวมผลตอบแทนหรือเงินเฟ้อ</li>
               <li><strong>ข้อจำกัด:</strong> ไม่ใช่การคาดการณ์ภาระที่ต้องจ่ายตามวันครบกำหนดจริง</li>
@@ -187,15 +186,19 @@
           </div>
         </div>
         <details class="card addon" id="carInvestAddon"><summary>🚗 Car Fund vs Investing</summary>
-          <div class="addon-body"><p class="hint">แบ่งเงินไปลงทุนแล้วจะซื้อรถช้าลงเท่าไร?</p>
+          <div class="addon-body"><p class="hint">ใช้งบรวมเท่ากัน: แผน A เก็บซื้อรถก่อนทั้งหมด ส่วนแผน B แบ่งงบไปลงทุนตั้งแต่แรก</p>
             <div class="addon-grid">
-              <div class="field" data-field="tradeCarPrice"><div class="field-line"><label for="tradeCarPrice-num">งบซื้อรถ</label><div class="field-input"><input id="tradeCarPrice-num" type="number" min="0" max="10000000" step="10000" value="500000"><span>บาท</span></div></div><input type="range" aria-label="งบซื้อรถ" min="100000" max="1000000" step="10000" value="500000"></div>
+              <div class="field" data-field="tradeCarPrice"><div class="field-line"><label for="tradeCarPrice-num">งบซื้อรถ</label><div class="field-input"><input id="tradeCarPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input type="range" aria-label="งบซื้อรถ" min="100000" max="1000000" step="10000" value="400000"></div>
               <div class="field" data-field="tradeCarNow"><div class="field-line"><label for="tradeCarNow-num">เงิน Car Fund ตอนนี้</label><div class="field-input"><input id="tradeCarNow-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input type="range" aria-label="เงิน Car Fund ตอนนี้" min="0" max="500000" step="10000" value="0"></div>
-              <div class="field" data-field="tradeMonthly"><div class="field-line"><label for="tradeMonthly-num">เงินแบ่งได้รวมต่อเดือน</label><div class="field-input"><input id="tradeMonthly-num" type="number" min="0" max="1000000" step="1000" value="20000"><span>บาท</span></div></div><input type="range" aria-label="เงินแบ่งได้รวมต่อเดือน" min="5000" max="100000" step="1000" value="20000"></div>
-              <div class="field" data-field="tradeInvest"><div class="field-line"><label for="tradeInvest-num">แบ่งไปลงทุนต่อเดือน (แผน B)</label><div class="field-input"><input id="tradeInvest-num" type="number" min="0" max="1000000" step="1000" value="3000"><span>บาท</span></div></div><input type="range" aria-label="แบ่งไปลงทุนต่อเดือน" min="0" max="50000" step="1000" value="3000"></div>
+              <div class="field" data-field="tradeMonthly"><div class="field-line"><label for="tradeMonthly-num">งบรวมออมซื้อรถและลงทุน / เดือน (ทั้งสองแผน)</label><div class="field-input"><input id="tradeMonthly-num" type="number" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input type="range" aria-label="งบรวมออมซื้อรถและลงทุนต่อเดือน" min="0" max="100000" step="1000" value="30000"></div>
+              <div class="field" data-field="tradeInvest"><div class="field-line"><label for="tradeInvest-num">แผน B · แบ่งไปลงทุน / เดือน</label><div class="field-input"><input id="tradeInvest-num" type="number" min="0" max="1000000" step="1000" value="5000"><span>บาท</span></div></div><input type="range" aria-label="แผน B แบ่งไปลงทุนต่อเดือน" min="0" max="50000" step="1000" value="5000"></div>
               <div class="field" data-field="tradeRate"><div class="field-line"><label for="tradeRate-num">ผลตอบแทนสมมติต่อปี</label><div class="field-input"><input id="tradeRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input type="range" aria-label="ผลตอบแทนสมมติต่อปี" min="-10" max="20" step="0.5" value="6"></div>
             </div>
-            <div class="addon-output"><div class="metric-title">แผน B ทำให้ซื้อรถช้ากว่าแผน A</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
+            <div class="trade-plan-split" aria-live="polite">
+               <div><strong>แผน A · ซื้อรถก่อน</strong><span id="tradeSplitA">—</span></div>
+               <div><strong>แผน B · ซื้อรถพร้อมลงทุน</strong><span id="tradeSplitB">—</span></div>
+             </div>
+             <div class="addon-output"><div class="metric-title">แผน B ทำให้ซื้อรถช้ากว่าแผน A</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
               <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">พอร์ตลงทุน A ณ เดือนที่ B ซื้อรถ</div><strong id="tradePortA">—</strong></div><div class="mini"><div class="k">พอร์ตลงทุน B ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong></div></div>
               <div class="metric-title">ผลต่างพอร์ตลงทุน B เทียบ A ณ เดือนเดียวกัน</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><p class="addon-note" id="tradeDetail">—</p>
             </div>
@@ -249,12 +252,12 @@
   'use strict';
   const DEFAULT = Object.freeze({
     invMonthly:30000,invYears:20,invRate:6,invInitial:0,invInflation:2,invRetRate:3,invWithdrawal:30000,
-    carEarlier:12,carPrice:400000,carFuel:2500,carParking:0,carService:8000,carTransport:0,carDep:10,carFinanceMode:'cash',carLoan:250000,carFlatRate:5,carLoanYears:1,
-    savGoal:300000,savNow:25000,savMonthly:12000,savPause:2,
-    tradeCarPrice:500000,tradeCarNow:0,tradeMonthly:20000,tradeInvest:3000,tradeRate:6,
+    carEarlier:12,carPrice:400000,carFuel:2500,carParking:0,carService:8000,carTransport:0,carDep:10,carFinanceMode:'loan',carLoan:250000,carFlatRate:5,carLoanYears:1,
+    savGoal:400000,savNow:0,savMonthly:30000,
+    tradeCarPrice:400000,tradeCarNow:0,tradeMonthly:30000,tradeInvest:5000,tradeRate:6,
     bmIncome:60000,bmSaving:12000,bmMonths:6,bmTarget:25
   });
-  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[-10,20],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carService:[0,3e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],savPause:[0,120],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],bmIncome:[0,1e7],bmSaving:[-1e7,1e7],bmMonths:[1,120],bmTarget:[0,100]};
+  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[-10,20],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carService:[0,3e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],bmIncome:[0,1e7],bmSaving:[-1e7,1e7],bmMonths:[1,120],bmTarget:[0,100]};
   const state={...DEFAULT};
   const fmt=new Intl.NumberFormat('th-TH',{maximumFractionDigits:0});
   const num=(value)=>Number.isFinite(value)?fmt.format(Math.round(value)):'—';
@@ -262,7 +265,7 @@
   const short=(v)=>!Number.isFinite(v)?'—':(Math.abs(v)>=1e6?`${(v/1e6).toFixed(2)} ล้านบาท`:`${num(v)} บาท`);
   const $=(id)=>document.getElementById(id);
   const set=(id,value)=>{ const el=$(id); if(el) el.textContent=value; };
-  const integerFields=new Set(['invYears','carEarlier','carLoanYears','savPause','bmMonths']);
+  const integerFields=new Set(['invYears','carEarlier','carLoanYears','bmMonths']);
   const clamp=(v,key)=>Math.min(bounds[key][1],Math.max(bounds[key][0],integerFields.has(key)?Math.round(v):v));
   const percent=(n)=>Number.isFinite(n)?`${n.toLocaleString('th-TH',{maximumFractionDigits:1})}%`:'—';
   const signed=(v,unit='')=>`${v>0?'+':''}${num(v)}${unit}`;
@@ -359,14 +362,12 @@
     set('carBarRunningText',short(running));set('carBarDepText',short(depreciation));set('carBarInterestText',short(earlyInterest));
   }
   function savings(){
-    const {savGoal:goal,savNow:now,savMonthly:monthly,savPause:pause}=state;
+    const {savGoal:goal,savNow:now,savMonthly:monthly}=state;
     const gap=Math.max(0,goal-now);
-    const noPause=gap===0?0:monthly===0?Infinity:Math.ceil(gap/monthly);
-    const withPause=gap===0?0:!Number.isFinite(noPause)?Infinity:noPause+pause;
-    const at=(t)=>now+monthly*Math.max(0,t-pause);
-    set('savTime',visibleMonths(withPause));
-    set('savSummary',gap===0?'เงินสะสมถึงยอดเป้าหมายที่ระบุแล้ว':monthly===0?'ต้องเพิ่มเงินออมต่อเดือนเพื่อไปถึงเป้าหมาย':`คงเงินออม ${baht(monthly)}/เดือน หลังพักช่วงแรก ${pause} เดือน`);
-    set('savNoPause',visibleMonths(noPause));set('savDelay',Number.isFinite(withPause)?`${withPause-noPause} เดือน`:'—');set('savOneYear',short(at(12)));set('savGap',short(gap));
+    const months=gap===0?0:monthly===0?Infinity:Math.ceil(gap/monthly);
+    const at=(t)=>now+monthly*t;
+    set('savTime',visibleMonths(months));
+    set('savSummary',gap===0?'ถึงเป้าหมายที่ระบุแล้ว':monthly===0?`ยังขาด ${baht(gap)} · ระบุเงินออมต่อเดือนเพื่อคำนวณ`:`ยังขาด ${baht(gap)} · ออม ${baht(monthly)}/เดือน`);
     [0,6,12,24].forEach(t=>{const a=at(t);$('savBar'+t).style.width=`${goal===0?100:Math.min(100,100*a/goal)}%`;set('savBar'+t+'Text',short(a))});
   }
   // Compare both plans at the same calendar month (when the slower plan can buy the car).
@@ -374,9 +375,11 @@
   function tradeoff(){
     const {tradeCarPrice:price,tradeCarNow:current,tradeMonthly:monthly,tradeInvest:investRequested,tradeRate:rate}=state;
     const remaining=Math.max(0,price-current),invest=investRequested;
+    set('tradeSplitA',`${baht(monthly)}/เดือน เข้า Car Fund`);
+    set('tradeSplitB',invest>monthly?'ยอดลงทุนเกินงบรวม':`${baht(monthly-invest)} เข้า Car Fund + ${baht(invest)} ลงทุน/เดือน`);
     if(invest>monthly){
       set('tradeA','—');set('tradeB','—');set('tradeDelay','เกินงบรวม');
-      set('tradeSummary','เงินที่แบ่งไปลงทุนต้องไม่เกินเงินที่แบ่งได้รวมต่อเดือน');
+      set('tradeSummary','แผน B กำหนดเงินลงทุนเกินงบรวมต่อเดือน');
       set('tradePortA','—');set('tradePortB','—');set('tradeDiff','—');set('tradeDetail','ลดวงเงินลงทุนหรือเพิ่มวงเงินแบ่งได้รวมต่อเดือน');return;
     }
     const carPerMonth=monthly-invest;
@@ -397,7 +400,7 @@
     }
     const diff=portfolioB-portfolioA;
     set('tradeDelay',`${delay} เดือน`);
-    set('tradeSummary',`เงินแบ่งได้ ${baht(monthly)}/เดือน · แผน B ลงทุน ${baht(invest)}/เดือน ก่อนซื้อรถ`);
+    set('tradeSummary',`ทั้งสองแผนใช้งบรวม ${baht(monthly)}/เดือน · แผน B ลงทุน ${baht(invest)}/เดือนก่อนซื้อรถ`);
     set('tradePortA',short(portfolioA));set('tradePortB',short(portfolioB));
     set('tradeDiff',`${diff>=0?'+':'−'}${short(Math.abs(diff))}`);
     const contributions=monthly*dateB-remaining;
@@ -415,7 +418,7 @@
     set('bmBarActualText',short(savings));set('bmBarTargetText',short(targetMoney));
   }
   const render={investment,car,savings,benchmark,tradeoff};
-  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carService','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly','savPause'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],benchmark:['bmIncome','bmSaving','bmMonths','bmTarget']};
+  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carService','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],benchmark:['bmIncome','bmSaving','bmMonths','bmTarget']};
   const groupFor=k=>Object.keys(groups).find(g=>groups[g].includes(k));
   function syncField(key,origin){
     const field=document.querySelector(`[data-field="${key}"]`);if(!field)return;
