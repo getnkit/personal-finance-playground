@@ -179,11 +179,11 @@
           </div>
         </div>
         <details class="card addon" id="carInvestAddon"><summary>🚗 Car Fund vs Investing</summary>
-          <div class="addon-body"><p class="hint">ใช้งบรวมเท่ากัน: แผน A เก็บซื้อรถก่อนทั้งหมด ส่วนแผน B แบ่งงบไปลงทุนตั้งแต่แรก</p>
+          <div class="addon-body"><p class="hint">สมมติซื้อรถด้วยเงินสดทั้งคัน: แผน A เก็บเงินซื้อรถก่อนแล้วค่อยลงทุน ส่วนแผน B ทยอยลงทุนไปพร้อมกับเก็บเงินซื้อรถ</p>
             <div class="addon-grid">
               <div class="field" data-field="tradeCarPrice"><div class="field-line"><label for="tradeCarPrice-num">งบซื้อรถ</label><div class="field-input"><input id="tradeCarPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input type="range" aria-label="งบซื้อรถ" min="100000" max="1000000" step="10000" value="400000"></div>
               <div class="field" data-field="tradeCarNow"><div class="field-line"><label for="tradeCarNow-num">เงิน Car Fund ตอนนี้</label><div class="field-input"><input id="tradeCarNow-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input type="range" aria-label="เงิน Car Fund ตอนนี้" min="0" max="500000" step="10000" value="0"></div>
-              <div class="field" data-field="tradeMonthly"><div class="field-line"><label for="tradeMonthly-num">งบรวมออมซื้อรถและลงทุน / เดือน</label><div class="field-input"><input id="tradeMonthly-num" type="number" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input type="range" aria-label="งบรวมออมซื้อรถและลงทุนต่อเดือน" min="0" max="100000" step="1000" value="30000"></div>
+              <div class="field" data-field="tradeMonthly"><div class="field-line"><label for="tradeMonthly-num">งบรวมออมซื้อรถและลงทุน / เดือน</label><div class="field-input"><input id="tradeMonthly-num" type="number" min="0" max="1000000" step="1000" value="35000"><span>บาท</span></div></div><input type="range" aria-label="งบรวมออมซื้อรถและลงทุนต่อเดือน" min="0" max="100000" step="1000" value="35000"></div>
               <div class="field" data-field="tradeInvest"><div class="field-line"><label for="tradeInvest-num">แบ่งไปลงทุน / เดือน</label><div class="field-input"><input id="tradeInvest-num" type="number" min="0" max="1000000" step="1000" value="5000"><span>บาท</span></div></div><input type="range" aria-label="แบ่งไปลงทุนต่อเดือน" min="0" max="50000" step="1000" value="5000"></div>
               <div class="field" data-field="tradeRate"><div class="field-line"><label for="tradeRate-num">ผลตอบแทนสมมติต่อปี</label><div class="field-input"><input id="tradeRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input type="range" aria-label="ผลตอบแทนสมมติต่อปี" min="-10" max="20" step="0.5" value="6"></div>
             </div>
@@ -191,9 +191,9 @@
                <div><strong>แผน A · ซื้อรถก่อน</strong><span id="tradeSplitA">—</span></div>
                <div><strong>แผน B · ซื้อรถพร้อมลงทุน</strong><span id="tradeSplitB">—</span></div>
              </div>
-             <div class="addon-output"><div class="metric-title">แผน B ทำให้ซื้อรถช้ากว่าแผน A</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
-              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">พอร์ตลงทุนแผน A</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตลงทุนแผน B</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
-              <div class="metric-title">ผลต่างพอร์ตลงทุนของแผน B เทียบกับ A ณ เดือนเดียวกัน</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><ul class="tradeoff-points trade-detail-list" id="tradeDetail" aria-label="คำอธิบายผลเปรียบเทียบ"></ul>
+             <div class="addon-output"><div class="metric-title">ลงทุนไปด้วย ทำให้ซื้อรถช้าลง</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
+              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">พอร์ตแผน A · ณ เดือนที่ B ซื้อรถได้</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตแผน B · ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
+              <div class="metric-title">พอร์ตแผน B มากกว่า/น้อยกว่าแผน A เท่าไร</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><ul class="tradeoff-points trade-detail-list" id="tradeDetail" aria-label="คำอธิบายผลเปรียบเทียบ"></ul>
             </div>
             <div class="button-row"><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
           </div>
@@ -216,7 +216,7 @@
     invMonthly:30000,invYears:20,invRate:6,invInitial:0,invInflation:2,invRetRate:3,invWithdrawal:30000,
     carEarlier:12,carPrice:400000,carFuel:2500,carParking:0,carService:8000,carTransport:0,carDep:10,carFinanceMode:'loan',carLoan:250000,carFlatRate:5,carLoanYears:1,
     savGoal:400000,savNow:0,savMonthly:30000,
-    tradeCarPrice:400000,tradeCarNow:0,tradeMonthly:30000,tradeInvest:5000,tradeRate:6
+    tradeCarPrice:400000,tradeCarNow:0,tradeMonthly:35000,tradeInvest:5000,tradeRate:6
   });
   const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[-10,20],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carService:[0,3e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20]};
   const state={...DEFAULT};
@@ -367,7 +367,7 @@
     }
     const diff=portfolioB-portfolioA;
     set('tradeDelay',`${delay} เดือน`);
-    set('tradeSummary',`ทั้งสองแผนใช้งบรวม ${baht(monthly)}/เดือน · แผน B ลงทุน ${baht(invest)}/เดือนก่อนซื้อรถ`);
+    set('tradeSummary',dateB===0?'มีเงินซื้อรถครบแล้วตั้งแต่วันนี้':`แผน A ซื้อรถเดือนที่ ${dateA} · แผน B ซื้อรถเดือนที่ ${dateB} · เทียบพอร์ตสิ้นเดือนที่ ${dateB}`);
     const contributions=monthly*dateB-remaining;
     const breakdown=(portfolio)=>{
       const gain=portfolio-contributions;
@@ -377,12 +377,26 @@
     set('tradePortABreakdown',breakdown(portfolioA));
     set('tradePortBBreakdown',breakdown(portfolioB));
     set('tradeDiff',`${diff>=0?'+':'−'}${short(Math.abs(diff))}`);
-    explain([
-      `สิ้นเดือนที่ ${dateB} ทั้งสองแผนสะสมเงินซื้อรถครบ ${short(price)} แล้ว จึงเทียบพอร์ต ณ เวลาเดียวกัน`,
-      `เงินต้นลงทุนเท่ากัน ${short(contributions)} = งบ ${short(monthly)} × ${dateB} เดือน − เงินซื้อรถที่ยังขาด ${short(remaining)}`,
-      'พอร์ตต่างกันเพราะเริ่มลงทุนคนละเวลา และนำเงินที่เหลือหลังซื้อรถไปลงทุนต่อ พอร์ตทั้งก้อนไม่ใช่กำไร',
-      'ไม่รวมค่าใช้รถ ค่าเสื่อมราคา และความผันผวนของผลตอบแทนจริง'
-    ]);
+    // Describe the last payment into the car fund and the first lump-sum investment.
+    const lastCarA=dateA>0?Math.max(0,remaining-monthly*(dateA-1)):0;
+    const lastCarB=dateB>0?Math.max(0,remaining-carPerMonth*(dateB-1)):0;
+    const firstInvestA=dateA>0?monthly-lastCarA:0;
+    const firstInvestB=dateB>0?monthly-lastCarB:0;
+    if(dateB===0){
+      explain(['มีเงินซื้อรถครบตั้งแต่วันนี้ จึงไม่ต้องออมเพิ่มเพื่อเป้าหมายนี้ และยังไม่มีช่วงเวลาที่จะเปรียบเทียบพอร์ตลงทุน']);
+    }else{
+      const explainA=dateA===0
+        ?`แผน A: มีเงินซื้อรถครบตั้งแต่แรก จึงลงทุน ${short(monthly)}/เดือนตั้งแต่เดือนที่ 1`
+        :`แผน A: เก็บซื้อรถ ${short(monthly)}/เดือน จนถึงเดือนที่ ${dateA} (เดือนซื้อรถจ่ายอีก ${short(lastCarA)} และนำส่วนที่เหลือ ${short(firstInvestA)} ไปลงทุน)${dateB>dateA?`; เดือนที่ ${dateA+1}–${dateB} ลงทุน ${short(monthly)}/เดือน`:''}`;
+      const explainB=`แผน B: เก็บซื้อรถ ${short(carPerMonth)} พร้อมลงทุน ${short(invest)}/เดือน${dateB>1?` ในเดือนที่ 1–${dateB-1}`:''}; เดือนที่ ${dateB} จ่ายซื้อรถส่วนที่เหลือ ${short(lastCarB)} และลงทุนอีก ${short(firstInvestB)}`;
+      explain([
+        `เทียบพอร์ต ณ สิ้นเดือนที่ ${dateB} หลังจากทั้งสองแผนซื้อรถได้แล้ว`,
+        explainA,
+        explainB,
+        `ถึงวันเปรียบเทียบ ทั้งสองแผนนำเงินไปลงทุนสะสมแผนละ ${short(contributions)} แต่แผน B เริ่มลงทุนก่อน จึงมีเวลาให้เงินเติบโตต่างกัน`,
+        'เป็นผลตอบแทนจำลอง ไม่รับประกันกำไร และยังไม่รวมค่าใช้รถหรือค่าเสื่อมจากการซื้อคนละเดือน'
+      ]);
+    }
   }
 
   const render={investment,car,savings,tradeoff};
