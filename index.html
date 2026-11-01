@@ -381,6 +381,7 @@
     set('invAltRate',`${percent(r)} → ${percent(altRate)}`);set('invAltTotal',short(alt));set('invDiff',short(Math.max(0,total-alt)));
     set('invAltWithdrawalReal','');
     $('invAltWithdrawalDetail').classList.remove('downside-reduction');
+    $('invAltRunwayDetail').classList.remove('downside-reduction');
     if(w===0){
       set('invAltRunway','—');set('invAltRunwayDetail','ระบุเงินถอนใช้ต่อเดือนก่อน');
       set('invAltWithdrawal','—');set('invAltWithdrawalDetail','ยังไม่มีระยะเวลาถอนใช้ให้เปรียบเทียบ');
@@ -390,6 +391,7 @@
       if(runway.exhausted){
         const lostMonths=Math.max(0,runway.months-downsideRunway.months);
         set('invAltRunwayDetail',lostMonths>0?`สั้นกว่าแผนหลัก ${visibleMonths(lostMonths)}`:'ระยะเวลาเท่ากับแผนหลัก');
+        if(lostMonths>0)$('invAltRunwayDetail').classList.add('downside-reduction');
       }else{
         set('invAltRunwayDetail','แผนหลักอยู่ได้มากกว่า 100 ปี');
       }
