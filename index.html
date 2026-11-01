@@ -64,6 +64,8 @@
     .eyebrow-dot{display:inline-block;width:7px;height:7px;background:#1ca58b;border-radius:50%;box-shadow:0 0 0 4px #daf5eb}
     .intro h1{font-size:clamp(25px,3vw,35px);line-height:1.33;letter-spacing:-.75px;color:#173b40;margin:0 0 8px;font-weight:820}
     .intro p{font-size:13.5px;line-height:1.8;color:#61797c;max-width:590px}
+    .privacy-note{display:flex;align-items:center;gap:7px;margin-top:12px;color:#4b8278;font-size:11.5px;line-height:1.55;font-weight:550}
+    .privacy-note svg{width:16px;height:16px;flex:0 0 auto}
     .hero-art{flex:0 0 225px;margin-right:6px;align-self:center}
     .hero-art svg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 14px #29594c13)}
     .tabs{gap:7px;padding:6px;margin-bottom:22px;border:1px solid #e0eae6;border-radius:17px;background:#fff;box-shadow:0 5px 18px #1d3a5009}
@@ -138,6 +140,7 @@
         <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> PLAN WITH CLARITY</div>
         <h1>วางแผนเงิน ให้เห็นภาพก่อนตัดสินใจ</h1>
         <p>ทดลองปรับตัวเลข แล้วเปรียบเทียบแผนลงทุน ซื้อรถ และเงินออมได้ในหน้าเดียว</p>
+        <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg><span>คำนวณบนอุปกรณ์ของคุณ · ไม่ส่งหรือจัดเก็บตัวเลขที่กรอก</span></div>
       </div>
       <div class="hero-art" aria-hidden="true">
         <svg viewBox="0 0 240 148" fill="none">
@@ -170,7 +173,7 @@
               <div class="field" data-field="invRate"><div class="field-line"><label for="invRate-num">ผลตอบแทนช่วงสะสมเงิน / ปี</label><div class="field-input"><input id="invRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input aria-label="ผลตอบแทนช่วงสะสมเงิน ปรับแถบ" type="range" min="0" max="15" step="0.5" value="6"><div class="range-ends"><span>0%</span><span>15%</span></div></div>
               <div class="input-grid"><div class="field" data-field="invInitial"><div class="field-line"><label for="invInitial-num">เงินลงทุนตั้งต้น</label><div class="field-input"><input id="invInitial-num" type="number" min="0" max="1000000000" step="10000" value="0"><span>บาท</span></div></div></div><div class="field" data-field="invInflation"><div class="field-line"><label for="invInflation-num">เงินเฟ้อต่อปี</label><div class="field-input"><input id="invInflation-num" type="number" min="0" max="15" step="0.5" value="2"><span>%</span></div></div></div></div>
               <div class="phase-heading">ช่วงเกษียณ <span>· หยุดเติมเงิน</span></div>
-              <div class="field" data-field="invRetRate"><div class="field-line"><label for="invRetRate-num">ผลตอบแทนช่วงเกษียณ / ปี</label><div class="field-input"><input id="invRetRate-num" type="number" min="-10" max="20" step="0.5" value="3"><span>%</span></div></div><input aria-label="ผลตอบแทนช่วงเกษียณ ปรับแถบ" type="range" min="-5" max="10" step="0.5" value="3"><div class="range-ends"><span>-5%</span><span>10%</span></div></div>
+              <div class="field" data-field="invRetRate"><div class="field-line"><label for="invRetRate-num">ผลตอบแทนช่วงเกษียณ / ปี</label><div class="field-input"><input id="invRetRate-num" type="number" min="0" max="10" step="0.5" value="3"><span>%</span></div></div><input aria-label="ผลตอบแทนช่วงเกษียณ ปรับแถบ" type="range" min="0" max="10" step="0.5" value="3"><div class="range-ends"><span>0%</span><span>10%</span></div></div>
               <div class="field" data-field="invWithdrawal"><div class="field-line"><label for="invWithdrawal-num">เริ่มถอนใช้ต่อเดือน</label><div class="field-input"><input id="invWithdrawal-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="ถอนใช้ต่อเดือน ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
             </div>
             <div class="button-row"><button class="btn" type="button" data-reset="investment">↺ คืนค่าตัวอย่าง</button></div>
@@ -193,7 +196,7 @@
               <li><strong>ช่วงสะสมเงิน:</strong> เงินลงทุนเริ่มต้นทบต้นรายเดือน และเติมเงินทุกสิ้นเดือนจนครบระยะเวลาที่ตั้งไว้</li>
               <li><strong>ช่วงถอนใช้:</strong> หลังหยุดเติมเงิน ถอนปลายเดือนตามจำนวนที่ตั้งไว้ โดยใช้ผลตอบแทนช่วงเกษียณแยกจากช่วงสะสมเงิน จำลองสูงสุด 100 ปี</li>
               <li><strong>เงินเฟ้อ:</strong> ใช้แปลงมูลค่าพอร์ตเป็นกำลังซื้อวันนี้ และเพิ่มเงินถอนตามอัตราเงินเฟ้อเมื่อครบทุก 12 เดือน เช่น 30,000 บาท/เดือนที่เงินเฟ้อ 2% จะเป็น 30,600 บาท/เดือนในปีถัดไป</li>
-              <li><strong>ข้อจำกัด:</strong> ผลตอบแทนทั้งสองช่วงเป็นเพียงสมมติฐานคงที่ แม้เลือกอัตราต่ำก็ไม่ได้รับประกัน ไม่รวมภาษี ค่าธรรมเนียม หรือความผันผวนของตลาด</li>
+              <li><strong>ข้อจำกัด:</strong> ผลตอบแทนทั้งสองช่วงเป็นเพียงสมมติฐานคงที่ แม้ตั้งช่วงเกษียณไว้ที่ 0% ผลตอบแทนจริงก็อาจติดลบในบางปีได้ แบบจำลองไม่รวมภาษี ค่าธรรมเนียม หรือความผันผวนของตลาด</li>
             </ul></details>
             <div class="purchasing-power-note" aria-label="คำอธิบายกำลังซื้อวันนี้">
               <h3>“กำลังซื้อวันนี้” หมายถึงอะไร?</h3>
@@ -324,7 +327,7 @@
     savGoal:400000,savNow:0,savMonthly:30000,
     tradeCarPrice:400000,tradeCarNow:0,tradeMonthly:35000,tradeInvest:5000,tradeRate:6
   });
-  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[-10,20],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,3e5],carService:[0,3e5],carAnnualTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20]};
+  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[0,10],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,3e5],carService:[0,3e5],carAnnualTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20]};
   const state={...DEFAULT};
   const fmt=new Intl.NumberFormat('th-TH',{maximumFractionDigits:0});
   const num=(value)=>Number.isFinite(value)?fmt.format(Math.round(value)):'—';
