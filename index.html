@@ -31,7 +31,6 @@
     input[type=number]{appearance:textfield;-moz-appearance:textfield}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
     input[type=range]{appearance:none;-webkit-appearance:none;background:#e3edf0;height:6px;border-radius:100px;width:100%;margin:9px 0 4px;accent-color:var(--teal)}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border:4px solid var(--teal);background:white;border-radius:50%;box-shadow:0 2px 5px #0002}input[type=range]::-moz-range-thumb{width:11px;height:11px;border:4px solid var(--teal);background:white;border-radius:50%}.range-ends{display:flex;justify-content:space-between;color:#a1adba;font-size:10px;margin-top:-4px}
     .car-finance-mode{display:grid;gap:6px}.car-finance-mode label{font-size:12.5px;font-weight:650;color:#364963}.car-finance-mode select{width:100%;border:1px solid #dce6ed;border-radius:10px;background:#fbfdff;color:var(--ink);font-weight:650;font-size:13px;padding:10px 12px}.car-finance-mode select:focus{outline:2px solid #0e998555;outline-offset:1px}.finance-fields{border:1px solid var(--line);padding:12px;border-radius:12px;background:#fbfdfc;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.finance-fields[hidden],.finance-results[hidden],.loan-bar[hidden]{display:none!important}.finance-fields>.field:first-child{grid-column:1/-1}.finance-fields .field-line{align-items:start;flex-direction:column}.finance-fields .field-input{justify-content:start;min-width:0}.finance-fields .field-input input{max-width:100%;width:100px}.finance-hint{grid-column:1/-1;font-size:11px;color:var(--sub);line-height:1.55}.finance-results{margin-top:10px}.finance-results .mini-grid{margin:10px 0}.finance-results .source{margin:7px 0 0}
-    .fixed-car-cost{background:#f5f8fa;border-radius:10px;padding:10px 11px;min-height:66px}.fixed-car-cost .fixed-label{font-size:11.5px;color:#52647a}.fixed-car-cost strong{display:block;margin-top:4px;color:#1e3045;font-size:15px}.fixed-car-cost .micro{font-size:10px;color:var(--sub)}
     .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.input-grid .field-line{align-items:start;flex-direction:column}.input-grid .field-input{min-width:0;justify-content:start}.input-grid .field-input input{width:100px}
     .divider{height:1px;background:var(--line);margin:18px 0}.button-row{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:20px}.btn{border:1px solid #d8e1e9;border-radius:11px;background:#fff;color:#40536d;padding:10px 12px;font-weight:700;font-size:12px}.btn:hover{border-color:#7ab9ae;color:var(--teal-dark)}.note-tiny{color:var(--sub);font-size:11px}
     .metric-title{color:var(--sub);font-size:12px;font-weight:650}.metric-primary{font-size:clamp(30px,4vw,40px);letter-spacing:-1.6px;line-height:1.3;font-weight:800;color:#142c43;overflow-wrap:anywhere}.metric-primary small{font-size:15px;color:#6e7c8e;font-weight:630;letter-spacing:0}.metric-sub{font-size:12px;color:var(--sub);margin-top:5px}
@@ -201,16 +200,16 @@
       <section id="car" class="panel" aria-labelledby="car-title" hidden>
         <div class="section-head"><div><h2 id="car-title">Car Purchase Timing</h2><p>ซื้อรถก่อนแผน ต้องจ่ายเพิ่มเท่าไร?</p></div></div>
         <div class="layout">
-          <div class="card inputs-card"><div class="card-label"><h3>เปรียบเทียบเวลาซื้อรถ</h3></div><p class="hint">สมมติ Toyota Yaris ATIV 1.2 เบนซิน มือสอง · นับเฉพาะช่วงซื้อก่อนแผนเดิม</p>
+          <div class="card inputs-card"><div class="card-label"><h3>เปรียบเทียบเวลาซื้อรถ</h3></div><p class="hint">ปรับค่าใช้จ่ายให้ตรงกับรถที่สนใจ · นับเฉพาะช่วงซื้อก่อนแผนเดิม</p>
             <div class="fields">
               <div class="field" data-field="carEarlier"><div class="field-line"><label for="carEarlier-num">ซื้อเร็วกว่ากำหนด</label><div class="field-input"><input id="carEarlier-num" type="number" min="0" max="120" step="1" value="12"><span>เดือน</span></div></div><input aria-label="ซื้อเร็วกว่ากำหนด ปรับแถบ" type="range" min="0" max="60" step="1" value="12"><div class="range-ends"><span>ตามแผน</span><span>60 เดือน</span></div></div>
               <div class="field" data-field="carPrice"><div class="field-line"><label for="carPrice-num">ราคารถที่ซื้อก่อน</label><div class="field-input"><input id="carPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input aria-label="ราคารถ ปรับแถบ" type="range" min="50000" max="1000000" step="10000" value="400000"><div class="range-ends"><span>50,000</span><span>1,000,000</span></div></div>
               <div class="input-grid">
                 <div class="field" data-field="carFuel"><div class="field-line"><label for="carFuel-num">น้ำมัน / เดือน</label><div class="field-input"><input id="carFuel-num" type="number" min="0" max="100000" step="100" value="2500"><span>฿</span></div></div></div>
                 <div class="field" data-field="carParking"><div class="field-line"><label for="carParking-num">ที่จอดรถ / เดือน (ถ้ามี)</label><div class="field-input"><input id="carParking-num" type="number" min="0" max="100000" step="100" value="0"><span>฿</span></div></div></div>
-                <div class="fixed-car-cost"><div class="fixed-label">ประกันสมัครใจ (ชั้น 2+)</div><strong>7,000 บาท/ปี</strong><div class="micro">สมมติฐานราคา ไม่ใช่ใบเสนอราคา</div></div>
+                <div class="field" data-field="carInsurance"><div class="field-line"><label for="carInsurance-num">ประกันสมัครใจ / ปี</label><div class="field-input"><input id="carInsurance-num" type="number" inputmode="numeric" min="0" max="300000" step="100" value="7000"><span>฿</span></div></div></div>
                 <div class="field" data-field="carService"><div class="field-line"><label for="carService-num">บำรุงรักษา / ปี</label><div class="field-input"><input id="carService-num" type="number" min="0" max="300000" step="1000" value="8000"><span>฿</span></div></div></div>
-                <div class="fixed-car-cost"><div class="fixed-label">ภาษีรถ + พ.ร.บ. (1,197 ซีซี)</div><strong>ประมาณ 1,841 บาท/ปี</strong><div class="micro">ก่อนส่วนลดภาษีตามอายุรถ</div></div>
+                <div class="field" data-field="carAnnualTax"><div class="field-line"><label for="carAnnualTax-num">ภาษีรถ + พ.ร.บ. / ปี</label><div class="field-input"><input id="carAnnualTax-num" type="number" inputmode="numeric" min="0" max="100000" step="1" value="1841"><span>฿</span></div></div></div>
                 <div class="field" data-field="carTransport"><div class="field-line"><label for="carTransport-num">ค่าเดินทางเดิมที่ประหยัดได้ / เดือน</label><div class="field-input"><input id="carTransport-num" type="number" min="0" max="100000" step="100" value="0"><span>฿</span></div></div></div>
                 <div class="field" data-field="carDep"><div class="field-line"><label for="carDep-num">มูลค่ารถลด / ปี (สมมติ)</label><div class="field-input"><input id="carDep-num" type="number" min="0" max="50" step="1" value="10"><span>%</span></div></div></div>
               </div>
@@ -234,7 +233,7 @@
             <div class="bar-row loan-bar" id="carLoanBar" hidden><span>ดอกเบี้ยช่วงซื้อก่อน</span><div class="bar-bg"><div id="carBarInterest" class="bar-fill" style="background:#bb8d4b"></div></div><strong id="carBarInterestText">—</strong></div>
             <div class="alert warm">ต้นทุนเป็นเพียงแบบจำลอง ไม่ใช่ยอดเงินสดที่ต้องจ่ายทั้งหมด และยังไม่รวมค่าซ่อมใหญ่หรือต้นทุนเสียโอกาส</div>
             <details><summary>วิธีคำนวณต้นทุนซื้อรถก่อนแผน</summary><ul>
-              <li><strong>ค่าใช้รถสุทธิ/เดือน:</strong> น้ำมัน + ที่จอด + (ประกันชั้น 2+ 7,000 + บำรุงรักษา + ภาษี/พ.ร.บ. ประมาณ 1,841)/12 − ค่าเดินทางเดิมที่ประหยัดได้</li>
+              <li><strong>ค่าใช้รถสุทธิ/เดือน:</strong> น้ำมัน + ที่จอด + (ประกันสมัครใจ + บำรุงรักษา + ภาษีรถและ พ.ร.บ. ตามค่าที่กรอก)/12 − ค่าเดินทางเดิมที่ประหยัดได้</li>
               <li><strong>ค่าใช้จ่ายช่วงซื้อก่อน:</strong> ค่าใช้รถสุทธิคูณจำนวนเดือนที่ซื้อก่อนแผน</li>
               <li><strong>มูลค่ารถลดลง:</strong> ประมาณจากราคารถและอัตราลดลงต่อปีแบบทบต้น</li>
               <li><strong>ต้นทุนเพิ่ม:</strong> ค่าใช้รถสุทธิในช่วงซื้อก่อน + มูลค่ารถลดลง + ดอกเบี้ยไฟแนนซ์เฉพาะช่วงซื้อก่อน (ถ้ามี) โดยไม่บวกเงินต้นรถซ้ำ</li>
@@ -247,7 +246,7 @@
                 </ul>
               </li>
               <li><strong>อัตราตัวอย่าง:</strong> 5% Flat ต่อปี อยู่ในช่วงอัตราประกาศสินเชื่อรถมือสอง เช่น <a href="https://www.krungsriauto.com/auto/products/krungsri-used-car" target="_blank" rel="noopener noreferrer">กรุงศรี ออโต้</a> และ <a href="https://www.scb.co.th/th/personal-banking/loans/car-loans/auto-finance-used-car" target="_blank" rel="noopener noreferrer">SCB</a> ไม่ใช่อัตราที่อนุมัติให้ผู้ใช้ทุกราย</li>
-              <li><strong>สมมติฐาน Yaris ATIV 1.2 เบนซิน:</strong>
+              <li><strong>ที่มาของค่าเริ่มต้น (ตัวอย่าง Yaris ATIV 1.2 เบนซิน):</strong> เป็นเพียงตัวเลขตั้งต้น แก้ให้ตรงกับรถและความคุ้มครองที่สนใจได้
                 <ul class="detail-sublist">
                   <li><strong>ภาษีรถ:</strong> 1,195.50 บาท/ปี สำหรับเครื่องยนต์ 1,197 ซีซี ก่อนส่วนลดตามอายุรถ</li>
                   <li><strong>พ.ร.บ.:</strong> 645.21 บาท/ปี</li>
@@ -315,11 +314,11 @@
   'use strict';
   const DEFAULT = Object.freeze({
     invMonthly:30000,invYears:20,invRate:6,invInitial:0,invInflation:2,invRetRate:3,invWithdrawal:30000,
-    carEarlier:12,carPrice:400000,carFuel:2500,carParking:0,carService:8000,carTransport:0,carDep:10,carFinanceMode:'loan',carLoan:250000,carFlatRate:5,carLoanYears:1,
+    carEarlier:12,carPrice:400000,carFuel:2500,carParking:0,carInsurance:7000,carService:8000,carAnnualTax:1841,carTransport:0,carDep:10,carFinanceMode:'loan',carLoan:250000,carFlatRate:5,carLoanYears:1,
     savGoal:400000,savNow:0,savMonthly:30000,
     tradeCarPrice:400000,tradeCarNow:0,tradeMonthly:35000,tradeInvest:5000,tradeRate:6
   });
-  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[-10,20],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carService:[0,3e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20]};
+  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[-10,20],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,3e5],carService:[0,3e5],carAnnualTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20]};
   const state={...DEFAULT};
   const fmt=new Intl.NumberFormat('th-TH',{maximumFractionDigits:0});
   const num=(value)=>Number.isFinite(value)?fmt.format(Math.round(value)):'—';
@@ -387,9 +386,8 @@
     const labels=`<text x="${left}" y="${H-7}" fill="#8b98a5" font-size="11">วันนี้</text><text x="${W-right}" text-anchor="end" y="${H-7}" fill="#8b98a5" font-size="11">ปีที่ ${years}</text>`;
     svg.innerHTML=`<defs><linearGradient id="investmentFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e9985" stop-opacity=".24"/><stop offset="1" stop-color="#0e9985" stop-opacity="0"/></linearGradient></defs>${grids}<polygon points="${area(data)}" fill="url(#investmentFill)"/><polyline points="${pts(base)}" fill="none" stroke="#b1c1cc" stroke-width="2.5" stroke-linecap="round"/><polyline points="${pts(data)}" fill="none" stroke="#0e9985" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${x(data.length-1)}" cy="${yp(data.at(-1))}" r="4.5" fill="#0e9985" stroke="#fff" stroke-width="2"/>${labels}`;
   }
-  const YARIS_ATIV_ANNUAL=Object.freeze({insurance:7000,roadTax:1195.5,compulsory:645.21});
   function car(){
-    const {carEarlier:months,carPrice:price,carFuel:fuel,carParking:parking,carService:maint,carTransport:old,carDep:d,carFinanceMode:mode,carFlatRate:flat,carLoanYears:years}=state;
+    const {carEarlier:months,carPrice:price,carFuel:fuel,carParking:parking,carInsurance:ins,carService:maint,carAnnualTax:tax,carTransport:old,carDep:d,carFinanceMode:mode,carFlatRate:flat,carLoanYears:years}=state;
     const financed=mode==='loan';
     $('carFinanceMode').value=mode;
     $('carFinanceFields').hidden=!financed;
@@ -398,7 +396,6 @@
     // A vehicle loan cannot exceed the vehicle's modeled purchase price.
     const loan=Math.min(price,state.carLoan);
     if(state.carLoan!==loan){state.carLoan=loan;syncField('carLoan');}
-    const ins=YARIS_ATIV_ANNUAL.insurance,tax=YARIS_ATIV_ANNUAL.roadTax+YARIS_ATIV_ANNUAL.compulsory;
     const netMonth=fuel+parking+(ins+maint+tax)/12-old;
     const running=netMonth*months;
     const depreciation=price*(1-Math.pow(1-d/100,months/12));
@@ -501,7 +498,7 @@
   }
 
   const render={investment,car,savings,tradeoff};
-  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carService','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate']};
+  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carAnnualTax','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate']};
   const groupFor=k=>Object.keys(groups).find(g=>groups[g].includes(k));
   function syncField(key,origin){
     const field=document.querySelector(`[data-field="${key}"]`);if(!field)return;
