@@ -185,7 +185,7 @@
               <div class="mini"><div class="k">พอร์ตเมื่อผลตอบแทนต่ำลง</div><strong id="invAltTotal">—</strong></div>
               <div class="mini"><div class="k">มูลค่าพอร์ตที่ลดลง</div><strong id="invDiff">—</strong></div>
               <div class="mini"><div class="k">พอร์ตอยู่ได้นานเท่าไร ถ้าถอนเท่าเดิม</div><strong id="invAltRunway">—</strong><div class="micro" id="invAltRunwayDetail">—</div></div>
-              <div class="mini"><div class="k">ถอนต่อเดือนเท่าไร เพื่อให้อยู่ได้นานเท่าเดิม</div><strong id="invAltWithdrawal">—</strong><div class="micro" id="invAltWithdrawalDetail">—</div></div>
+              <div class="mini"><div class="k">ถอนต่อเดือนเท่าไร เพื่อให้อยู่ได้นานเท่าเดิม</div><strong id="invAltWithdrawal">—</strong><div class="micro" id="invAltWithdrawalReal">—</div><div class="micro" id="invAltWithdrawalDetail">—</div></div>
             </div>
             <div class="source">ลดเฉพาะผลตอบแทนช่วงสะสมเงิน · ผลตอบแทนช่วงเกษียณและเงินเฟ้อยังคงตามค่าที่กรอก</div>
             <div class="alert warm">อายุพอร์ตเป็นเพียงแบบจำลองจากผลตอบแทนคงที่ ไม่ใช่การรับประกันว่าเงินจะอยู่ได้นานเท่านี้</div>
@@ -379,6 +379,7 @@
       set('invRunwaySummary',`เริ่มถอน ${baht(w)}/เดือน · ผลตอบแทนช่วงเกษียณ ${percent(retRate)}/ปี · เพิ่มเงินถอนตามเงินเฟ้อ ${percent(infl)}/ปี`);
     }
     set('invAltRate',`${percent(r)} → ${percent(altRate)}`);set('invAltTotal',short(alt));set('invDiff',short(Math.max(0,total-alt)));
+    set('invAltWithdrawalReal','');
     if(w===0){
       set('invAltRunway','—');set('invAltRunwayDetail','ระบุเงินถอนใช้ต่อเดือนก่อน');
       set('invAltWithdrawal','—');set('invAltWithdrawalDetail','ยังไม่มีระยะเวลาถอนใช้ให้เปรียบเทียบ');
@@ -400,6 +401,7 @@
         // and inflation assumptions stay the same. Round down to whole baht conservatively.
         const adjusted=Math.floor(w*alt/total);
         set('invAltWithdrawal',baht(adjusted));
+        set('invAltWithdrawalReal',`คิดเป็นกำลังซื้อวันนี้ประมาณ ${baht(adjusted/Math.pow(1+infl/100,y))}/เดือน`);
         set('invAltWithdrawalDetail',`ลดลง ${baht(w-adjusted)}/เดือน · เป้า ${visibleMonths(runway.months)}`);
       }
     }
