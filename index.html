@@ -42,7 +42,7 @@
     details{border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:12px;color:#64758b}summary{font-weight:720;color:#52657a;cursor:pointer;list-style:revert}details p{margin:8px 0 0}details ul{margin:8px 0;padding-left:18px}details li{margin:4px 0}details .detail-sublist{margin:5px 0 8px;padding-left:17px}details .detail-sublist li{margin:3px 0;line-height:1.55}
     .bar-row{display:grid;grid-template-columns:102px 1fr 92px;align-items:center;gap:9px;font-size:11px;color:#69788b;margin:12px 0}.bar-bg{height:12px;background:#e9eef2;border-radius:10px;overflow:hidden}.bar-fill{height:100%;border-radius:10px;background:var(--teal)}.bar-row strong{text-align:right;color:#3b5063;font-weight:700}
     .trade-plan-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.trade-plan-split>div{background:#f5f8fa;border:1px solid #edf1f5;border-radius:11px;padding:10px 12px;min-width:0}.trade-plan-split strong{display:block;font-size:11px;color:#244959}.trade-plan-split span{display:block;font-size:12px;color:var(--sub);line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
-    .addon{padding-top:0;margin-top:18px;border-radius:18px;overflow:hidden}.addon summary{list-style:revert;cursor:pointer;padding:16px 18px;color:#1a354c;font-size:14px;font-weight:750}.addon[open] summary{border-bottom:1px solid var(--line)}.addon-body{padding:16px 18px}.addon-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.addon-grid .field{min-width:0}.addon-grid .field-input{min-width:0}.addon-grid .field-input input{max-width:130px}.addon-output{border:1px solid #d7ebe5;background:#f2faf7;border-radius:14px;padding:14px;margin-top:16px}.addon-output .metric-primary{font-size:28px}.addon-note{font-size:11px;color:var(--sub);margin:10px 0 0}.addon-budget-note{font-size:11px;line-height:1.6;color:var(--sub);margin-top:1px}
+.decision-guide{margin-top:17px;padding:14px;border-radius:12px;border:1px solid #dae8e7;background:#fff}.decision-heading{display:flex;gap:7px;flex-wrap:wrap;align-items:baseline;font-size:13px;font-weight:760;color:#224c50}.decision-heading span{font-size:10px;font-weight:550;color:#819099}.decision-guide p{font-size:11.5px;line-height:1.65;color:#536777;margin:8px 0 0}.decision-guide .decision-points{margin:9px 0 0;padding-left:19px;font-size:11.5px;line-height:1.7;color:#526675}.decision-guide .decision-points li{margin:5px 0}.decision-guide .decision-caution{border-top:1px solid #e8eeef;margin-top:10px;padding-top:9px;font-size:10.5px;color:#82919d}.addon{padding-top:0;margin-top:18px;border-radius:18px;overflow:hidden}.addon summary{list-style:revert;cursor:pointer;padding:16px 18px;color:#1a354c;font-size:14px;font-weight:750}.addon[open] summary{border-bottom:1px solid var(--line)}.addon-body{padding:16px 18px}.addon-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.addon-grid .field{min-width:0}.addon-grid .field-input{min-width:0}.addon-grid .field-input input{max-width:130px}.addon-output{border:1px solid #d7ebe5;background:#f2faf7;border-radius:14px;padding:14px;margin-top:16px}.addon-output .metric-primary{font-size:28px}.addon-note{font-size:11px;color:var(--sub);margin:10px 0 0}.addon-budget-note{font-size:11px;line-height:1.6;color:var(--sub);margin-top:1px}
     @media(max-width:520px){.trade-plan-split{grid-template-columns:1fr}.addon-grid{grid-template-columns:1fr}.addon-body{padding:15px}.addon summary{padding:14px}}
     .source{font-size:11px;color:#7a8899;margin-top:10px}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8e9aac;font-size:11px;margin-top:28px;padding:12px 4px}.footer span{max-width:800px}.bottom-tabs{display:none}
     @media(max-width:760px){.sitebar{padding:16px 18px}.top-pill{display:none}.shell{padding:21px 14px 90px}.intro{align-items:start}.intro h1{font-size:25px}.privacy-pill{display:none}.tabs{display:none}.layout{grid-template-columns:1fr;gap:12px}.section-head{margin-bottom:13px}.section-head h2{font-size:21px}.section-head p{font-size:12px}.inputs-card,.results-card{padding:17px}.fields{gap:15px}.bottom-tabs{position:fixed;bottom:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-top:1px solid #e4ebef;box-shadow:0 -5px 25px #18324813;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}.bottom-tabs .tab{padding:4px 0 3px;border-radius:9px;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-weight:680}.bottom-tabs .tab .emoji{font-size:19px}.bottom-tabs .tab[aria-selected="true"]{box-shadow:none;background:#e9f6f1;color:#006c5d}.input-grid{gap:10px}.metric-primary{font-size:34px}.footer{margin:18px 0 0}}
@@ -281,13 +281,12 @@
           <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div><div class="metric-sub" id="savSummary">—</div>
             <details><summary>สูตรและขอบเขต</summary><ul>
               <li><strong>ระยะเวลาถึงเป้า:</strong> ปัดขึ้น(เงินที่ยังขาด ÷ เงินออมต่อเดือน) โดยเริ่มออมตั้งแต่เดือนแรก</li>
-              <li><strong>ถึงเป้าแล้ว:</strong> แสดง 0 เดือน หากยังไม่ถึงเป้าและไม่เติมเงิน จะแสดงว่าไปไม่ถึง</li>
               <li><strong>สมมติฐาน:</strong> เติมเงินปลายเดือน เป้าหมายคงที่ ไม่รวมผลตอบแทนหรือเงินเฟ้อ</li>
               <li><strong>ข้อจำกัด:</strong> ไม่ใช่การคาดการณ์ภาระที่ต้องจ่ายตามวันครบกำหนดจริง</li>
             </ul></details>
           </div>
         </div>
-        <details class="card addon" id="carInvestAddon"><summary><span class="addon-heading"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span> Car Fund vs Investing</span></summary>
+        <details class="card addon" id="carInvestAddon"><summary><span class="addon-heading"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span> Use Case · Car Fund vs Investing</span></summary>
           <div class="addon-body"><p class="hint">สมมติซื้อรถด้วยเงินสดทั้งคัน: แผน A เก็บเงินซื้อรถก่อนแล้วค่อยลงทุน ส่วนแผน B ทยอยลงทุนไปพร้อมกับเก็บเงินซื้อรถ</p>
             <div class="addon-grid">
               <div class="field" data-field="tradeCarPrice"><div class="field-line"><label for="tradeCarPrice-num">งบซื้อรถ</label><div class="field-input"><input id="tradeCarPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input type="range" aria-label="งบซื้อรถ" min="100000" max="1000000" step="10000" value="400000"><div class="addon-budget-note">ควรรวมราคารถ ค่าโอน ค่าตรวจสภาพ และเงินเผื่อค่าใช้จ่ายแรกเข้า ไม่ใช่แค่ราคาประกาศขาย</div></div>
@@ -303,6 +302,12 @@
              <div class="addon-output"><div class="metric-title">ลงทุนไปด้วย ทำให้ซื้อรถช้าลง</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
               <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">พอร์ตแผน A · ณ เดือนที่ B ซื้อรถได้</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตแผน B · ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
               <div class="metric-title">พอร์ตแผน B มากกว่า/น้อยกว่าแผน A เท่าไร</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><ul class="tradeoff-points trade-detail-list" id="tradeDetail" aria-label="คำอธิบายผลเปรียบเทียบ"></ul>
+              <section class="decision-guide" aria-label="ข้อสังเกตช่วยตัดสินใจ" aria-live="polite">
+                <div class="decision-heading">Decision Guide <span>คำแนะนำตามเงื่อนไข · ไม่ใช่ AI สด</span></div>
+                <p id="tradeDecisionSummary">—</p>
+                <ul class="decision-points"><li id="tradeDecisionA">—</li><li id="tradeDecisionB">—</li></ul>
+                <p class="decision-caution" id="tradeDecisionRisk">—</p>
+              </section>
             </div>
             <div class="button-row"><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
           </div>
@@ -478,20 +483,30 @@
         return item;
       }));
     };
+    // Rule-based explanation, not live AI or a promise that either plan wins.
+    const guide=(summary,forCar,forInvest,risk)=>{
+      set('tradeDecisionSummary',summary);
+      set('tradeDecisionA',forCar);
+      set('tradeDecisionB',forInvest);
+      set('tradeDecisionRisk',risk);
+    };
+    const riskNote='ส่วนต่างอาศัยผลตอบแทนจำลอง ไม่รับประกันกำไร และไม่รวมภาษี ค่าธรรมเนียม ค่าใช้รถหรือค่าเสื่อมจากเวลาซื้อที่ต่างกัน';
     const remaining=Math.max(0,price-current),invest=investRequested;
     set('tradeSplitA',`${baht(monthly)}/เดือน เข้า Car Fund`);
     set('tradeSplitB',invest>monthly?'ยอดลงทุนเกินงบรวม':`${baht(monthly-invest)} เข้า Car Fund + ${baht(invest)} ลงทุน/เดือน`);
     if(invest>monthly){
       set('tradeA','—');set('tradeB','—');set('tradeDelay','เกินงบรวม');
       set('tradeSummary','แผน B กำหนดเงินลงทุนเกินงบรวมต่อเดือน');
-      set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);return;
+      set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);
+      guide('ยังเปรียบเทียบไม่ได้ เพราะเงินที่แบ่งลงทุนสูงกว่างบรวมต่อเดือน','แผน A: ตรวจยอดเงินออมที่มีจริงก่อน','แผน B: ลดเงินลงทุนหรือเพิ่มงบรวมให้เพียงพอ','ควรแก้ตัวเลขให้สอดคล้องกันก่อนใช้ข้อสรุป');return;
     }
     const carPerMonth=monthly-invest;
     const dateA=remaining===0?0:monthly<=0?Infinity:Math.ceil(remaining/monthly);
     const dateB=remaining===0?0:carPerMonth<=0?Infinity:Math.ceil(remaining/carPerMonth);
     const valid=Number.isFinite(dateB)&&dateB<=600;
     set('tradeA',visibleMonths(dateA));set('tradeB',visibleMonths(dateB));
-    if(!valid){set('tradeDelay','คำนวณไม่ได้');set('tradeSummary','แผน B ไม่มีเงินเติม Car Fund หรือใช้เวลานานเกิน 50 ปี');set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลองลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);return;}
+    if(!valid){set('tradeDelay','คำนวณไม่ได้');set('tradeSummary','แผน B ไม่มีเงินเติม Car Fund หรือใช้เวลานานเกิน 50 ปี');set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลองลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);
+      guide('ยังเปรียบเทียบไม่ได้ เพราะแผน B ไม่ถึงเป้าซื้อรถภายในขอบเขต 50 ปี','แผน A: ให้น้ำหนักเงินออมซื้อรถเพื่อให้ถึงเป้าตามเวลา','แผน B: ลดเงินลงทุนหรือเพิ่มงบให้ Car Fund เพื่อให้คำนวณได้','ยังสรุปเรื่องความคุ้มค่าของสองแผนจากชุดข้อมูลนี้ไม่ได้');return;}
     const delay=dateB-dateA;
     let carA=Math.min(current,price),carB=carA,portfolioA=0,portfolioB=0;
     const monthlyRate=rate/1200;
@@ -514,6 +529,22 @@
     set('tradePortABreakdown',breakdown(portfolioA));
     set('tradePortBBreakdown',breakdown(portfolioB));
     set('tradeDiff',`${diff>=0?'+':'−'}${short(Math.abs(diff))}`);
+    if(remaining===0){
+      guide('มีเงินซื้อรถครบแล้วตั้งแต่วันนี้ จึงไม่มีช่วงต้องรอเพื่อเปรียบเทียบ','แผน A: ซื้อรถได้ทันทีตามเป้าหมาย','แผน B: จะลงทุนต่อหรือไม่เป็นการตัดสินใจแยกจากการเก็บเงินซื้อรถ',riskNote);
+    }else if(invest===0){
+      guide('สองแผนเหมือนกัน เพราะไม่ได้แบ่งเงินลงทุนระหว่างเก็บซื้อรถ','แผน A: เดินตามแผนออมซื้อรถได้','แผน B: หากต้องการเปรียบเทียบ ลองตั้งยอดแบ่งลงทุนต่อเดือน',riskNote);
+    }else{
+      const relative=price>0?(Math.abs(diff)/price*100).toLocaleString('th-TH',{maximumFractionDigits:2}):'0';
+      const advantage=diff>0?`แผน B มีพอร์ตมากกว่า ${baht(diff)}`:diff<0?`แผน B มีพอร์ตน้อยกว่า ${baht(Math.abs(diff))}`:'พอร์ตทั้งสองแผนมีมูลค่าเท่ากัน';
+      const timing=delay>0?`และซื้อรถช้าลง ${visibleMonths(delay)}`:'โดยไม่ทำให้ซื้อรถช้าลง';
+      guide(
+        `${advantage} (เท่ากับ ${relative}% ของงบซื้อรถ) ${timing} · ไม่มีส่วนต่างขั้นต่ำที่บอกว่าคุ้มสำหรับทุกคน`,
+        delay>0?'ถ้าต้องใช้รถตามแผนแรกหรือไม่ต้องการรอเพิ่ม แผน A ตอบโจทย์เรื่องเวลาได้ดีกว่า':'หากต้องการโฟกัสเงินซื้อรถก่อน แผน A ยังเป็นทางเลือกที่สอดคล้องกับเป้าหมาย',
+        diff>0?(delay>0?`ถ้ารอรถเพิ่ม ${visibleMonths(delay)} ได้ และรับความเสี่ยงการลงทุนได้ แผน B เป็นทางเลือกที่น่าพิจารณา`:'ถ้าให้ความสำคัญกับการเริ่มลงทุนและรับความเสี่ยงได้ แผน B เป็นทางเลือกที่น่าพิจารณา'):
+          'เมื่อสมมติฐานนี้ไม่ได้ทำให้พอร์ต B มากกว่า การรอซื้อรถเพียงเพื่อหวังส่วนต่างก็ไม่ได้มีข้อได้เปรียบจากตัวเลขนี้',
+        `สมมติผลตอบแทน ${percent(rate)}/ปี · หากผลตอบแทนเป็น 0% ส่วนต่างของพอร์ตจะเป็นศูนย์ · ${riskNote}`
+      );
+    }
     // Describe the last payment into the car fund and the first lump-sum investment.
     const lastCarA=dateA>0?Math.max(0,remaining-monthly*(dateA-1)):0;
     const lastCarB=dateB>0?Math.max(0,remaining-carPerMonth*(dateB-1)):0;
