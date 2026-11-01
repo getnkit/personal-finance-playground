@@ -181,7 +181,13 @@
             <div class="chart-title"><span>การเติบโตของพอร์ต</span><div class="legend"><span><b style="background:#0e9985"></b>พอร์ต</span><span><b style="background:#b1c1cc"></b>เงินต้น</span></div></div>
             <div class="chartwrap"><svg id="invChart" class="svgchart" viewBox="0 0 570 218" role="img" aria-label="กราฟมูลค่าพอร์ตตามระยะเวลาลงทุน"></svg></div>
             <div class="chart-title"><span>ถ้าผลตอบแทนต่ำกว่าคาด 2 จุดเปอร์เซ็นต์</span><span id="invAltRate" style="font-size:11px;color:#62748a">—</span></div>
-            <div class="mini-grid" style="margin-top:8px"><div class="mini"><div class="k">พอร์ตเมื่อผลตอบแทนต่ำลง</div><strong id="invAltTotal">—</strong></div><div class="mini"><div class="k">มูลค่าพอร์ตที่ลดลง</div><strong id="invDiff">—</strong></div></div>
+            <div class="mini-grid" style="margin-top:8px">
+              <div class="mini"><div class="k">พอร์ตเมื่อผลตอบแทนต่ำลง</div><strong id="invAltTotal">—</strong></div>
+              <div class="mini"><div class="k">มูลค่าพอร์ตที่ลดลง</div><strong id="invDiff">—</strong></div>
+              <div class="mini"><div class="k">พอร์ตอยู่ได้นานเท่าไร ถ้าถอนเท่าเดิม</div><strong id="invAltRunway">—</strong><div class="micro" id="invAltRunwayDetail">—</div></div>
+              <div class="mini"><div class="k">ถอนต่อเดือนเท่าไร เพื่อให้อยู่ได้นานเท่าเดิม</div><strong id="invAltWithdrawal">—</strong><div class="micro" id="invAltWithdrawalDetail">—</div></div>
+            </div>
+            <div class="source">ลดเฉพาะผลตอบแทนช่วงสะสมเงิน · ผลตอบแทนช่วงเกษียณและเงินเฟ้อยังคงตามค่าที่กรอก</div>
             <div class="alert warm">อายุพอร์ตเป็นเพียงแบบจำลองจากผลตอบแทนคงที่ ไม่ใช่การรับประกันว่าเงินจะอยู่ได้นานเท่านี้</div>
             <details><summary>สูตรและสมมติฐาน</summary><ul>
               <li><strong>ช่วงสะสมเงิน:</strong> เงินลงทุนเริ่มต้นทบต้นรายเดือน และเติมเงินทุกสิ้นเดือนจนครบระยะเวลาที่ตั้งไว้</li>
@@ -373,6 +379,30 @@
       set('invRunwaySummary',`เริ่มถอน ${baht(w)}/เดือน · ผลตอบแทนช่วงเกษียณ ${percent(retRate)}/ปี · เพิ่มเงินถอนตามเงินเฟ้อ ${percent(infl)}/ปี`);
     }
     set('invAltRate',`${percent(r)} → ${percent(altRate)}`);set('invAltTotal',short(alt));set('invDiff',short(Math.max(0,total-alt)));
+    if(w===0){
+      set('invAltRunway','—');set('invAltRunwayDetail','ระบุเงินถอนใช้ต่อเดือนก่อน');
+      set('invAltWithdrawal','—');set('invAltWithdrawalDetail','ยังไม่มีระยะเวลาถอนใช้ให้เปรียบเทียบ');
+    }else{
+      const downsideRunway=withdrawalRunway(alt,w,retRate,infl);
+      set('invAltRunway',downsideRunway.exhausted?(downsideRunway.months===0?'ไม่ถึง 1 เดือน':visibleMonths(downsideRunway.months)):'มากกว่า 100 ปี');
+      if(runway.exhausted){
+        const lostMonths=Math.max(0,runway.months-downsideRunway.months);
+        set('invAltRunwayDetail',lostMonths>0?`สั้นกว่าแผนหลัก ${visibleMonths(lostMonths)}`:'ระยะเวลาเท่ากับแผนหลัก');
+      }else{
+        set('invAltRunwayDetail','แผนหลักอยู่ได้มากกว่า 100 ปี');
+      }
+      if(!runway.exhausted){
+        set('invAltWithdrawal','—');set('invAltWithdrawalDetail','แผนหลักเกินขอบเขตจำลอง 100 ปี จึงไม่มีระยะเวลาที่แน่นอน');
+      }else if(runway.months===0||total<=0||alt<=0){
+        set('invAltWithdrawal','—');set('invAltWithdrawalDetail','เงินต้นหรือระยะเวลาในแผนหลักยังไม่พอใช้เป็นเป้าหมาย');
+      }else{
+        // Withdrawals and portfolio balances scale proportionally when retirement return
+        // and inflation assumptions stay the same. Round down to whole baht conservatively.
+        const adjusted=Math.floor(w*alt/total);
+        set('invAltWithdrawal',baht(adjusted));
+        set('invAltWithdrawalDetail',`ลดลง ${baht(w-adjusted)}/เดือน · เป้า ${visibleMonths(runway.months)}`);
+      }
+    }
     const data=[],base=[];for(let t=0;t<=y;t++){data.push(Math.max(0,futureValue(p,m,r,t)));base.push(p+m*t*12)};
     drawLineChart($('invChart'),data,base,y);
   }
