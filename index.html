@@ -9,7 +9,7 @@
   <style>
     :root{color-scheme:light;--navy:#101e36;--ink:#17263b;--sub:#617087;--teal:#0e9985;--teal-dark:#087664;--line:#e3eaf0;--wash:#f5f8fa;--white:#fff;--amber:#efb34f;--blue:#7893bb;--shadow:0 12px 44px rgba(23,39,60,.055)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f8fb;color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;font-variant-numeric:tabular-nums}
-    button,input{font:inherit}button{cursor:pointer}a{color:var(--teal-dark);text-underline-offset:3px}
+    button,input,select{font:inherit}button{cursor:pointer}a{color:var(--teal-dark);text-underline-offset:3px}
     .sitebar{background:var(--navy);color:#fff;padding:20px max(22px,calc((100vw - 1140px)/2));display:flex;align-items:center;justify-content:space-between;gap:14px}
     .brand{display:flex;align-items:center;gap:12px}.brandmark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#59d4bf,#1c9a8f);color:#0d2830;font-size:23px;font-weight:800;box-shadow:0 4px 15px #0002}
     .brand-title{font-size:16px;font-weight:760;line-height:1.25;letter-spacing:-.3px}.brand-sub{font-size:11px;opacity:.68;letter-spacing:.1em;margin-top:2px}
@@ -17,19 +17,20 @@
     .shell{max-width:1140px;margin:auto;padding:27px 22px 70px}
     .intro{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:22px}.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:var(--teal-dark);font-weight:780;font-size:10px}.intro h1{font-size:clamp(24px,3.6vw,32px);line-height:1.2;letter-spacing:-.7px;margin:6px 0 5px}.intro p{color:var(--sub);margin:0;max-width:640px;font-size:13px}.privacy-pill{color:#326b5c;background:#e8f5ef;border:1px solid #d4eddf;border-radius:99px;padding:8px 12px;white-space:nowrap;font-size:12px}
     .tabs{display:flex;gap:7px;background:#e9eff4;padding:6px;border-radius:17px;margin-bottom:22px}.tab{border:0;background:transparent;border-radius:12px;padding:12px 16px;text-align:center;flex:1;color:#506078;font-weight:700;font-size:13px;transition:.15s}.tab[aria-selected="true"]{color:#11223b;background:white;box-shadow:0 2px 10px #21395316}.tab:hover{color:#17283e}
-    .panel[hidden]{display:none!important}.section-head{display:flex;justify-content:space-between;align-items:start;gap:12px;margin-bottom:17px}.section-head h2{font-size:22px;letter-spacing:-.5px;margin:0}.section-head p{margin:3px 0 0;color:var(--sub);font-size:13px}.chip{padding:5px 10px;border:1px solid #d4e8e1;border-radius:20px;color:var(--teal-dark);font-weight:700;font-size:11px;white-space:nowrap;background:#ecf7f3}
+    .panel[hidden]{display:none!important}.section-head{display:flex;justify-content:space-between;align-items:start;gap:12px;margin-bottom:17px}.section-head h2{font-size:22px;letter-spacing:-.5px;margin:0}.section-head p{margin:3px 0 0;color:var(--sub);font-size:13px}
     .layout{display:grid;grid-template-columns:minmax(300px, 420px) minmax(0,1fr);gap:20px;align-items:start}
     .card{background:var(--white);border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow)}.inputs-card{padding:21px}.results-card{padding:22px}
     .card-label{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:3px}.card-label h3{font-size:15px;margin:0}.card-label small{color:var(--sub);font-weight:500;font-size:11px}
     .hint{font-size:12px;color:var(--sub);margin:3px 0 16px}.fields{display:grid;gap:16px;margin-top:19px}.field{display:grid;gap:5px}.field-line{display:flex;justify-content:space-between;align-items:center;gap:8px}.field label{font-size:12.5px;color:#364963;font-weight:610}.field-input{display:flex;align-items:center;gap:6px;justify-content:flex-end;min-width:118px}.field-input input{width:105px;max-width:34vw;text-align:right;border:1px solid #dce6ed;border-radius:9px;padding:6px 7px;color:var(--ink);background:#fbfdff;outline:none;font-size:14px;font-weight:710}.field-input input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #0e998521}.field-input span{color:#718196;font-size:12px;min-width:20px}
     input[type=number]{appearance:textfield;-moz-appearance:textfield}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
     input[type=range]{appearance:none;-webkit-appearance:none;background:#e3edf0;height:6px;border-radius:100px;width:100%;margin:9px 0 4px;accent-color:var(--teal)}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border:4px solid var(--teal);background:white;border-radius:50%;box-shadow:0 2px 5px #0002}input[type=range]::-moz-range-thumb{width:11px;height:11px;border:4px solid var(--teal);background:white;border-radius:50%}.range-ends{display:flex;justify-content:space-between;color:#a1adba;font-size:10px;margin-top:-4px}
+    .input-select{width:100%;min-height:41px;border:1px solid #dce6ed;border-radius:10px;padding:9px 12px;background:#fbfdff;color:var(--ink);font-size:13px;font-weight:650}.input-select:focus{outline:2px solid #0e99854a;outline-offset:1px}
     .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.input-grid .field-line{align-items:start;flex-direction:column}.input-grid .field-input{min-width:0;justify-content:start}.input-grid .field-input input{width:100px}
     .divider{height:1px;background:var(--line);margin:18px 0}.button-row{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:20px}.btn{border:1px solid #d8e1e9;border-radius:11px;background:#fff;color:#40536d;padding:10px 12px;font-weight:700;font-size:12px}.btn:hover{border-color:#7ab9ae;color:var(--teal-dark)}.btn-secondary{background:#ecf8f4;color:#087b6c;border-color:#d5eee6}.note-tiny{color:var(--sub);font-size:11px}
     .metric-title{color:var(--sub);font-size:12px;font-weight:650}.metric-primary{font-size:clamp(30px,4vw,40px);letter-spacing:-1.6px;line-height:1.3;font-weight:800;color:#142c43;overflow-wrap:anywhere}.metric-primary small{font-size:15px;color:#6e7c8e;font-weight:630;letter-spacing:0}.metric-sub{font-size:12px;color:var(--sub);margin-top:5px}
     .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:17px 0}.mini{padding:14px;background:#f5f8fa;border:1px solid #edf1f5;border-radius:13px;min-width:0}.mini .k{color:#69798b;font-size:11px;line-height:1.4}.mini strong{display:block;font-size:18px;color:#1e3045;letter-spacing:-.4px;line-height:1.5;overflow-wrap:anywhere;margin-top:5px}.mini .micro{font-size:10px;color:#708094;line-height:1.4}
     .chart-title{display:flex;align-items:center;justify-content:space-between;gap:6px;font-weight:710;font-size:13px;margin:18px 0 3px}.legend{display:flex;gap:13px;flex-wrap:wrap;color:#79869a;font-size:10px}.legend b{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:baseline}.svgchart{display:block;width:100%;height:auto;overflow:visible}.chartwrap{margin:7px 0 4px;padding:5px 0 0}.stack{display:flex;height:10px;background:#e7edf1;border-radius:30px;overflow:hidden;margin:9px 0}.stack>div{min-width:0}
-    .retirement-input-title{padding-top:12px;border-top:1px solid var(--line);color:var(--teal-dark);font-size:12px;font-weight:760}.retirement-forecast{margin:16px 0 20px;padding:14px 16px;border-radius:14px;border:1px solid #d9eee5;background:#f1faf6}.retirement-years{font-size:clamp(23px,3.5vw,30px);font-weight:800;line-height:1.4;color:#087664;margin-top:3px}.tradeoff-points{padding-left:19px;margin:14px 0 0;color:var(--sub);font-size:12px;line-height:1.65}.tradeoff-points li{margin:5px 0}
+    .phase-heading{padding-top:17px;border-top:1px solid var(--line);color:#174b49;font-size:16px;font-weight:780;line-height:1.4;letter-spacing:-.15px}.phase-heading-first{padding-top:0;border-top:0}.phase-heading span{font-size:12px;font-weight:550;color:var(--sub);letter-spacing:0}.retirement-forecast{margin:16px 0 20px;padding:14px 16px;border-radius:14px;border:1px solid #d9eee5;background:#f1faf6}.retirement-years{font-size:clamp(23px,3.5vw,30px);font-weight:800;line-height:1.4;color:#087664;margin-top:3px}.tradeoff-points{padding-left:19px;margin:14px 0 0;color:var(--sub);font-size:12px;line-height:1.65}.tradeoff-points li{margin:5px 0}
     .alert{padding:12px 13px;border:1px solid #dae9e7;border-left:3px solid #56aa99;background:#f2faf8;border-radius:10px;color:#41655f;font-size:11.5px;line-height:1.6;margin-top:17px}.alert.warm{background:#fff9ee;border-color:#f3e7d1;border-left-color:var(--amber);color:#735e3c}
     .purchasing-power-note{margin-top:16px;padding:17px 20px}.purchasing-power-note h3{font-size:14px;margin:0 0 6px}.purchasing-power-note p{font-size:13px;line-height:1.75;color:var(--sub);margin:0}
     details{border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:12px;color:#64758b}summary{font-weight:720;color:#52657a;cursor:pointer;list-style:revert}details p{margin:8px 0 0}details ul{margin:8px 0;padding-left:18px}details li{margin:4px 0}
@@ -58,22 +59,30 @@
 
     <main>
       <section id="investment" class="panel" aria-labelledby="investment-title">
-        <div class="section-head"><div><h2 id="investment-title">Investment & Retirement</h2><p>ทดลองเงินออม ผลตอบแทน และแผนเกษียณ</p></div><span class="chip">01 / 04</span></div>
+        <div class="section-head"><div><h2 id="investment-title">Investment & Retirement</h2><p>ทดลองเงินออม ผลตอบแทน และแผนเกษียณ</p></div></div>
         <div class="layout">
           <div class="card inputs-card"><div class="card-label"><h3>กำหนดสมมติฐาน</h3></div>
             <div class="fields">
+              <div class="phase-heading phase-heading-first">ช่วงสะสมเงิน <span>· เติมเงินทุกเดือน</span></div>
               <div class="field" data-field="invMonthly"><div class="field-line"><label for="invMonthly-num">ลงทุนต่อเดือน</label><div class="field-input"><input id="invMonthly-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="12000"><span>บาท</span></div></div><input aria-label="ลงทุนต่อเดือน ปรับแถบ" type="range" min="0" max="100000" step="1000" value="12000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
               <div class="field" data-field="invYears"><div class="field-line"><label for="invYears-num">ระยะเวลาลงทุน</label><div class="field-input"><input id="invYears-num" type="number" min="1" max="60" step="1" value="20"><span>ปี</span></div></div><input aria-label="ระยะเวลาลงทุน ปรับแถบ" type="range" min="1" max="45" step="1" value="20"><div class="range-ends"><span>1 ปี</span><span>45 ปี</span></div></div>
               <div class="field" data-field="invRate"><div class="field-line"><label for="invRate-num">ผลตอบแทนช่วงสะสมเงิน / ปี</label><div class="field-input"><input id="invRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input aria-label="ผลตอบแทนช่วงสะสมเงิน ปรับแถบ" type="range" min="0" max="15" step="0.5" value="6"><div class="range-ends"><span>0%</span><span>15%</span></div></div>
               <div class="input-grid"><div class="field" data-field="invInitial"><div class="field-line"><label for="invInitial-num">เงินลงทุนตั้งต้น</label><div class="field-input"><input id="invInitial-num" type="number" min="0" max="1000000000" step="10000" value="0"><span>บาท</span></div></div></div><div class="field" data-field="invInflation"><div class="field-line"><label for="invInflation-num">เงินเฟ้อต่อปี</label><div class="field-input"><input id="invInflation-num" type="number" min="0" max="15" step="0.5" value="2"><span>%</span></div></div></div></div>
-              <div class="retirement-input-title">ช่วงเกษียณ · หยุดเติมเงิน</div>
+              <div class="phase-heading">ช่วงเกษียณ <span>· หยุดเติมเงิน</span></div>
               <div class="field" data-field="invRetRate"><div class="field-line"><label for="invRetRate-num">ผลตอบแทนช่วงเกษียณ / ปี</label><div class="field-input"><input id="invRetRate-num" type="number" min="-10" max="20" step="0.5" value="3"><span>%</span></div></div><input aria-label="ผลตอบแทนช่วงเกษียณ ปรับแถบ" type="range" min="-5" max="10" step="0.5" value="3"><div class="range-ends"><span>-5%</span><span>10%</span></div></div>
-              <div class="field" data-field="invWithdrawal"><div class="field-line"><label for="invWithdrawal-num">ถอนใช้ต่อเดือนหลังหยุดเติมเงิน</label><div class="field-input"><input id="invWithdrawal-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="ถอนใช้ต่อเดือน ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
+              <div class="field" data-field="invWithdrawal"><div class="field-line"><label for="invWithdrawal-num">เริ่มถอนใช้ต่อเดือน</label><div class="field-input"><input id="invWithdrawal-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="ถอนใช้ต่อเดือน ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
+              <div class="field" data-field="invWithdrawalMode">
+                <div class="field-line"><label for="invWithdrawalMode-select">การถอนใช้หลังเกษียณ</label></div>
+                <select class="input-select" id="invWithdrawalMode-select" aria-label="รูปแบบการถอนใช้หลังเกษียณ">
+                  <option value="inflation" selected>เพิ่มตามเงินเฟ้อทุกปี</option>
+                  <option value="fixed">ถอนเท่าเดิมทุกเดือน</option>
+                </select>
+              </div>
             </div>
             <div class="button-row"><button class="btn" type="button" data-reset="investment">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">มูลค่าพอร์ตปลายงวด (สมมติ)</div><div class="metric-primary" id="invTotal" aria-live="polite">—</div><div class="metric-sub" id="invSummary">—</div>
-            <div class="mini-grid"><div class="mini"><div class="k">เงินต้นสะสม</div><strong id="invPrincipal">—</strong></div><div class="mini"><div class="k">ผลตอบแทนสะสม</div><strong id="invGrowth">—</strong></div><div class="mini"><div class="k">มูลค่าเทียบกำลังซื้อวันนี้</div><strong id="invReal">—</strong></div><div class="mini"><div class="k">ถอนใช้ต่อเดือนหลังหยุดเติมเงิน</div><strong id="invWithdraw">—</strong><div class="micro" id="invWithdrawReal">—</div></div></div>
+            <div class="mini-grid"><div class="mini"><div class="k">เงินต้นสะสม</div><strong id="invPrincipal">—</strong></div><div class="mini"><div class="k">ผลตอบแทนสะสม</div><strong id="invGrowth">—</strong></div><div class="mini"><div class="k">มูลค่าเทียบกำลังซื้อวันนี้</div><strong id="invReal">—</strong></div><div class="mini"><div class="k">เงินถอนใช้เริ่มต้น / เดือน</div><strong id="invWithdraw">—</strong><div class="micro" id="invWithdrawReal">—</div></div></div>
             <div class="retirement-forecast"><div class="metric-title">หลังหยุดเติมเงิน พอร์ตอยู่ได้นานเท่าไร?</div><div class="retirement-years" id="invRunway" aria-live="polite">—</div><div class="metric-sub" id="invRunwaySummary">—</div></div>
             <div class="chart-title"><span>การเติบโตของพอร์ต</span><div class="legend"><span><b style="background:#0e9985"></b>พอร์ต</span><span><b style="background:#b1c1cc"></b>เงินต้น</span></div></div>
             <div class="chartwrap"><svg id="invChart" class="svgchart" viewBox="0 0 570 218" role="img" aria-label="กราฟมูลค่าพอร์ตตามระยะเวลาลงทุน"></svg></div>
@@ -82,8 +91,8 @@
             <div class="alert warm">อายุพอร์ตเป็นเพียงแบบจำลองจากผลตอบแทนคงที่ ไม่ใช่การรับประกันว่าเงินจะอยู่ได้นานเท่านี้</div>
             <details><summary>สูตรและสมมติฐาน</summary><ul>
               <li><strong>ช่วงสะสมเงิน:</strong> เงินลงทุนเริ่มต้นทบต้นรายเดือน และเติมเงินทุกสิ้นเดือนจนครบระยะเวลาที่ตั้งไว้</li>
-              <li><strong>ช่วงถอนใช้:</strong> หลังจากนั้นหยุดเติมเงิน ถอนจำนวนบาทคงที่ทุกสิ้นเดือน และใช้ผลตอบแทนช่วงเกษียณที่ตั้งแยกไว้ จำลองได้สูงสุด 100 ปี</li>
-              <li><strong>เงินเฟ้อ:</strong> ใช้เทียบกำลังซื้อกลับเป็นมูลค่าวันนี้ ไม่ได้เพิ่มจำนวนเงินที่ถอนในแต่ละปี</li>
+              <li><strong>ช่วงถอนใช้:</strong> หลังหยุดเติมเงิน ถอนปลายเดือนตามจำนวนที่ตั้งไว้ โดยใช้ผลตอบแทนช่วงเกษียณแยกจากช่วงสะสมเงิน จำลองสูงสุด 100 ปี</li>
+              <li><strong>เงินเฟ้อ:</strong> ใช้แปลงมูลค่าพอร์ตเป็นกำลังซื้อวันนี้ และหากเลือก “เพิ่มตามเงินเฟ้อ” จะเพิ่มเงินถอนเมื่อครบทุก 12 เดือน เช่น 30,000 บาท/เดือนที่เงินเฟ้อ 2% จะเป็น 30,600 บาท/เดือนในปีถัดไป</li>
               <li><strong>ข้อจำกัด:</strong> ผลตอบแทนทั้งสองช่วงเป็นเพียงสมมติฐานคงที่ แม้เลือกอัตราต่ำก็ไม่ได้รับประกัน ไม่รวมภาษี ค่าธรรมเนียม หรือความผันผวนของตลาด</li>
             </ul></details>
           </div>
@@ -95,7 +104,7 @@
       </section>
 
       <section id="car" class="panel" aria-labelledby="car-title" hidden>
-        <div class="section-head"><div><h2 id="car-title">Car Purchase Timing</h2><p>ซื้อรถก่อนแผน ต้องจ่ายเพิ่มเท่าไร?</p></div><span class="chip">02 / 04</span></div>
+        <div class="section-head"><div><h2 id="car-title">Car Purchase Timing</h2><p>ซื้อรถก่อนแผน ต้องจ่ายเพิ่มเท่าไร?</p></div></div>
         <div class="layout">
           <div class="card inputs-card"><div class="card-label"><h3>เปรียบเทียบเวลาซื้อรถ</h3></div><p class="hint">นับเฉพาะช่วงที่ซื้อก่อนแผนเดิม</p>
             <div class="fields">
@@ -130,7 +139,7 @@
       </section>
 
       <section id="savings" class="panel" aria-labelledby="savings-title" hidden>
-        <div class="section-head"><div><h2 id="savings-title">Savings & Goals</h2><p>ออมเท่าไร และใช้เวลากี่เดือนถึงเป้าหมาย?</p></div><span class="chip">03 / 04</span></div>
+        <div class="section-head"><div><h2 id="savings-title">Savings & Goals</h2><p>ออมเท่าไร และใช้เวลากี่เดือนถึงเป้าหมาย?</p></div></div>
         <div class="layout">
           <div class="card inputs-card"><div class="card-label"><h3>ทดลองแผนสะสมเงิน</h3><small>เป้าหมายเงินสด ไม่รวมผลตอบแทน</small></div>
             <div class="fields">
@@ -178,7 +187,7 @@
       </section>
 
       <section id="benchmark" class="panel" aria-labelledby="benchmark-title" hidden>
-        <div class="section-head"><div><h2 id="benchmark-title">Financial Benchmark</h2><p>วัดวินัยการออมและดูข้อมูลอ้างอิงไทย</p></div><span class="chip">04 / 04</span></div>
+        <div class="section-head"><div><h2 id="benchmark-title">Financial Benchmark</h2><p>วัดวินัยการออมและดูข้อมูลอ้างอิงไทย</p></div></div>
         <div class="layout">
           <div class="card inputs-card"><div class="card-label"><h3>ประเมินการออม</h3></div><p class="hint">ใช้เงินออมจริงเฉลี่ยต่อเดือน โดยไม่นับเงินโอนระหว่างบัญชีซ้ำ</p>
             <div class="fields">
@@ -217,7 +226,7 @@
 (() => {
   'use strict';
   const DEFAULT = Object.freeze({
-    invMonthly:12000,invYears:20,invRate:6,invInitial:0,invInflation:2,invRetRate:3,invWithdrawal:30000,
+    invMonthly:12000,invYears:20,invRate:6,invInitial:0,invInflation:2,invRetRate:3,invWithdrawal:30000,invWithdrawalMode:'inflation',
     carEarlier:18,carPrice:550000,carFuel:2500,carParking:500,carInsurance:13000,carService:8000,carTax:2200,carTransport:2000,carDep:12,
     savGoal:300000,savNow:25000,savMonthly:12000,savPause:2,
     tradeCarPrice:500000,tradeCarNow:0,tradeMonthly:20000,tradeInvest:3000,tradeRate:6,
@@ -244,26 +253,30 @@
     const compounded=Math.pow(1+r,n);
     return principal*compounded+(Math.abs(r)<1e-12?monthly*n:monthly*(compounded-1)/r);
   }
-  // Fixed nominal monthly withdrawals at month-end, after growth; no new contributions.
-  // A 100-year cap avoids presenting a deterministic projection as a lifetime guarantee.
-  function withdrawalRunway(portfolio,withdrawal,annualPercent){
+  // Growth first, then monthly withdrawal at month-end. In inflation mode,
+  // spending rises once every 12 completed months of retirement.
+  // This is a fixed-return illustrative calculation capped at 100 years.
+  function withdrawalRunway(portfolio,withdrawal,annualPercent,inflationPercent,mode){
     if(withdrawal<=0)return {months:null,exhausted:false};
     let balance=Math.max(0,portfolio);
     const monthlyRate=annualPercent/1200;
+    const annualGrowth=1+inflationPercent/100;
     for(let month=1;month<=1200;month++){
+      const annualStep=Math.floor((month-1)/12);
+      const needed=mode==='inflation'?withdrawal*Math.pow(annualGrowth,annualStep):withdrawal;
       const available=balance*(1+monthlyRate);
-      if(available+1e-7<withdrawal)return {months:month-1,exhausted:true};
-      balance=Math.max(0,available-withdrawal);
+      if(available+1e-7<needed)return {months:month-1,exhausted:true};
+      balance=Math.max(0,available-needed);
       if(balance===0)return {months:month,exhausted:true};
     }
     return {months:1200,exhausted:false};
   }
   function investment(){
-    const {invMonthly:m,invYears:y,invRate:r,invInitial:p,invInflation:infl,invRetRate:retRate,invWithdrawal:w}=state;
+    const {invMonthly:m,invYears:y,invRate:r,invInitial:p,invInflation:infl,invRetRate:retRate,invWithdrawal:w,invWithdrawalMode:mode}=state;
     const total=futureValue(p,m,r,y),principal=p+m*y*12,growth=total-principal;
     const real=total/Math.pow(1+infl/100,y),withdrawReal=w/Math.pow(1+infl/100,y);
     const altRate=Math.min(20,r+2),alt=futureValue(p,m,altRate,y);
-    const runway=withdrawalRunway(total,w,retRate);
+    const runway=withdrawalRunway(total,w,retRate,infl,mode);
     set('invTotal',short(total));set('invSummary',`ลงทุน ${baht(m)}/เดือน นาน ${y} ปี ที่ผลตอบแทนสมมติ ${percent(r)}/ปี`);
     set('invPrincipal',short(principal));set('invGrowth',short(growth));set('invReal',short(real));set('invWithdraw',baht(w));set('invWithdrawReal',`คิดเป็นกำลังซื้อวันนี้ประมาณ ${baht(withdrawReal)}/เดือน`);
     if(w===0){
@@ -271,7 +284,7 @@
       set('invRunwaySummary','ระบุเงินถอนใช้ต่อเดือนเพื่อคำนวณอายุพอร์ต');
     }else{
       set('invRunway',runway.exhausted?(runway.months===0?'ไม่ถึง 1 เดือน':visibleMonths(runway.months)):'มากกว่า 100 ปี');
-      set('invRunwaySummary',`หลังหยุดเติมเงิน ถอน ${baht(w)}/เดือน · ผลตอบแทนช่วงเกษียณ ${percent(retRate)}/ปี · ไม่เพิ่มเงินถอนตามเงินเฟ้อ`);
+      set('invRunwaySummary',`เริ่มถอน ${baht(w)}/เดือน · ผลตอบแทนช่วงเกษียณ ${percent(retRate)}/ปี · ${mode==='inflation'?`เพิ่มเงินถอน ${percent(infl)}/ปี`:'ถอนคงที่ทุกเดือน'}`);
     }
     set('invAltRate',`${percent(r)} → ${percent(altRate)}`);set('invAltTotal',short(alt));set('invDiff',`+${short(Math.max(0,alt-total))}`);
     const data=[],base=[];for(let t=0;t<=y;t++){data.push(Math.max(0,futureValue(p,m,r,t)));base.push(p+m*t*12)};
@@ -358,12 +371,13 @@
     set('bmBarActualText',short(savings));set('bmBarTargetText',short(targetMoney));
   }
   const render={investment,car,savings,benchmark,tradeoff};
-  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carTax','carTransport','carDep'],savings:['savGoal','savNow','savMonthly','savPause'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],benchmark:['bmIncome','bmSaving','bmMonths','bmTarget']};
+  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal','invWithdrawalMode'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carTax','carTransport','carDep'],savings:['savGoal','savNow','savMonthly','savPause'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],benchmark:['bmIncome','bmSaving','bmMonths','bmTarget']};
   const groupFor=k=>Object.keys(groups).find(g=>groups[g].includes(k));
   function syncField(key,origin){
     const field=document.querySelector(`[data-field="${key}"]`);if(!field)return;
-    const numeric=field.querySelector('input[type=number]'),slider=field.querySelector('input[type=range]');
-    if(numeric!==origin)numeric.value=String(state[key]);
+    const numeric=field.querySelector('input[type=number]'),slider=field.querySelector('input[type=range]'),select=field.querySelector('select');
+    if(numeric&&numeric!==origin)numeric.value=String(state[key]);
+    if(select&&select!==origin)select.value=String(state[key]);
     if(slider){slider.value=String(state[key]);const lo=Number(slider.min),hi=Number(slider.max);slider.style.background=`linear-gradient(to right,#0e9985 ${Math.max(0,Math.min(100,(state[key]-lo)/(hi-lo)*100))}%,#e3edf0 0)`;}
   }
   document.querySelectorAll('[data-field]').forEach(field=>{
@@ -377,6 +391,8 @@
       input.addEventListener('change',()=>{if(!Number.isFinite(Number(input.value))||input.value.trim()==='')state[key]=DEFAULT[key];syncField(key);render[groupFor(key)]()});
       input.addEventListener('blur',()=>{syncField(key);render[groupFor(key)]()});
     }
+    const select=field.querySelector('select');
+    if(select)select.addEventListener('change',()=>{state[key]=select.value;syncField(key,select);render[groupFor(key)]()});
     syncField(key);
   });
   document.querySelectorAll('[data-reset]').forEach(button=>button.addEventListener('click',()=>{
