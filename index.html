@@ -484,9 +484,9 @@
         return item;
       }));
     };
-    // Simple transparent tie-breaker: nominal portfolio gain should exceed 0.5%
-    // of the car budget per additional month of waiting, or have no extra wait.
-    // This is only a configurable planning heuristic, not a market benchmark.
+    // The verdict compares outcomes the user actually modeled, without assigning an
+    // invented monetary value to each month waiting for the car.
+    // A higher simulated portfolio favors B; car urgency may still favor A.
     const guide=(verdict,summary,why,tradeoff,risk)=>{
       set('tradeDecisionVerdict',verdict);
       set('tradeDecisionSummary',summary);
@@ -494,7 +494,7 @@
       set('tradeDecisionTradeoff',tradeoff);
       set('tradeDecisionRisk',risk);
     };
-    const riskNote='เกณฑ์ช่วยเลือก: หากต้องรอรถเพิ่ม ให้ส่วนต่างพอร์ต B อย่างน้อย 0.5% ของงบรถต่อเดือนที่รอ (เป็นเกณฑ์ตัวอย่าง ไม่ใช่มาตรฐาน) · ยังไม่รวมค่าใช้รถหรือค่าเสื่อมจากเวลาซื้อที่ต่างกัน และผลตอบแทนไม่รับประกัน';
+    const riskNote='คำแนะนำเทียบมูลค่าพอร์ตตามผลตอบแทนสมมติ ไม่ใช่การวัดความคุ้มค่าสุทธิ · ยังไม่รวมค่าใช้รถ ค่าเสื่อม ภาษี ค่าธรรมเนียม หรือความจำเป็นต้องใช้รถ และผลตอบแทนไม่รับประกัน';
     const remaining=Math.max(0,price-current),invest=investRequested;
     set('tradeSplitA',`${baht(monthly)}/เดือน เข้า Car Fund`);
     set('tradeSplitB',invest>monthly?'ยอดลงทุนเกินงบรวม':`${baht(monthly-invest)} เข้า Car Fund + ${baht(invest)} ลงทุน/เดือน`);
@@ -543,26 +543,32 @@
     }else if(invest===0){
       guide('แผน A และ B เท่ากัน','ยังไม่ได้แบ่งเงินไปลงทุน ทั้งสองแผนจึงซื้อรถและเริ่มลงทุนในเวลาเดียวกัน','เลือกแผน A ได้เลยหากต้องการเก็บเงินซื้อรถตามปกติ','หากอยากดูโอกาสของ B ต้องทดลองแบ่งเงินไปลงทุนบางส่วนก่อน',riskNote);
     }else{
-      const waitValue=price*0.005*delay;
-      const chooseB=diff>=1 && (delay===0 || diff>=waitValue);
+      // Compare whole-baht displayed values; tiny floating point noise is not a gain.
+      const roundedDiff=Math.round(diff);
       const relative=price>0?(Math.abs(diff)/price*100).toLocaleString('th-TH',{maximumFractionDigits:2}):'0';
-      if(chooseB){
+      if(roundedDiff>0){
         guide(
-          'แนะนำแผน B · ลงทุนไปด้วย',
-          `พอร์ต B มากกว่า ${baht(diff)} (${relative}% ของงบรถ) ${delay>0?`แม้ซื้อรถช้าลง ${visibleMonths(delay)}`:'โดยไม่ทำให้ซื้อรถช้าลง'}`,
-          delay>0?`ส่วนต่างมากกว่าเกณฑ์ช่วยเลือก ${baht(waitValue)} จึงพอชดเชยเวลารอเพิ่มในเกณฑ์จำลองนี้`:'ได้พอร์ตมากกว่าโดยไม่ต้องรอซื้อรถเพิ่ม จึงให้น้ำหนักกับแผน B',
-          delay>0?`ต้องยอมรอรถเพิ่ม ${visibleMonths(delay)} และยอมรับว่าผลตอบแทนจริงอาจต่ำกว่าสมมติฐาน ${percent(rate)}/ปี`:'ยังมีความเสี่ยงจากการเริ่มลงทุนเร็วขึ้น แม้วันซื้อรถไม่เลื่อน',
+          'แนะนำแผน B · หากเน้นมูลค่าพอร์ต',
+          `ตามผลตอบแทนสมมติ ${percent(rate)}/ปี พอร์ต B มากกว่า A ${baht(diff)} (${relative}% ของงบรถ)`,
+          delay>0?`แผน B ลงทุนได้ก่อน จึงมีมูลค่าพอร์ตสูงกว่า โดยแลกกับการซื้อรถช้าลง ${visibleMonths(delay)}`:'แผน B มีพอร์ตมากกว่า โดยซื้อรถได้ในเดือนเดียวกับ A',
+          delay>0?`ถ้าต้องใช้รถเร็วกว่า ${visibleMonths(delay)} หรือไม่ต้องการรับความเสี่ยงระหว่างรอ ควรเลือกแผน A แทน`:
+            'หากไม่ต้องการรับความเสี่ยงลงทุนก่อนซื้อรถ ยังเลือกแผน A ได้',
+          riskNote
+        );
+      }else if(roundedDiff<0 || delay>0){
+        guide(
+          'แนะนำแผน A · ซื้อรถก่อน',
+          roundedDiff<0?`ตามผลตอบแทนสมมติ ${percent(rate)}/ปี พอร์ต B น้อยกว่า A ${baht(Math.abs(diff))}`:'พอร์ต A และ B ไม่ต่างกันตามผลจำลอง',
+          delay>0?`แผน A ซื้อรถได้เร็วกว่า ${visibleMonths(delay)} โดยไม่เสียข้อได้เปรียบด้านมูลค่าพอร์ตในสมมติฐานนี้`:'แผน A มีพอร์ตมากกว่าภายใต้สมมติฐานนี้',
+          'ยังสามารถนำเงินไปลงทุนต่อหลังซื้อรถได้ โดยไม่ต้องเลื่อนเป้าหมายซื้อรถ',
           riskNote
         );
       }else{
         guide(
-          'แนะนำแผน A · ซื้อรถก่อน',
-          diff>0?`พอร์ต B มากกว่าเพียง ${baht(diff)} (${relative}% ของงบรถ) แต่ต้องรอรถเพิ่ม ${visibleMonths(delay)}`:
-            diff<0?`พอร์ต B น้อยกว่า A อยู่ ${baht(Math.abs(diff))} และซื้อรถช้าลง ${visibleMonths(delay)}`:
-            `พอร์ต B ไม่ได้มากกว่า A แต่ซื้อรถช้าลง ${visibleMonths(delay)}`,
-          diff>0?`ส่วนต่าง ${baht(diff)} ยังต่ำกว่าเกณฑ์ช่วยเลือก ${baht(waitValue)} จึงให้น้ำหนักกับการได้รถเร็วกว่า`:
-            'ทั้งผลลัพธ์พอร์ตและเวลาซื้อรถไม่ได้ให้ข้อได้เปรียบกับการรอของแผน B',
-          diff>0?`สิ่งที่แลกคือพอร์ตจำลองอาจน้อยกว่า B ${baht(diff)} หากผลตอบแทนเป็นไปตามสมมติฐาน`:'ยังสามารถนำเงินไปลงทุนหลังซื้อรถตามแผน A ได้',
+          'แผน A และ B ให้ผลเท่ากัน',
+          'พอร์ตจำลองและเดือนที่ซื้อรถได้เท่ากัน จึงไม่มีแผนใดได้เปรียบจากผลลัพธ์นี้',
+          'เลือกแผน A หากต้องการแยกเงินซื้อรถไว้ก่อนอย่างชัดเจน',
+          'เลือกแผน B หากต้องการเริ่มลงทุน แต่ต้องยอมรับความผันผวนที่โมเดลไม่ได้สะท้อน',
           riskNote
         );
       }
