@@ -31,7 +31,7 @@
     .metric-title{color:var(--sub);font-size:12px;font-weight:650}.metric-primary{font-size:clamp(30px,4vw,40px);letter-spacing:-1.6px;line-height:1.3;font-weight:800;color:#142c43;overflow-wrap:anywhere}.metric-primary small{font-size:15px;color:#6e7c8e;font-weight:630;letter-spacing:0}.metric-sub{font-size:12px;color:var(--sub);margin-top:5px}
     .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:17px 0}.mini{padding:14px;background:#f5f8fa;border:1px solid #edf1f5;border-radius:13px;min-width:0}.mini .k{color:#69798b;font-size:11px;line-height:1.4}.mini strong{display:block;font-size:18px;color:#1e3045;letter-spacing:-.4px;line-height:1.5;overflow-wrap:anywhere;margin-top:5px}.mini .micro{font-size:10px;color:#708094;line-height:1.4}
     .chart-title{display:flex;align-items:center;justify-content:space-between;gap:6px;font-weight:710;font-size:13px;margin:18px 0 3px}.legend{display:flex;gap:13px;flex-wrap:wrap;color:#79869a;font-size:10px}.legend b{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:baseline}.svgchart{display:block;width:100%;height:auto;overflow:visible}.chartwrap{margin:7px 0 4px;padding:5px 0 0}.stack{display:flex;height:10px;background:#e7edf1;border-radius:30px;overflow:hidden;margin:9px 0}.stack>div{min-width:0}
-    .phase-heading{padding-top:17px;border-top:1px solid var(--line);color:#174b49;font-size:16px;font-weight:780;line-height:1.4;letter-spacing:-.15px}.phase-heading-first{padding-top:0;border-top:0}.phase-heading span{font-size:12px;font-weight:550;color:var(--sub);letter-spacing:0}.retirement-forecast{margin:16px 0 20px;padding:14px 16px;border-radius:14px;border:1px solid #d9eee5;background:#f1faf6}.retirement-years{font-size:clamp(23px,3.5vw,30px);font-weight:800;line-height:1.4;color:#087664;margin-top:3px}.tradeoff-points{padding-left:19px;margin:14px 0 0;color:var(--sub);font-size:12px;line-height:1.65}.tradeoff-points li{margin:5px 0}
+    .phase-heading{padding-top:17px;border-top:1px solid var(--line);color:#174b49;font-size:16px;font-weight:780;line-height:1.4;letter-spacing:-.15px}.phase-heading-first{padding-top:0;border-top:0}.phase-heading span{font-size:12px;font-weight:550;color:var(--sub);letter-spacing:0}.retirement-forecast{margin:16px 0 20px;padding:14px 16px;border-radius:14px;border:1px solid #d9eee5;background:#f1faf6}.retirement-years{font-size:clamp(23px,3.5vw,30px);font-weight:800;line-height:1.4;color:#087664;margin-top:3px}.tradeoff-points{padding-left:19px;margin:14px 0 0;color:var(--sub);font-size:12px;line-height:1.65}.tradeoff-points li{margin:5px 0}.trade-detail-list{margin:12px 0 0}
     .alert{padding:12px 13px;border:1px solid #dae9e7;border-left:3px solid #56aa99;background:#f2faf8;border-radius:10px;color:#41655f;font-size:11.5px;line-height:1.6;margin-top:17px}.alert.warm{background:#fff9ee;border-color:#f3e7d1;border-left-color:var(--amber);color:#735e3c}
     .purchasing-power-note{margin-top:17px;padding-top:14px;border-top:1px solid var(--line)}.purchasing-power-note h3{font-size:13px;margin:0 0 6px;color:var(--ink)}.purchasing-power-note p{font-size:12px;line-height:1.7;color:var(--sub);margin:0}
     details{border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:12px;color:#64758b}summary{font-weight:720;color:#52657a;cursor:pointer;list-style:revert}details p{margin:8px 0 0}details ul{margin:8px 0;padding-left:18px}details li{margin:4px 0}details .detail-sublist{margin:5px 0 8px;padding-left:17px}details .detail-sublist li{margin:3px 0;line-height:1.55}
@@ -192,14 +192,10 @@
                <div><strong>แผน B · ซื้อรถพร้อมลงทุน</strong><span id="tradeSplitB">—</span></div>
              </div>
              <div class="addon-output"><div class="metric-title">แผน B ทำให้ซื้อรถช้ากว่าแผน A</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
-              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">พอร์ตลงทุน A ณ เดือนที่ B ซื้อรถ</div><strong id="tradePortA">—</strong></div><div class="mini"><div class="k">พอร์ตลงทุน B ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong></div></div>
-              <div class="metric-title">ผลต่างพอร์ตลงทุน B เทียบ A ณ เดือนเดียวกัน</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><p class="addon-note" id="tradeDetail">—</p>
+              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">พอร์ตลงทุนแผน A</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตลงทุนแผน B</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
+              <div class="metric-title">ผลต่างพอร์ตลงทุนของแผน B เทียบกับ A ณ เดือนเดียวกัน</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><ul class="tradeoff-points trade-detail-list" id="tradeDetail" aria-label="คำอธิบายผลเปรียบเทียบ"></ul>
             </div>
             <div class="button-row"><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
-            <ul class="tradeoff-points">
-              <li>เทียบยอดพอร์ต ณ เดือนเดียวกัน และนำเงินที่เหลือหลังซื้อรถไปลงทุนต่อ</li>
-              <li>ยังไม่รวมค่าใช้รถ ค่าเสื่อม และความผันผวนของผลตอบแทน</li>
-            </ul>
           </div>
         </details>
       </section>
@@ -337,20 +333,28 @@
   // Redirect all remaining monthly allocation to investments once the car goal is filled.
   function tradeoff(){
     const {tradeCarPrice:price,tradeCarNow:current,tradeMonthly:monthly,tradeInvest:investRequested,tradeRate:rate}=state;
+    const explain=(notes)=>{
+      const target=$('tradeDetail');
+      target.replaceChildren(...notes.map(note=>{
+        const item=document.createElement('li');
+        item.textContent=note;
+        return item;
+      }));
+    };
     const remaining=Math.max(0,price-current),invest=investRequested;
     set('tradeSplitA',`${baht(monthly)}/เดือน เข้า Car Fund`);
     set('tradeSplitB',invest>monthly?'ยอดลงทุนเกินงบรวม':`${baht(monthly-invest)} เข้า Car Fund + ${baht(invest)} ลงทุน/เดือน`);
     if(invest>monthly){
       set('tradeA','—');set('tradeB','—');set('tradeDelay','เกินงบรวม');
       set('tradeSummary','แผน B กำหนดเงินลงทุนเกินงบรวมต่อเดือน');
-      set('tradePortA','—');set('tradePortB','—');set('tradeDiff','—');set('tradeDetail','ลดวงเงินลงทุนหรือเพิ่มวงเงินแบ่งได้รวมต่อเดือน');return;
+      set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);return;
     }
     const carPerMonth=monthly-invest;
     const dateA=remaining===0?0:monthly<=0?Infinity:Math.ceil(remaining/monthly);
     const dateB=remaining===0?0:carPerMonth<=0?Infinity:Math.ceil(remaining/carPerMonth);
     const valid=Number.isFinite(dateB)&&dateB<=600;
     set('tradeA',visibleMonths(dateA));set('tradeB',visibleMonths(dateB));
-    if(!valid){set('tradeDelay','คำนวณไม่ได้');set('tradeSummary','แผน B ไม่มีเงินเติม Car Fund หรือใช้เวลานานเกิน 50 ปี');set('tradePortA','—');set('tradePortB','—');set('tradeDiff','—');set('tradeDetail','ลองลดเงินที่แบ่งไปลงทุน หรือเพิ่มเงินแบ่งได้ต่อเดือน');return;}
+    if(!valid){set('tradeDelay','คำนวณไม่ได้');set('tradeSummary','แผน B ไม่มีเงินเติม Car Fund หรือใช้เวลานานเกิน 50 ปี');set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลองลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);return;}
     const delay=dateB-dateA;
     let carA=Math.min(current,price),carB=carA,portfolioA=0,portfolioB=0;
     const monthlyRate=rate/1200;
@@ -364,10 +368,21 @@
     const diff=portfolioB-portfolioA;
     set('tradeDelay',`${delay} เดือน`);
     set('tradeSummary',`ทั้งสองแผนใช้งบรวม ${baht(monthly)}/เดือน · แผน B ลงทุน ${baht(invest)}/เดือนก่อนซื้อรถ`);
-    set('tradePortA',short(portfolioA));set('tradePortB',short(portfolioB));
-    set('tradeDiff',`${diff>=0?'+':'−'}${short(Math.abs(diff))}`);
     const contributions=monthly*dateB-remaining;
-    set('tradeDetail',`ณ สิ้นเดือนที่ ${dateB} ทั้งสองแผนจ่ายค่ารถเป้าหมายเท่ากันและมีเงินต้นจัดสรรไปลงทุนรวมเท่ากัน (${short(contributions)}) ผลต่างพอร์ตเกิดจากเวลาที่ทยอยลงทุนต่างกัน ไม่ใช่เงินลงทุน B ทั้งก้อนเป็นกำไร · ไม่รวมค่าใช้รถและมูลค่ารถที่ต่างกัน`);
+    const breakdown=(portfolio)=>{
+      const gain=portfolio-contributions;
+      return `เงินต้น ${short(contributions)} · ผลตอบแทน ${gain>=0?'+':'−'}${short(Math.abs(gain))}`;
+    };
+    set('tradePortA',short(portfolioA));set('tradePortB',short(portfolioB));
+    set('tradePortABreakdown',breakdown(portfolioA));
+    set('tradePortBBreakdown',breakdown(portfolioB));
+    set('tradeDiff',`${diff>=0?'+':'−'}${short(Math.abs(diff))}`);
+    explain([
+      `สิ้นเดือนที่ ${dateB} ทั้งสองแผนสะสมเงินซื้อรถครบ ${short(price)} แล้ว จึงเทียบพอร์ต ณ เวลาเดียวกัน`,
+      `เงินต้นลงทุนเท่ากัน ${short(contributions)} = งบ ${short(monthly)} × ${dateB} เดือน − เงินซื้อรถที่ยังขาด ${short(remaining)}`,
+      'พอร์ตต่างกันเพราะเริ่มลงทุนคนละเวลา และนำเงินที่เหลือหลังซื้อรถไปลงทุนต่อ พอร์ตทั้งก้อนไม่ใช่กำไร',
+      'ไม่รวมค่าใช้รถ ค่าเสื่อมราคา และความผันผวนของผลตอบแทนจริง'
+    ]);
   }
 
   const render={investment,car,savings,tradeoff};
