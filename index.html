@@ -7,7 +7,7 @@
   <meta name="description" content="ทดลองวางแผนลงทุน ซื้อรถ และเงินออม ปรับตัวเลขเพื่อเปรียบเทียบทางเลือกก่อนตัดสินใจ">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Personal Finance Playground">
-  <meta property="og:description" content="ลองปรับตัวเลข แล้วเห็นภาพแผนลงทุน ซื้อรถ และเงินออมในหน้าเดียว">
+  <meta property="og:description" content="ลองปรับตัวเลข แล้วเห็นภาพแผนลงทุน ซื้อรถ เงินออม และภาษีในหน้าเดียว">
   <meta property="og:url" content="https://getnkit.github.io/personal-finance-playground/">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101e36'/%3E%3Cpath d='M14 43 27 30 36 36 51 17M40 17h11v11' fill='none' stroke='%2359d4bf' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -45,7 +45,7 @@
 .addon{padding-top:0;margin-top:18px;border-radius:18px;overflow:hidden}.addon summary{list-style:revert;cursor:pointer;padding:16px 18px;color:#1a354c;font-size:14px;font-weight:750}.addon[open] summary{border-bottom:1px solid var(--line)}.addon-body{padding:16px 18px}.addon-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.addon-grid .field{min-width:0}.addon-grid .field-input{min-width:0}.addon-grid .field-input input{max-width:130px}.addon-output{border:1px solid #d7ebe5;background:#f2faf7;border-radius:14px;padding:14px;margin-top:16px}.addon-output .metric-primary{font-size:28px}.addon-note{font-size:11px;color:var(--sub);margin:10px 0 0}.addon-budget-note{font-size:11px;line-height:1.6;color:var(--sub);margin-top:1px}
     @media(max-width:520px){.trade-plan-split{grid-template-columns:1fr}.addon-grid{grid-template-columns:1fr}.addon-body{padding:15px}.addon summary{padding:14px}}
     .source{font-size:11px;color:#7a8899;margin-top:10px}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8e9aac;font-size:11px;margin-top:28px;padding:12px 4px}.footer span{max-width:800px}.bottom-tabs{display:none}
-    @media(max-width:760px){.sitebar{padding:16px 18px}.top-pill{display:none}.shell{padding:21px 14px 90px}.intro{align-items:start}.intro h1{font-size:25px}.privacy-pill{display:none}.tabs{display:none}.layout{grid-template-columns:1fr;gap:12px}.section-head{margin-bottom:13px}.section-head h2{font-size:21px}.section-head p{font-size:12px}.inputs-card,.results-card{padding:17px}.fields{gap:15px}.bottom-tabs{position:fixed;bottom:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-top:1px solid #e4ebef;box-shadow:0 -5px 25px #18324813;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}.bottom-tabs .tab{padding:4px 0 3px;border-radius:9px;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-weight:680}.bottom-tabs .tab .emoji{font-size:19px}.bottom-tabs .tab[aria-selected="true"]{box-shadow:none;background:#e9f6f1;color:#006c5d}.input-grid{gap:10px}.metric-primary{font-size:34px}.footer{margin:18px 0 0}}
+    @media(max-width:760px){.sitebar{padding:16px 18px}.top-pill{display:none}.shell{padding:21px 14px 90px}.intro{align-items:start}.intro h1{font-size:25px}.privacy-pill{display:none}.tabs{display:none}.layout{grid-template-columns:1fr;gap:12px}.section-head{margin-bottom:13px}.section-head h2{font-size:21px}.section-head p{font-size:12px}.inputs-card,.results-card{padding:17px}.fields{gap:15px}.bottom-tabs{position:fixed;bottom:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid #e4ebef;box-shadow:0 -5px 25px #18324813;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}.bottom-tabs .tab{padding:4px 0 3px;border-radius:9px;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-weight:680}.bottom-tabs .tab .emoji{font-size:19px}.bottom-tabs .tab[aria-selected="true"]{box-shadow:none;background:#e9f6f1;color:#006c5d}.input-grid{gap:10px}.metric-primary{font-size:34px}.footer{margin:18px 0 0}}
     @media(min-width:761px) and (max-width:960px){.layout{grid-template-columns:minmax(290px,360px) 1fr}.inputs-card,.results-card{padding:17px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
@@ -139,7 +139,7 @@
       <div class="intro-copy">
         <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> PLAN WITH CLARITY</div>
         <h1>วางแผนเงิน ให้เห็นภาพก่อนตัดสินใจ</h1>
-        <p>ทดลองปรับตัวเลข แล้วเปรียบเทียบแผนลงทุน ซื้อรถ และเงินออมได้ในหน้าเดียว</p>
+        <p>ทดลองปรับตัวเลข แล้วเปรียบเทียบแผนลงทุน ซื้อรถ เงินออม และภาษีได้ในหน้าเดียว</p>
         <div class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg><span>คำนวณในเบราว์เซอร์ของคุณ · ไม่บันทึกข้อมูลที่กรอก</span></div>
       </div>
       <div class="hero-art" aria-hidden="true">
@@ -159,6 +159,7 @@
       <button class="tab" data-tab="investment" aria-selected="true"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></span><span class="tab-text">Investment & Retirement</span></button>
       <button class="tab" data-tab="car" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span><span class="tab-text">Car Timing</span></button>
       <button class="tab" data-tab="savings" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="tab-text">Savings & Goals</span></button>
+      <button class="tab" data-tab="tax" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tab-text">Tax Playground</span></button>
     </nav>
 
     <main>
@@ -308,6 +309,43 @@
         </details>
       </section>
 
+
+      <section id="tax" class="panel" aria-labelledby="tax-title" hidden>
+        <div class="section-head"><div><h2 id="tax-title">Tax Playground</h2><p>ลองเปลี่ยนรายได้และค่าลดหย่อนเพื่อดูภาษีที่เปลี่ยนไป · ปีภาษี 2569</p></div></div>
+        <div class="layout">
+          <div class="card inputs-card">
+            <div class="card-label"><h3>ทดลองภาษีเงินเดือน</h3><small>เงินได้ ม.40(1)</small></div>
+            <p class="hint">ตัวอย่างผู้มีเงินเดือนครบ 12 เดือน · ไม่ใช่ยอดสำหรับยื่นภาษีจริง</p>
+            <div class="fields">
+              <div class="field" data-field="taxSalary"><div class="field-line"><label for="taxSalary-num">เงินเดือนก่อนหักภาษี / เดือน</label><div class="field-input"><input id="taxSalary-num" type="number" min="0" max="1000000" step="1000" value="40000"><span>บาท</span></div></div><input aria-label="เงินเดือนก่อนหักภาษี / เดือน" type="range" min="0" max="200000" step="1000" value="40000"><div class="range-ends"><span>0</span><span>200,000</span></div></div>
+              <div class="field" data-field="taxBonus"><div class="field-line"><label for="taxBonus-num">โบนัสรวมทั้งปี</label><div class="field-input"><input id="taxBonus-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input aria-label="โบนัสรวมทั้งปี" type="range" min="0" max="1000000" step="10000" value="0"><div class="range-ends"><span>0</span><span>1,000,000</span></div></div>
+              <div class="field" data-field="taxSso"><div class="field-line"><label for="taxSso-num">ประกันสังคมที่จ่ายจริงทั้งปี</label><div class="field-input"><input id="taxSso-num" type="number" min="0" max="10500" step="125" value="10500"><span>บาท</span></div></div><input aria-label="ประกันสังคมที่จ่ายจริงทั้งปี" type="range" min="0" max="10500" step="125" value="10500"><div class="range-ends"><span>0</span><span>10,500</span></div><div class="addon-budget-note">ม.33 ปี 2569 จ่ายสูงสุด 875 บาท/เดือน · กรอกยอดที่จ่ายจริง</div></div>
+              <div class="field" data-field="taxExtra"><div class="field-line"><label for="taxExtra-num">ค่าลดหย่อนอื่นที่มีสิทธิใช้รวม</label><div class="field-input"><input id="taxExtra-num" type="number" min="0" max="10000000" step="1000" value="0"><span>บาท</span></div></div><input aria-label="ค่าลดหย่อนอื่นที่มีสิทธิใช้รวม" type="range" min="0" max="500000" step="1000" value="0"><div class="range-ends"><span>0</span><span>500,000</span></div><div class="addon-budget-note">ไม่รวมส่วนตัว 60,000 บาทและประกันสังคมที่กรอกข้างต้น · ต้องตรวจสอบสิทธิและเพดานเอง</div></div>
+            </div>
+            <div class="button-row"><button class="btn" data-reset="tax" type="button">↺ คืนค่าตัวอย่าง</button></div>
+          </div>
+          <div class="card results-card">
+            <div class="metric-title">ภาษีเงินได้ทั้งปีโดยประมาณ</div><div class="metric-primary" id="taxAnnual">—</div>
+            <div class="metric-sub" id="taxMonthly">—</div>
+            <div class="mini-grid">
+              <div class="mini"><div class="k">เงินได้สุทธิที่ใช้คำนวณภาษี</div><strong id="taxTaxable">—</strong><div class="micro">หลังค่าใช้จ่ายและค่าลดหย่อน</div></div>
+              <div class="mini"><div class="k">ประหยัดภาษีจากค่าลดหย่อนอื่น</div><strong id="taxSaving">—</strong><div class="micro">เทียบกับไม่ใช้ค่าลดหย่อนอื่น</div></div>
+              <div class="mini"><div class="k">ขั้นภาษีสูงสุดที่ถึง</div><strong id="taxBracket">—</strong><div class="micro">ไม่ใช่อัตราภาษีของรายได้ทั้งหมด</div></div>
+              <div class="mini"><div class="k">รายได้เงินเดือนและโบนัสทั้งปี</div><strong id="taxGross">—</strong><div class="micro">ก่อนหักค่าใช้จ่าย</div></div>
+            </div>
+            <p class="hint">ยังไม่หักภาษี ณ ที่จ่าย จึงไม่ใช่ยอดที่ต้องจ่ายเพิ่มหรือขอคืน</p>
+            <details><summary>สูตรและขอบเขต</summary><ul>
+              <li>รายได้รวม = เงินเดือน × 12 + โบนัส</li>
+              <li>ค่าใช้จ่ายเงินเดือน = 50% สูงสุด 100,000 บาท</li>
+              <li>หักลดหย่อนส่วนตัว 60,000 บาท ประกันสังคมตามที่จ่ายจริง และค่าลดหย่อนอื่นที่มีสิทธิใช้</li>
+              <li>ภาษีคำนวณแบบขั้นบันได 0–35% · ส่วนประหยัดภาษีเทียบก่อนและหลังค่าลดหย่อนอื่น</li>
+              <li>ไม่ตรวจเพดานค่าลดหย่อนอื่น และไม่รองรับรายได้ประเภทอื่น การยื่นร่วม หรือกรณีพิเศษ</li>
+            </ul>
+            <p class="source">อ้างอิง: <a href="https://www.rd.go.th/5938.html" target="_blank" rel="noopener noreferrer">อัตราภาษี</a> · <a href="https://www.rd.go.th/556.html" target="_blank" rel="noopener noreferrer">ค่าใช้จ่าย</a> · <a href="https://www.rd.go.th/62777.html" target="_blank" rel="noopener noreferrer">ค่าลดหย่อน</a> (กรมสรรพากร)</p></details>
+            <div class="alert">สำหรับการวางแผนลดหย่อนและตรวจสอบตัวเลขเพื่อยื่นจริง ให้ใช้ <a href="https://www.itax.in.th/app/" target="_blank" rel="noopener noreferrer">iTAX</a> และตรวจเงื่อนไขจากกรมสรรพากร</div>
+          </div>
+        </div>
+      </section>
     </main>
     <div class="footer"><span>© 2026 getnkit · Personal Finance Playground</span><span>ผลลัพธ์เป็นเพียงการจำลอง ไม่รับประกันผลลัพธ์จริง</span></div>
   </div>
@@ -315,6 +353,7 @@
     <button class="tab" data-tab="investment" aria-selected="true"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></span><span class="tab-text">Investment</span></button>
     <button class="tab" data-tab="car" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span><span class="tab-text">Car Timing</span></button>
     <button class="tab" data-tab="savings" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="tab-text">Savings</span></button>
+    <button class="tab" data-tab="tax" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tab-text">Tax</span></button>
   </nav>
   <noscript><div style="max-width:600px;margin:20px auto;background:#fff3d9;padding:14px;border-radius:12px">โปรดเปิด JavaScript เพื่อใช้เครื่องคำนวณ</div></noscript>
 <script>
@@ -324,9 +363,10 @@
     invMonthly:30000,invYears:20,invRate:6,invInitial:0,invInflation:2,invRetRate:3,invWithdrawal:30000,
     carEarlier:12,carPrice:400000,carFuel:2500,carParking:0,carInsurance:7000,carService:8000,carAnnualTax:1841,carTransport:0,carDep:10,carFinanceMode:'loan',carLoan:250000,carFlatRate:5,carLoanYears:1,
     savGoal:400000,savNow:0,savMonthly:30000,
-    tradeCarPrice:400000,tradeCarNow:0,tradeMonthly:35000,tradeInvest:5000,tradeRate:6
+    tradeCarPrice:400000,tradeCarNow:0,tradeMonthly:35000,tradeInvest:5000,tradeRate:6,
+    taxSalary:40000,taxBonus:0,taxSso:10500,taxExtra:0
   });
-  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[0,10],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,3e5],carService:[0,3e5],carAnnualTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20]};
+  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[0,10],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,3e5],carService:[0,3e5],carAnnualTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],taxSalary:[0,1e6],taxBonus:[0,1e7],taxSso:[0,10500],taxExtra:[0,1e7]};
   const state={...DEFAULT};
   const fmt=new Intl.NumberFormat('th-TH',{maximumFractionDigits:0});
   const num=(value)=>Number.isFinite(value)?fmt.format(Math.round(value)):'—';
@@ -535,8 +575,33 @@
     }
   }
 
-  const render={investment,car,savings,tradeoff};
-  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carAnnualTax','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate']};
+
+  // Salary/bonus-only illustrative calculation for tax year 2569.
+  const taxBands=[[150000,0],[300000,.05],[500000,.1],[750000,.15],[1000000,.2],[2000000,.25],[5000000,.3],[Infinity,.35]];
+  function progressiveTax(income){
+    let due=0,previous=0;
+    for(const [ceiling,rate] of taxBands){
+      due+=Math.max(0,Math.min(income,ceiling)-previous)*rate;
+      if(income<=ceiling)break;
+      previous=ceiling;
+    }
+    return due;
+  }
+  function tax(){
+    const {taxSalary:salary,taxBonus:bonus,taxSso:sso,taxExtra:extra}=state;
+    const gross=salary*12+bonus,expenses=Math.min(100000,gross*.5);
+    const base=Math.max(0,gross-expenses-60000-sso),taxable=Math.max(0,base-extra);
+    const annual=progressiveTax(taxable);
+    const bracket=taxable<=150000?0:taxBands.find(([ceiling])=>taxable<=ceiling)[1];
+    set('taxAnnual',baht(annual));
+    set('taxMonthly',`เฉลี่ยประมาณ ${baht(annual/12)}/เดือน · ไม่ใช่ยอดภาษีหัก ณ ที่จ่าย`);
+    set('taxTaxable',baht(taxable));
+    set('taxSaving',baht(Math.max(0,progressiveTax(base)-annual)));
+    set('taxBracket',percent(bracket*100));
+    set('taxGross',baht(gross));
+  }
+  const render={investment,car,savings,tradeoff,tax};
+  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carAnnualTax','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],tax:['taxSalary','taxBonus','taxSso','taxExtra']};
   const groupFor=k=>Object.keys(groups).find(g=>groups[g].includes(k));
   function syncField(key,origin){
     const field=document.querySelector(`[data-field="${key}"]`);if(!field)return;
