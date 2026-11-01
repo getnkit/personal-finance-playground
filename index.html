@@ -34,7 +34,7 @@
     .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.input-grid .field-line{align-items:start;flex-direction:column}.input-grid .field-input{min-width:0;justify-content:start}.input-grid .field-input input{width:100px}
     .divider{height:1px;background:var(--line);margin:18px 0}.button-row{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:20px}.btn{border:1px solid #d8e1e9;border-radius:11px;background:#fff;color:#40536d;padding:10px 12px;font-weight:700;font-size:12px}.btn:hover{border-color:#7ab9ae;color:var(--teal-dark)}.note-tiny{color:var(--sub);font-size:11px}
     .metric-title{color:var(--sub);font-size:12px;font-weight:650}.metric-primary{font-size:clamp(30px,4vw,40px);letter-spacing:-1.6px;line-height:1.3;font-weight:800;color:#142c43;overflow-wrap:anywhere}.metric-primary small{font-size:15px;color:#6e7c8e;font-weight:630;letter-spacing:0}.metric-sub{font-size:12px;color:var(--sub);margin-top:5px}
-    .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:17px 0}.mini{padding:14px;background:#f5f8fa;border:1px solid #edf1f5;border-radius:13px;min-width:0}.mini .k{color:#69798b;font-size:11px;line-height:1.4}.mini strong{display:block;font-size:18px;color:#1e3045;letter-spacing:-.4px;line-height:1.5;overflow-wrap:anywhere;margin-top:5px}.mini .micro{font-size:10px;color:#708094;line-height:1.4}
+    .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:17px 0}.mini{padding:14px;background:#f5f8fa;border:1px solid #edf1f5;border-radius:13px;min-width:0}.mini .k{color:#69798b;font-size:11px;line-height:1.4}.mini strong{display:block;font-size:18px;color:#1e3045;letter-spacing:-.4px;line-height:1.5;overflow-wrap:anywhere;margin-top:5px}.mini .micro{font-size:10px;color:#708094;line-height:1.4}.mini .micro.downside-reduction{margin-top:4px;color:#ad4843;font-size:11px;font-weight:700}.mini .micro.downside-real:not(:empty){margin-top:8px;padding-top:7px;border-top:1px solid #e0e9e7;line-height:1.5}
     .chart-title{display:flex;align-items:center;justify-content:space-between;gap:6px;font-weight:710;font-size:13px;margin:18px 0 3px}.legend{display:flex;gap:13px;flex-wrap:wrap;color:#79869a;font-size:10px}.legend b{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:baseline}.svgchart{display:block;width:100%;height:auto;overflow:visible}.chartwrap{margin:7px 0 4px;padding:5px 0 0}.stack{display:flex;height:10px;background:#e7edf1;border-radius:30px;overflow:hidden;margin:9px 0}.stack>div{min-width:0}
     .phase-heading{padding-top:17px;border-top:1px solid var(--line);color:#174b49;font-size:16px;font-weight:780;line-height:1.4;letter-spacing:-.15px}.phase-heading-first{padding-top:0;border-top:0}.phase-heading span{font-size:12px;font-weight:550;color:var(--sub);letter-spacing:0}.retirement-forecast{margin:16px 0 20px;padding:14px 16px;border-radius:14px;border:1px solid #d9eee5;background:#f1faf6}.retirement-years{font-size:clamp(23px,3.5vw,30px);font-weight:800;line-height:1.4;color:#087664;margin-top:3px}.tradeoff-points{padding-left:19px;margin:14px 0 0;color:var(--sub);font-size:12px;line-height:1.65}.tradeoff-points li{margin:5px 0}.trade-detail-list{margin:12px 0 0}
     .alert{padding:12px 13px;border:1px solid #dae9e7;border-left:3px solid #56aa99;background:#f2faf8;border-radius:10px;color:#41655f;font-size:11.5px;line-height:1.6;margin-top:17px}.alert.warm{background:#fff9ee;border-color:#f3e7d1;border-left-color:var(--amber);color:#735e3c}
@@ -185,7 +185,7 @@
               <div class="mini"><div class="k">พอร์ตเมื่อผลตอบแทนต่ำลง</div><strong id="invAltTotal">—</strong></div>
               <div class="mini"><div class="k">มูลค่าพอร์ตที่ลดลง</div><strong id="invDiff">—</strong></div>
               <div class="mini"><div class="k">พอร์ตอยู่ได้นานเท่าไร ถ้าถอนเท่าเดิม</div><strong id="invAltRunway">—</strong><div class="micro" id="invAltRunwayDetail">—</div></div>
-              <div class="mini"><div class="k">ถอนต่อเดือนเท่าไร เพื่อให้อยู่ได้นานเท่าเดิม</div><strong id="invAltWithdrawal">—</strong><div class="micro" id="invAltWithdrawalReal">—</div><div class="micro" id="invAltWithdrawalDetail">—</div></div>
+              <div class="mini"><div class="k">ถอนต่อเดือนเท่าไร เพื่อให้อยู่ได้นานเท่าเดิม</div><strong id="invAltWithdrawal">—</strong><div class="micro" id="invAltWithdrawalDetail">—</div><div class="micro downside-real" id="invAltWithdrawalReal">—</div></div>
             </div>
             <div class="source">ลดเฉพาะผลตอบแทนช่วงสะสมเงิน · ผลตอบแทนช่วงเกษียณและเงินเฟ้อยังคงตามค่าที่กรอก</div>
             <div class="alert warm">อายุพอร์ตเป็นเพียงแบบจำลองจากผลตอบแทนคงที่ ไม่ใช่การรับประกันว่าเงินจะอยู่ได้นานเท่านี้</div>
@@ -380,6 +380,7 @@
     }
     set('invAltRate',`${percent(r)} → ${percent(altRate)}`);set('invAltTotal',short(alt));set('invDiff',short(Math.max(0,total-alt)));
     set('invAltWithdrawalReal','');
+    $('invAltWithdrawalDetail').classList.remove('downside-reduction');
     if(w===0){
       set('invAltRunway','—');set('invAltRunwayDetail','ระบุเงินถอนใช้ต่อเดือนก่อน');
       set('invAltWithdrawal','—');set('invAltWithdrawalDetail','ยังไม่มีระยะเวลาถอนใช้ให้เปรียบเทียบ');
@@ -402,7 +403,8 @@
         const adjusted=Math.floor(w*alt/total);
         set('invAltWithdrawal',baht(adjusted));
         set('invAltWithdrawalReal',`คิดเป็นกำลังซื้อวันนี้ประมาณ ${baht(adjusted/Math.pow(1+infl/100,y))}/เดือน`);
-        set('invAltWithdrawalDetail',`ลดลง ${baht(w-adjusted)}/เดือน · เป้า ${visibleMonths(runway.months)}`);
+        set('invAltWithdrawalDetail',`ลดลง ${baht(w-adjusted)}/เดือน`);
+        $('invAltWithdrawalDetail').classList.add('downside-reduction');
       }
     }
     const data=[],base=[];for(let t=0;t<=y;t++){data.push(Math.max(0,futureValue(p,m,r,t)));base.push(p+m*t*12)};
