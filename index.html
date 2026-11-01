@@ -31,7 +31,7 @@
     .chart-title{display:flex;align-items:center;justify-content:space-between;gap:6px;font-weight:710;font-size:13px;margin:18px 0 3px}.legend{display:flex;gap:13px;flex-wrap:wrap;color:#79869a;font-size:10px}.legend b{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:baseline}.svgchart{display:block;width:100%;height:auto;overflow:visible}.chartwrap{margin:7px 0 4px;padding:5px 0 0}.stack{display:flex;height:10px;background:#e7edf1;border-radius:30px;overflow:hidden;margin:9px 0}.stack>div{min-width:0}
     .phase-heading{padding-top:17px;border-top:1px solid var(--line);color:#174b49;font-size:16px;font-weight:780;line-height:1.4;letter-spacing:-.15px}.phase-heading-first{padding-top:0;border-top:0}.phase-heading span{font-size:12px;font-weight:550;color:var(--sub);letter-spacing:0}.retirement-forecast{margin:16px 0 20px;padding:14px 16px;border-radius:14px;border:1px solid #d9eee5;background:#f1faf6}.retirement-years{font-size:clamp(23px,3.5vw,30px);font-weight:800;line-height:1.4;color:#087664;margin-top:3px}.tradeoff-points{padding-left:19px;margin:14px 0 0;color:var(--sub);font-size:12px;line-height:1.65}.tradeoff-points li{margin:5px 0}
     .alert{padding:12px 13px;border:1px solid #dae9e7;border-left:3px solid #56aa99;background:#f2faf8;border-radius:10px;color:#41655f;font-size:11.5px;line-height:1.6;margin-top:17px}.alert.warm{background:#fff9ee;border-color:#f3e7d1;border-left-color:var(--amber);color:#735e3c}
-    .purchasing-power-note{margin-top:16px;padding:17px 20px}.purchasing-power-note h3{font-size:14px;margin:0 0 6px}.purchasing-power-note p{font-size:13px;line-height:1.75;color:var(--sub);margin:0}
+    .purchasing-power-note{margin-top:17px;padding-top:14px;border-top:1px solid var(--line)}.purchasing-power-note h3{font-size:13px;margin:0 0 6px;color:var(--ink)}.purchasing-power-note p{font-size:12px;line-height:1.7;color:var(--sub);margin:0}
     details{border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:12px;color:#64758b}summary{font-weight:720;color:#52657a;cursor:pointer;list-style:revert}details p{margin:8px 0 0}details ul{margin:8px 0;padding-left:18px}details li{margin:4px 0}
     .bar-row{display:grid;grid-template-columns:102px 1fr 92px;align-items:center;gap:9px;font-size:11px;color:#69788b;margin:12px 0}.bar-bg{height:12px;background:#e9eef2;border-radius:10px;overflow:hidden}.bar-fill{height:100%;border-radius:10px;background:var(--teal)}.bar-row strong{text-align:right;color:#3b5063;font-weight:700}
     .market{margin-top:18px;border:1px solid #e4eaef;background:#fbfcfd;padding:15px;border-radius:14px}.market h4{margin:0;font-size:13px}.market p{font-size:11px;color:#697b8e;margin:6px 0 0}.market-row{display:flex;gap:10px;margin-top:12px}.market-stat{flex:1;border:1px solid #e4eaef;background:#fff;padding:11px;border-radius:11px}.market-stat b{font-size:16px;display:block;color:#1f3951}.market-stat span{font-size:11px;color:var(--sub)}
@@ -87,12 +87,12 @@
               <li><strong>เงินเฟ้อ:</strong> ใช้แปลงมูลค่าพอร์ตเป็นกำลังซื้อวันนี้ และเพิ่มเงินถอนตามอัตราเงินเฟ้อเมื่อครบทุก 12 เดือน เช่น 30,000 บาท/เดือนที่เงินเฟ้อ 2% จะเป็น 30,600 บาท/เดือนในปีถัดไป</li>
               <li><strong>ข้อจำกัด:</strong> ผลตอบแทนทั้งสองช่วงเป็นเพียงสมมติฐานคงที่ แม้เลือกอัตราต่ำก็ไม่ได้รับประกัน ไม่รวมภาษี ค่าธรรมเนียม หรือความผันผวนของตลาด</li>
             </ul></details>
+            <div class="purchasing-power-note" aria-label="คำอธิบายกำลังซื้อวันนี้">
+              <h3>“กำลังซื้อวันนี้” หมายถึงอะไร?</h3>
+              <p>คือการนำเงินในอนาคตมาเทียบกับราคาสินค้าในวันนี้ เพื่อให้เห็นผลของเงินเฟ้อ เช่น ถ้าอีก 20 ปีมีเงิน 10 ล้านบาท และเงินเฟ้อเฉลี่ย 2% ต่อปี เงินก้อนนั้นจะมีกำลังซื้อใกล้เคียงเงิน 6.73 ล้านบาทในวันนี้ แต่ยอดเงินจริงยังเป็น 10 ล้านบาท ส่วนตัวเลข “คิดเป็นกำลังซื้อวันนี้” ใต้เงินถอนใช้ต่อเดือนก็ใช้หลักการเดียวกัน</p>
+            </div>
           </div>
         </div>
-        <aside class="card purchasing-power-note" aria-label="คำอธิบายกำลังซื้อวันนี้">
-          <h3>“กำลังซื้อวันนี้” หมายถึงอะไร?</h3>
-          <p>คือการนำเงินในอนาคตมาเทียบกับราคาสินค้าในวันนี้ เพื่อให้เห็นผลของเงินเฟ้อ เช่น ถ้าอีก 20 ปีมีเงิน 10 ล้านบาท และเงินเฟ้อเฉลี่ย 2% ต่อปี เงินก้อนนั้นจะมีกำลังซื้อใกล้เคียงเงิน 6.73 ล้านบาทในวันนี้ แต่ยอดเงินจริงยังเป็น 10 ล้านบาท ส่วนตัวเลข “คิดเป็นกำลังซื้อวันนี้” ใต้เงินถอนใช้ต่อเดือนก็ใช้หลักการเดียวกัน</p>
-        </aside>
       </section>
 
       <section id="car" class="panel" aria-labelledby="car-title" hidden>
