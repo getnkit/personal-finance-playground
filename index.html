@@ -541,7 +541,7 @@
   const plannedExpenses=[];
   let nextExpenseId=1;
   const monthKeyFromDate=(date)=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
-  const monthIndex=(key)=>/^\\d{4}-(0[1-9]|1[0-2])$/.test(key)?Number(key.slice(0,4))*12+Number(key.slice(5,7))-1:null;
+  const monthIndex=(key)=>/^\d{4}-(0[1-9]|1[0-2])$/.test(key)?Number(key.slice(0,4))*12+Number(key.slice(5,7))-1:null;
   const monthKey=(index)=>`${Math.floor(index/12)}-${String(index%12+1).padStart(2,'0')}`;
   const monthLabel=(index)=>`${SAV_MONTH_NAMES[index%12]} ${Math.floor(index/12)}`;
   const savingsStart=()=>monthIndex($('savStartMonth').value)??monthIndex(monthKeyFromDate(new Date()));
