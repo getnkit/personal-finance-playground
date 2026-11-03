@@ -726,7 +726,7 @@
     const annual=progressiveTax(taxable);
     const bracket=taxable<=150000?0:taxBands.find(([ceiling])=>taxable<=ceiling)[1];
     set('taxAnnual',baht(annual));
-    set('taxMonthly',`เฉลี่ยประมาณ ${baht(annual/12)}/เดือน · ไม่ใช่ยอดภาษีหัก ณ ที่จ่าย`);
+    set('taxMonthly',`เฉลี่ยประมาณ ${baht(annual/12)}/เดือน`);
     set('taxTaxable',baht(taxable));
     set('taxSaving',baht(Math.max(0,progressiveTax(base)-annual)));
     set('taxBracket',percent(bracket*100));
