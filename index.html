@@ -312,7 +312,7 @@
               <div class="sav-expense-list" id="savExpenseRows" aria-label="รายจ่ายพิเศษที่วางแผนไว้"></div>
             </div><div class="button-row"><button class="btn" type="button" data-reset="savings">↺ คืนค่าตัวอย่าง</button></div>
           </div>
-          <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div><div class="metric-sub" id="savSummary">—</div>
+          <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div>
             <div class="mini-grid sav-result-grid">
               <div class="mini"><div class="k">คาดว่าจะถึงเป้าหมาย</div><strong id="savFinishMonth">—</strong></div>
               <div class="mini" id="savCompareBox" hidden><div class="k">ถ้าไม่มีรายจ่ายพิเศษ</div><strong id="savBaseFinish">—</strong><div class="micro" id="savDelay">—</div></div>
@@ -621,11 +621,9 @@
       const dated=monthIndex(item.month);
       if(dated===null||dated<start)item.month=monthKey(start);
     }
-    const gap=Math.max(0,goal-now);
     const baseMonths=forecastSavings(goal,now,monthly,start,[]);
     const months=forecastSavings(goal,now,monthly,start,plannedExpenses);
     set('savTime',visibleMonths(months));
-    set('savSummary',gap===0?'ถึงเป้าหมายที่ระบุแล้ว':monthly===0?`ยังขาด ${baht(gap)} · ระบุเงินออมต่อเดือนเพื่อคำนวณ`:`ยังขาด ${baht(gap)} · ออมปกติ ${baht(monthly)}/เดือน`);
     set('savFinishMonth',savingsFinishLabel(start,months));
     const active=plannedExpenses.some(item=>item.amount>0&&monthIndex(item.month)>=start);
     $('savCompareBox').hidden=!active;
