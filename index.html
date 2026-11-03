@@ -186,7 +186,7 @@
       <button class="tab" data-tab="investment" aria-selected="true"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></span><span class="tab-text">Investment & Retirement</span></button>
       <button class="tab" data-tab="car" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span><span class="tab-text">Car Timing</span></button>
       <button class="tab" data-tab="savings" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="tab-text">Savings & Goals</span></button>
-      <button class="tab" data-tab="tax" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tab-text">Tax Playground</span></button>
+      <button class="tab" data-tab="tax" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tab-text">Tax</span></button>
     </nav>
 
     <main>
@@ -348,11 +348,11 @@
 
 
       <section id="tax" class="panel" aria-labelledby="tax-title" hidden>
-        <div class="section-head"><div><h2 id="tax-title">Tax Playground</h2><p>ลองเปลี่ยนรายได้และค่าลดหย่อนเพื่อดูภาษีที่เปลี่ยนไป · ปีภาษี 2569</p></div></div>
+        <div class="section-head"><div><h2 id="tax-title">Tax</h2><p>รายได้และค่าลดหย่อนเท่านี้ ต้องเสียภาษีประมาณเท่าไร? · ปีภาษี 2569</p></div></div>
         <div class="layout">
           <div class="card inputs-card">
-            <div class="card-label"><h3>ทดลองภาษีเงินเดือน</h3><small>เงินได้ ม.40(1)</small></div>
-            <p class="hint">ตัวอย่างผู้มีเงินเดือนครบ 12 เดือน · ไม่ใช่ยอดสำหรับยื่นภาษีจริง</p>
+            <div class="card-label"><h3>ลองคำนวณภาษีเงินได้</h3><small>เงินได้ ม.40(1)</small></div>
+            <p class="hint">สมมติว่าได้รับเงินเดือนครบ 12 เดือน · ใช้เพื่อประมาณการเท่านั้น</p>
             <div class="fields">
               <div class="field" data-field="taxSalary"><div class="field-line"><label for="taxSalary-num">เงินเดือนก่อนหักภาษี / เดือน</label><div class="field-input"><input id="taxSalary-num" type="number" min="0" max="1000000" step="1000" value="40000"><span>บาท</span></div></div><input aria-label="เงินเดือนก่อนหักภาษี / เดือน" type="range" min="0" max="200000" step="1000" value="40000"><div class="range-ends"><span>0</span><span>200,000</span></div></div>
               <div class="field" data-field="taxBonus"><div class="field-line"><label for="taxBonus-num">โบนัสรวมทั้งปี</label><div class="field-input"><input id="taxBonus-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input aria-label="โบนัสรวมทั้งปี" type="range" min="0" max="1000000" step="10000" value="0"><div class="range-ends"><span>0</span><span>1,000,000</span></div></div>
@@ -367,8 +367,8 @@
             <div class="mini-grid">
               <div class="mini"><div class="k">เงินได้สุทธิที่ใช้คำนวณภาษี</div><strong id="taxTaxable">—</strong><div class="micro">หลังค่าใช้จ่ายและค่าลดหย่อน</div></div>
               <div class="mini"><div class="k">ประหยัดภาษีจากค่าลดหย่อนอื่น</div><strong id="taxSaving">—</strong><div class="micro">เทียบกับไม่ใช้ค่าลดหย่อนอื่น</div></div>
-              <div class="mini"><div class="k">ขั้นภาษีสูงสุดที่ถึง</div><strong id="taxBracket">—</strong><div class="micro">ไม่ใช่อัตราภาษีของรายได้ทั้งหมด</div></div>
-              <div class="mini"><div class="k">รายได้เงินเดือนและโบนัสทั้งปี</div><strong id="taxGross">—</strong><div class="micro">ก่อนหักค่าใช้จ่าย</div></div>
+              <div class="mini"><div class="k">อัตราภาษีขั้นสูงสุด</div><strong id="taxBracket">—</strong><div class="micro">ไม่ใช่อัตราที่ใช้กับรายได้ทั้งหมด</div></div>
+              <div class="mini"><div class="k">เงินเดือนและโบนัสรวมทั้งปี</div><strong id="taxGross">—</strong><div class="micro">ก่อนหักค่าใช้จ่าย</div></div>
             </div>
             <p class="hint">ยังไม่หักภาษี ณ ที่จ่าย จึงไม่ใช่ยอดที่ต้องจ่ายเพิ่มหรือขอคืน</p>
             <details><summary>สูตรและขอบเขต</summary><ul>
