@@ -128,6 +128,33 @@
       .intro h1{font-size:21px}
       .addon summary{font-size:12.5px}
     }
+
+    /* Savings & Goals — optional, calendar-based planned expenses. */
+    .sav-start .field-input input{width:151px;max-width:44vw;text-align:left;font-weight:650}
+    .sav-plan{margin-top:19px;padding:15px;border:1px solid #dceae6;border-radius:13px;background:#fbfdfc}
+    .sav-plan-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    .sav-plan-top h4{font-size:13px;line-height:1.4;margin:0;color:#244951}
+    .sav-plan-top h4 span{color:var(--sub);font-size:11px;font-weight:500}
+    .sav-plan-top .btn{padding:8px 11px;white-space:nowrap}
+    .sav-plan-description{font-size:11px;line-height:1.55;color:var(--sub);margin:6px 0 0}
+    .sav-expense-list{display:grid;gap:10px;margin-top:12px}
+    .sav-expense-list:empty{display:none}
+    .sav-expense-row{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1.2fr) minmax(0,.9fr) auto;gap:8px;align-items:end;border-top:1px solid #e3ece9;padding-top:11px}
+    .sav-expense-row label{display:grid;gap:5px;min-width:0;color:#52687a;font-size:11px;font-weight:630}
+    .sav-expense-row input,.sav-expense-row select{width:100%;min-width:0;border:1px solid #d6e3e5;border-radius:9px;background:#fff;color:var(--ink);min-height:36px;padding:7px 8px;font-size:12px;outline:none}
+    .sav-expense-row input:focus,.sav-expense-row select:focus,.sav-start input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #0e998521}
+    .sav-expense-row input[type=number]{text-align:right}
+    .sav-remove{height:36px;padding:5px 9px;align-self:end;background:#fff;border:1px solid #e4e9e9;border-radius:9px;color:#a04a4a;font-size:11px;font-weight:700}
+    .sav-remove:hover{border-color:#e0adad;background:#fff6f5}
+    .sav-result-grid{margin-bottom:0}
+    .sav-result-grid .mini strong{font-size:16px}
+    @media(max-width:520px){
+      .sav-plan{padding:13px}
+      .sav-expense-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+      .sav-expense-row label:first-child{grid-column:1}
+      .sav-expense-row label:nth-child(2){grid-column:2}
+      .sav-remove{justify-self:end}
+    }
   </style>
 </head>
 <body>
@@ -277,13 +304,23 @@
               <div class="field" data-field="savGoal"><div class="field-line"><label for="savGoal-num">ยอดเงินเป้าหมาย</label><div class="field-input"><input id="savGoal-num" type="number" min="0" max="1000000000" step="10000" value="400000"><span>บาท</span></div></div><input aria-label="เป้าหมาย ปรับแถบ" type="range" min="50000" max="2000000" step="10000" value="400000"><div class="range-ends"><span>50,000</span><span>2,000,000</span></div></div>
               <div class="field" data-field="savNow"><div class="field-line"><label for="savNow-num">เงินสะสมที่มีแล้ว</label><div class="field-input"><input id="savNow-num" type="number" min="0" max="1000000000" step="10000" value="0"><span>บาท</span></div></div><input aria-label="เงินสะสมที่มีแล้ว ปรับแถบ" type="range" min="0" max="1000000" step="10000" value="0"><div class="range-ends"><span>0</span><span>1,000,000</span></div></div>
               <div class="field" data-field="savMonthly"><div class="field-line"><label for="savMonthly-num">ออมเข้าเป้าหมายต่อเดือน</label><div class="field-input"><input id="savMonthly-num" type="number" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="ออมเข้าเป้าหมาย ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
+              <div class="field sav-start"><div class="field-line"><label for="savStartMonth">เริ่มออมเดือน</label><div class="field-input"><input id="savStartMonth" type="month" aria-label="เดือนและปีที่เริ่มออม"></div></div></div>
+            </div>
+            <div class="sav-plan">
+              <div class="sav-plan-top"><h4>รายจ่ายที่วางแผนไว้ <span>(ไม่บังคับ)</span></h4><button class="btn" id="savAddExpense" type="button">+ เพิ่มรายการ</button></div>
+              <p class="sav-plan-description">หักจากเงินที่จะออมในเดือนที่มีรายจ่ายพิเศษ</p>
+              <div class="sav-expense-list" id="savExpenseRows" aria-label="รายจ่ายพิเศษที่วางแผนไว้"></div>
             </div><div class="button-row"><button class="btn" type="button" data-reset="savings">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div><div class="metric-sub" id="savSummary">—</div>
+            <div class="mini-grid sav-result-grid">
+              <div class="mini"><div class="k">คาดว่าจะถึงเป้าหมาย</div><strong id="savFinishMonth">—</strong></div>
+              <div class="mini" id="savCompareBox" hidden><div class="k">ถ้าไม่มีรายจ่ายพิเศษ</div><strong id="savBaseFinish">—</strong><div class="micro" id="savDelay">—</div></div>
+            </div>
             <details><summary>สูตรและขอบเขต</summary><ul>
-              <li><strong>ระยะเวลาถึงเป้า:</strong> ปัดขึ้น(เงินที่ยังขาด ÷ เงินออมต่อเดือน) โดยเริ่มออมตั้งแต่เดือนแรก</li>
-              <li><strong>สมมติฐาน:</strong> เติมเงินปลายเดือน เป้าหมายคงที่ ไม่รวมผลตอบแทนหรือเงินเฟ้อ</li>
-              <li><strong>ข้อจำกัด:</strong> ไม่ใช่การคาดการณ์ภาระที่ต้องจ่ายตามวันครบกำหนดจริง</li>
+              <li><strong>การคำนวณ:</strong> ออมเงินปลายเดือน ตั้งแต่เดือนที่เลือก จนสะสมครบเป้าหมาย</li>
+              <li><strong>รายจ่ายพิเศษ:</strong> หักจากเงินออมของเดือนนั้นเท่านั้น ถ้าเกินยอดออมจะออมได้ 0 บาท โดยไม่ถอนเงินสะสมเดิมหรือทบยอดที่เกิน</li>
+              <li><strong>สมมติฐาน:</strong> เป้าหมายคงที่ ไม่รวมผลตอบแทนและเงินเฟ้อ รายจ่ายที่รวมไว้ในยอดออมสุทธิแล้วไม่ต้องหักซ้ำ</li>
             </ul></details>
           </div>
         </div>
@@ -498,12 +535,102 @@
     $('carBarInterest').style.width=`${100*earlyInterest/max}%`;
     set('carBarRunningText',short(running));set('carBarDepText',short(depreciation));set('carBarInterestText',short(earlyInterest));
   }
+  const SAV_MONTH_NAMES=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const SAV_MAX_CALC_MONTHS=600; // 50-year safety limit for the forecast.
+  const SAV_MAX_SELECT_MONTHS=360; // Keep the month dropdown manageable.
+  const plannedExpenses=[];
+  let nextExpenseId=1;
+  const monthKeyFromDate=(date)=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
+  const monthIndex=(key)=>/^\\d{4}-(0[1-9]|1[0-2])$/.test(key)?Number(key.slice(0,4))*12+Number(key.slice(5,7))-1:null;
+  const monthKey=(index)=>`${Math.floor(index/12)}-${String(index%12+1).padStart(2,'0')}`;
+  const monthLabel=(index)=>`${SAV_MONTH_NAMES[index%12]} ${Math.floor(index/12)}`;
+  const savingsStart=()=>monthIndex($('savStartMonth').value)??monthIndex(monthKeyFromDate(new Date()));
+  const savingsFinishLabel=(start,months)=>!Number.isFinite(months)?'ยังคำนวณไม่ได้':months===0?'ถึงเป้าหมายแล้ว':monthLabel(start+months-1);
+  function forecastSavings(goal,initial,monthly,start,expenses){
+    if(initial>=goal)return 0;
+    if(monthly<=0)return Infinity;
+    const plannedByMonth=new Map();
+    for(const item of expenses){
+      const index=monthIndex(item.month);
+      if(index!==null&&index>=start&&item.amount>0)plannedByMonth.set(index,(plannedByMonth.get(index)||0)+item.amount);
+    }
+    let saved=initial;
+    for(let i=0;i<SAV_MAX_CALC_MONTHS;i++){
+      // Never draw down existing savings or carry overspending into the next month.
+      saved+=Math.max(0,monthly-(plannedByMonth.get(start+i)||0));
+      if(saved+1e-7>=goal)return i+1;
+    }
+    return Infinity;
+  }
+  function syncSavingsExpenseMonths(start,months){
+    const limit=Math.min(SAV_MAX_SELECT_MONTHS,Number.isFinite(months)?Math.max(1,months):36);
+    for(const item of plannedExpenses){
+      const row=document.querySelector(`[data-sav-expense-id="${item.id}"]`);
+      if(!row)continue;
+      const select=row.querySelector('select');
+      let selected=monthIndex(item.month);
+      if(selected===null||selected<start)selected=start;
+      selected=Math.min(selected,start+SAV_MAX_SELECT_MONTHS-1);
+      item.month=monthKey(selected);
+      const end=Math.max(start+limit-1,selected);
+      const fragment=document.createDocumentFragment();
+      for(let n=start;n<=end;n++){
+        const opt=document.createElement('option');
+        opt.value=monthKey(n);
+        opt.textContent=monthLabel(n);
+        fragment.appendChild(opt);
+      }
+      select.replaceChildren(fragment);
+      select.value=item.month;
+    }
+  }
+  function renderSavingsExpenses(){
+    const container=$('savExpenseRows');
+    container.replaceChildren();
+    for(const item of plannedExpenses){
+      const row=document.createElement('div');
+      row.className='sav-expense-row';
+      row.dataset.savExpenseId=String(item.id);
+      // Static markup: user-supplied notes are assigned as input.value, never HTML.
+      row.innerHTML=`<label>เดือนที่จ่าย<select aria-label="เดือนที่จ่าย"></select></label><label>รายการ (ถ้ามี)<input type="text" maxlength="60" placeholder="เช่น ล้างแอร์" aria-label="ชื่อรายการ"></label><label>จำนวนเงิน (บาท)<input type="number" min="0" max="1000000" step="1000" placeholder="0" aria-label="จำนวนเงิน"></label><button type="button" class="sav-remove" aria-label="ลบรายการ">ลบ</button>`;
+      const select=row.querySelector('select');
+      const [description,amount]=row.querySelectorAll('input');
+      description.value=item.label;
+      amount.value=item.amount?String(item.amount):'';
+      select.addEventListener('change',()=>{item.month=select.value;savings();});
+      description.addEventListener('input',()=>{item.label=description.value;});
+      amount.addEventListener('input',()=>{
+        item.amount=amount.value.trim()===''?0:Math.max(0,Math.min(1000000,Number(amount.value)||0));
+        savings();
+      });
+      amount.addEventListener('change',()=>{amount.value=item.amount?String(item.amount):'';});
+      row.querySelector('.sav-remove').addEventListener('click',()=>{
+        const i=plannedExpenses.findIndex(entry=>entry.id===item.id);
+        if(i>=0)plannedExpenses.splice(i,1);
+        renderSavingsExpenses();
+        savings();
+      });
+      container.appendChild(row);
+    }
+  }
   function savings(){
     const {savGoal:goal,savNow:now,savMonthly:monthly}=state;
+    const start=savingsStart();
     const gap=Math.max(0,goal-now);
-    const months=gap===0?0:monthly===0?Infinity:Math.ceil(gap/monthly);
+    const baseMonths=forecastSavings(goal,now,monthly,start,[]);
+    const months=forecastSavings(goal,now,monthly,start,plannedExpenses);
     set('savTime',visibleMonths(months));
-    set('savSummary',gap===0?'ถึงเป้าหมายที่ระบุแล้ว':monthly===0?`ยังขาด ${baht(gap)} · ระบุเงินออมต่อเดือนเพื่อคำนวณ`:`ยังขาด ${baht(gap)} · ออม ${baht(monthly)}/เดือน`);
+    set('savSummary',gap===0?'ถึงเป้าหมายที่ระบุแล้ว':monthly===0?`ยังขาด ${baht(gap)} · ระบุเงินออมต่อเดือนเพื่อคำนวณ`:`ยังขาด ${baht(gap)} · ออมปกติ ${baht(monthly)}/เดือน`);
+    set('savFinishMonth',savingsFinishLabel(start,months));
+    const active=plannedExpenses.some(item=>item.amount>0&&monthIndex(item.month)>=start);
+    $('savCompareBox').hidden=!active;
+    if(active){
+      set('savBaseFinish',savingsFinishLabel(start,baseMonths));
+      set('savDelay',Number.isFinite(months)&&Number.isFinite(baseMonths)
+        ?months>baseMonths?`ถึงเป้าหมายช้าลง ${visibleMonths(months-baseMonths)}`:'ถึงเป้าหมายเดือนเดิม'
+        :'ยังเทียบระยะเวลาไม่ได้');
+    }
+    syncSavingsExpenseMonths(start,months);
   }
   // Compare both plans at the same calendar month (when the slower plan can buy the car).
   // Redirect all remaining monthly allocation to investments once the car goal is filled.
@@ -624,7 +751,13 @@
   });
   $('carFinanceMode').addEventListener('change',event=>{state.carFinanceMode=event.target.value;car();});
   document.querySelectorAll('[data-reset]').forEach(button=>button.addEventListener('click',()=>{
-    const group=button.dataset.reset;groups[group].forEach(key=>{state[key]=DEFAULT[key];syncField(key)});render[group]();
+    const group=button.dataset.reset;groups[group].forEach(key=>{state[key]=DEFAULT[key];syncField(key)});
+    if(group==='savings'){
+      plannedExpenses.length=0;
+      $('savStartMonth').value=monthKeyFromDate(new Date());
+      renderSavingsExpenses();
+    }
+    render[group]();
   }));
   function showTab(name){
     document.querySelectorAll('.panel').forEach(panel=>panel.hidden=panel.id!==name);
@@ -632,6 +765,14 @@
     window.scrollTo({top:0,behavior:'instant'});
   }
   document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>showTab(button.dataset.tab)));
+  $('savStartMonth').value=monthKeyFromDate(new Date());
+  $('savStartMonth').addEventListener('change',savings);
+  $('savAddExpense').addEventListener('click',()=>{
+    const start=savingsStart();
+    plannedExpenses.push({id:nextExpenseId++,month:monthKey(start),label:'',amount:0});
+    renderSavingsExpenses();
+    savings();
+  });
   Object.values(render).forEach(fn=>fn());
 })();
 </script>
