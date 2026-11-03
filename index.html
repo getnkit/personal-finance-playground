@@ -616,6 +616,11 @@
   function savings(){
     const {savGoal:goal,savNow:now,savMonthly:monthly}=state;
     const start=savingsStart();
+    // A revised start date must never leave a displayed expense before the plan begins.
+    for(const item of plannedExpenses){
+      const dated=monthIndex(item.month);
+      if(dated===null||dated<start)item.month=monthKey(start);
+    }
     const gap=Math.max(0,goal-now);
     const baseMonths=forecastSavings(goal,now,monthly,start,[]);
     const months=forecastSavings(goal,now,monthly,start,plannedExpenses);
