@@ -163,6 +163,27 @@
     .tax-note{font-size:11px;color:var(--sub);line-height:1.5;margin:7px 0 0}
     .tax-more .field-input select{width:115px;max-width:38vw;border:1px solid #dce6ed;border-radius:9px;padding:7px;color:var(--ink);background:#fbfdff;font-weight:700}
     .tax-actual .field-input input,.tax-withheld .field-input input{width:126px}
+
+    .export-btn{white-space:nowrap;flex-shrink:0;border-color:#b6dcd5;color:#0b7368;background:#f5fcfa}
+    #printSnapshot{display:none}
+    @media(max-width:520px){.export-btn{font-size:11px;padding:8px 9px}.section-head h2{font-size:20px}}
+    @page{size:A4;margin:14mm}
+    @media print{
+      body{margin:0!important;background:#fff!important}
+      body > :not(#printSnapshot){display:none!important}
+      #printSnapshot{display:block!important;color:#1c2b3b;font:12px/1.5 -apple-system,BlinkMacSystemFont,"Sarabun",Tahoma,sans-serif}
+      #printSnapshot *{box-sizing:border-box}
+      #printSnapshot .pbrand{color:#147b70;font-size:12px;font-weight:750}
+      #printSnapshot h1{font-size:24px;margin:5px 0}
+      #printSnapshot h2{font-size:14px;margin:19px 0 8px}
+      #printSnapshot .pmeta{font-size:11px;color:#607588;border-bottom:2px solid #147b70;padding-bottom:11px}
+      #printSnapshot .prows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+      #printSnapshot .prow{padding:8px 10px;border:1px solid #dce4e8;border-radius:8px;break-inside:avoid}
+      #printSnapshot .plabel{font-size:10px;color:#647687}
+      #printSnapshot .pvalue{font-size:14px;font-weight:700;margin-top:3px;overflow-wrap:anywhere}
+      #printSnapshot .pnote{white-space:pre-line;font-size:11px;margin-top:15px;border-left:3px solid #8aabb2;background:#f2f6f7;padding:9px 10px}
+      #printSnapshot .pfooter{font-size:10px;color:#667787;margin-top:18px;border-top:1px solid #dce4e8;padding-top:9px}
+    }
   </style>
 </head>
 <body>
@@ -199,7 +220,7 @@
 
     <main>
       <section id="investment" class="panel" aria-labelledby="investment-title">
-        <div class="section-head"><div><h2 id="investment-title">Investment & Retirement</h2><p>ทดลองเงินออม ผลตอบแทน และแผนเกษียณ</p></div></div>
+        <div class="section-head"><div><h2 id="investment-title">Investment & Retirement</h2><p>ทดลองเงินออม ผลตอบแทน และแผนเกษียณ</p></div><button class="btn export-btn" type="button" data-print>Export PDF</button></div>
         <div class="layout">
           <div class="card inputs-card"><div class="card-label"><h3>กำหนดสมมติฐาน</h3></div>
             <div class="fields">
@@ -243,7 +264,7 @@
       </section>
 
       <section id="car" class="panel" aria-labelledby="car-title" hidden>
-        <div class="section-head"><div><h2 id="car-title">Car Purchase Timing</h2><p>ซื้อรถก่อนแผน ต้องจ่ายเพิ่มเท่าไร?</p></div></div>
+        <div class="section-head"><div><h2 id="car-title">Car Purchase Timing</h2><p>ซื้อรถก่อนแผน ต้องจ่ายเพิ่มเท่าไร?</p></div><button class="btn export-btn" type="button" data-print>Export PDF</button></div>
         <div class="layout">
           <div class="card inputs-card"><div class="card-label"><h3>เปรียบเทียบเวลาซื้อรถ</h3></div><p class="hint">ปรับค่าใช้จ่ายให้ตรงกับรถที่สนใจ · นับเฉพาะช่วงซื้อก่อนแผนเดิม</p>
             <div class="fields">
@@ -305,7 +326,7 @@
       </section>
 
       <section id="savings" class="panel" aria-labelledby="savings-title" hidden>
-        <div class="section-head"><div><h2 id="savings-title">Savings & Goals</h2><p>ออมเท่าไร และใช้เวลากี่เดือนถึงเป้าหมาย?</p></div></div>
+        <div class="section-head"><div><h2 id="savings-title">Savings & Goals</h2><p>ออมเท่าไร และใช้เวลากี่เดือนถึงเป้าหมาย?</p></div><button class="btn export-btn" type="button" data-print>Export PDF</button></div>
         <div class="layout">
           <div class="card inputs-card"><div class="card-label"><h3>ทดลองแผนสะสมเงิน</h3><small>เป้าหมายเงินสด ไม่รวมผลตอบแทน</small></div>
             <div class="fields">
@@ -356,7 +377,7 @@
 
 
       <section id="tax" class="panel" aria-labelledby="tax-title" hidden>
-        <div class="section-head"><div><h2 id="tax-title">Personal Income Tax</h2><p>รายได้และค่าลดหย่อนเท่านี้ ต้องเสียภาษีประมาณเท่าไร? · ปีภาษี 2569</p></div></div>
+        <div class="section-head"><div><h2 id="tax-title">Personal Income Tax</h2><p>รายได้และค่าลดหย่อนเท่านี้ ต้องเสียภาษีประมาณเท่าไร? · ปีภาษี 2569</p></div><button class="btn export-btn" type="button" data-print>Export PDF</button></div>
         <div class="layout">
           <div class="card inputs-card">
             <div class="card-label"><h3>ลองคำนวณภาษีเงินได้</h3><small>เงินได้ ม.40(1)</small></div>
@@ -417,6 +438,7 @@
     <button class="tab" data-tab="tax" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tab-text">Tax</span></button>
   </nav>
   <noscript><div style="max-width:600px;margin:20px auto;background:#fff3d9;padding:14px;border-radius:12px">โปรดเปิด JavaScript เพื่อใช้เครื่องคำนวณ</div></noscript>
+<div id="printSnapshot" aria-hidden="true"></div>
 <script>
 (() => {
   'use strict';
@@ -782,6 +804,56 @@
     if(rmf>rmfUsed)capped.push('RMF');
     set('taxCapNote',(capped.length?'ระบบปรับยอดให้ไม่เกินเพดานเบื้องต้น: '+capped.join(', ')+' · ':'')+(extra>0?'ค่าลดหย่อนอื่นยังไม่ตรวจเพดานหรือสิทธิ · ':'')+'กรณีมีกองทุนเกษียณอื่นหรือค่าลดหย่อนพิเศษ ต้องตรวจเพดานรวมด้วยตนเอง');
   }
+
+  // Client-side report preview via browser print / Save as PDF. No server or storage.
+  function exportSnapshot(){
+    const panel=document.querySelector('main .panel:not([hidden])');
+    if(!panel)return;
+    const esc=v=>String(v===undefined||v===null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const row=(label,val)=>'<div class="prow"><div class="plabel">'+esc(label)+'</div><div class="pvalue">'+esc(val)+'</div></div>';
+    const inputs=[];
+    panel.querySelectorAll('.inputs-card .field,#carInvestAddon[open] .field').forEach(f=>{
+      if(f.closest('[hidden]'))return;
+      const el=f.querySelector('.field-input input[type=number],.field-input input[type=month],.field-input select,select');
+      const lab=f.querySelector('.field-line label,label');
+      if(!el||!lab||el.value==='')return;
+      if(f.closest('.tax-more')&&el.type==='number'&&Number(el.value)===0)return;
+      if(f.dataset.field==='taxAnnualActual'&&Number(el.value)===0)return;
+      const unit=f.querySelector('.field-input span');
+      const val=el.tagName==='SELECT'?el.options[el.selectedIndex].textContent:el.type==='number'?num(Number(el.value))+(unit?' '+unit.textContent:''):el.value;
+      inputs.push([lab.textContent.trim(),val]);
+    });
+    if(panel.id==='savings')plannedExpenses.filter(e=>e.amount>0).forEach(e=>inputs.push(['รายจ่ายพิเศษ · '+(e.label.trim()||'ไม่ระบุชื่อ')+' · '+e.month,baht(e.amount)]));
+    const fields={
+      investment:[['เงินสะสมปลายช่วงลงทุน','invTotal'],['สรุปเงินสะสม','invSummary'],['เงินต้นสะสม','invPrincipal'],['ผลตอบแทน','invGrowth'],['กำลังซื้อวันนี้','invReal'],['เงินถอนต่อเดือน','invWithdraw'],['กำลังซื้อของเงินถอน','invWithdrawReal'],['เงินพอใช้หลังเกษียณ','invRunway'],['รายละเอียดหลังเกษียณ','invRunwaySummary']],
+      car:[['ต้นทุนซื้อรถก่อนแผน','carEconomic'],['สรุปต้นทุน','carSummary'],['ค่าใช้จ่ายช่วงซื้อก่อน','carRunning'],['ค่าเสื่อม','carDepLoss'],['ค่างวด','carLoanPayment'],['เงินดาวน์','carLoanDown'],['ดอกเบี้ยรวม','carLoanTotalInterest']],
+      savings:[['เวลาถึงเป้าหมาย','savTime'],['คาดว่าจะถึงเป้าหมาย','savFinishMonth'],['ถ้าไม่มีรายจ่ายพิเศษ','savBaseFinish'],['ผลของรายจ่ายพิเศษ','savDelay']],
+      tax:[['ภาษีเงินได้ทั้งปี','taxAnnual'],['เฉลี่ยต่อเดือน','taxMonthly'],['รายได้ทั้งปี','taxGross'],['เงินได้สุทธิ','taxTaxable'],['ประหยัดภาษีจากค่าลดหย่อนเพิ่มเติม','taxSaving'],['อัตราภาษีขั้นสูงสุด','taxBracket'],['ค่าลดหย่อนเพิ่มเติมที่ใช้','taxAdditionalUsed'],['ภาษีที่ต้องจ่ายเพิ่มหรือขอคืน','taxSettlementValue']]
+    };
+    const outputs=[];
+    fields[panel.id].forEach(pair=>{
+      const el=$(pair[1]);if(!el||!el.textContent.trim()||el.textContent.trim()==='—')return;
+      if(el.closest('[hidden]')&&pair[1]!=='taxAdditionalUsed')return;
+      outputs.push([pair[1]==='taxSettlementValue'?$('taxSettlementLabel').textContent:pair[0],el.textContent.trim()]);
+    });
+    if(panel.id==='savings'&&$('carInvestAddon').open){
+      [['แผน A เทียบกับ B','tradeDelay'],['รถตามแผน A','tradeA'],['รถตามแผน B','tradeB'],['พอร์ตแผน A','tradePortA'],['พอร์ตแผน B','tradePortB'],['ส่วนต่างพอร์ต','tradeDiff']].forEach(pair=>{const el=$(pair[1]);if(el&&el.textContent.trim()!=='—')outputs.push([pair[0],el.textContent.trim()]);});
+    }
+    const notes={
+      investment:'ผลตอบแทนและเงินเฟ้อเป็นสมมติฐาน ไม่รับประกันผลลงทุนจริง',
+      car:'ราคารถ ค่าเสื่อม และต้นทุนเป็นประมาณการตามตัวเลขที่กรอก',
+      savings:'เป้าหมายเงินสดคงที่ ไม่รวมผลตอบแทนหรือเงินเฟ้อ รายจ่ายพิเศษหักจากเงินออมของเดือนนั้นเท่านั้น',
+      tax:'ประมาณการสำหรับเงินได้ ม.40(1) ต้องตรวจเอกสาร 50 ทวิ สิทธิและเพดานลดหย่อนทั้งหมดก่อนยื่นจริง'
+    };
+    const today=new Intl.DateTimeFormat('th-TH',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Bangkok'}).format(new Date());
+    $('printSnapshot').innerHTML='<div class="pbrand">PERSONAL FINANCE PLAYGROUND</div><h1>'+esc(panel.querySelector('.section-head h2').textContent)+'</h1>'+
+      '<div class="pmeta">Scenario Snapshot · '+esc(today)+' (เวลาไทย)</div>'+
+      '<h2>ข้อมูลที่ใช้จำลอง</h2><div class="prows">'+inputs.map(pair=>row(pair[0],pair[1])).join('')+'</div>'+
+      '<h2>ผลลัพธ์</h2><div class="prows">'+outputs.map(pair=>row(pair[0],pair[1])).join('')+'</div>'+
+      '<div class="pnote">'+esc(notes[panel.id])+'</div>'+
+      '<div class="pfooter">รายงานจำลองส่วนตัว · สร้างบนอุปกรณ์นี้ · ไม่ใช่เอกสารรับรองทางการเงินหรือภาษี</div>';
+    window.print();
+  }
   const render={investment,car,savings,tradeoff,tax};
   const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carAnnualTax','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],tax:['taxSalary','taxBonus','taxAnnualActual','taxSso','taxLife','taxHealth','taxParents','taxPvd','taxRmf','taxExtra']};
   const groupFor=k=>Object.keys(groups).find(g=>groups[g].includes(k));
@@ -823,6 +895,7 @@
     window.scrollTo({top:0,behavior:'instant'});
   }
   document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>showTab(button.dataset.tab)));
+  document.querySelectorAll('[data-print]').forEach(button=>button.addEventListener('click',exportSnapshot));
   $('savStartMonth').value=monthKeyFromDate(new Date());
   $('savStartMonth').addEventListener('change',savings);
   $('savAddExpense').addEventListener('click',()=>{
