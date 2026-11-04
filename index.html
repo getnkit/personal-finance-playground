@@ -861,7 +861,7 @@
   function syncField(key,origin){
     const field=document.querySelector(`[data-field="${key}"]`);if(!field)return;
     const numeric=field.querySelector('input[type=number]'),slider=field.querySelector('input[type=range]');
-    if(numeric!==origin)numeric.value=String(state[key]);
+    if(numeric && numeric!==origin)numeric.value=String(state[key]);
     if(slider){slider.value=String(state[key]);const lo=Number(slider.min),hi=Number(slider.max);slider.style.background=`linear-gradient(to right,#0e9985 ${Math.max(0,Math.min(100,(state[key]-lo)/(hi-lo)*100))}%,#e3edf0 0)`;}
     const dropdown=field.querySelector('select');if(dropdown)dropdown.value=String(state[key]);
   }
