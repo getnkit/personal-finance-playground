@@ -155,6 +155,14 @@
       .sav-expense-row label:nth-child(2){grid-column:2}
       .sav-remove{justify-self:end}
     }
+
+    /* Tax planner: optional deductions, capped inputs and settlement. */
+    .tax-more{margin-top:17px;border:1px solid var(--line);border-radius:13px;padding:0 13px 14px;background:#fbfdff}
+    .tax-more summary{font-size:13px;font-weight:750;color:#234459;cursor:pointer;padding:13px 0}
+    .tax-more .fields{margin-top:10px}
+    .tax-note{font-size:11px;color:var(--sub);line-height:1.5;margin:7px 0 0}
+    .tax-more .field-input select{width:115px;max-width:38vw;border:1px solid #dce6ed;border-radius:9px;padding:7px;color:var(--ink);background:#fbfdff;font-weight:700}
+    .tax-actual .field-input input,.tax-withheld .field-input input{width:126px}
   </style>
 </head>
 <body>
@@ -356,9 +364,24 @@
             <div class="fields">
               <div class="field" data-field="taxSalary"><div class="field-line"><label for="taxSalary-num">เงินเดือนก่อนหักภาษี / เดือน</label><div class="field-input"><input id="taxSalary-num" type="number" min="0" max="1000000" step="1000" value="40000"><span>บาท</span></div></div><input aria-label="เงินเดือนก่อนหักภาษี / เดือน" type="range" min="0" max="200000" step="1000" value="40000"><div class="range-ends"><span>0</span><span>200,000</span></div></div>
               <div class="field" data-field="taxBonus"><div class="field-line"><label for="taxBonus-num">โบนัสรวมทั้งปี</label><div class="field-input"><input id="taxBonus-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input aria-label="โบนัสรวมทั้งปี" type="range" min="0" max="1000000" step="10000" value="0"><div class="range-ends"><span>0</span><span>1,000,000</span></div></div>
+
+              <div class="field tax-actual" data-field="taxAnnualActual"><div class="field-line"><label for="taxAnnualActual-num">รายได้รวมจริงทั้งปี (ถ้ามี)</label><div class="field-input"><input id="taxAnnualActual-num" type="number" min="0" max="100000000" step="1000" value="0"><span>บาท</span></div></div><p class="tax-note">กรอกยอดจากหนังสือ 50 ทวิ หรือยอดรวมจริงกรณีเงินเดือนเปลี่ยนระหว่างปี · ใส่ 0 เพื่อใช้เงินเดือน × 12 + โบนัส</p></div>
               <div class="field" data-field="taxSso"><div class="field-line"><label for="taxSso-num">ประกันสังคมที่จ่ายจริงทั้งปี</label><div class="field-input"><input id="taxSso-num" type="number" min="0" max="10500" step="125" value="10500"><span>บาท</span></div></div><input aria-label="ประกันสังคมที่จ่ายจริงทั้งปี" type="range" min="0" max="10500" step="125" value="10500"><div class="range-ends"><span>0</span><span>10,500</span></div><div class="addon-budget-note">ม.33 ปี 2569 จ่ายสูงสุด 875 บาท/เดือน · กรอกยอดที่จ่ายจริง</div></div>
-              <div class="field" data-field="taxExtra"><div class="field-line"><label for="taxExtra-num">ค่าลดหย่อนอื่นที่มีสิทธิใช้รวม</label><div class="field-input"><input id="taxExtra-num" type="number" min="0" max="10000000" step="1000" value="0"><span>บาท</span></div></div><input aria-label="ค่าลดหย่อนอื่นที่มีสิทธิใช้รวม" type="range" min="0" max="500000" step="1000" value="0"><div class="range-ends"><span>0</span><span>500,000</span></div><div class="addon-budget-note">ไม่รวมส่วนตัว 60,000 บาทและประกันสังคมที่กรอกข้างต้น · ต้องตรวจสอบสิทธิและเพดานเอง</div></div>
+
+              <div class="field tax-withheld"><div class="field-line"><label for="taxWithheldInput">ภาษีหัก ณ ที่จ่ายทั้งปี (ถ้าทราบ)</label><div class="field-input"><input id="taxWithheldInput" type="number" min="0" max="100000000" step="1" placeholder="ยังไม่กรอก" inputmode="decimal"><span>บาท</span></div></div><p class="tax-note">ใช้ยอดจากหนังสือ 50 ทวิ หรือยอดที่นายจ้างหักไว้จริง · เว้นว่างหากไม่ทราบ (0 หมายถึงถูกหัก 0 บาท)</p></div>
             </div>
+            <details class="tax-more"><summary>ค่าลดหย่อนเพิ่มเติม (ถ้ามี)</summary>
+              <p class="tax-note">ระบบจำกัดเพดานเบื้องต้นให้อัตโนมัติ แต่ผู้ใช้ต้องตรวจสิทธิและหลักฐานตามกฎหมายก่อนนำไปยื่นจริง</p>
+              <div class="fields">
+                <div class="field" data-field="taxLife"><div class="field-line"><label for="taxLife-num">ประกันชีวิตที่มีสิทธิใช้</label><div class="field-input"><input id="taxLife-num" type="number" min="0" max="10000000" step="1000" value="0"><span>บาท</span></div></div><p class="tax-note">ไม่เกิน 100,000 บาท รวมกับประกันสุขภาพตนเอง และต้องเป็นกรมธรรม์ที่เข้าเงื่อนไข</p></div>
+                <div class="field" data-field="taxHealth"><div class="field-line"><label for="taxHealth-num">ประกันสุขภาพตนเองที่มีสิทธิใช้</label><div class="field-input"><input id="taxHealth-num" type="number" min="0" max="10000000" step="1000" value="0"><span>บาท</span></div></div><p class="tax-note">ไม่เกิน 25,000 บาท และเมื่อรวมประกันชีวิตต้องไม่เกิน 100,000 บาท</p></div>
+                <div class="field" data-field="taxParents"><div class="field-line"><label for="taxParents-select">บิดามารดาที่มีสิทธิลดหย่อน</label><div class="field-input"><select id="taxParents-select"><option value="0">ไม่มี</option><option value="1">1 คน</option><option value="2">2 คน</option></select></div></div><p class="tax-note">คนละ 30,000 บาท · อายุ 60 ปีขึ้นไป รายได้ไม่เกิน 30,000 บาทต่อปี ต้องเป็นบุตรโดยชอบด้วยกฎหมายและมีเอกสาร ล.ย.03 ตามเงื่อนไข</p></div>
+                <div class="field" data-field="taxPvd"><div class="field-line"><label for="taxPvd-num">เงินสะสมกองทุนสำรองเลี้ยงชีพ</label><div class="field-input"><input id="taxPvd-num" type="number" min="0" max="10000000" step="1000" value="0"><span>บาท</span></div></div><p class="tax-note">คำนวณเพดานเบื้องต้นไม่เกิน 15% ของรายได้จากงาน และใช้วงเงินกลุ่มเกษียณรวมกับ RMF ไม่เกิน 500,000 บาท</p></div>
+                <div class="field" data-field="taxRmf"><div class="field-line"><label for="taxRmf-num">ค่าซื้อ RMF ที่มีสิทธิใช้</label><div class="field-input"><input id="taxRmf-num" type="number" min="0" max="10000000" step="1000" value="0"><span>บาท</span></div></div><p class="tax-note">ไม่เกิน 30% ของรายได้และเมื่อรวมกับกองทุนสำรองเลี้ยงชีพต้องไม่เกิน 500,000 บาท (หากมีกองทุนเกษียณอื่นร่วมด้วยต้องตรวจวงเงินรวมเพิ่มเติม)</p></div>
+                <div class="field" data-field="taxExtra"><div class="field-line"><label for="taxExtra-num">ค่าลดหย่อนอื่นที่ตรวจสิทธิแล้ว</label><div class="field-input"><input id="taxExtra-num" type="number" min="0" max="10000000" step="1000" value="0"><span>บาท</span></div></div><p class="tax-note">เช่น ดอกเบี้ยบ้าน / Thai ESG ตามสิทธิจริง · ช่องนี้ยังไม่ตรวจเพดานหรือเงื่อนไขเฉพาะ และห้ามรวมรายการที่กรอกด้านบนซ้ำ</p></div>
+              </div>
+              <p class="tax-note" id="taxCapNote" aria-live="polite"></p>
+            </details>
             <div class="button-row"><button class="btn" data-reset="tax" type="button">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card">
@@ -366,20 +389,21 @@
             <div class="metric-sub" id="taxMonthly">—</div>
             <div class="mini-grid">
               <div class="mini"><div class="k">เงินได้สุทธิที่ใช้คำนวณภาษี</div><strong id="taxTaxable">—</strong><div class="micro">หลังค่าใช้จ่ายและค่าลดหย่อน</div></div>
-              <div class="mini"><div class="k">ประหยัดภาษีจากค่าลดหย่อนอื่น</div><strong id="taxSaving">—</strong><div class="micro">เทียบกับไม่ใช้ค่าลดหย่อนอื่น</div></div>
+              <div class="mini"><div class="k">ประหยัดภาษีจากค่าลดหย่อนเพิ่มเติม</div><strong id="taxSaving">—</strong><div class="micro">เทียบกับก่อนใช้รายการเพิ่มเติม</div></div>
               <div class="mini"><div class="k">อัตราภาษีขั้นสูงสุด</div><strong id="taxBracket">—</strong><div class="micro">ไม่ใช่อัตราที่ใช้กับรายได้ทั้งหมด</div></div>
               <div class="mini"><div class="k">เงินเดือนและโบนัสรวมทั้งปี</div><strong id="taxGross">—</strong><div class="micro">ก่อนหักค่าใช้จ่าย</div></div>
             </div>
-            <p class="hint">ยังไม่หักภาษี ณ ที่จ่าย จึงไม่ใช่ยอดที่ต้องจ่ายเพิ่มหรือขอคืน</p>
+            <div class="mini-grid" id="taxSettlementBox" hidden><div class="mini"><div class="k" id="taxSettlementLabel">ภาษีที่ต้องจ่ายเพิ่ม / ขอคืน</div><strong id="taxSettlementValue">—</strong><div class="micro">ภาษีทั้งปี หักภาษี ณ ที่จ่ายที่กรอกไว้</div></div><div class="mini"><div class="k">ค่าลดหย่อนและรายการยกเว้นเพิ่มเติมที่นำมาใช้</div><strong id="taxAdditionalUsed">—</strong><div class="micro">หลังจำกัดเพดานที่รองรับ</div></div></div>
+            <p class="hint" id="taxWithheldHint">ยังไม่หักภาษี ณ ที่จ่าย จึงไม่ใช่ยอดที่ต้องจ่ายเพิ่มหรือขอคืน</p>
             <details><summary>สูตรและขอบเขต</summary><ul>
               <li>รายได้รวม = เงินเดือน × 12 + โบนัส</li>
               <li>ค่าใช้จ่ายเงินเดือน = 50% สูงสุด 100,000 บาท</li>
-              <li>หักลดหย่อนส่วนตัว 60,000 บาท ประกันสังคมตามที่จ่ายจริง และค่าลดหย่อนอื่นที่มีสิทธิใช้</li>
+              <li>หักลดหย่อนส่วนตัว 60,000 บาท ประกันสังคมตามที่จ่ายจริง และรายการที่มีสิทธิใช้หลังปรับเพดานที่รองรับ</li>
               <li>ภาษีคำนวณแบบขั้นบันได 0–35% · ส่วนประหยัดภาษีเทียบก่อนและหลังค่าลดหย่อนอื่น</li>
-              <li>ไม่ตรวจเพดานค่าลดหย่อนอื่น และไม่รองรับรายได้ประเภทอื่น การยื่นร่วม หรือกรณีพิเศษ</li>
+              <li>ตรวจเพดานประกันชีวิต/สุขภาพและกองทุนสำรองเลี้ยงชีพ/RMF ในขอบเขตที่ระบุ แต่ไม่รับรองสิทธิจริงของผู้ใช้ และไม่ตรวจเพดานค่าลดหย่อนช่อง "อื่น" · ไม่รองรับรายได้ประเภทอื่น การยื่นร่วม หรือกรณีพิเศษ</li>
             </ul>
             <p class="source">อ้างอิง: <a href="https://www.rd.go.th/5938.html" target="_blank" rel="noopener noreferrer">อัตราภาษี</a> · <a href="https://www.rd.go.th/556.html" target="_blank" rel="noopener noreferrer">ค่าใช้จ่าย</a> · <a href="https://www.rd.go.th/62777.html" target="_blank" rel="noopener noreferrer">ค่าลดหย่อน</a> (กรมสรรพากร)</p></details>
-            <div class="alert">สำหรับการวางแผนลดหย่อนและตรวจสอบตัวเลขเพื่อยื่นจริง ให้ใช้ <a href="https://www.itax.in.th/app/" target="_blank" rel="noopener noreferrer">iTAX</a> และตรวจเงื่อนไขจากกรมสรรพากร</div>
+            <div class="alert">เครื่องมือนี้เป็นประมาณการสำหรับเงินได้ ม.40(1) เท่านั้น ก่อนยื่นจริงตรวจเอกสาร 50 ทวิ สิทธิและเพดานลดหย่อนทั้งหมดกับกรมสรรพากร แล้วใช้ <a href="https://efiling.rd.go.th/rd-cms/" target="_blank" rel="noopener noreferrer">e-Filing</a> ยื่นแบบโดยตรง</div>
           </div>
         </div>
       </section>
@@ -401,9 +425,9 @@
     carEarlier:12,carPrice:400000,carFuel:2500,carParking:0,carInsurance:7000,carService:8000,carAnnualTax:1841,carTransport:0,carDep:10,carFinanceMode:'loan',carLoan:250000,carFlatRate:5,carLoanYears:1,
     savGoal:400000,savNow:0,savMonthly:30000,
     tradeCarPrice:400000,tradeCarNow:0,tradeMonthly:35000,tradeInvest:5000,tradeRate:6,
-    taxSalary:40000,taxBonus:0,taxSso:10500,taxExtra:0
+    taxSalary:40000,taxBonus:0,taxAnnualActual:0,taxSso:10500,taxLife:0,taxHealth:0,taxParents:0,taxPvd:0,taxRmf:0,taxExtra:0
   });
-  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[0,10],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,3e5],carService:[0,3e5],carAnnualTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],taxSalary:[0,1e6],taxBonus:[0,1e7],taxSso:[0,10500],taxExtra:[0,1e7]};
+  const bounds={invMonthly:[0,1e6],invYears:[1,60],invRate:[-10,20],invInitial:[0,1e9],invInflation:[0,15],invRetRate:[0,10],invWithdrawal:[0,1e6],carEarlier:[0,120],carPrice:[0,1e7],carFuel:[0,1e5],carParking:[0,1e5],carInsurance:[0,3e5],carService:[0,3e5],carAnnualTax:[0,1e5],carTransport:[0,1e5],carDep:[0,50],carLoan:[0,1e7],carFlatRate:[0,20],carLoanYears:[1,7],savGoal:[0,1e9],savNow:[0,1e9],savMonthly:[0,1e6],tradeCarPrice:[0,1e7],tradeCarNow:[0,1e7],tradeMonthly:[0,1e6],tradeInvest:[0,1e6],tradeRate:[-10,20],taxSalary:[0,1e6],taxBonus:[0,1e7],taxAnnualActual:[0,1e8],taxSso:[0,10500],taxLife:[0,1e7],taxHealth:[0,1e7],taxParents:[0,2],taxPvd:[0,1e7],taxRmf:[0,1e7],taxExtra:[0,1e7]};
   const state={...DEFAULT};
   const fmt=new Intl.NumberFormat('th-TH',{maximumFractionDigits:0});
   const num=(value)=>Number.isFinite(value)?fmt.format(Math.round(value)):'—';
@@ -411,7 +435,7 @@
   const short=(v)=>!Number.isFinite(v)?'—':(Math.abs(v)>=1e6?`${(v/1e6).toFixed(2)} ล้านบาท`:`${num(v)} บาท`);
   const $=(id)=>document.getElementById(id);
   const set=(id,value)=>{ const el=$(id); if(el) el.textContent=value; };
-  const integerFields=new Set(['invYears','carEarlier','carLoanYears']);
+  const integerFields=new Set(['invYears','carEarlier','carLoanYears','taxParents']);
   const clamp=(v,key)=>Math.min(bounds[key][1],Math.max(bounds[key][0],integerFields.has(key)?Math.round(v):v));
   const percent=(n)=>Number.isFinite(n)?`${n.toLocaleString('th-TH',{maximumFractionDigits:1})}%`:'—';
   const signed=(v,unit='')=>`${v>0?'+':''}${num(v)}${unit}`;
@@ -717,10 +741,20 @@
     }
     return due;
   }
+
+  // Personal salaried-income estimate; only supported caps are enforced.
   function tax(){
-    const {taxSalary:salary,taxBonus:bonus,taxSso:sso,taxExtra:extra}=state;
-    const gross=salary*12+bonus,expenses=Math.min(100000,gross*.5);
-    const base=Math.max(0,gross-expenses-60000-sso),taxable=Math.max(0,base-extra);
+    const {taxSalary:salary,taxBonus:bonus,taxAnnualActual:actual,taxSso:sso,taxLife:life,taxHealth:health,taxParents:parents,taxPvd:pvd,taxRmf:rmf,taxExtra:extra}=state;
+    const gross=actual>0?actual:salary*12+bonus;
+    const expenses=Math.min(100000,gross*.5);
+    const base=Math.max(0,gross-expenses-60000-sso);
+    const lifeUsed=Math.min(life,100000);
+    const healthUsed=Math.min(health,25000,Math.max(0,100000-lifeUsed));
+    const parentsUsed=parents*30000;
+    const pvdUsed=Math.min(pvd,gross*.15,500000);
+    const rmfUsed=Math.min(rmf,gross*.30,Math.max(0,500000-pvdUsed));
+    const additional=lifeUsed+healthUsed+parentsUsed+pvdUsed+rmfUsed+extra;
+    const taxable=Math.max(0,base-additional);
     const annual=progressiveTax(taxable);
     const bracket=taxable<=150000?0:taxBands.find(([ceiling])=>taxable<=ceiling)[1];
     set('taxAnnual',baht(annual));
@@ -729,19 +763,38 @@
     set('taxSaving',baht(Math.max(0,progressiveTax(base)-annual)));
     set('taxBracket',percent(bracket*100));
     set('taxGross',baht(gross));
+    set('taxAdditionalUsed',baht(additional));
+    const withheldRaw=$('taxWithheldInput').value.trim();
+    const hasWithheld=withheldRaw!==''&&Number.isFinite(Number(withheldRaw))&&Number(withheldRaw)>=0;
+    $('taxSettlementBox').hidden=!hasWithheld;
+    if(hasWithheld){
+      const balance=annual-Number(withheldRaw);
+      set('taxSettlementLabel',balance>0.5?'คาดว่าต้องจ่ายเพิ่ม':balance< -0.5?'คาดว่าขอคืน':'ภาษีคำนวณและยอดที่หักไว้เท่ากัน');
+      set('taxSettlementValue',baht(Math.abs(balance)));
+      set('taxWithheldHint','ผลต่างเป็นเพียงประมาณการ ต้องตรวจยอดภาษีหัก ณ ที่จ่ายและสิทธิลดหย่อนจากเอกสารจริงก่อนยื่น');
+    }else{
+      set('taxWithheldHint','ยังไม่หักภาษี ณ ที่จ่าย จึงไม่ใช่ยอดที่ต้องจ่ายเพิ่มหรือขอคืน');
+    }
+    const capped=[];
+    if(life>lifeUsed)capped.push('ประกันชีวิต');
+    if(health>healthUsed)capped.push('ประกันสุขภาพ');
+    if(pvd>pvdUsed)capped.push('กองทุนสำรองเลี้ยงชีพ');
+    if(rmf>rmfUsed)capped.push('RMF');
+    set('taxCapNote',(capped.length?'ระบบปรับยอดให้ไม่เกินเพดานเบื้องต้น: '+capped.join(', ')+' · ':'')+(extra>0?'ค่าลดหย่อนอื่นยังไม่ตรวจเพดานหรือสิทธิ · ':'')+'กรณีมีกองทุนเกษียณอื่นหรือค่าลดหย่อนพิเศษ ต้องตรวจเพดานรวมด้วยตนเอง');
   }
   const render={investment,car,savings,tradeoff,tax};
-  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carAnnualTax','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],tax:['taxSalary','taxBonus','taxSso','taxExtra']};
+  const groups={investment:['invMonthly','invYears','invRate','invInitial','invInflation','invRetRate','invWithdrawal'],car:['carEarlier','carPrice','carFuel','carParking','carInsurance','carService','carAnnualTax','carTransport','carDep','carFinanceMode','carLoan','carFlatRate','carLoanYears'],savings:['savGoal','savNow','savMonthly'],tradeoff:['tradeCarPrice','tradeCarNow','tradeMonthly','tradeInvest','tradeRate'],tax:['taxSalary','taxBonus','taxAnnualActual','taxSso','taxLife','taxHealth','taxParents','taxPvd','taxRmf','taxExtra']};
   const groupFor=k=>Object.keys(groups).find(g=>groups[g].includes(k));
   function syncField(key,origin){
     const field=document.querySelector(`[data-field="${key}"]`);if(!field)return;
     const numeric=field.querySelector('input[type=number]'),slider=field.querySelector('input[type=range]');
     if(numeric!==origin)numeric.value=String(state[key]);
     if(slider){slider.value=String(state[key]);const lo=Number(slider.min),hi=Number(slider.max);slider.style.background=`linear-gradient(to right,#0e9985 ${Math.max(0,Math.min(100,(state[key]-lo)/(hi-lo)*100))}%,#e3edf0 0)`;}
+    const dropdown=field.querySelector('select');if(dropdown)dropdown.value=String(state[key]);
   }
   document.querySelectorAll('[data-field]').forEach(field=>{
     const key=field.dataset.field;
-    for(const input of field.querySelectorAll('input')){
+    for(const input of field.querySelectorAll('input,select')){
       input.addEventListener('input',()=>{
         if(input.value.trim()==='')return;
         const raw=Number(input.value);if(!Number.isFinite(raw))return;
@@ -753,8 +806,10 @@
     syncField(key);
   });
   $('carFinanceMode').addEventListener('change',event=>{state.carFinanceMode=event.target.value;car();});
+  $('taxWithheldInput').addEventListener('input',tax);
   document.querySelectorAll('[data-reset]').forEach(button=>button.addEventListener('click',()=>{
     const group=button.dataset.reset;groups[group].forEach(key=>{state[key]=DEFAULT[key];syncField(key)});
+    if(group==='tax')$('taxWithheldInput').value='';
     if(group==='savings'){
       plannedExpenses.length=0;
       $('savStartMonth').value=monthKeyFromDate(new Date());
