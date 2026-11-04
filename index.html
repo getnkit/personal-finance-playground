@@ -165,24 +165,50 @@
     .tax-actual .field-input input,.tax-withheld .field-input input{width:126px}
 
     .export-btn{white-space:nowrap;flex-shrink:0;border-color:#b6dcd5;color:#0b7368;background:#f5fcfa}
-    #printSnapshot{display:none}
+    .print-meta{display:none}
     @media(max-width:520px){.export-btn{font-size:11px;padding:8px 9px}.section-head h2{font-size:20px}}
-    @page{size:A4;margin:14mm}
+    @page{size:A4 portrait;margin:12mm}
+    /* Reuse the live UI rather than rebuilding the results as square rows. */
     @media print{
-      body{margin:0!important;background:#fff!important}
-      body > :not(#printSnapshot){display:none!important}
-      #printSnapshot{display:block!important;color:#1c2b3b;font:12px/1.5 -apple-system,BlinkMacSystemFont,"Sarabun",Tahoma,sans-serif}
-      #printSnapshot *{box-sizing:border-box}
-      #printSnapshot .pbrand{color:#147b70;font-size:12px;font-weight:750}
-      #printSnapshot h1{font-size:24px;margin:5px 0}
-      #printSnapshot h2{font-size:14px;margin:19px 0 8px}
-      #printSnapshot .pmeta{font-size:11px;color:#607588;border-bottom:2px solid #147b70;padding-bottom:11px}
-      #printSnapshot .prows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-      #printSnapshot .prow{padding:8px 10px;border:1px solid #dce4e8;border-radius:8px;break-inside:avoid}
-      #printSnapshot .plabel{font-size:10px;color:#647687}
-      #printSnapshot .pvalue{font-size:14px;font-weight:700;margin-top:3px;overflow-wrap:anywhere}
-      #printSnapshot .pnote{white-space:pre-line;font-size:11px;margin-top:15px;border-left:3px solid #8aabb2;background:#f2f6f7;padding:9px 10px}
-      #printSnapshot .pfooter{font-size:10px;color:#667787;margin-top:18px;border-top:1px solid #dce4e8;padding-top:9px}
+      html,body{background:#fff!important;color:var(--ink)!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+      body{margin:0!important;font-size:12px!important}
+      .sitebar{display:flex!important;padding:10px 14px!important;margin:0 0 15px!important;border-radius:12px;background:var(--navy)!important;color:#fff!important;box-shadow:none!important}
+      .shell{max-width:none!important;width:100%!important;padding:0!important;margin:0!important}
+      .intro,.tabs,.bottom-tabs,.footer,.export-btn,.button-row,.sav-remove,.sav-plan-top button,
+      input[type=range],.range-ends,.addon summary::after{display:none!important}
+      main{display:block!important}
+      main .panel[hidden]{display:none!important}
+      main .panel:not([hidden]){display:block!important}
+      .section-head{display:block!important;margin:0 0 12px!important}
+      .section-head h2{font-size:22px!important;line-height:1.3!important;color:#153f42!important}
+      .section-head p{font-size:12px!important;margin-top:3px!important}
+      .section-head .print-meta{display:block!important;font-size:10px!important;color:#617087!important;margin-top:5px!important}
+      /* Keep the original card hierarchy with legible A4 portrait proportions. */
+      .layout{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;align-items:start!important}
+      .card{border:1px solid #dde8e5!important;border-radius:16px!important;box-shadow:none!important;background:#fff!important}
+      .inputs-card,.results-card{padding:15px 17px!important;min-width:0!important;break-inside:auto}
+      .card-label{margin-bottom:7px!important}
+      .fields{gap:12px!important;margin-top:10px!important}
+      .field{gap:4px!important;break-inside:avoid}
+      .field-line{flex-wrap:wrap!important;gap:7px!important}
+      .field-input input,.field-input select,.car-finance-mode select,.sav-start input{max-width:none!important;box-shadow:none!important;background:#fff!important;color:#17263b!important}
+      .field-input input[type=number]{width:115px!important}
+      .sav-expense-row{break-inside:avoid}
+      .mini-grid{gap:9px!important;margin:12px 0!important}
+      .mini{padding:12px!important;background:#f5f9f8!important;border:1px solid #e4eeec!important;border-radius:12px!important;break-inside:avoid}
+      .metric-primary{font-size:34px!important}
+      .chartwrap,.svgchart,.bar-row,.retirement-forecast,.addon-output{break-inside:avoid}
+      .svgchart{max-width:100%!important;height:auto!important}
+      .alert,.hint,.tax-note,.source{color:#526477!important}
+      .addon{margin-top:12px!important;break-inside:auto}
+      .addon summary{padding:12px 15px!important;break-inside:avoid}
+      .addon-body{padding:13px 15px!important}
+      .addon[open] .addon-body{display:block!important}
+      details:not([open]) > :not(summary){display:none!important}
+      .tax-more{break-inside:auto}
+      .tax-more .fields{gap:10px!important}
+      .sav-plan{break-inside:auto}
+      .print-meta,.card,.mini,.alert,.retirement-forecast,.addon-output,.stack,.bar-bg{print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
     }
   </style>
 </head>
@@ -438,7 +464,6 @@
     <button class="tab" data-tab="tax" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tab-text">Tax</span></button>
   </nav>
   <noscript><div style="max-width:600px;margin:20px auto;background:#fff3d9;padding:14px;border-radius:12px">โปรดเปิด JavaScript เพื่อใช้เครื่องคำนวณ</div></noscript>
-<div id="printSnapshot" aria-hidden="true"></div>
 <script>
 (() => {
   'use strict';
@@ -805,54 +830,32 @@
     set('taxCapNote',(capped.length?'ระบบปรับยอดให้ไม่เกินเพดานเบื้องต้น: '+capped.join(', ')+' · ':'')+(extra>0?'ค่าลดหย่อนอื่นยังไม่ตรวจเพดานหรือสิทธิ · ':'')+'กรณีมีกองทุนเกษียณอื่นหรือค่าลดหย่อนพิเศษ ต้องตรวจเพดานรวมด้วยตนเอง');
   }
 
-  // Client-side report preview via browser print / Save as PDF. No server or storage.
+  // Print the visible UI itself: same cards, values and SVG charts as on screen.
+  const reportNames={
+    investment:'Investment_Retirement',
+    car:'Car_Purchase',
+    savings:'Savings_Goals',
+    tax:'Personal_Income_Tax'
+  };
+  const originalPageTitle=document.title;
+  window.addEventListener('afterprint',()=>{document.title=originalPageTitle;});
   function exportSnapshot(){
     const panel=document.querySelector('main .panel:not([hidden])');
     if(!panel)return;
-    const esc=v=>String(v===undefined||v===null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    const row=(label,val)=>'<div class="prow"><div class="plabel">'+esc(label)+'</div><div class="pvalue">'+esc(val)+'</div></div>';
-    const inputs=[];
-    panel.querySelectorAll('.inputs-card .field,#carInvestAddon[open] .field').forEach(f=>{
-      if(f.closest('[hidden]'))return;
-      const el=f.querySelector('.field-input input[type=number],.field-input input[type=month],.field-input select,select');
-      const lab=f.querySelector('.field-line label,label');
-      if(!el||!lab||el.value==='')return;
-      if(f.closest('.tax-more')&&el.type==='number'&&Number(el.value)===0)return;
-      if(f.dataset.field==='taxAnnualActual'&&Number(el.value)===0)return;
-      const unit=f.querySelector('.field-input span');
-      const val=el.tagName==='SELECT'?el.options[el.selectedIndex].textContent:el.type==='number'?num(Number(el.value))+(unit?' '+unit.textContent:''):el.value;
-      inputs.push([lab.textContent.trim(),val]);
-    });
-    if(panel.id==='car'){const choice=$('carFinanceMode');inputs.push(['วิธีซื้อรถ',choice.options[choice.selectedIndex].textContent]);}
-    if(panel.id==='savings')plannedExpenses.filter(e=>e.amount>0).forEach(e=>inputs.push(['รายจ่ายพิเศษ · '+(e.label.trim()||'ไม่ระบุชื่อ')+' · '+e.month,baht(e.amount)]));
-    const fields={
-      investment:[['เงินสะสมปลายช่วงลงทุน','invTotal'],['สรุปเงินสะสม','invSummary'],['เงินต้นสะสม','invPrincipal'],['ผลตอบแทน','invGrowth'],['กำลังซื้อวันนี้','invReal'],['เงินถอนต่อเดือน','invWithdraw'],['กำลังซื้อของเงินถอน','invWithdrawReal'],['เงินพอใช้หลังเกษียณ','invRunway'],['รายละเอียดหลังเกษียณ','invRunwaySummary'],['กรณีผลตอบแทนต่ำกว่าคาด','invAltRate'],['พอร์ตกรณีต่ำกว่าคาด','invAltTotal'],['พอร์ตที่ลดลง','invDiff'],['เงินพอใช้หลังเกษียณกรณีต่ำกว่าคาด','invAltRunway'],['เงินถอนต่อเดือนเพื่อให้อยู่ได้นานเท่าเดิม','invAltWithdrawal']],
-      car:[['ต้นทุนซื้อรถก่อนแผน','carEconomic'],['สรุปต้นทุน','carSummary'],['ค่าใช้จ่ายช่วงซื้อก่อน','carRunning'],['ค่าเสื่อม','carDepLoss'],['ค่างวด','carLoanPayment'],['เงินดาวน์','carLoanDown'],['ดอกเบี้ยรวม','carLoanTotalInterest']],
-      savings:[['เวลาถึงเป้าหมาย','savTime'],['คาดว่าจะถึงเป้าหมาย','savFinishMonth'],['ถ้าไม่มีรายจ่ายพิเศษ','savBaseFinish'],['ผลของรายจ่ายพิเศษ','savDelay']],
-      tax:[['ภาษีเงินได้ทั้งปี','taxAnnual'],['เฉลี่ยต่อเดือน','taxMonthly'],['รายได้ทั้งปี','taxGross'],['เงินได้สุทธิ','taxTaxable'],['ประหยัดภาษีจากค่าลดหย่อนเพิ่มเติม','taxSaving'],['อัตราภาษีขั้นสูงสุด','taxBracket'],['ค่าลดหย่อนเพิ่มเติมที่ใช้','taxAdditionalUsed'],['ภาษีที่ต้องจ่ายเพิ่มหรือขอคืน','taxSettlementValue']]
-    };
-    const outputs=[];
-    fields[panel.id].forEach(pair=>{
-      const el=$(pair[1]);if(!el||!el.textContent.trim()||el.textContent.trim()==='—')return;
-      if(el.closest('[hidden]')&&pair[1]!=='taxAdditionalUsed')return;
-      outputs.push([pair[1]==='taxSettlementValue'?$('taxSettlementLabel').textContent:pair[0],el.textContent.trim()]);
-    });
-    if(panel.id==='savings'&&$('carInvestAddon').open){
-      [['แผน A เทียบกับ B','tradeDelay'],['รถตามแผน A','tradeA'],['รถตามแผน B','tradeB'],['พอร์ตแผน A','tradePortA'],['พอร์ตแผน B','tradePortB'],['ส่วนต่างพอร์ต','tradeDiff']].forEach(pair=>{const el=$(pair[1]);if(el&&el.textContent.trim()!=='—')outputs.push([pair[0],el.textContent.trim()]);});
-    }
-    const notes={
-      investment:'ผลตอบแทนและเงินเฟ้อเป็นสมมติฐาน ไม่รับประกันผลลงทุนจริง',
-      car:'ราคารถ ค่าเสื่อม และต้นทุนเป็นประมาณการตามตัวเลขที่กรอก',
-      savings:'เป้าหมายเงินสดคงที่ ไม่รวมผลตอบแทนหรือเงินเฟ้อ รายจ่ายพิเศษหักจากเงินออมของเดือนนั้นเท่านั้น',
-      tax:'ประมาณการสำหรับเงินได้ ม.40(1) ต้องตรวจเอกสาร 50 ทวิ สิทธิและเพดานลดหย่อนทั้งหมดก่อนยื่นจริง'
-    };
-    const today=new Intl.DateTimeFormat('th-TH',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Bangkok'}).format(new Date());
-    $('printSnapshot').innerHTML='<div class="pbrand">PERSONAL FINANCE PLAYGROUND</div><h1>'+esc(panel.querySelector('.section-head h2').textContent)+'</h1>'+
-      '<div class="pmeta">Scenario Snapshot · '+esc(today)+' (เวลาไทย)</div>'+
-      '<h2>ข้อมูลที่ใช้จำลอง</h2><div class="prows">'+inputs.map(pair=>row(pair[0],pair[1])).join('')+'</div>'+
-      '<h2>ผลลัพธ์</h2><div class="prows">'+outputs.map(pair=>row(pair[0],pair[1])).join('')+'</div>'+
-      '<div class="pnote">'+esc(notes[panel.id])+'</div>'+
-      '<div class="pfooter">รายงานจำลองส่วนตัว · สร้างบนอุปกรณ์นี้ · ไม่ใช่เอกสารรับรองทางการเงินหรือภาษี</div>';
+    const parts=new Intl.DateTimeFormat('en-GB',{
+      timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'
+    }).formatToParts(new Date());
+    const part=name=>parts.find(item=>item.type===name)?.value||'00';
+    const stamp=part('year')+part('month')+part('day')+'_'+part('hour')+part('minute')+part('second');
+    document.title=reportNames[panel.id]+'_'+stamp;
+    const heading=panel.querySelector('.section-head > div');
+    let meta=heading.querySelector('.print-meta');
+    if(!meta){meta=document.createElement('p');meta.className='print-meta';heading.appendChild(meta);}
+    meta.textContent='Scenario Snapshot · '+new Intl.DateTimeFormat('th-TH',{
+      timeZone:'Asia/Bangkok',day:'numeric',month:'long',year:'numeric',
+      hour:'2-digit',minute:'2-digit'
+    }).format(new Date())+' (เวลาไทย)';
     window.print();
   }
   const render={investment,car,savings,tradeoff,tax};
