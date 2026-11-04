@@ -13,7 +13,7 @@ Mobile-first, free, standalone financial *what-if* simulator. Built with a singl
 
 ## Export to PDF
 
-Each planner has an **Export PDF** button. It prepares a concise snapshot of the current assumptions and results and opens your browser's print dialog. Choose **Save as PDF** (or the device's equivalent). It does not upload or store the report.
+Each planner has an **Export PDF** button. It prints the **actual active planner UI** (its colored result cards, current input values, and charts) on A4 pages, with light print-only spacing adjustments. Controls such as tabs, sliders, and action buttons are hidden in print. Use the browser's **Save as PDF** option. The page title is temporarily changed to a mode-specific timestamp so browsers that use document titles can suggest distinct filenames. Final filename behavior varies by browser, especially on iOS. No financial data is uploaded or stored.
 
 ## Scope and privacy
 
