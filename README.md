@@ -9,7 +9,7 @@ Mobile-first, free, standalone financial *what-if* simulator. Built with a singl
 - **Investment & Retirement:** contributions, compound growth, inflation-adjusted values, retirement withdrawals, and lower-return sensitivity.
 - **Car Purchase Timing:** incremental costs of purchasing a car early, including an optional used-car loan.
 - **Savings & Goals:** cash savings targets, dated planned expenses, and a separate **Car Fund First vs Car Fund + Investing** comparison.
-- **Personal Income Tax (Tax):** Thai tax year **2569**, scoped to salary / bonus income (Section 40(1)). Supports actual annual employment income, social security, basic personal deduction, eligible life/health insurance, eligible parents, provident fund, RMF, and tax withheld. The additional deduction field is **not** automatically verified.
+- **Tax Planning (Tax):** Thai tax year **2569**, scoped to salary / bonus income (Section 40(1)). Supports actual annual employment income, social security, basic personal deduction, eligible life/health insurance, eligible parents, provident fund, RMF, and tax withheld. The additional deduction field is **not** automatically verified.
 
 ## Export to PDF
 
