@@ -28,6 +28,7 @@ async function check(engine,name,options){
    assert.match(await page.locator('#printSnapshot').innerHTML(),/Scenario Snapshot/,name+': PDF snapshot '+mode);
  }
  await page.locator('.bottom-tabs .tab[data-tab="tax"]').click();
+ await page.locator('.tax-more summary').click();
  await page.locator('#taxParents-select').selectOption('1');
  await page.locator('#taxWithheldInput').fill('10000');
  assert.equal(await page.locator('#taxSettlementBox').evaluate(el=>!el.hidden),true,name+': settlement visible');
