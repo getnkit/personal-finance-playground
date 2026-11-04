@@ -1,0 +1,24 @@
+name: UI and Tax smoke checks
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install test-only DOM runtime
+        run: npm install --no-save --no-package-lock --ignore-scripts jsdom@26
+      - name: Frontend interactions and PDF export
+        run: node tests/ui-smoke.cjs
+      - name: Tax calculation regression
+        run: node tests/tax-regression.cjs
