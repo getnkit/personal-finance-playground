@@ -33,7 +33,11 @@ for(const tab of ['car','savings','tax','investment']){
   printBtn.click();
   clean();
   assert.equal(dom.window.__printed,printed+1,'Export invokes browser print for '+tab);
-  assert.match(document.getElementById('printSnapshot').innerHTML,/Scenario Snapshot/,'Export snapshot for '+tab);
+  const meta=document.querySelector('#'+tab+' .section-head .print-meta');
+  assert.match(meta?.textContent||'',/Scenario Snapshot/,'Print date for '+tab);
+  assert.match(document.title,/_[0-9]{8}_[0-9]{6}$/,'Timestamp-based print title for '+tab);
+  assert.ok(document.querySelector('#'+tab+' .results-card'),'Live result card for '+tab);
+  assert.equal(document.getElementById('printSnapshot'),null,'No duplicate square-box report');
 }
 document.querySelector('.tab[data-tab="tax"]').click();
 const parent=document.getElementById('taxParents-select');
