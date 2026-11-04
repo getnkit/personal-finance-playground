@@ -823,6 +823,7 @@
       const val=el.tagName==='SELECT'?el.options[el.selectedIndex].textContent:el.type==='number'?num(Number(el.value))+(unit?' '+unit.textContent:''):el.value;
       inputs.push([lab.textContent.trim(),val]);
     });
+    if(panel.id==='car'){const choice=$('carFinanceMode');inputs.push(['วิธีซื้อรถ',choice.options[choice.selectedIndex].textContent]);}
     if(panel.id==='savings')plannedExpenses.filter(e=>e.amount>0).forEach(e=>inputs.push(['รายจ่ายพิเศษ · '+(e.label.trim()||'ไม่ระบุชื่อ')+' · '+e.month,baht(e.amount)]));
     const fields={
       investment:[['เงินสะสมปลายช่วงลงทุน','invTotal'],['สรุปเงินสะสม','invSummary'],['เงินต้นสะสม','invPrincipal'],['ผลตอบแทน','invGrowth'],['กำลังซื้อวันนี้','invReal'],['เงินถอนต่อเดือน','invWithdraw'],['กำลังซื้อของเงินถอน','invWithdrawReal'],['เงินพอใช้หลังเกษียณ','invRunway'],['รายละเอียดหลังเกษียณ','invRunwaySummary']],
