@@ -22,3 +22,9 @@ jobs:
         run: node tests/ui-smoke.cjs
       - name: Tax calculation regression
         run: node tests/tax-regression.cjs
+      - name: Install real browser test runtime
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+      - name: Install browser engines
+        run: npx playwright install --with-deps chromium webkit
+      - name: Mobile Chromium and iPhone WebKit smoke tests
+        run: node tests/browser-smoke.cjs
