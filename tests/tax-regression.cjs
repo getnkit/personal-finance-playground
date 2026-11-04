@@ -10,7 +10,7 @@ const assert = require('node:assert/strict');
 
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const start = html.indexOf('const taxBands=');
-const end = html.indexOf('// Client-side report preview', start);
+const end = html.indexOf('// Print the visible UI itself', start);
 assert.ok(start >= 0 && end > start, 'Tax calculation source was not found');
 const source = html.slice(start, end);
 
