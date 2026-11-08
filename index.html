@@ -174,6 +174,18 @@
     .print-meta{display:none}
     @media(max-width:520px){.export-btn{font-size:11px;padding:8px 9px}.section-head h2{font-size:20px}}
     .withdraw-hint{font-size:11px;line-height:1.5;margin:5px 0 0;color:var(--teal-dark)}
+    .field.is-overridden{opacity:.52}
+    .tax-override-note{color:#0b7368;font-weight:650}
+    @media(max-width:760px){
+      /* 16px prevents Safari auto-zoom while keeping pinch-to-zoom available. */
+      input:not([type="range"]),select{font-size:16px!important}
+      .intro{min-height:0;padding:12px 15px;margin-bottom:10px}
+      .intro .eyebrow{display:none}
+      .intro h1{font-size:18px;line-height:1.32;margin:0 0 3px}
+      .intro p{font-size:11px;line-height:1.4}
+      .intro .privacy-note{font-size:10px;margin-top:6px}
+      .section-head{scroll-margin-top:12px}
+    }
     @page{size:A4 portrait;margin:12mm}
     /* Reuse the live UI rather than rebuilding the results as square rows. */
     @media print{
@@ -419,7 +431,7 @@
               <div class="field" data-field="taxSalary"><div class="field-line"><label for="taxSalary-num">เงินเดือนก่อนหักภาษี / เดือน</label><div class="field-input"><input id="taxSalary-num" type="number" min="0" max="1000000" step="1000" value="40000"><span>บาท</span></div></div><input aria-label="เงินเดือนก่อนหักภาษี / เดือน" type="range" min="0" max="200000" step="1000" value="40000"><div class="range-ends"><span>0</span><span>200,000</span></div></div>
               <div class="field" data-field="taxBonus"><div class="field-line"><label for="taxBonus-num">โบนัสรวมทั้งปี</label><div class="field-input"><input id="taxBonus-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input aria-label="โบนัสรวมทั้งปี" type="range" min="0" max="1000000" step="10000" value="0"><div class="range-ends"><span>0</span><span>1,000,000</span></div></div>
 
-              <div class="field tax-actual" data-field="taxAnnualActual"><div class="field-line"><label for="taxAnnualActual-num">รายได้รวมจริงทั้งปี (ถ้ามี)</label><div class="field-input"><input id="taxAnnualActual-num" type="number" min="0" max="100000000" step="1000" value="0"><span>บาท</span></div></div><p class="tax-note">กรอกยอดจากหนังสือ 50 ทวิ หรือยอดรวมจริงกรณีเงินเดือนเปลี่ยนระหว่างปี · ใส่ 0 เพื่อใช้เงินเดือน × 12 + โบนัส</p></div>
+              <div class="field tax-actual" data-field="taxAnnualActual"><div class="field-line"><label for="taxAnnualActual-num">รายได้รวมจริงทั้งปี (ถ้ามี)</label><div class="field-input"><input id="taxAnnualActual-num" type="number" min="0" max="100000000" step="1000" value="0"><span>บาท</span></div></div><p class="tax-note">กรอกยอดจากหนังสือ 50 ทวิ หรือยอดรวมจริงกรณีเงินเดือนเปลี่ยนระหว่างปี · ใส่ 0 เพื่อใช้เงินเดือน × 12 + โบนัส</p><p class="tax-note tax-override-note" id="taxOverrideNotice" hidden>กำลังใช้รายได้รวมจริงทั้งปีในการคำนวณ · ช่องเงินเดือนและโบนัสไม่ถูกนำมาคิด</p></div>
               <div class="field" data-field="taxSso"><div class="field-line"><label for="taxSso-num">ประกันสังคมที่จ่ายจริงทั้งปี</label><div class="field-input"><input id="taxSso-num" type="number" min="0" max="10500" step="125" value="10500"><span>บาท</span></div></div><input aria-label="ประกันสังคมที่จ่ายจริงทั้งปี" type="range" min="0" max="10500" step="125" value="10500"><div class="range-ends"><span>0</span><span>10,500</span></div><div class="addon-budget-note">ม.33 ปี 2569 จ่ายสูงสุด 875 บาท/เดือน · กรอกยอดที่จ่ายจริง</div></div>
 
               <div class="field tax-withheld"><div class="field-line"><label for="taxWithheldInput">ภาษีหัก ณ ที่จ่ายทั้งปี (ถ้าทราบ)</label><div class="field-input"><input id="taxWithheldInput" type="number" min="0" max="100000000" step="1" placeholder="ยังไม่กรอก" inputmode="decimal"><span>บาท</span></div></div><p class="tax-note">ใช้ยอดจากหนังสือ 50 ทวิ หรือยอดที่นายจ้างหักไว้จริง · เว้นว่างหากไม่ทราบ (0 หมายถึงถูกหัก 0 บาท)</p></div>
@@ -493,7 +505,7 @@
   const clamp=(v,key)=>Math.min(bounds[key][1],Math.max(bounds[key][0],integerFields.has(key)?Math.round(v):v));
   const percent=(n)=>Number.isFinite(n)?`${n.toLocaleString('th-TH',{maximumFractionDigits:1})}%`:'—';
   const signed=(v,unit='')=>`${v>0?'+':''}${num(v)}${unit}`;
-  const visibleMonths=(months)=>!Number.isFinite(months)?'ไปไม่ถึงเป้า':months===0?'ถึงแล้ว':months>=12?`${Math.floor(months/12)} ปี ${months%12} เดือน`:`${months} เดือน`;
+  const visibleMonths=(months)=>!Number.isFinite(months)?'ไปไม่ถึงเป้า':months===0?'ถึงแล้ว':months>=12?`${Math.floor(months/12)} ปี${months%12?` ${months%12} เดือน`:''}`:`${months} เดือน`;
 
   // Ordinary annuity: contributions at end of each month; nominal annual rate divided by 12.
   function futureValue(principal,monthly,annualPercent,years){
@@ -829,6 +841,15 @@
   function tax(){
     const {taxSalary:salary,taxBonus:bonus,taxAnnualActual:actual,taxSso:sso,taxLife:life,taxHealth:health,taxParents:parents,taxPvd:pvd,taxRmf:rmf,taxExtra:extra}=state;
     const gross=actual>0?actual:salary*12+bonus;
+    if(typeof document!=='undefined'){
+      const notice=$('taxOverrideNotice');if(notice)notice.hidden=actual<=0;
+      for(const key of ['taxSalary','taxBonus']){
+        const field=document.querySelector(`[data-field="${key}"]`);
+        if(!field)continue;
+        field.classList.toggle('is-overridden',actual>0);
+        field.querySelectorAll('input').forEach(control=>{control.disabled=actual>0;});
+      }
+    }
     const expenses=Math.min(100000,gross*.5);
     const base=Math.max(0,gross-expenses-60000-sso);
     const lifeUsed=Math.min(life,100000);
@@ -912,7 +933,7 @@
         const raw=Number(input.value);if(!Number.isFinite(raw))return;
         state[key]=clamp(raw,key);syncField(key,input);render[groupFor(key)]();
       });
-      input.addEventListener('change',()=>{if(!Number.isFinite(Number(input.value))||input.value.trim()==='')state[key]=DEFAULT[key];syncField(key);render[groupFor(key)]()});
+      input.addEventListener('change',()=>{if(input.value.trim()!==''&&Number.isFinite(Number(input.value)))state[key]=clamp(Number(input.value),key);syncField(key);render[groupFor(key)]()});
       input.addEventListener('blur',()=>{syncField(key);render[groupFor(key)]()});
     }
     syncField(key);
@@ -932,7 +953,13 @@
   function showTab(name){
     document.querySelectorAll('.panel').forEach(panel=>panel.hidden=panel.id!==name);
     document.querySelectorAll('[data-tab]').forEach(button=>button.setAttribute('aria-selected',String(button.dataset.tab===name)));
-    window.scrollTo({top:0,behavior:'instant'});
+    // Mobile navigation goes to the active planner heading, not the repeated hero.
+    const target=document.querySelector(`#${name} .section-head`);
+    if(window.matchMedia&&window.matchMedia('(max-width:760px)').matches&&target&&typeof target.scrollIntoView==='function'){
+      target.scrollIntoView({block:'start',behavior:'auto'});
+    }else{
+      window.scrollTo({top:0,behavior:'instant'});
+    }
   }
   document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>showTab(button.dataset.tab)));
   document.querySelectorAll('[data-print]').forEach(button=>button.addEventListener('click',exportSnapshot));
