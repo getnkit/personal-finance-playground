@@ -7,6 +7,13 @@ Mobile-first, free, standalone financial *what-if* simulator. Built with a singl
 
 **Live site:** https://getnkit.github.io/personal-finance-playground/
 
+## Calculation and mobile UX notes
+
+- Retirement withdrawal input represents a monthly budget in **today's purchasing power**; Finance Lab applies inflation through the accumulation period to obtain the amount required at retirement. The main and downside runway estimates use that retirement-start amount.
+- Flat-rate car financing still determines the displayed monthly payment and total contractual interest. Only the **economic allocation of interest during the earlier-purchase window** uses an implied effective rate. This is not a lender's early-settlement amount.
+- On mobile, input text is at least 16px, the hero is more compact, and switching planners scrolls to the selected section. Empty number inputs revert to their last valid value. An annual tax income override is indicated explicitly.
+- No user scenario data is stored or transmitted, and no sticky result bar was added.
+
 ## Four planners
 
 - **Investment & Retirement:** contributions, compound growth, inflation-adjusted values, retirement withdrawals, and lower-return sensitivity.
