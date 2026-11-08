@@ -108,6 +108,9 @@ assert.equal(document.getElementById('tradeMonthB').textContent,'ยังระ
 invest.value='40000';invest.dispatchEvent(new Event('input',{bubbles:true}));
 assert.equal(document.getElementById('tradeMonthA').textContent,'—','Invalid budget clears A date');
 assert.equal(document.getElementById('tradeMonthB').textContent,'—','Invalid budget clears B date');
+// Restore a valid scenario and the intended Nov 2026 start after invalid-input checks.
+invest.value='5000';invest.dispatchEvent(new Event('input',{bubbles:true}));
+tradeMonth.value='2026-11';tradeMonth.dispatchEvent(new Event('change',{bubbles:true}));
 // Planned expenses in the tradeoff are independent from the upper savings calculator.
 document.getElementById('tradeAddExpense').click();
 assert.equal(document.querySelectorAll('#tradeExpenseRows .sav-expense-row').length,1);
