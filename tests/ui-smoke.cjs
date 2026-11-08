@@ -143,7 +143,7 @@ const goalMonthly=document.getElementById('savMonthly-num');
 const saveDate=document.getElementById('savStartMonth');
 saveDate.value='2026-11';saveDate.dispatchEvent(new Event('change',{bubbles:true}));
 assert.equal(document.getElementById('savTime').textContent,'1 ปี 2 เดือน','Default saving takes 14 months');
-assert.match(document.getElementById('savLastTopUp').textContent,/10,000/,'Default final saving top-up is 10k');
+assert.equal(document.getElementById('savLastTopUp').textContent,'เติมงวดสุดท้าย 10,000 ฿','Default final top-up is correct without extra spacing');
 assert.equal(document.getElementById('savLastTopUp').hidden,false,'Last deposit visible for reachable goal');
 document.getElementById('savAddExpense').click();
 let savRow=document.querySelector('#savExpenseRows .sav-expense-row');
@@ -164,7 +164,7 @@ assert.match(document.getElementById('savLastTopUp').textContent,/10,000/,'Savin
 
 // Use Case A and B each need their own actual final Car Fund top-up.
 document.querySelector('[data-reset="tradeoff"]').click();
-assert.match(document.getElementById('tradeLastA').textContent,/15,000/,'Default plan A last deposit');
+assert.equal(document.getElementById('tradeLastA').textContent,'เติม Car Fund งวดสุดท้าย 15,000 ฿','Default plan A final top-up wording');
 assert.match(document.getElementById('tradeLastB').textContent,/10,000/,'Default plan B last deposit');
 assert.equal(document.getElementById('tradeLastA').hidden,false);
 assert.equal(document.getElementById('tradeLastB').hidden,false);

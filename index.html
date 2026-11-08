@@ -152,7 +152,6 @@
     .sav-expense-row input[type=number]{text-align:right}
     .sav-remove{height:36px;padding:5px 9px;align-self:end;background:#fff;border:1px solid #e4e9e9;border-radius:9px;color:#a04a4a;font-size:11px;font-weight:700}
     .sav-remove:hover{border-color:#e0adad;background:#fff6f5}
-    .mini .micro.final-topup{font-size:11px;line-height:1.5;font-weight:650;color:#405d60}
     .sav-result-grid{margin-bottom:0}
     .sav-result-grid .mini strong{font-size:16px}
     @media(max-width:520px){
@@ -389,7 +388,7 @@
           </div>
           <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div>
             <div class="mini-grid sav-result-grid">
-              <div class="mini"><div class="k">คาดว่าจะถึงเป้าหมาย</div><strong id="savFinishMonth">—</strong><div class="micro final-topup" id="savLastTopUp" hidden>—</div></div>
+              <div class="mini"><div class="k">คาดว่าจะถึงเป้าหมาย</div><strong id="savFinishMonth">—</strong><div class="micro" id="savLastTopUp" hidden>—</div></div>
               <div class="mini" id="savCompareBox" hidden><div class="k">ถ้าไม่มีรายจ่ายพิเศษ</div><strong id="savBaseFinish">—</strong><div class="micro" id="savDelay">—</div></div>
             </div>
             <details><summary>สูตรและขอบเขต</summary><ul>
@@ -419,7 +418,7 @@
                <div><strong>แผน B · ซื้อรถพร้อมลงทุน</strong><span id="tradeSplitB">—</span></div>
              </div>
              <div class="addon-output"><div class="metric-title">ลงทุนไปด้วย ทำให้ซื้อรถช้าลง</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
-              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro" id="tradeMonthA">—</div><div class="micro final-topup" id="tradeLastA" hidden>—</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro" id="tradeMonthB">—</div><div class="micro final-topup" id="tradeLastB" hidden>—</div></div><div class="mini"><div class="k">พอร์ตแผน A · ณ เดือนที่ B ซื้อรถได้</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตแผน B · ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
+              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro" id="tradeMonthA">—</div><div class="micro" id="tradeLastA" hidden>—</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro" id="tradeMonthB">—</div><div class="micro" id="tradeLastB" hidden>—</div></div><div class="mini"><div class="k">พอร์ตแผน A · ณ เดือนที่ B ซื้อรถได้</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตแผน B · ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
               <div class="metric-title">พอร์ตแผน B มากกว่า/น้อยกว่าแผน A เท่าไร</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><ul class="tradeoff-points trade-detail-list" id="tradeDetail" aria-label="คำอธิบายผลเปรียบเทียบ"></ul>
             </div>
             <div class="button-row"><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
@@ -680,7 +679,7 @@
     const el=$(id);
     const needed=amount!==null&&Number.isFinite(amount)&&amount>0;
     el.hidden=!needed;
-    el.textContent=needed?`เติม${kind==='car'?' Car Fund':''} งวดสุดท้าย ${baht(amount)}`:'';
+    el.textContent=needed?`${kind==='car'?'เติม Car Fund งวดสุดท้าย':'เติมงวดสุดท้าย'} ${baht(amount)}`:'';
   }
   function plannedExpensesByMonth(expenses,start){
     const byMonth=new Map();

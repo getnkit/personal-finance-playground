@@ -75,6 +75,14 @@ async function check(engine,name,options){
  await page.locator('#savMonthly-num').fill('30000');
  await page.locator('#savStartMonth').evaluate(el=>{el.value='2026-11';el.dispatchEvent(new Event('change',{bubbles:true}));});
  assert.match(await page.locator('#savLastTopUp').textContent(),/10,000/,name+': savings default last deposit');
+ assert.equal(await page.locator('#savLastTopUp').textContent(),'เติมงวดสุดท้าย 10,000 ฿',name+': top-up wording without extra whitespace');
+ const topupFont=await page.locator('#savLastTopUp').evaluate(el=>{
+   const css=getComputedStyle(el);
+   const comparison=getComputedStyle(document.querySelector('#tradeMonthA'));
+   return {weight:css.fontWeight,size:css.fontSize,referenceWeight:comparison.fontWeight,referenceSize:comparison.fontSize};
+ });
+ assert.equal(topupFont.weight,topupFont.referenceWeight,name+': top-up no longer bold');
+ assert.equal(topupFont.size,topupFont.referenceSize,name+': top-up matches supporting text size');
  assert.equal(await page.locator('#savLastTopUp').evaluate(el=>!el.hidden),true,name+': savings last deposit shown');
  await page.locator('#tradeStartMonth').evaluate(el=>{el.value='2026-11';el.dispatchEvent(new Event('change',{bubbles:true}));});
  assert.match(await page.locator('#tradeLastA').textContent(),/15,000/,name+': A last deposit');
