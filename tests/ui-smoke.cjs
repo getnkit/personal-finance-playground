@@ -108,6 +108,27 @@ assert.equal(document.getElementById('tradeMonthB').textContent,'ยังระ
 invest.value='40000';invest.dispatchEvent(new Event('input',{bubbles:true}));
 assert.equal(document.getElementById('tradeMonthA').textContent,'—','Invalid budget clears A date');
 assert.equal(document.getElementById('tradeMonthB').textContent,'—','Invalid budget clears B date');
+// Planned expenses in the tradeoff are independent from the upper savings calculator.
+document.getElementById('tradeAddExpense').click();
+assert.equal(document.querySelectorAll('#tradeExpenseRows .sav-expense-row').length,1);
+const tradeRow=document.querySelector('#tradeExpenseRows .sav-expense-row');
+const tradeSelect=tradeRow.querySelector('select');
+const tradeAmount=tradeRow.querySelector('input[type="number"]');
+tradeSelect.value='2026-11';tradeSelect.dispatchEvent(new Event('change',{bubbles:true}));
+tradeAmount.value='35000';tradeAmount.dispatchEvent(new Event('input',{bubbles:true}));
+assert.equal(document.getElementById('tradeA').textContent,'1 ปี 1 เดือน','One skipped contribution delays plan A');
+assert.equal(document.getElementById('tradeB').textContent,'1 ปี 3 เดือน','One skipped contribution delays plan B');
+assert.equal(document.getElementById('tradeMonthA').textContent,'คาดว่าจะซื้อได้: พ.ย. 2027');
+assert.equal(document.getElementById('tradeMonthB').textContent,'คาดว่าจะซื้อได้: ม.ค. 2028');
+assert.equal(document.getElementById('savStartMonth').value,'2027-03','Upper savings month unaffected');
+assert.equal(document.querySelectorAll('#savExpenseRows .sav-expense-row').length,1,'Upper savings expenses unaffected');
+const tradeGain=document.getElementById('tradePortABreakdown').textContent;
+assert.match(tradeGain,/เงินต้น/);
+tradeAmount.value='100000';tradeAmount.dispatchEvent(new Event('input',{bubbles:true}));
+assert.equal(document.getElementById('tradeMonthB').textContent,'คาดว่าจะซื้อได้: ม.ค. 2028','Expense above budget capped at current month');
+document.querySelector('#tradeExpenseRows .sav-remove').click();
+assert.equal(document.getElementById('tradeB').textContent,'1 ปี 2 เดือน','Removing expense restores baseline');
+assert.equal(document.querySelector('#tradeExpenseRows').children.length,0);
 document.querySelector('[data-reset="tradeoff"]').click();
 assert.match(tradeMonth.value,/^\d{4}-\d{2}$/,'Reset restores current start month');
 assert.equal(document.getElementById('tradeB').textContent,'1 ปี 2 เดือน','Reset restores default tradeoff durations');

@@ -399,7 +399,7 @@
           </div>
         </div>
         <details class="card addon" id="carInvestAddon"><summary><span class="addon-heading"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span> Use Case · Car Fund First vs Car Fund + Investing</span></summary>
-          <div class="addon-body"><p class="hint">สมมติซื้อรถด้วยเงินสดทั้งคัน: แผน A ทุ่มงบเก็บ Car Fund ให้ครบก่อนแล้วค่อยลงทุน ส่วนแผน B แบ่งงบเก็บ Car Fund และลงทุนไปพร้อมกัน</p><p class="hint">หมายเหตุ: ไม่รวมรายจ่ายพิเศษที่วางแผนไว้ในส่วนบน</p>
+          <div class="addon-body"><p class="hint">สมมติซื้อรถด้วยเงินสดทั้งคัน: แผน A ทุ่มงบเก็บ Car Fund ให้ครบก่อนแล้วค่อยลงทุน ส่วนแผน B แบ่งงบเก็บ Car Fund และลงทุนไปพร้อมกัน</p><p class="hint">รายจ่ายพิเศษใน Use Case นี้แยกจากเครื่องคำนวณด้านบน เพื่อให้ทดลองสองแผนได้อิสระ</p>
             <div class="addon-grid">
               <div class="field" data-field="tradeCarPrice"><div class="field-line"><label for="tradeCarPrice-num">งบซื้อรถ</label><div class="field-input"><input id="tradeCarPrice-num" type="number" min="0" max="10000000" step="10000" value="400000"><span>บาท</span></div></div><input type="range" aria-label="งบซื้อรถ" min="100000" max="1000000" step="10000" value="400000"><div class="addon-budget-note">ควรรวมราคารถ ค่าโอน ค่าตรวจสภาพ และเงินเผื่อค่าใช้จ่ายแรกเข้า ไม่ใช่แค่ราคาประกาศขาย</div></div>
               <div class="field" data-field="tradeCarNow"><div class="field-line"><label for="tradeCarNow-num">เงิน Car Fund ตอนนี้</label><div class="field-input"><input id="tradeCarNow-num" type="number" min="0" max="10000000" step="10000" value="0"><span>บาท</span></div></div><input type="range" aria-label="เงิน Car Fund ตอนนี้" min="0" max="500000" step="10000" value="0"></div>
@@ -407,6 +407,11 @@
               <div class="field" data-field="tradeInvest"><div class="field-line"><label for="tradeInvest-num">แบ่งไปลงทุน / เดือน</label><div class="field-input"><input id="tradeInvest-num" type="number" min="0" max="1000000" step="1000" value="5000"><span>บาท</span></div></div><input type="range" aria-label="แบ่งไปลงทุนต่อเดือน" min="0" max="50000" step="1000" value="5000"></div>
               <div class="field" data-field="tradeRate"><div class="field-line"><label for="tradeRate-num">ผลตอบแทนสมมติต่อปี</label><div class="field-input"><input id="tradeRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input type="range" aria-label="ผลตอบแทนสมมติต่อปี" min="-10" max="20" step="0.5" value="6"></div>
               <div class="field sav-start"><div class="field-line"><label for="tradeStartMonth">เริ่มออมเดือน</label><div class="field-input"><input id="tradeStartMonth" type="month" aria-label="เดือนและปีที่เริ่มออมสำหรับแผน A และ B"></div></div><p class="addon-budget-note">นับการเติมเงินปลายเดือนที่เลือกเป็นเดือนแรก · แยกจากเครื่องคำนวณด้านบน</p></div>
+            </div>
+            <div class="sav-plan">
+              <div class="sav-plan-top"><h4>รายจ่ายที่วางแผนไว้ <span>(ไม่บังคับ)</span></h4><button class="btn" id="tradeAddExpense" type="button">+ เพิ่มรายการ</button></div>
+              <p class="sav-plan-description">หักจากงบรวมซื้อรถและลงทุนเฉพาะเดือนที่จ่าย ไม่ถอนเงิน Car Fund เดิม และไม่ยกยอดรายจ่ายส่วนเกินไปเดือนถัดไป</p>
+              <div class="sav-expense-list" id="tradeExpenseRows" aria-label="รายจ่ายพิเศษที่วางแผนไว้ของแผน A และ B"></div>
             </div>
             <div class="trade-plan-split" aria-live="polite">
                <div><strong>แผน A · ซื้อรถก่อน</strong><span id="tradeSplitA">—</span></div>
@@ -659,7 +664,9 @@
   const SAV_MAX_CALC_MONTHS=600; // 50-year safety limit for the forecast.
   const SAV_MAX_SELECT_MONTHS=360; // Keep the month dropdown manageable.
   const plannedExpenses=[];
+  const tradeExpenses=[];
   let nextExpenseId=1;
+  let nextTradeExpenseId=1;
   const monthKeyFromDate=(date)=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
   const monthIndex=(key)=>/^\d{4}-(0[1-9]|1[0-2])$/.test(key)?Number(key.slice(0,4))*12+Number(key.slice(5,7))-1:null;
   const monthKey=(index)=>`${Math.floor(index/12)}-${String(index%12+1).padStart(2,'0')}`;
@@ -668,14 +675,18 @@
   const tradeStart=()=>monthIndex($('tradeStartMonth').value)??monthIndex(monthKeyFromDate(new Date()));
   const tradePurchaseMonth=(start,months)=>!Number.isFinite(months)||months>600?'ยังระบุเดือนไม่ได้':months===0?'มีเงินซื้อได้แล้ว':`คาดว่าจะซื้อได้: ${monthLabel(start+months-1)}`;
   const savingsFinishLabel=(start,months)=>!Number.isFinite(months)?'ยังคำนวณไม่ได้':months===0?'ถึงเป้าหมายแล้ว':monthLabel(start+months-1);
+  function plannedExpensesByMonth(expenses,start){
+    const byMonth=new Map();
+    for(const item of expenses){
+      const index=monthIndex(item.month);
+      if(index!==null&&index>=start&&item.amount>0)byMonth.set(index,(byMonth.get(index)||0)+item.amount);
+    }
+    return byMonth;
+  }
   function forecastSavings(goal,initial,monthly,start,expenses){
     if(initial>=goal)return 0;
     if(monthly<=0)return Infinity;
-    const plannedByMonth=new Map();
-    for(const item of expenses){
-      const index=monthIndex(item.month);
-      if(index!==null&&index>=start&&item.amount>0)plannedByMonth.set(index,(plannedByMonth.get(index)||0)+item.amount);
-    }
+    const plannedByMonth=plannedExpensesByMonth(expenses,start);
     let saved=initial;
     for(let i=0;i<SAV_MAX_CALC_MONTHS;i++){
       // Never draw down existing savings or carry overspending into the next month.
@@ -684,10 +695,12 @@
     }
     return Infinity;
   }
-  function syncSavingsExpenseMonths(start,months){
+  // Both planners share the same month and amount input behavior while storing
+  // their hypothetical expenses independently.
+  function syncPlannedExpenseMonths(items,start,months,dataAttribute){
     const limit=Math.min(SAV_MAX_SELECT_MONTHS,Number.isFinite(months)?Math.max(1,months):36);
-    for(const item of plannedExpenses){
-      const row=document.querySelector(`[data-sav-expense-id="${item.id}"]`);
+    for(const item of items){
+      const row=document.querySelector(`[${dataAttribute}="${item.id}"]`);
       if(!row)continue;
       const select=row.querySelector('select');
       let selected=monthIndex(item.month);
@@ -706,34 +719,46 @@
       select.value=item.month;
     }
   }
-  function renderSavingsExpenses(){
-    const container=$('savExpenseRows');
+  function syncSavingsExpenseMonths(start,months){
+    syncPlannedExpenseMonths(plannedExpenses,start,months,'data-sav-expense-id');
+  }
+  function syncTradeExpenseMonths(start,months){
+    syncPlannedExpenseMonths(tradeExpenses,start,months,'data-trade-expense-id');
+  }
+  function renderPlannedExpenseRows(items,containerId,dataAttribute,onChange){
+    const container=$(containerId);
     container.replaceChildren();
-    for(const item of plannedExpenses){
+    for(const item of items){
       const row=document.createElement('div');
       row.className='sav-expense-row';
-      row.dataset.savExpenseId=String(item.id);
-      // Static markup: user-supplied notes are assigned as input.value, never HTML.
-      row.innerHTML=`<label>เดือนที่จ่าย<select aria-label="เดือนที่จ่าย"></select></label><label>รายการ (ถ้ามี)<input type="text" maxlength="60" placeholder="เช่น ล้างแอร์" aria-label="ชื่อรายการ"></label><label>จำนวนเงิน (บาท)<input type="number" min="0" max="1000000" step="1000" placeholder="0" aria-label="จำนวนเงิน"></label><button type="button" class="sav-remove" aria-label="ลบรายการ">ลบ</button>`;
+      row.setAttribute(dataAttribute,String(item.id));
+      // Labels are static; user-entered descriptions are set as values, never HTML.
+      row.innerHTML=`<label>เดือนที่จ่าย<select aria-label="เดือนที่จ่าย"></select></label><label>รายการ (ถ้ามี)<input type="text" maxlength="60" placeholder="เช่น ค่าซ่อมบ้าน" aria-label="ชื่อรายการ"></label><label>จำนวนเงิน (บาท)<input type="number" min="0" max="1000000" step="1000" placeholder="0" aria-label="จำนวนเงิน"></label><button type="button" class="sav-remove" aria-label="ลบรายการ">ลบ</button>`;
       const select=row.querySelector('select');
       const [description,amount]=row.querySelectorAll('input');
       description.value=item.label;
       amount.value=item.amount?String(item.amount):'';
-      select.addEventListener('change',()=>{item.month=select.value;savings();});
+      select.addEventListener('change',()=>{item.month=select.value;onChange();});
       description.addEventListener('input',()=>{item.label=description.value;});
       amount.addEventListener('input',()=>{
         item.amount=amount.value.trim()===''?0:Math.max(0,Math.min(1000000,Number(amount.value)||0));
-        savings();
+        onChange();
       });
       amount.addEventListener('change',()=>{amount.value=item.amount?String(item.amount):'';});
       row.querySelector('.sav-remove').addEventListener('click',()=>{
-        const i=plannedExpenses.findIndex(entry=>entry.id===item.id);
-        if(i>=0)plannedExpenses.splice(i,1);
-        renderSavingsExpenses();
-        savings();
+        const i=items.findIndex(entry=>entry.id===item.id);
+        if(i>=0)items.splice(i,1);
+        renderPlannedExpenseRows(items,containerId,dataAttribute,onChange);
+        onChange();
       });
       container.appendChild(row);
     }
+  }
+  function renderSavingsExpenses(){
+    renderPlannedExpenseRows(plannedExpenses,'savExpenseRows','data-sav-expense-id',savings);
+  }
+  function renderTradeExpenses(){
+    renderPlannedExpenseRows(tradeExpenses,'tradeExpenseRows','data-trade-expense-id',tradeoff);
   }
   function savings(){
     const {savGoal:goal,savNow:now,savMonthly:monthly}=state;
@@ -759,6 +784,32 @@
   }
   // Compare both plans at the same calendar month (when the slower plan can buy the car).
   // Redirect all remaining monthly allocation to investments once the car goal is filled.
+  // Both plans have the same monthly budget and planned expenses. Plan A first
+  // funds the car; Plan B first invests up to its chosen amount, then funds the car.
+  // Any remaining money after a car contribution is invested at month-end.
+  function simulateCarTradeoff(price,current,monthly,invest,rate,start,expenses){
+    const expensesByMonth=plannedExpensesByMonth(expenses,start);
+    let carA=Math.min(current,price),carB=carA,portfolioA=0,portfolioB=0;
+    let contributionsA=0,contributionsB=0;
+    let dateA=carA>=price?0:Infinity,dateB=carB>=price?0:Infinity;
+    const monthlyRate=rate/1200;
+    for(let t=1;t<=SAV_MAX_CALC_MONTHS&&!Number.isFinite(dateB);t++){
+      const available=Math.max(0,monthly-(expensesByMonth.get(start+t-1)||0));
+      const buyA=Math.min(available,Math.max(0,price-carA));
+      const preferredInvestB=Math.min(invest,available);
+      const buyB=Math.min(available-preferredInvestB,Math.max(0,price-carB));
+      carA+=buyA;carB+=buyB;
+      const investA=available-buyA,investB=available-buyB;
+      portfolioA=portfolioA*(1+monthlyRate)+investA;
+      portfolioB=portfolioB*(1+monthlyRate)+investB;
+      contributionsA+=investA;contributionsB+=investB;
+      if(!Number.isFinite(dateA)&&carA+1e-7>=price)dateA=t;
+      if(!Number.isFinite(dateB)&&carB+1e-7>=price)dateB=t;
+    }
+    return {dateA,dateB,portfolioA,portfolioB,contributionsA,contributionsB};
+  }
+
+  // Compare both plans at the same month: when Plan B has finished funding the car.
   function tradeoff(){
     const {tradeCarPrice:price,tradeCarNow:current,tradeMonthly:monthly,tradeInvest:investRequested,tradeRate:rate}=state;
     const explain=(notes)=>{
@@ -771,51 +822,68 @@
     };
     const remaining=Math.max(0,price-current),invest=investRequested;
     const start=tradeStart();
+    for(const item of tradeExpenses){
+      const dated=monthIndex(item.month);
+      if(dated===null||dated<start)item.month=monthKey(start);
+      const capped=monthIndex(item.month);
+      if(capped>start+SAV_MAX_SELECT_MONTHS-1)item.month=monthKey(start+SAV_MAX_SELECT_MONTHS-1);
+    }
+    const expensesActive=tradeExpenses.some(item=>item.amount>0);
     set('tradeSplitA',`${baht(monthly)}/เดือน เข้า Car Fund`);
     set('tradeSplitB',invest>monthly?'ยอดลงทุนเกินงบรวม':`${baht(monthly-invest)} เข้า Car Fund + ${baht(invest)} ลงทุน/เดือน`);
     if(invest>monthly){
-      set('tradeA','—');set('tradeB','—');set('tradeMonthA','—');set('tradeMonthB','—');set('tradeDelay','เกินงบรวม');
+      set('tradeA','—');set('tradeB','—');set('tradeMonthA','—');set('tradeMonthB','—');
+      set('tradeDelay','เกินงบรวม');
       set('tradeSummary','แผน B กำหนดเงินลงทุนเกินงบรวมต่อเดือน');
-      set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);return;
+      set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');
+      set('tradePortBBreakdown','—');set('tradeDiff','—');
+      explain(['ลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);
+      syncTradeExpenseMonths(start,36);
+      return;
     }
-    const carPerMonth=monthly-invest;
-    const dateA=remaining===0?0:monthly<=0?Infinity:Math.ceil(remaining/monthly);
-    const dateB=remaining===0?0:carPerMonth<=0?Infinity:Math.ceil(remaining/carPerMonth);
-    const valid=Number.isFinite(dateB)&&dateB<=600;
+    const result=simulateCarTradeoff(price,current,monthly,invest,rate,start,tradeExpenses);
+    const {dateA,dateB,portfolioA,portfolioB,contributionsA,contributionsB}=result;
+    const valid=Number.isFinite(dateB);
     set('tradeA',visibleMonths(dateA));set('tradeB',visibleMonths(dateB));
     set('tradeMonthA',tradePurchaseMonth(start,dateA));
     set('tradeMonthB',tradePurchaseMonth(start,dateB));
-    if(!valid){set('tradeDelay','คำนวณไม่ได้');set('tradeSummary','แผน B ไม่มีเงินเติม Car Fund หรือใช้เวลานานเกิน 50 ปี');set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลองลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);return;}
-    const delay=dateB-dateA;
-    let carA=Math.min(current,price),carB=carA,portfolioA=0,portfolioB=0;
-    const monthlyRate=rate/1200;
-    for(let t=1;t<=dateB;t++){
-      const buyA=Math.min(monthly,Math.max(0,price-carA));
-      const buyB=Math.min(carPerMonth,Math.max(0,price-carB));
-      carA+=buyA;carB+=buyB;
-      portfolioA=portfolioA*(1+monthlyRate)+(monthly-buyA);
-      portfolioB=portfolioB*(1+monthlyRate)+(monthly-buyB);
+    if(!valid){
+      set('tradeDelay','คำนวณไม่ได้');
+      set('tradeSummary','แผน B ยังเก็บเงินซื้อรถไม่ครบภายในขอบเขตจำลอง 50 ปี');
+      set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');
+      set('tradePortBBreakdown','—');set('tradeDiff','—');
+      explain(['ลองลดเงินที่แบ่งไปลงทุน ลดรายจ่ายที่วางแผนไว้ หรือเพิ่มงบรวมต่อเดือน']);
+      syncTradeExpenseMonths(start,36);
+      return;
     }
-    const diff=portfolioB-portfolioA;
+    const delay=dateB-dateA,diff=portfolioB-portfolioA;
     set('tradeDelay',`${delay} เดือน`);
     set('tradeSummary',dateB===0?'มีเงินซื้อรถครบแล้วตั้งแต่วันนี้':`แผน A ซื้อรถเดือนที่ ${dateA} · แผน B ซื้อรถเดือนที่ ${dateB} · เทียบพอร์ตสิ้นเดือนที่ ${dateB}`);
-    const contributions=monthly*dateB-remaining;
-    const breakdown=(portfolio)=>{
+    const breakdown=(portfolio,contributions)=>{
       const gain=portfolio-contributions;
       return `เงินต้น ${short(contributions)} · ผลตอบแทน ${gain>=0?'+':'−'}${short(Math.abs(gain))}`;
     };
     set('tradePortA',short(portfolioA));set('tradePortB',short(portfolioB));
-    set('tradePortABreakdown',breakdown(portfolioA));
-    set('tradePortBBreakdown',breakdown(portfolioB));
+    set('tradePortABreakdown',breakdown(portfolioA,contributionsA));
+    set('tradePortBBreakdown',breakdown(portfolioB,contributionsB));
     set('tradeDiff',`${diff>=0?'+':'−'}${short(Math.abs(diff))}`);
-    // Describe the last payment into the car fund and the first lump-sum investment.
-    const lastCarA=dateA>0?Math.max(0,remaining-monthly*(dateA-1)):0;
-    const lastCarB=dateB>0?Math.max(0,remaining-carPerMonth*(dateB-1)):0;
-    const firstInvestA=dateA>0?monthly-lastCarA:0;
-    const firstInvestB=dateB>0?monthly-lastCarB:0;
     if(dateB===0){
       explain(['มีเงินซื้อรถครบตั้งแต่วันนี้ จึงไม่ต้องออมเพิ่มเพื่อเป้าหมายนี้ และยังไม่มีช่วงเวลาที่จะเปรียบเทียบพอร์ตลงทุน']);
+    }else if(expensesActive){
+      explain([
+        `แผน A คาดว่าจะซื้อรถได้ ${monthLabel(start+dateA-1)} · แผน B ${monthLabel(start+dateB-1)}`,
+        'รายจ่ายพิเศษหักจากงบรวมรายเดือนเท่ากันทั้งสองแผน โดยหักได้ไม่เกินงบของเดือนนั้น ไม่ถอนเงินออมเดิมและไม่ทบยอดส่วนเกิน',
+        'แผน A ใช้งบที่เหลือเติม Car Fund ก่อน แล้วลงทุนส่วนที่เหลือหลังเงินซื้อรถครบ',
+        `แผน B พยายามลงทุน ${baht(invest)}/เดือนก่อน ส่วนที่เหลือเติม Car Fund; ถ้างบหลังรายจ่ายไม่พอ จะลดเงินลงทุนลงโดยอัตโนมัติ`,
+        `เทียบพอร์ตสิ้นเดือนที่ ${dateB}: ทั้งสองแผนลงทุนด้วยเงินต้นสะสมแผนละ ${short(contributionsA)} แต่เริ่มลงทุนต่างเวลากัน`,
+        'ผลตอบแทนเป็นสมมติฐาน ไม่รวมค่าใช้รถหรือค่าเสื่อมจากการซื้อคนละเดือน'
+      ]);
     }else{
+      const carPerMonth=monthly-invest;
+      const lastCarA=dateA>0?Math.max(0,remaining-monthly*(dateA-1)):0;
+      const lastCarB=dateB>0?Math.max(0,remaining-carPerMonth*(dateB-1)):0;
+      const firstInvestA=dateA>0?monthly-lastCarA:0;
+      const firstInvestB=dateB>0?monthly-lastCarB:0;
       const explainA=dateA===0
         ?`แผน A: มีเงินซื้อรถครบตั้งแต่แรก จึงลงทุน ${short(monthly)}/เดือนตั้งแต่เดือนที่ 1`
         :`แผน A: เก็บซื้อรถ ${short(monthly)}/เดือน จนถึงเดือนที่ ${dateA} (เดือนซื้อรถจ่ายอีก ${short(lastCarA)} และนำส่วนที่เหลือ ${short(firstInvestA)} ไปลงทุน)${dateB>dateA?`; เดือนที่ ${dateA+1}–${dateB} ลงทุน ${short(monthly)}/เดือน`:''}`;
@@ -824,10 +892,11 @@
         `เทียบพอร์ต ณ สิ้นเดือนที่ ${dateB} หลังจากทั้งสองแผนซื้อรถได้แล้ว`,
         explainA,
         explainB,
-        `ถึงวันเปรียบเทียบ ทั้งสองแผนนำเงินไปลงทุนสะสมแผนละ ${short(contributions)} แต่แผน B เริ่มลงทุนก่อน จึงมีเวลาให้เงินเติบโตต่างกัน`,
+        `ถึงวันเปรียบเทียบ ทั้งสองแผนนำเงินไปลงทุนสะสมแผนละ ${short(contributionsA)} แต่แผน B เริ่มลงทุนก่อน จึงมีเวลาให้เงินเติบโตต่างกัน`,
         'เป็นผลตอบแทนจำลอง ไม่รับประกันกำไร และยังไม่รวมค่าใช้รถหรือค่าเสื่อมจากการซื้อคนละเดือน'
       ]);
     }
+    syncTradeExpenseMonths(start,dateB);
   }
 
 
@@ -949,7 +1018,11 @@
   document.querySelectorAll('[data-reset]').forEach(button=>button.addEventListener('click',()=>{
     const group=button.dataset.reset;groups[group].forEach(key=>{state[key]=DEFAULT[key];syncField(key)});
     if(group==='tax')$('taxWithheldInput').value='';
-    if(group==='tradeoff')$('tradeStartMonth').value=monthKeyFromDate(new Date());
+    if(group==='tradeoff'){
+      tradeExpenses.length=0;
+      $('tradeStartMonth').value=monthKeyFromDate(new Date());
+      renderTradeExpenses();
+    }
     if(group==='savings'){
       plannedExpenses.length=0;
       $('savStartMonth').value=monthKeyFromDate(new Date());
@@ -975,6 +1048,11 @@
   $('tradeStartMonth').value=monthKeyFromDate(new Date());
   $('tradeStartMonth').addEventListener('change',()=>{
     if(monthIndex($('tradeStartMonth').value)===null)$('tradeStartMonth').value=monthKeyFromDate(new Date());
+    tradeoff();
+  });
+  $('tradeAddExpense').addEventListener('click',()=>{
+    tradeExpenses.push({id:nextTradeExpenseId++,month:monthKey(tradeStart()),label:'',amount:0});
+    renderTradeExpenses();
     tradeoff();
   });
   $('savAddExpense').addEventListener('click',()=>{

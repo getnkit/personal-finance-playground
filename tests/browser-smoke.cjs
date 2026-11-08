@@ -57,6 +57,17 @@ async function check(engine,name,options){
  await page.locator('#tradeStartMonth').evaluate(el=>{el.value='2027-03';el.dispatchEvent(new Event('change',{bubbles:true}));});
  assert.equal(await page.locator('#tradeMonthB').textContent(),'คาดว่าจะซื้อได้: เม.ย. 2028',name+': date reacts to month change');
  assert.ok(await page.locator('#tradeStartMonth').isVisible(),name+': tradeoff month picker visible');
+ // Planned expenses should update dates and remain editable in WebKit and Chromium.
+ await page.locator('#tradeStartMonth').evaluate(el=>{el.value='2026-11';el.dispatchEvent(new Event('change',{bubbles:true}));});
+ await page.locator('#tradeAddExpense').click();
+ assert.equal(await page.locator('#tradeExpenseRows .sav-expense-row').count(),1,name+': trade expense added');
+ await page.locator('#tradeExpenseRows select').selectOption('2026-11');
+ await page.locator('#tradeExpenseRows input[type="number"]').fill('35000');
+ assert.equal(await page.locator('#tradeMonthA').textContent(),'คาดว่าจะซื้อได้: พ.ย. 2027',name+': expense delays A');
+ assert.equal(await page.locator('#tradeMonthB').textContent(),'คาดว่าจะซื้อได้: ม.ค. 2028',name+': expense delays B');
+ assert.equal(await page.locator('#tradeB').textContent(),'1 ปี 3 เดือน',name+': duration includes planned expense');
+ await page.locator('#tradeExpenseRows .sav-remove').click();
+ assert.equal(await page.locator('#tradeMonthB').textContent(),'คาดว่าจะซื้อได้: ธ.ค. 2027',name+': removal restores B');
  await page.locator('[data-reset="tradeoff"]').click();
  assert.match(await page.locator('#tradeStartMonth').inputValue(),/^\d{4}-\d{2}$/,name+': tradeoff reset month');
  await page.locator('.bottom-tabs .tab[data-tab="tax"]').click();
