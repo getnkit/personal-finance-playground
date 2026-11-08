@@ -48,6 +48,17 @@ async function check(engine,name,options){
    }
    await page.emulateMedia({media:'screen'});
  }
+ await page.locator('.bottom-tabs .tab[data-tab="savings"]').click();
+ await page.locator('#carInvestAddon summary').click();
+ await page.locator('#tradeStartMonth').evaluate(el=>{el.value='2026-11';el.dispatchEvent(new Event('change',{bubbles:true}));});
+ assert.equal(await page.locator('#tradeMonthA').textContent(),'คาดว่าจะซื้อได้: ต.ค. 2027',name+': A purchase month');
+ assert.equal(await page.locator('#tradeMonthB').textContent(),'คาดว่าจะซื้อได้: ธ.ค. 2027',name+': B purchase month');
+ assert.equal(await page.locator('#tradeB').textContent(),'1 ปี 2 เดือน',name+': original duration unchanged');
+ await page.locator('#tradeStartMonth').evaluate(el=>{el.value='2027-03';el.dispatchEvent(new Event('change',{bubbles:true}));});
+ assert.equal(await page.locator('#tradeMonthB').textContent(),'คาดว่าจะซื้อได้: เม.ย. 2028',name+': date reacts to month change');
+ assert.ok(await page.locator('#tradeStartMonth').isVisible(),name+': tradeoff month picker visible');
+ await page.locator('[data-reset="tradeoff"]').click();
+ assert.match(await page.locator('#tradeStartMonth').inputValue(),/^\d{4}-\d{2}$/,name+': tradeoff reset month');
  await page.locator('.bottom-tabs .tab[data-tab="tax"]').click();
  await page.locator('.tax-more summary').click();
  await page.locator('#taxParents-select').selectOption('1');

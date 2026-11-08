@@ -406,13 +406,14 @@
               <div class="field" data-field="tradeMonthly"><div class="field-line"><label for="tradeMonthly-num">งบรวมออมซื้อรถและลงทุน / เดือน</label><div class="field-input"><input id="tradeMonthly-num" type="number" min="0" max="1000000" step="1000" value="35000"><span>บาท</span></div></div><input type="range" aria-label="งบรวมออมซื้อรถและลงทุนต่อเดือน" min="0" max="100000" step="1000" value="35000"></div>
               <div class="field" data-field="tradeInvest"><div class="field-line"><label for="tradeInvest-num">แบ่งไปลงทุน / เดือน</label><div class="field-input"><input id="tradeInvest-num" type="number" min="0" max="1000000" step="1000" value="5000"><span>บาท</span></div></div><input type="range" aria-label="แบ่งไปลงทุนต่อเดือน" min="0" max="50000" step="1000" value="5000"></div>
               <div class="field" data-field="tradeRate"><div class="field-line"><label for="tradeRate-num">ผลตอบแทนสมมติต่อปี</label><div class="field-input"><input id="tradeRate-num" type="number" min="-10" max="20" step="0.5" value="6"><span>%</span></div></div><input type="range" aria-label="ผลตอบแทนสมมติต่อปี" min="-10" max="20" step="0.5" value="6"></div>
+              <div class="field sav-start"><div class="field-line"><label for="tradeStartMonth">เริ่มออมเดือน</label><div class="field-input"><input id="tradeStartMonth" type="month" aria-label="เดือนและปีที่เริ่มออมสำหรับแผน A และ B"></div></div><p class="addon-budget-note">นับการเติมเงินปลายเดือนที่เลือกเป็นเดือนแรก · แยกจากเครื่องคำนวณด้านบน</p></div>
             </div>
             <div class="trade-plan-split" aria-live="polite">
                <div><strong>แผน A · ซื้อรถก่อน</strong><span id="tradeSplitA">—</span></div>
                <div><strong>แผน B · ซื้อรถพร้อมลงทุน</strong><span id="tradeSplitB">—</span></div>
              </div>
              <div class="addon-output"><div class="metric-title">ลงทุนไปด้วย ทำให้ซื้อรถช้าลง</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
-              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro">ซื้อรถเมื่อไร</div></div><div class="mini"><div class="k">พอร์ตแผน A · ณ เดือนที่ B ซื้อรถได้</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตแผน B · ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
+              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro" id="tradeMonthA">—</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro" id="tradeMonthB">—</div></div><div class="mini"><div class="k">พอร์ตแผน A · ณ เดือนที่ B ซื้อรถได้</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตแผน B · ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
               <div class="metric-title">พอร์ตแผน B มากกว่า/น้อยกว่าแผน A เท่าไร</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><ul class="tradeoff-points trade-detail-list" id="tradeDetail" aria-label="คำอธิบายผลเปรียบเทียบ"></ul>
             </div>
             <div class="button-row"><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
@@ -664,6 +665,8 @@
   const monthKey=(index)=>`${Math.floor(index/12)}-${String(index%12+1).padStart(2,'0')}`;
   const monthLabel=(index)=>`${SAV_MONTH_NAMES[index%12]} ${Math.floor(index/12)}`;
   const savingsStart=()=>monthIndex($('savStartMonth').value)??monthIndex(monthKeyFromDate(new Date()));
+  const tradeStart=()=>monthIndex($('tradeStartMonth').value)??monthIndex(monthKeyFromDate(new Date()));
+  const tradePurchaseMonth=(start,months)=>!Number.isFinite(months)||months>600?'ยังระบุเดือนไม่ได้':months===0?'มีเงินซื้อได้แล้ว':`คาดว่าจะซื้อได้: ${monthLabel(start+months-1)}`;
   const savingsFinishLabel=(start,months)=>!Number.isFinite(months)?'ยังคำนวณไม่ได้':months===0?'ถึงเป้าหมายแล้ว':monthLabel(start+months-1);
   function forecastSavings(goal,initial,monthly,start,expenses){
     if(initial>=goal)return 0;
@@ -767,10 +770,11 @@
       }));
     };
     const remaining=Math.max(0,price-current),invest=investRequested;
+    const start=tradeStart();
     set('tradeSplitA',`${baht(monthly)}/เดือน เข้า Car Fund`);
     set('tradeSplitB',invest>monthly?'ยอดลงทุนเกินงบรวม':`${baht(monthly-invest)} เข้า Car Fund + ${baht(invest)} ลงทุน/เดือน`);
     if(invest>monthly){
-      set('tradeA','—');set('tradeB','—');set('tradeDelay','เกินงบรวม');
+      set('tradeA','—');set('tradeB','—');set('tradeMonthA','—');set('tradeMonthB','—');set('tradeDelay','เกินงบรวม');
       set('tradeSummary','แผน B กำหนดเงินลงทุนเกินงบรวมต่อเดือน');
       set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);return;
     }
@@ -779,6 +783,8 @@
     const dateB=remaining===0?0:carPerMonth<=0?Infinity:Math.ceil(remaining/carPerMonth);
     const valid=Number.isFinite(dateB)&&dateB<=600;
     set('tradeA',visibleMonths(dateA));set('tradeB',visibleMonths(dateB));
+    set('tradeMonthA',tradePurchaseMonth(start,dateA));
+    set('tradeMonthB',tradePurchaseMonth(start,dateB));
     if(!valid){set('tradeDelay','คำนวณไม่ได้');set('tradeSummary','แผน B ไม่มีเงินเติม Car Fund หรือใช้เวลานานเกิน 50 ปี');set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');set('tradePortBBreakdown','—');set('tradeDiff','—');explain(['ลองลดเงินที่แบ่งไปลงทุน หรือเพิ่มงบรวมต่อเดือน']);return;}
     const delay=dateB-dateA;
     let carA=Math.min(current,price),carB=carA,portfolioA=0,portfolioB=0;
@@ -943,6 +949,7 @@
   document.querySelectorAll('[data-reset]').forEach(button=>button.addEventListener('click',()=>{
     const group=button.dataset.reset;groups[group].forEach(key=>{state[key]=DEFAULT[key];syncField(key)});
     if(group==='tax')$('taxWithheldInput').value='';
+    if(group==='tradeoff')$('tradeStartMonth').value=monthKeyFromDate(new Date());
     if(group==='savings'){
       plannedExpenses.length=0;
       $('savStartMonth').value=monthKeyFromDate(new Date());
@@ -965,6 +972,11 @@
   document.querySelectorAll('[data-print]').forEach(button=>button.addEventListener('click',exportSnapshot));
   $('savStartMonth').value=monthKeyFromDate(new Date());
   $('savStartMonth').addEventListener('change',savings);
+  $('tradeStartMonth').value=monthKeyFromDate(new Date());
+  $('tradeStartMonth').addEventListener('change',()=>{
+    if(monthIndex($('tradeStartMonth').value)===null)$('tradeStartMonth').value=monthKeyFromDate(new Date());
+    tradeoff();
+  });
   $('savAddExpense').addEventListener('click',()=>{
     const start=savingsStart();
     plannedExpenses.push({id:nextExpenseId++,month:monthKey(start),label:'',amount:0});
