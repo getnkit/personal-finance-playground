@@ -16,6 +16,12 @@ async function check(engine,name,options){
  console.log('Loaded '+name);
  await page.waitForTimeout(150);
  assert.equal(await page.locator('#invTotal').textContent()!=='—',true,name+': initial metrics');
+ const inputFont=await page.locator('#invWithdrawal-num').evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
+ const selectFont=await page.locator('#taxParents-select').evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
+ assert.ok(inputFont>=16,name+': mobile numeric inputs prevent focus zoom');
+ assert.ok(selectFont>=16,name+': mobile selects prevent focus zoom');
+ const heroHeight=await page.locator('.intro').evaluate(el=>el.getBoundingClientRect().height);
+ assert.ok(heroHeight<185,name+': mobile hero remains compact');
  for(const mode of ['car','savings','tax','investment']){
    console.log('Clicking '+name+' '+mode);
    await page.locator('.bottom-tabs .tab[data-tab="'+mode+'"]').click({timeout:10000});
