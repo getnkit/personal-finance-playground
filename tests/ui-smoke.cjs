@@ -39,6 +39,27 @@ for(const tab of ['car','savings','tax','investment']){
   assert.ok(document.querySelector('#'+tab+' .results-card'),'Live result card for '+tab);
   assert.equal(document.getElementById('printSnapshot'),null,'No duplicate square-box report');
 }
+// Numeric fields restore the last valid value rather than resetting to DEFAULT.
+document.querySelector('.tab[data-tab="car"]').click();
+const fuel=document.getElementById('carFuel-num');
+fuel.value='3600';fuel.dispatchEvent(new Event('input',{bubbles:true}));
+fuel.value='';fuel.dispatchEvent(new Event('change',{bubbles:true}));
+assert.equal(fuel.value,'3600','Empty car fuel input restores last entered value');
+// Withdrawal is now defined in today's purchasing power.
+document.querySelector('.tab[data-tab="investment"]').click();
+assert.match(document.getElementById('invWithdrawalNominal').textContent,/44,578/,'Retirement nominal amount appears near input');
+assert.match(document.getElementById('invWithdraw').textContent,/44,578/,'Result shows inflation-adjusted withdrawal');
+// Tax annual income overrides the salary and bonus fields visibly.
+document.querySelector('.tab[data-tab="tax"]').click();
+const annualActual=document.getElementById('taxAnnualActual-num');
+annualActual.value='500000';annualActual.dispatchEvent(new Event('input',{bubbles:true}));
+assert.equal(document.getElementById('taxOverrideNotice').hidden,false,'Annual-income override note visible');
+assert.equal(document.getElementById('taxSalary-num').disabled,true,'Overridden salary input disabled');
+assert.equal(document.getElementById('taxBonus-num').disabled,true,'Overridden bonus input disabled');
+annualActual.value='0';annualActual.dispatchEvent(new Event('input',{bubbles:true}));
+assert.equal(document.getElementById('taxSalary-num').disabled,false,'Salary restored when annual override removed');
+// The smaller duration label should omit a redundant zero-month suffix.
+assert.equal(document.getElementById('carEarlier-num').value,'12');
 document.querySelector('.tab[data-tab="tax"]').click();
 const parent=document.getElementById('taxParents-select');
 parent.value='1';
