@@ -45,6 +45,11 @@ const fuel=document.getElementById('carFuel-num');
 fuel.value='3600';fuel.dispatchEvent(new Event('input',{bubbles:true}));
 fuel.value='';fuel.dispatchEvent(new Event('change',{bubbles:true}));
 assert.equal(fuel.value,'3600','Empty car fuel input restores last entered value');
+const loanYears=document.getElementById('carLoanYears-num');
+loanYears.value='5';loanYears.dispatchEvent(new Event('input',{bubbles:true}));
+assert.match(document.getElementById('carBarInterestText').textContent,/21,181/,'Five-year loan allocates higher early interest');
+loanYears.value='1';loanYears.dispatchEvent(new Event('input',{bubbles:true}));
+assert.match(document.getElementById('carBarInterestText').textContent,/12,500/,'One-year loan allocates full interest over 12 months');
 // Withdrawal is now defined in today's purchasing power.
 document.querySelector('.tab[data-tab="investment"]').click();
 assert.match(document.getElementById('invWithdrawalNominal').textContent,/44,578/,'Retirement nominal amount appears near input');
