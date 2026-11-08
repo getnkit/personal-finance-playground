@@ -70,6 +70,18 @@ async function check(engine,name,options){
  assert.equal(await page.locator('#tradeMonthB').textContent(),'คาดว่าจะซื้อได้: ธ.ค. 2027',name+': removal restores B');
  await page.locator('[data-reset="tradeoff"]').click();
  assert.match(await page.locator('#tradeStartMonth').inputValue(),/^\d{4}-\d{2}$/,name+': tradeoff reset month');
+ // Confirm final top-up amounts are visible in mobile render and remain in print output.
+ await page.locator('#savNow-num').fill('0');
+ await page.locator('#savMonthly-num').fill('30000');
+ await page.locator('#savStartMonth').evaluate(el=>{el.value='2026-11';el.dispatchEvent(new Event('change',{bubbles:true}));});
+ assert.match(await page.locator('#savLastTopUp').textContent(),/10,000/,name+': savings default last deposit');
+ assert.equal(await page.locator('#savLastTopUp').evaluate(el=>!el.hidden),true,name+': savings last deposit shown');
+ await page.locator('#tradeStartMonth').evaluate(el=>{el.value='2026-11';el.dispatchEvent(new Event('change',{bubbles:true}));});
+ assert.match(await page.locator('#tradeLastA').textContent(),/15,000/,name+': A last deposit');
+ assert.match(await page.locator('#tradeLastB').textContent(),/10,000/,name+': B last deposit');
+ await page.emulateMedia({media:'print'});
+ assert.equal(await page.locator('#tradeLastA').isVisible(),true,name+': last deposit remains printable');
+ await page.emulateMedia({media:'screen'});
  await page.locator('.bottom-tabs .tab[data-tab="tax"]').click();
  await page.locator('.tax-more summary').click();
  await page.locator('#taxParents-select').selectOption('1');

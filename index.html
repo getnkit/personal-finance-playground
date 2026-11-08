@@ -152,6 +152,7 @@
     .sav-expense-row input[type=number]{text-align:right}
     .sav-remove{height:36px;padding:5px 9px;align-self:end;background:#fff;border:1px solid #e4e9e9;border-radius:9px;color:#a04a4a;font-size:11px;font-weight:700}
     .sav-remove:hover{border-color:#e0adad;background:#fff6f5}
+    .mini .micro.final-topup{font-size:11px;line-height:1.5;font-weight:650;color:#405d60}
     .sav-result-grid{margin-bottom:0}
     .sav-result-grid .mini strong{font-size:16px}
     @media(max-width:520px){
@@ -388,11 +389,11 @@
           </div>
           <div class="card results-card"><div class="metric-title">เวลาที่ต้องใช้เพื่อถึงเป้าหมาย</div><div class="metric-primary" id="savTime">—</div>
             <div class="mini-grid sav-result-grid">
-              <div class="mini"><div class="k">คาดว่าจะถึงเป้าหมาย</div><strong id="savFinishMonth">—</strong></div>
+              <div class="mini"><div class="k">คาดว่าจะถึงเป้าหมาย</div><strong id="savFinishMonth">—</strong><div class="micro final-topup" id="savLastTopUp" hidden>—</div></div>
               <div class="mini" id="savCompareBox" hidden><div class="k">ถ้าไม่มีรายจ่ายพิเศษ</div><strong id="savBaseFinish">—</strong><div class="micro" id="savDelay">—</div></div>
             </div>
             <details><summary>สูตรและขอบเขต</summary><ul>
-              <li><strong>การคำนวณ:</strong> ออมเงินปลายเดือน ตั้งแต่เดือนที่เลือก จนสะสมครบเป้าหมาย</li>
+              <li><strong>การคำนวณ:</strong> ออมเงินปลายเดือน ตั้งแต่เดือนที่เลือก จนสะสมครบเป้าหมาย ยอดเติมงวดสุดท้ายคือส่วนที่ขาดอยู่ก่อนเงินรอบนั้น ไม่ใช่ค่าใช้จ่ายเพิ่มนอกแผน</li>
               <li><strong>รายจ่ายพิเศษ:</strong> หักจากเงินออมของเดือนนั้นเท่านั้น ถ้าเกินยอดออมจะออมได้ 0 บาท โดยไม่ถอนเงินสะสมเดิมหรือทบยอดที่เกิน</li>
               <li><strong>สมมติฐาน:</strong> เป้าหมายคงที่ ไม่รวมผลตอบแทนและเงินเฟ้อ รายจ่ายที่รวมไว้ในยอดออมสุทธิแล้วไม่ต้องหักซ้ำ</li>
             </ul></details>
@@ -418,7 +419,7 @@
                <div><strong>แผน B · ซื้อรถพร้อมลงทุน</strong><span id="tradeSplitB">—</span></div>
              </div>
              <div class="addon-output"><div class="metric-title">ลงทุนไปด้วย ทำให้ซื้อรถช้าลง</div><div class="metric-primary" id="tradeDelay">—</div><div class="metric-sub" id="tradeSummary">—</div>
-              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro" id="tradeMonthA">—</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro" id="tradeMonthB">—</div></div><div class="mini"><div class="k">พอร์ตแผน A · ณ เดือนที่ B ซื้อรถได้</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตแผน B · ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
+              <div class="mini-grid"><div class="mini"><div class="k">แผน A · เน้นซื้อรถก่อน</div><strong id="tradeA">—</strong><div class="micro" id="tradeMonthA">—</div><div class="micro final-topup" id="tradeLastA" hidden>—</div></div><div class="mini"><div class="k">แผน B · แบ่งเงินลงทุน</div><strong id="tradeB">—</strong><div class="micro" id="tradeMonthB">—</div><div class="micro final-topup" id="tradeLastB" hidden>—</div></div><div class="mini"><div class="k">พอร์ตแผน A · ณ เดือนที่ B ซื้อรถได้</div><strong id="tradePortA">—</strong><div class="micro" id="tradePortABreakdown">—</div></div><div class="mini"><div class="k">พอร์ตแผน B · ณ เดือนเดียวกัน</div><strong id="tradePortB">—</strong><div class="micro" id="tradePortBBreakdown">—</div></div></div>
               <div class="metric-title">พอร์ตแผน B มากกว่า/น้อยกว่าแผน A เท่าไร</div><div style="font-size:22px;font-weight:800" id="tradeDiff">—</div><ul class="tradeoff-points trade-detail-list" id="tradeDetail" aria-label="คำอธิบายผลเปรียบเทียบ"></ul>
             </div>
             <div class="button-row"><button class="btn" data-reset="tradeoff" type="button">↺ คืนค่าตัวอย่าง</button></div>
@@ -675,6 +676,12 @@
   const tradeStart=()=>monthIndex($('tradeStartMonth').value)??monthIndex(monthKeyFromDate(new Date()));
   const tradePurchaseMonth=(start,months)=>!Number.isFinite(months)||months>600?'ยังระบุเดือนไม่ได้':months===0?'มีเงินซื้อได้แล้ว':`คาดว่าจะซื้อได้: ${monthLabel(start+months-1)}`;
   const savingsFinishLabel=(start,months)=>!Number.isFinite(months)?'ยังคำนวณไม่ได้':months===0?'ถึงเป้าหมายแล้ว':monthLabel(start+months-1);
+  function showFinalTopUp(id,amount,kind){
+    const el=$(id);
+    const needed=amount!==null&&Number.isFinite(amount)&&amount>0;
+    el.hidden=!needed;
+    el.textContent=needed?`เติม${kind==='car'?' Car Fund':''} งวดสุดท้าย ${baht(amount)}`:'';
+  }
   function plannedExpensesByMonth(expenses,start){
     const byMonth=new Map();
     for(const item of expenses){
@@ -684,16 +691,20 @@
     return byMonth;
   }
   function forecastSavings(goal,initial,monthly,start,expenses){
-    if(initial>=goal)return 0;
-    if(monthly<=0)return Infinity;
+    if(initial>=goal)return {months:0,lastTopUp:null};
+    if(monthly<=0)return {months:Infinity,lastTopUp:null};
     const plannedByMonth=plannedExpensesByMonth(expenses,start);
     let saved=initial;
     for(let i=0;i<SAV_MAX_CALC_MONTHS;i++){
-      // Never draw down existing savings or carry overspending into the next month.
-      saved+=Math.max(0,monthly-(plannedByMonth.get(start+i)||0));
-      if(saved+1e-7>=goal)return i+1;
+      // Each contribution is made at month-end; planned expenses only reduce
+      // that month's contribution, never the balance from prior months.
+      const available=Math.max(0,monthly-(plannedByMonth.get(start+i)||0));
+      if(saved+available+1e-7>=goal){
+        return {months:i+1,lastTopUp:Math.min(available,Math.max(0,goal-saved))};
+      }
+      saved+=available;
     }
-    return Infinity;
+    return {months:Infinity,lastTopUp:null};
   }
   // Both planners share the same month and amount input behavior while storing
   // their hypothetical expenses independently.
@@ -768,10 +779,12 @@
       const dated=monthIndex(item.month);
       if(dated===null||dated<start)item.month=monthKey(start);
     }
-    const baseMonths=forecastSavings(goal,now,monthly,start,[]);
-    const months=forecastSavings(goal,now,monthly,start,plannedExpenses);
+    const baseline=forecastSavings(goal,now,monthly,start,[]);
+    const projection=forecastSavings(goal,now,monthly,start,plannedExpenses);
+    const baseMonths=baseline.months,months=projection.months;
     set('savTime',visibleMonths(months));
     set('savFinishMonth',savingsFinishLabel(start,months));
+    showFinalTopUp('savLastTopUp',projection.lastTopUp,'savings');
     const active=plannedExpenses.some(item=>item.amount>0&&monthIndex(item.month)>=start);
     $('savCompareBox').hidden=!active;
     if(active){
@@ -792,6 +805,7 @@
     let carA=Math.min(current,price),carB=carA,portfolioA=0,portfolioB=0;
     let contributionsA=0,contributionsB=0;
     let dateA=carA>=price?0:Infinity,dateB=carB>=price?0:Infinity;
+    let lastTopUpA=null,lastTopUpB=null;
     const monthlyRate=rate/1200;
     for(let t=1;t<=SAV_MAX_CALC_MONTHS&&!Number.isFinite(dateB);t++){
       const available=Math.max(0,monthly-(expensesByMonth.get(start+t-1)||0));
@@ -803,10 +817,10 @@
       portfolioA=portfolioA*(1+monthlyRate)+investA;
       portfolioB=portfolioB*(1+monthlyRate)+investB;
       contributionsA+=investA;contributionsB+=investB;
-      if(!Number.isFinite(dateA)&&carA+1e-7>=price)dateA=t;
-      if(!Number.isFinite(dateB)&&carB+1e-7>=price)dateB=t;
+      if(!Number.isFinite(dateA)&&carA+1e-7>=price){dateA=t;lastTopUpA=buyA;}
+      if(!Number.isFinite(dateB)&&carB+1e-7>=price){dateB=t;lastTopUpB=buyB;}
     }
-    return {dateA,dateB,portfolioA,portfolioB,contributionsA,contributionsB};
+    return {dateA,dateB,lastTopUpA,lastTopUpB,portfolioA,portfolioB,contributionsA,contributionsB};
   }
 
   // Compare both plans at the same month: when Plan B has finished funding the car.
@@ -833,6 +847,7 @@
     set('tradeSplitB',invest>monthly?'ยอดลงทุนเกินงบรวม':`${baht(monthly-invest)} เข้า Car Fund + ${baht(invest)} ลงทุน/เดือน`);
     if(invest>monthly){
       set('tradeA','—');set('tradeB','—');set('tradeMonthA','—');set('tradeMonthB','—');
+      showFinalTopUp('tradeLastA',null,'car');showFinalTopUp('tradeLastB',null,'car');
       set('tradeDelay','เกินงบรวม');
       set('tradeSummary','แผน B กำหนดเงินลงทุนเกินงบรวมต่อเดือน');
       set('tradePortA','—');set('tradePortB','—');set('tradePortABreakdown','—');
@@ -842,11 +857,13 @@
       return;
     }
     const result=simulateCarTradeoff(price,current,monthly,invest,rate,start,tradeExpenses);
-    const {dateA,dateB,portfolioA,portfolioB,contributionsA,contributionsB}=result;
+    const {dateA,dateB,lastTopUpA,lastTopUpB,portfolioA,portfolioB,contributionsA,contributionsB}=result;
     const valid=Number.isFinite(dateB);
     set('tradeA',visibleMonths(dateA));set('tradeB',visibleMonths(dateB));
     set('tradeMonthA',tradePurchaseMonth(start,dateA));
     set('tradeMonthB',tradePurchaseMonth(start,dateB));
+    showFinalTopUp('tradeLastA',lastTopUpA,'car');
+    showFinalTopUp('tradeLastB',lastTopUpB,'car');
     if(!valid){
       set('tradeDelay','คำนวณไม่ได้');
       set('tradeSummary','แผน B ยังเก็บเงินซื้อรถไม่ครบภายในขอบเขตจำลอง 50 ปี');
