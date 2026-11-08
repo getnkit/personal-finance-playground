@@ -4,20 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101e36">
+  <meta name="application-name" content="Finance Lab">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Finance Lab">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="description" content="ทดลองวางแผนลงทุน ซื้อรถ และเงินออม ปรับตัวเลขเพื่อเปรียบเทียบทางเลือกก่อนตัดสินใจ">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Personal Finance Playground">
+  <meta property="og:title" content="Finance Lab">
   <meta property="og:description" content="ลองปรับตัวเลข แล้วเห็นภาพแผนลงทุน ซื้อรถ เงินออม และภาษีในหน้าเดียว">
   <meta property="og:url" content="https://getnkit.github.io/personal-finance-playground/">
   <meta name="twitter:card" content="summary">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101e36'/%3E%3Cpath d='M14 43 27 30 36 36 51 17M40 17h11v11' fill='none' stroke='%2359d4bf' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <title>Personal Finance Playground</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <title>Finance Lab</title>
   <style>
     :root{color-scheme:light;--navy:#101e36;--ink:#17263b;--sub:#617087;--teal:#0e9985;--teal-dark:#087664;--line:#e3eaf0;--wash:#f5f8fa;--white:#fff;--amber:#efb34f;--blue:#7893bb;--shadow:0 12px 44px rgba(23,39,60,.055)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f8fb;color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;font-variant-numeric:tabular-nums}
     button,input,select{font:inherit}button{cursor:pointer}a{color:var(--teal-dark);text-underline-offset:3px}
     .sitebar{background:var(--navy);color:#fff;padding:20px max(22px,calc((100vw - 1140px)/2));display:flex;align-items:center;justify-content:space-between;gap:14px}
-    .brand{display:flex;align-items:center;gap:12px}.brandmark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#59d4bf,#1c9a8f);color:#0d2830;font-size:23px;font-weight:800;box-shadow:0 4px 15px #0002}
+    .brand{display:flex;align-items:center;gap:12px}.brandmark{width:40px;height:40px;border-radius:11px;display:block;object-fit:cover;box-shadow:0 4px 15px #0002}
     .brand-title{font-size:16px;font-weight:760;line-height:1.25;letter-spacing:-.3px}.brand-sub{font-size:11px;opacity:.68;letter-spacing:.1em;margin-top:2px}
     .top-pill{border:1px solid #ffffff35;color:#e5f6f3;background:#ffffff0b;padding:6px 12px;border-radius:999px;font-size:12px;white-space:nowrap}
     .shell{max-width:1140px;margin:auto;padding:27px 22px 70px}
@@ -214,7 +220,7 @@
 </head>
 <body>
   <header class="sitebar">
-    <div class="brand"><div class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></div><div><div class="brand-title">Personal Finance Playground</div><div class="brand-sub">PLAN · EXPLORE · DECIDE</div></div></div>
+    <div class="brand"><img class="brandmark" src="./apple-touch-icon.png" alt="" aria-hidden="true"><div><div class="brand-title">Finance Lab</div><div class="brand-sub">PLAN · EXPLORE · DECIDE</div></div></div>
   </header>
   <div class="shell">
     <div class="intro">
@@ -455,7 +461,7 @@
         </div>
       </section>
     </main>
-    <div class="footer"><span>© 2026 getnkit · Personal Finance Playground</span><span>ผลลัพธ์เป็นเพียงการจำลอง ไม่รับประกันผลลัพธ์จริง</span></div>
+    <div class="footer"><span>© 2026 getnkit · Finance Lab</span><span>ผลลัพธ์เป็นเพียงการจำลอง ไม่รับประกันผลลัพธ์จริง</span></div>
   </div>
   <nav class="bottom-tabs" aria-label="เลือกโหมด (มือถือ)">
     <button class="tab" data-tab="investment" aria-selected="true"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></span><span class="tab-text">Investment</span></button>

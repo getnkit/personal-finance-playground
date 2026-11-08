@@ -1,4 +1,7 @@
-# Personal Finance Playground
+# Finance Lab
+
+**On iPhone:** open the live site in Safari, then Share → Add to Home Screen. The app uses the Finance Lab name and the navy/mint icon. If an earlier Home Screen shortcut still shows the old icon, remove it and add it again. The repository and Pages URL remain unchanged.
+
 
 Mobile-first, free, standalone financial *what-if* simulator. Built with a single `index.html` using HTML, CSS, and JavaScript. No account, backend, or paid hosting required.
 

@@ -1,0 +1,17 @@
+{
+  "name": "Finance Lab",
+  "short_name": "Finance Lab",
+  "description": "เครื่องมือจำลองและวางแผนการเงินส่วนบุคคล",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#101e36",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
