@@ -173,6 +173,7 @@
     .export-btn{white-space:nowrap;flex-shrink:0;border-color:#b6dcd5;color:#0b7368;background:#f5fcfa}
     .print-meta{display:none}
     @media(max-width:520px){.export-btn{font-size:11px;padding:8px 9px}.section-head h2{font-size:20px}}
+    .withdraw-hint{font-size:11px;line-height:1.5;margin:5px 0 0;color:var(--teal-dark)}
     @page{size:A4 portrait;margin:12mm}
     /* Reuse the live UI rather than rebuilding the results as square rows. */
     @media print{
@@ -263,12 +264,12 @@
               <div class="input-grid"><div class="field" data-field="invInitial"><div class="field-line"><label for="invInitial-num">เงินลงทุนตั้งต้น</label><div class="field-input"><input id="invInitial-num" type="number" min="0" max="1000000000" step="10000" value="0"><span>บาท</span></div></div></div><div class="field" data-field="invInflation"><div class="field-line"><label for="invInflation-num">เงินเฟ้อต่อปี</label><div class="field-input"><input id="invInflation-num" type="number" min="0" max="15" step="0.5" value="2"><span>%</span></div></div></div></div>
               <div class="phase-heading">ช่วงเกษียณ <span>· หยุดเติมเงิน</span></div>
               <div class="field" data-field="invRetRate"><div class="field-line"><label for="invRetRate-num">ผลตอบแทนช่วงเกษียณ / ปี</label><div class="field-input"><input id="invRetRate-num" type="number" min="0" max="10" step="0.5" value="3"><span>%</span></div></div><input aria-label="ผลตอบแทนช่วงเกษียณ ปรับแถบ" type="range" min="0" max="10" step="0.5" value="3"><div class="range-ends"><span>0%</span><span>10%</span></div></div>
-              <div class="field" data-field="invWithdrawal"><div class="field-line"><label for="invWithdrawal-num">เริ่มถอนใช้ต่อเดือน</label><div class="field-input"><input id="invWithdrawal-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="ถอนใช้ต่อเดือน ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div></div>
+              <div class="field" data-field="invWithdrawal"><div class="field-line"><label for="invWithdrawal-num">ต้องการใช้ต่อเดือน (กำลังซื้อวันนี้)</label><div class="field-input"><input id="invWithdrawal-num" type="number" inputmode="numeric" min="0" max="1000000" step="1000" value="30000"><span>บาท</span></div></div><input aria-label="เงินที่ต้องการใช้ต่อเดือน ตามกำลังซื้อวันนี้ ปรับแถบ" type="range" min="0" max="100000" step="1000" value="30000"><div class="range-ends"><span>0</span><span>100,000</span></div><p class="withdraw-hint" id="invWithdrawalNominal">—</p></div>
             </div>
             <div class="button-row"><button class="btn" type="button" data-reset="investment">↺ คืนค่าตัวอย่าง</button></div>
           </div>
           <div class="card results-card"><div class="metric-title">มูลค่าพอร์ตปลายงวด (สมมติ)</div><div class="metric-primary" id="invTotal" aria-live="polite">—</div><div class="metric-sub" id="invSummary">—</div>
-            <div class="mini-grid"><div class="mini"><div class="k">เงินต้นสะสม</div><strong id="invPrincipal">—</strong></div><div class="mini"><div class="k">ผลตอบแทนสะสม</div><strong id="invGrowth">—</strong></div><div class="mini"><div class="k">มูลค่าเทียบกำลังซื้อวันนี้</div><strong id="invReal">—</strong></div><div class="mini"><div class="k">เงินถอนใช้เริ่มต้น / เดือน</div><strong id="invWithdraw">—</strong><div class="micro" id="invWithdrawReal">—</div></div></div>
+            <div class="mini-grid"><div class="mini"><div class="k">เงินต้นสะสม</div><strong id="invPrincipal">—</strong></div><div class="mini"><div class="k">ผลตอบแทนสะสม</div><strong id="invGrowth">—</strong></div><div class="mini"><div class="k">มูลค่าเทียบกำลังซื้อวันนี้</div><strong id="invReal">—</strong></div><div class="mini"><div class="k">ยอดถอนจริงเมื่อเริ่มเกษียณ / เดือน</div><strong id="invWithdraw">—</strong><div class="micro" id="invWithdrawReal">—</div></div></div>
             <div class="retirement-forecast"><div class="metric-title">หลังหยุดเติมเงิน พอร์ตอยู่ได้นานเท่าไร?</div><div class="retirement-years" id="invRunway" aria-live="polite">—</div><div class="metric-sub" id="invRunwaySummary">—</div></div>
             <div class="chart-title"><span>การเติบโตของพอร์ต</span><div class="legend"><span><b style="background:#0e9985"></b>พอร์ต</span><span><b style="background:#b1c1cc"></b>เงินต้น</span></div></div>
             <div class="chartwrap"><svg id="invChart" class="svgchart" viewBox="0 0 570 218" role="img" aria-label="กราฟมูลค่าพอร์ตตามระยะเวลาลงทุน"></svg></div>
@@ -277,19 +278,19 @@
               <div class="mini"><div class="k">พอร์ตเมื่อผลตอบแทนต่ำลง</div><strong id="invAltTotal">—</strong></div>
               <div class="mini"><div class="k">มูลค่าพอร์ตที่ลดลง</div><strong id="invDiff">—</strong></div>
               <div class="mini"><div class="k">พอร์ตอยู่ได้นานเท่าไร ถ้าถอนเท่าเดิม</div><strong id="invAltRunway">—</strong><div class="micro" id="invAltRunwayDetail">—</div></div>
-              <div class="mini"><div class="k">ถอนต่อเดือนเท่าไร เพื่อให้อยู่ได้นานเท่าเดิม</div><strong id="invAltWithdrawal">—</strong><div class="micro" id="invAltWithdrawalDetail">—</div><div class="micro downside-real" id="invAltWithdrawalReal">—</div></div>
+              <div class="mini"><div class="k">ถอนเทียบกำลังซื้อวันนี้เท่าไร เพื่อให้อยู่ได้นานเท่าเดิม</div><strong id="invAltWithdrawal">—</strong><div class="micro" id="invAltWithdrawalDetail">—</div><div class="micro downside-real" id="invAltWithdrawalReal">—</div></div>
             </div>
             <div class="source">ลดเฉพาะผลตอบแทนช่วงสะสมเงิน · ผลตอบแทนช่วงเกษียณและเงินเฟ้อยังคงตามค่าที่กรอก</div>
             <div class="alert warm">อายุพอร์ตเป็นเพียงแบบจำลองจากผลตอบแทนคงที่ ไม่ใช่การรับประกันว่าเงินจะอยู่ได้นานเท่านี้</div>
             <details><summary>สูตรและสมมติฐาน</summary><ul>
               <li><strong>ช่วงสะสมเงิน:</strong> เงินลงทุนเริ่มต้นทบต้นรายเดือน และเติมเงินทุกสิ้นเดือนจนครบระยะเวลาที่ตั้งไว้</li>
-              <li><strong>ช่วงถอนใช้:</strong> หลังหยุดเติมเงิน ถอนปลายเดือนตามจำนวนที่ตั้งไว้ โดยใช้ผลตอบแทนช่วงเกษียณแยกจากช่วงสะสมเงิน จำลองสูงสุด 100 ปี</li>
-              <li><strong>เงินเฟ้อ:</strong> ใช้แปลงมูลค่าพอร์ตเป็นกำลังซื้อวันนี้ และเพิ่มเงินถอนตามอัตราเงินเฟ้อเมื่อครบทุก 12 เดือน เช่น 30,000 บาท/เดือนที่เงินเฟ้อ 2% จะเป็น 30,600 บาท/เดือนในปีถัดไป</li>
+              <li><strong>ช่วงถอนใช้:</strong> หลังหยุดเติมเงิน ระบบแปลงยอดที่ต้องการใช้ตามกำลังซื้อวันนี้ให้เป็นยอดถอน ณ วันเริ่มเกษียณตามเงินเฟ้อ แล้วถอนปลายเดือนด้วยผลตอบแทนช่วงเกษียณแยกจากช่วงสะสมเงิน จำลองสูงสุด 100 ปี</li>
+              <li><strong>เงินเฟ้อ:</strong> ใช้แปลงเป้าหมายรายเดือนจากกำลังซื้อวันนี้เป็นจำนวนเงิน ณ วันเกษียณ และปรับยอดถอนขึ้นตามเงินเฟ้อทุก 12 เดือนหลังเกษียณ</li>
               <li><strong>ข้อจำกัด:</strong> ผลตอบแทนทั้งสองช่วงเป็นเพียงสมมติฐานคงที่ แม้ตั้งช่วงเกษียณไว้ที่ 0% ผลตอบแทนจริงก็อาจติดลบในบางปีได้ แบบจำลองไม่รวมภาษี ค่าธรรมเนียม หรือความผันผวนของตลาด</li>
             </ul></details>
             <div class="purchasing-power-note" aria-label="คำอธิบายกำลังซื้อวันนี้">
               <h3>“กำลังซื้อวันนี้” หมายถึงอะไร?</h3>
-              <p>คือการนำเงินในอนาคตมาเทียบกับราคาสินค้าในวันนี้ เพื่อให้เห็นผลของเงินเฟ้อ เช่น ถ้าอีก 20 ปีมีเงิน 10 ล้านบาท และเงินเฟ้อเฉลี่ย 2% ต่อปี เงินก้อนนั้นจะมีกำลังซื้อใกล้เคียงเงิน 6.73 ล้านบาทในวันนี้ แต่ยอดเงินจริงยังเป็น 10 ล้านบาท ส่วนตัวเลข “คิดเป็นกำลังซื้อวันนี้” ใต้เงินถอนใช้ต่อเดือนก็ใช้หลักการเดียวกัน</p>
+              <p>คือการนำเงินในอนาคตมาเทียบกับราคาสินค้าในวันนี้ เพื่อให้เห็นผลของเงินเฟ้อ เช่น ถ้าอีก 20 ปีมีเงิน 10 ล้านบาท และเงินเฟ้อเฉลี่ย 2% ต่อปี เงินก้อนนั้นจะมีกำลังซื้อใกล้เคียงเงิน 6.73 ล้านบาทในวันนี้ แต่ยอดเงินจริงยังเป็น 10 ล้านบาท สำหรับเงินถอน ผู้ใช้ระบุจำนวนที่อยากใช้ตามกำลังซื้อวันนี้ แล้วระบบแปลงเป็นยอดถอน ณ วันเริ่มเกษียณให้อัตโนมัติ</p>
             </div>
           </div>
         </div>
@@ -522,17 +523,19 @@
   function investment(){
     const {invMonthly:m,invYears:y,invRate:r,invInitial:p,invInflation:infl,invRetRate:retRate,invWithdrawal:w}=state;
     const total=futureValue(p,m,r,y),principal=p+m*y*12,growth=total-principal;
-    const real=total/Math.pow(1+infl/100,y),withdrawReal=w/Math.pow(1+infl/100,y);
+    const inflationFactor=Math.pow(1+infl/100,y);
+    const real=total/inflationFactor,withdrawStart=w*inflationFactor;
     const altRate=r-2,alt=futureValue(p,m,altRate,y);
-    const runway=withdrawalRunway(total,w,retRate,infl);
+    const runway=withdrawalRunway(total,withdrawStart,retRate,infl);
     set('invTotal',short(total));set('invSummary',`ลงทุน ${baht(m)}/เดือน นาน ${y} ปี ที่ผลตอบแทนสมมติ ${percent(r)}/ปี`);
-    set('invPrincipal',short(principal));set('invGrowth',short(growth));set('invReal',short(real));set('invWithdraw',baht(w));set('invWithdrawReal',`คิดเป็นกำลังซื้อวันนี้ประมาณ ${baht(withdrawReal)}/เดือน`);
+    set('invPrincipal',short(principal));set('invGrowth',short(growth));set('invReal',short(real));set('invWithdraw',baht(withdrawStart));set('invWithdrawReal',`เทียบกำลังซื้อวันนี้ ${baht(w)}/เดือน`);
+    set('invWithdrawalNominal',`ณ วันเริ่มเกษียณในอีก ${y} ปี ต้องถอนประมาณ ${baht(withdrawStart)}/เดือน (เงินเฟ้อ ${percent(infl)}/ปี)`);
     if(w===0){
       set('invRunway','ยังไม่ถอนเงิน');
       set('invRunwaySummary','ระบุเงินถอนใช้ต่อเดือนเพื่อคำนวณอายุพอร์ต');
     }else{
       set('invRunway',runway.exhausted?(runway.months===0?'ไม่ถึง 1 เดือน':visibleMonths(runway.months)):'มากกว่า 100 ปี');
-      set('invRunwaySummary',`เริ่มถอน ${baht(w)}/เดือน · ผลตอบแทนช่วงเกษียณ ${percent(retRate)}/ปี · เพิ่มเงินถอนตามเงินเฟ้อ ${percent(infl)}/ปี`);
+      set('invRunwaySummary',`เริ่มถอน ${baht(withdrawStart)}/เดือน ณ วันเกษียณ (เทียบกำลังซื้อวันนี้ ${baht(w)}) · ผลตอบแทนช่วงเกษียณ ${percent(retRate)}/ปี · เพิ่มเงินถอนตามเงินเฟ้อ ${percent(infl)}/ปี`);
     }
     set('invAltRate',`${percent(r)} → ${percent(altRate)}`);set('invAltTotal',short(alt));set('invDiff',short(Math.max(0,total-alt)));
     set('invAltWithdrawalReal','');
@@ -542,7 +545,7 @@
       set('invAltRunway','—');set('invAltRunwayDetail','ระบุเงินถอนใช้ต่อเดือนก่อน');
       set('invAltWithdrawal','—');set('invAltWithdrawalDetail','ยังไม่มีระยะเวลาถอนใช้ให้เปรียบเทียบ');
     }else{
-      const downsideRunway=withdrawalRunway(alt,w,retRate,infl);
+      const downsideRunway=withdrawalRunway(alt,withdrawStart,retRate,infl);
       set('invAltRunway',downsideRunway.exhausted?(downsideRunway.months===0?'ไม่ถึง 1 เดือน':visibleMonths(downsideRunway.months)):'มากกว่า 100 ปี');
       if(runway.exhausted){
         const lostMonths=Math.max(0,runway.months-downsideRunway.months);
@@ -558,10 +561,10 @@
       }else{
         // Withdrawals and portfolio balances scale proportionally when retirement return
         // and inflation assumptions stay the same. Round down to whole baht conservatively.
-        const adjusted=Math.floor(w*alt/total);
-        set('invAltWithdrawal',baht(adjusted));
-        set('invAltWithdrawalReal',`คิดเป็นกำลังซื้อวันนี้ประมาณ ${baht(adjusted/Math.pow(1+infl/100,y))}/เดือน`);
-        set('invAltWithdrawalDetail',`ลดลง ${baht(w-adjusted)}/เดือน`);
+        const adjustedToday=Math.floor(w*alt/total);
+        set('invAltWithdrawal',baht(adjustedToday));
+        set('invAltWithdrawalReal',`ณ วันเริ่มเกษียณประมาณ ${baht(adjustedToday*inflationFactor)}/เดือน`);
+        set('invAltWithdrawalDetail',`ลดจากเป้าหมายวันนี้ ${baht(w-adjustedToday)}/เดือน`);
         $('invAltWithdrawalDetail').classList.add('downside-reduction');
       }
     }
