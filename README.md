@@ -14,9 +14,10 @@ Mobile-first, free, standalone financial *what-if* simulator. Built with a singl
 - On mobile, input text is at least 16px, the hero is more compact, and switching planners scrolls to the selected section. Empty number inputs revert to their last valid value. An annual tax income override is indicated explicitly.
 - No user scenario data is stored or transmitted, and no sticky result bar was added.
 
-## Four planners
+## Five planners
 
 - **Investment & Retirement:** contributions, compound growth, inflation-adjusted values, retirement withdrawals, and lower-return sensitivity.
+- **Portfolio Planner:** compare two target asset allocations (Cash/Money Market, Thai Equity, Global Equity, Bonds, Gold, optional Crypto and Other), edit illustrative stress shocks, see scenario loss against a user-selected tolerance, and split new monthly contributions. Optionally enter current allocation for buy-only rebalancing. Scenario loss is not a maximum drawdown or a guaranteed loss cap.
 - **Car Purchase Timing:** incremental costs of purchasing a car early, including an optional used-car loan.
 - **Savings & Goals:** cash savings targets with dated planned expenses, plus an independent **Car Fund First vs Car Fund + Investing** comparison with its own start month and dated planned expenses. Both plans reduce their monthly available budget by the same one-off expenses; Plan B prioritizes its requested investing amount when funds are sufficient. Neither planner draws down existing savings or carries excess expenses forward. Both the main savings goal and each car comparison plan show the exact final monthly contribution required to reach the goal, including any planned expense effects; no amount is shown for already-funded or unreachable goals.
 - **Tax Planning (Tax):** Thai tax year **2569**, scoped to salary / bonus income (Section 40(1)). Supports actual annual employment income, social security, basic personal deduction, eligible life/health insurance, eligible parents, provident fund, RMF, and tax withheld. The additional deduction field is **not** automatically verified.
@@ -39,4 +40,5 @@ Tax calculator regression cases can be run with Node.js (no dependencies):
 
 ```bash
 node tests/tax-regression.cjs
+node tests/portfolio-regression.cjs
 ```
