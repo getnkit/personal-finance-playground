@@ -229,6 +229,70 @@
       .sav-plan{break-inside:auto}
       .print-meta,.card,.mini,.alert,.retirement-forecast,.addon-output,.stack,.bar-bg{print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
     }
+
+    /* Portfolio Planner — built on the existing Finance Lab card system. */
+    .port-overview{display:grid;gap:11px;margin:14px 0 18px}
+    .port-setting{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12.5px;font-weight:650;color:#36536a}
+    .port-number{display:inline-flex;align-items:center;gap:6px;color:#778b9a;font-size:12px;white-space:nowrap}
+    .port-number input{width:85px;min-width:0;border:1px solid #d6e3e5;border-radius:9px;background:#fff;padding:8px 7px;text-align:right;color:#203a4c;font-size:15px;font-weight:720;min-height:37px}
+    .port-setting .port-number input{width:116px}
+    .port-number input:focus{outline:2px solid #9cd9ca;outline-offset:1px}
+    .port-switch{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:11px 0 17px;padding:5px;border:1px solid #e3ede9;border-radius:12px;background:#f4f8f7}
+    .port-switch button{background:none;border:1px solid transparent;border-radius:9px;padding:11px 8px;color:#617789;font-size:13px;font-weight:750}
+    .port-switch button[aria-pressed="true"]{background:#fff;border-color:#cbe9df;color:#0a7967;box-shadow:0 3px 10px #234c420a}
+    .port-section-title{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:14px 0 7px}
+    .port-section-title h3{margin:0;font-size:14px;color:#244650}
+    .port-status{font-size:11px;color:#12816c;font-weight:750}
+    .port-status.is-invalid{color:#ad4d46}
+    .port-weight-row{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:8px 0;border-bottom:1px solid #edf2f1}
+    .port-asset-label,.port-breakdown-label{display:inline-flex;align-items:center;gap:9px;font-size:12px;color:#38566a;min-width:0}
+    .port-swatch{width:10px;height:10px;border-radius:3px;flex:0 0 10px}
+    .port-weight-row .port-number input{width:75px}
+    .port-details{margin-top:8px;border-top:none;padding-top:0}
+    .port-details summary{padding:11px 0;font-size:12px;color:#257968;font-weight:700}
+    .port-details .port-weight-row:first-child{border-top:1px solid #edf2f1}
+    .port-toggle{display:flex;align-items:flex-start;gap:10px;margin-top:16px;padding:12px;background:#f4faf7;border:1px solid #dfede7;border-radius:11px;color:#315f56;font-size:12px;line-height:1.6;cursor:pointer}
+    .port-toggle input{width:17px;height:17px;margin-top:1px;accent-color:#0e9985;flex:0 0 auto}
+    .port-current{padding:12px 13px;border:1px solid #e4eeeb;border-radius:12px;margin-top:10px}
+    .port-current p,.port-explainer{margin:6px 0;font-size:11px;color:#718292;line-height:1.6}
+    .port-alert{padding:12px 13px;background:#edf8f3;border:1px solid #d6ece2;border-radius:11px;font-size:12px;color:#19745e;margin-top:12px;line-height:1.6}
+    .port-alert.is-warning{background:#fff5ed;color:#aa553c;border-color:#f3dfce}
+    .port-error{padding:13px;border:1px solid #f0d5c8;background:#fff8f3;border-radius:12px;color:#a5573b;font-size:12px;line-height:1.6}
+    .port-bar{display:flex;overflow:hidden;height:17px;border-radius:10px;background:#e9f0ef;margin:10px 0 13px;gap:2px}
+    .port-bar span{height:100%;min-width:0}
+    .port-breakdown-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid #edf1f1}
+    .port-breakdown-row strong{color:#284b57;font-size:12px;text-align:right;font-weight:730}
+    .port-result-hero{padding-bottom:13px;border-bottom:1px solid #e6eeeb}
+    .port-result-hero .metric-primary{margin:4px 0}
+    .port-result-main{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+    .port-result-mini{background:#f5f9f8;border:1px solid #e3eeea;border-radius:12px;padding:12px}
+    .port-result-mini strong{display:block;font-size:19px;color:#1c635d;overflow-wrap:anywhere}
+    .port-result-mini strong.is-negative{color:#b9564c}
+    .port-result-mini small{display:block;font-size:11px;color:#748693;margin-bottom:5px}
+    .port-block-title{margin:18px 0 8px;font-size:14px;font-weight:760;color:#254b54}
+    .port-comparison{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .port-compare{min-width:0;padding:12px;border:1px solid #e0eae7;background:#f8faf9;border-radius:12px}
+    .port-compare.is-selected{border-color:#70bea8;background:#f0f9f5}
+    .port-compare strong{display:block;font-size:18px;color:#274b59;margin:5px 0}
+    .port-compare small,.port-compare .port-compare-line{display:block;font-size:11px;color:#738493;line-height:1.6}
+    .port-note{margin:9px 0 0;color:#758798;font-size:11px;line-height:1.65}
+    #portfolio .port-breakdown-label{font-size:11.5px}
+    @media(max-width:760px){
+      .bottom-tabs{grid-template-columns:repeat(5,minmax(0,1fr));padding-left:5px;padding-right:5px}
+      .bottom-tabs .tab{font-size:9px;min-width:0}
+      .bottom-tabs .tab .tab-text{white-space:nowrap}
+      .port-setting .port-number input{width:112px}
+      .port-result-main{gap:7px}
+      .port-result-mini{padding:10px}
+      .port-result-mini strong{font-size:17px}
+    }
+    @media print{
+      .port-switch,#port-reset{display:none!important}
+      #portfolio .port-number input{box-shadow:none!important;background:#fff!important}
+      .port-compare,.port-result-mini,.port-bar{print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
+      .port-weight-row,.port-breakdown-row,.port-compare{break-inside:avoid}
+      .port-result-hero{break-inside:avoid}
+    }
   </style>
 </head>
 <body>
@@ -258,6 +322,7 @@
     </div>
     <nav class="tabs" aria-label="โหมดจำลอง">
       <button class="tab" data-tab="investment" aria-selected="true"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></span><span class="tab-text">Investment & Retirement</span></button>
+      <button class="tab" data-tab="portfolio" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3v18M12 12 20 7A9 9 0 0 0 12 3ZM12 12l-7 8a9 9 0 0 0 15-13"/></svg></span><span class="tab-text">Portfolio Planner</span></button>
       <button class="tab" data-tab="car" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span><span class="tab-text">Car Timing</span></button>
       <button class="tab" data-tab="savings" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="tab-text">Savings & Goals</span></button>
       <button class="tab" data-tab="tax" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tab-text">Tax</span></button>
@@ -303,6 +368,78 @@
             <div class="purchasing-power-note" aria-label="คำอธิบายกำลังซื้อวันนี้">
               <h3>“กำลังซื้อวันนี้” หมายถึงอะไร?</h3>
               <p>คือการนำเงินในอนาคตมาเทียบกับราคาสินค้าในวันนี้ เพื่อให้เห็นผลของเงินเฟ้อ เช่น ถ้าอีก 20 ปีมีเงิน 10 ล้านบาท และเงินเฟ้อเฉลี่ย 2% ต่อปี เงินก้อนนั้นจะมีกำลังซื้อใกล้เคียงเงิน 6.73 ล้านบาทในวันนี้ แต่ยอดเงินจริงยังเป็น 10 ล้านบาท สำหรับเงินถอน ผู้ใช้ระบุจำนวนที่อยากใช้ตามกำลังซื้อวันนี้ แล้วระบบแปลงเป็นยอดถอน ณ วันเริ่มเกษียณให้อัตโนมัติ</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section id="portfolio" class="panel" aria-labelledby="portfolio-title" hidden>
+        <div class="section-head"><div><h2 id="portfolio-title">Portfolio Planner</h2><p>ทดลองสัดส่วนสินทรัพย์ ประเมินผลกระทบ และแบ่งเงิน DCA ก่อนลงทุนจริง</p></div><button class="btn export-btn" type="button" data-print>Export PDF</button></div>
+        <div class="layout">
+          <div class="card inputs-card">
+            <div class="card-label"><h3>กำหนดแผนลงทุน</h3><small>ตัวเลขจำลอง ไม่ใช่ราคาตลาด</small></div>
+            <div class="port-overview">
+              <label class="port-setting"><span>มูลค่าพอร์ต</span><span class="port-number"><input id="port-value" type="number" min="0" max="1000000000" step="1000" inputmode="numeric" value="1000000">บาท</span></label>
+              <label class="port-setting"><span>เงินลงทุนใหม่ / เดือน</span><span class="port-number"><input id="port-monthly" type="number" min="0" max="1000000" step="1000" inputmode="numeric" value="30000">บาท</span></label>
+              <label class="port-setting"><span>กรอบขาดทุนที่รับได้</span><span class="port-number"><input id="port-limit" type="number" min="0" max="100" step="1" inputmode="decimal" value="20">%</span></label>
+            </div>
+            <div class="port-section-title"><h3>พอร์ตที่กำลังออกแบบ</h3></div>
+            <div class="port-switch" role="group" aria-label="เลือกพอร์ตสำหรับแก้ไข">
+              <button type="button" id="port-choose-A" aria-pressed="true">Portfolio A</button>
+              <button type="button" id="port-choose-B" aria-pressed="false">Portfolio B</button>
+            </div>
+            <div class="port-section-title"><h3>Target Allocation</h3><span class="port-status" id="port-weight-status">ครบ 100%</span></div>
+            <p class="port-explainer">กำหนดสัดส่วนเป้าหมายให้รวม 100% · เปลี่ยน A/B เพื่อเปรียบเทียบคนละพอร์ต</p>
+            <div id="port-main-weights"></div>
+            <details class="port-details"><summary>คริปโต / สินทรัพย์อื่น <span id="port-extra-total">0%</span></summary><div id="port-extra-weights"></div></details>
+
+            <details class="port-details"><summary>แก้ไขสมมติฐาน Stress Test</summary>
+              <p class="port-explainer">การเปลี่ยนแปลงราคาตามสถานการณ์ที่สมมติ ไม่ใช่ผลตอบแทนคาดการณ์หรือความเสี่ยงสูงสุดจริง</p>
+              <div id="port-shock-weights"></div>
+            </details>
+            <label class="port-toggle"><input id="port-use-current" type="checkbox"><span>ใช้สัดส่วนที่ถืออยู่จริงเพื่อคำนวณ DCA แบบช่วย Rebalance (ไม่ขายสินทรัพย์เดิม)</span></label>
+            <div id="port-current-options" class="port-current" hidden>
+              <div class="port-section-title"><h3>Current Allocation</h3><span class="port-status" id="port-current-status">ครบ 100%</span></div>
+              <p>กรอกสัดส่วนปัจจุบันของเงินลงทุนก้อนที่จำลอง ให้ครบทุกหมวดรวม 100%</p>
+              <div id="port-current-weights"></div>
+            </div>
+            <div class="button-row"><button class="btn" type="button" id="port-reset">↺ คืนค่าตัวอย่าง</button><span class="note-tiny">ไม่บันทึกข้อมูลที่กรอก</span></div>
+          </div>
+
+          <div class="card results-card">
+            <div class="port-error" id="port-invalid" hidden></div>
+            <div id="port-results">
+              <div class="port-result-hero">
+                <div class="metric-title"><span id="port-active-name">Portfolio A</span> · มูลค่าพอร์ตจำลอง</div>
+                <div class="metric-primary" id="port-value-summary">1,000,000 บาท</div>
+                <div class="port-bar" id="port-allocation-bar" aria-label="สัดส่วนสินทรัพย์"></div>
+                <div id="port-allocation-rows"></div>
+              </div>
+              <div class="port-block-title">Stress Test · ผลลัพธ์จากสถานการณ์จำลอง</div>
+              <div class="port-result-main">
+                <div class="port-result-mini"><small>การเปลี่ยนแปลงของพอร์ต</small><strong id="port-scenario-change">-22.5%</strong><small id="port-scenario-impact">ลดลง 225,000 บาท</small></div>
+                <div class="port-result-mini"><small>มูลค่าพอร์ตหลัง Shock</small><strong id="port-scenario-after">775,000 บาท</strong><small>จากมูลค่าปัจจุบันที่กรอก</small></div>
+              </div>
+              <div class="port-alert" id="port-risk-note">เปรียบเทียบกับกรอบขาดทุนที่รับได้</div>
+              <p class="port-note" id="port-assumptions"></p>
+
+              <div class="port-block-title">Portfolio A / B Comparison</div>
+              <div class="port-comparison">
+                <div class="port-compare is-selected" id="port-compare-A"><span class="port-compare-line">Portfolio A</span><strong id="port-compare-A-shock">-22.5%</strong><span class="port-compare-line" id="port-compare-A-after">775,000 บาท</span><small id="port-compare-A-status"></small></div>
+                <div class="port-compare" id="port-compare-B"><span class="port-compare-line">Portfolio B</span><strong id="port-compare-B-shock">-27.0%</strong><span class="port-compare-line" id="port-compare-B-after">730,000 บาท</span><small id="port-compare-B-status"></small></div>
+              </div>
+              <p class="port-note">ทั้งสองพอร์ตใช้เงินต้นและสมมติฐาน Stress Test เดียวกัน จึงเปรียบเทียบผลกระทบจากสัดส่วนสินทรัพย์ได้</p>
+
+              <div class="port-block-title">DCA & Rebalancing</div>
+              <p class="port-explainer" id="port-dca-mode"></p>
+              <div class="port-error" id="port-dca-invalid" hidden></div>
+              <div id="port-dca-output">
+                <div id="port-dca-rows"></div>
+                <div class="port-breakdown-row"><span class="port-breakdown-label"><strong>รวมเงินลงทุนใหม่</strong></span><strong id="port-dca-total">30,000 บาท</strong></div>
+                <p class="port-note" id="port-dca-gap"></p>
+              </div>
+              <div class="alert warm">ตัวเลขเป็นการจำลองเพื่อวางแผน ไม่รับประกันผลตอบแทนหรือขีดจำกัดการขาดทุน และยังไม่รวมต้นทุนซื้อขาย ภาษี หรือความเสี่ยงที่สินทรัพย์อาจเคลื่อนไหวร่วมกัน</div>
             </div>
           </div>
         </div>
@@ -484,6 +621,7 @@
   </div>
   <nav class="bottom-tabs" aria-label="เลือกโหมด (มือถือ)">
     <button class="tab" data-tab="investment" aria-selected="true"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 7-9"/><path d="M15 6h5v5"/></svg></span><span class="tab-text">Investment</span></button>
+    <button class="tab" data-tab="portfolio" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3v18M12 12 20 7A9 9 0 0 0 12 3ZM12 12l-7 8a9 9 0 0 0 15-13"/></svg></span><span class="tab-text">Portfolio</span></button>
     <button class="tab" data-tab="car" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-1 2v2h2l1-2m12-2 1 2v2h-2l-1-2"/><path d="M5 17h14l1.5-6-2.2-5H5.7l-2.2 5L5 17Z"/><path d="M5 11h14"/><path d="M7.5 14h.01M16.5 14h.01"/></svg></span><span class="tab-text">Car Timing</span></button>
     <button class="tab" data-tab="savings" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="tab-text">Savings</span></button>
     <button class="tab" data-tab="tax" aria-selected="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a2 2 0 0 1 2 2v16l-3-2-4 2-3 2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tab-text">Tax</span></button>
@@ -981,6 +1119,7 @@
   // Print the visible UI itself: same cards, values and SVG charts as on screen.
   const reportNames={
     investment:'Investment_Retirement',
+    portfolio:'Portfolio_Planner',
     car:'Car_Purchase',
     savings:'Savings_Goals',
     tax:'Tax_Planning'
@@ -1080,5 +1219,6 @@
   Object.values(render).forEach(fn=>fn());
 })();
 </script>
+<script src="./portfolio.js"></script>
 </body>
 </html>
