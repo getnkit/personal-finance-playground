@@ -19,6 +19,16 @@ const dom=new JSDOM(html,{
 const {document,Event}=dom.window;
 function clean(){assert.deepEqual(errors,[],'No uncaught page errors');}
 clean();
+const icon=fs.readFileSync(path.join(__dirname,'..','apple-touch-icon.png'));
+assert.equal(icon.subarray(0,8).toString('hex'),'89504e470d0a1a0a','iPhone icon is a PNG');
+assert.equal(icon.readUInt32BE(16),180,'iPhone icon width');
+assert.equal(icon.readUInt32BE(20),180,'iPhone icon height');
+const manifest=JSON.parse(fs.readFileSync(path.join(__dirname,'..','manifest.webmanifest'),'utf8'));
+const appleIcon=document.querySelector('link[rel="apple-touch-icon"]').getAttribute('href');
+assert.equal(appleIcon,'./apple-touch-icon.png?v=20261110','iPhone icon URL version updated');
+assert.equal(document.querySelector('link[rel="icon"]').getAttribute('href'),appleIcon,'Browser favicon uses the same icon');
+assert.equal(document.querySelector('.brandmark').getAttribute('src'),appleIcon,'App header uses the same icon');
+assert.equal(manifest.icons[0].src,appleIcon,'PWA manifest uses the same icon');
 assert.notEqual(document.getElementById('invTotal').textContent.trim(),'—','Investment initializes');
 for(const tab of ['car','savings','tax','investment']){
   const button=document.querySelector('.tab[data-tab="'+tab+'"]');
